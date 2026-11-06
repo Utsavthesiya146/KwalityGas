@@ -2,12 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentAdmin } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
-  const pages = await prisma.page.findMany({
-    include: { sections: true, seo: true },
-    orderBy: { slug: "asc" },
-  });
-  return NextResponse.json({ pages });
+  try {
+    const pages = await prisma.page.findMany({
+      include: { sections: true, seo: true },
+      orderBy: { slug: "asc" },
+    });
+    return NextResponse.json({ pages });
+  } catch (err: any) {
+    return NextResponse.json({ pages: [], error: err.message }, { status: 500 });
+  }
 }
 
 export async function PUT(req: NextRequest) {

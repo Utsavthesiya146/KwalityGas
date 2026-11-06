@@ -11,14 +11,20 @@ export const metadata: Metadata = {
     "Explore Kwality Gas products: Kwality Gas Water Heater (Gas Geyser), domestic LPG cylinders (12kg, 5.5kg, 4kg), commercial cylinders (17kg, 21kg), and 33kg industrial cylinders.",
 };
 
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function ProductsPage() {
-  const products = await prisma.product.findMany({
-    where: { isActive: true },
-    include: { category: true },
-    orderBy: { displayOrder: "asc" },
-  });
+  let products: any[] = [];
+  try {
+    products = await prisma.product.findMany({
+      where: { isActive: true },
+      include: { category: true },
+      orderBy: { displayOrder: "asc" },
+    });
+  } catch (err) {
+    console.error("ProductsPage data fetch error:", err);
+  }
 
   const waterHeaterSpecs = [
     { title: "Low Water Pressure Starting", desc: "Starts smoothly even in multi-story apartments and areas with low water head pressure." },

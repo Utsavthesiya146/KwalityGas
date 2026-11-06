@@ -11,16 +11,22 @@ export const metadata: Metadata = {
     "Kwality Gas cylinders available in 33kg, 21kg, 17kg, 15kg, 12kg, 5.5kg, and 4kg capacities for domestic, commercial, and industrial consumers across South India.",
 };
 
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function CylindersPage() {
-  const cylinders = await prisma.product.findMany({
-    where: {
-      category: { slug: "cylinders" },
-      isActive: true,
-    },
-    orderBy: { displayOrder: "asc" },
-  });
+  let cylinders: any[] = [];
+  try {
+    cylinders = await prisma.product.findMany({
+      where: {
+        category: { slug: "cylinders" },
+        isActive: true,
+      },
+      orderBy: { displayOrder: "asc" },
+    });
+  } catch (err) {
+    console.error("CylindersPage data fetch error:", err);
+  }
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">

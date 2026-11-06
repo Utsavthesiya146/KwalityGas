@@ -2,16 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentAdmin } from "@/lib/auth";
 
-export async function GET() {
-  const products = await prisma.product.findMany({
-    include: { category: true },
-    orderBy: { displayOrder: "asc" },
-  });
-  const categories = await prisma.productCategory.findMany({
-    orderBy: { displayOrder: "asc" },
-  });
+export const dynamic = "force-dynamic";
 
-  return NextResponse.json({ products, categories });
+export async function GET() {
+  try {
+    const products = await prisma.product.findMany({
+      include: { category: true },
+      orderBy: { displayOrder: "asc" },
+    });
+    const categories = await prisma.productCategory.findMany({
+      orderBy: { displayOrder: "asc" },
+    });
+
+    return NextResponse.json({ products, categories });
+  } catch (err: any) {
+    return NextResponse.json({ products: [], categories: [], error: err.message }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {

@@ -16,35 +16,48 @@ import {
   Plus,
 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function AdminDashboardPage() {
-  const [
-    totalEnquiries,
-    newEnquiries,
-    totalProducts,
-    totalTestimonials,
-    recentEnquiries,
-    recentProducts,
-    priceStates,
-  ] = await Promise.all([
-    prisma.enquiry.count(),
-    prisma.enquiry.count({ where: { status: "NEW" } }),
-    prisma.product.count(),
-    prisma.testimonial.count(),
-    prisma.enquiry.findMany({
-      take: 6,
-      orderBy: { createdAt: "desc" },
-    }),
-    prisma.product.findMany({
-      take: 5,
-      include: { category: true },
-      orderBy: { displayOrder: "asc" },
-    }),
-    prisma.priceListState.findMany({
-      include: { items: true },
-    }),
-  ]);
+  let totalEnquiries = 0;
+  let newEnquiries = 0;
+  let totalProducts = 0;
+  let totalTestimonials = 0;
+  let recentEnquiries: any[] = [];
+  let recentProducts: any[] = [];
+  let priceStates: any[] = [];
+
+  try {
+    const results = await Promise.all([
+      prisma.enquiry.count(),
+      prisma.enquiry.count({ where: { status: "NEW" } }),
+      prisma.product.count(),
+      prisma.testimonial.count(),
+      prisma.enquiry.findMany({
+        take: 6,
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.product.findMany({
+        take: 5,
+        include: { category: true },
+        orderBy: { displayOrder: "asc" },
+      }),
+      prisma.priceListState.findMany({
+        include: { items: true },
+      }),
+    ]);
+
+    totalEnquiries = results[0];
+    newEnquiries = results[1];
+    totalProducts = results[2];
+    totalTestimonials = results[3];
+    recentEnquiries = results[4];
+    recentProducts = results[5];
+    priceStates = results[6];
+  } catch (err) {
+    console.error("Admin dashboard fetch error:", err);
+  }
 
   return (
     <div className="space-y-8">

@@ -11,13 +11,19 @@ export const metadata: Metadata = {
     "Read real testimonials from restaurants, distributors, manufacturing plants, laboratories, and domestic customers who trust Kwality Gas for prompt on-time deliveries.",
 };
 
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function TestimonialsPage() {
-  const testimonials = await prisma.testimonial.findMany({
-    where: { isActive: true },
-    orderBy: { displayOrder: "asc" },
-  });
+  let testimonials: any[] = [];
+  try {
+    testimonials = await prisma.testimonial.findMany({
+      where: { isActive: true },
+      orderBy: { displayOrder: "asc" },
+    });
+  } catch (err) {
+    console.error("TestimonialsPage data fetch error:", err);
+  }
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">

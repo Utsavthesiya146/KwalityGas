@@ -2,11 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentAdmin } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
-  const testimonials = await prisma.testimonial.findMany({
-    orderBy: { displayOrder: "asc" },
-  });
-  return NextResponse.json({ testimonials });
+  try {
+    const testimonials = await prisma.testimonial.findMany({
+      orderBy: { displayOrder: "asc" },
+    });
+    return NextResponse.json({ testimonials });
+  } catch (err: any) {
+    return NextResponse.json({ testimonials: [], error: err.message }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {
