@@ -1,0 +1,52 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Next.js build output
+/.next/
+/out/
+/build
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Vercel
+.vercel
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# TypeScript / Cache
+*.tsbuildinfo
+
+# Scraper & Temporary audit files (keeping original assets in public/images/original/ and prisma/seed.mjs)
+/audit_images/
+/audit_raw/
+/audit_text/
+audit_analysis.json
+audit_summary.json
+extracted_pages_data.json
+image_inventory.json
+page_text_summaries.json
+original_home.html
+crawler.mjs
+download_assets.mjs
+dump_page_details.mjs
+extract_page_content.mjs
+print_full_page_details.mjs
+analyze_audit.mjs
+audit_extractor.mjs
+test_system_integration.mjs

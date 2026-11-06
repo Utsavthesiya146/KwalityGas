@@ -1,0 +1,266 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum AdminRole {
+  SUPERADMIN
+  ADMIN
+  EDITOR
+}
+
+enum EnquiryType {
+  DOMESTIC
+  COMMERCIAL
+  INDUSTRIAL
+}
+
+enum EnquiryStatus {
+  NEW
+  IN_PROGRESS
+  CONTACTED
+  RESOLVED
+  CLOSED
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         AdminRole @default(ADMIN)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("admin_users")
+}
+
+model Page {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  title       String
+  description String?       @db.Text
+  isPublished Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  sections    PageSection[]
+  seo         SEOSettings?
+
+  @@map("pages")
+}
+
+model PageSection {
+  id         String   @id @default(cuid())
+  pageId     String
+  sectionKey String
+  title      String?
+  subtitle   String?
+  content    String?  @db.LongText
+  imageUrl   String?
+  orderIndex Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId, sectionKey])
+  @@map("page_sections")
+}
+
+model ProductCategory {
+  id           String    @id @default(cuid())
+  name         String
+  slug         String    @unique
+  description  String?   @db.Text
+  displayOrder Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  products     Product[]
+
+  @@map("product_categories")
+}
+
+model Product {
+  id             String   @id @default(cuid())
+  categoryId     String
+  name           String
+  slug           String   @unique
+  capacity       String?  // e.g. "33.0 Kgs", "17.0 Kgs"
+  shortDesc      String?  @db.Text
+  description    String?  @db.LongText
+  imageUrl       String?
+  isDomestic     Boolean  @default(false)
+  isCommercial   Boolean  @default(false)
+  isIndustrial   Boolean  @default(false)
+  features       String?  @db.LongText // JSON array or text
+  specifications String?  @db.LongText // JSON key-value or text
+  displayOrder   Int      @default(0)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  category ProductCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@map("products")
+}
+
+model Service {
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique
+  shortDesc    String?  @db.Text
+  fullContent  String?  @db.LongText
+  icon         String?
+  imageUrl     String?
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("services")
+}
+
+model PriceListState {
+  id           String          @id @default(cuid())
+  stateCode    String          @unique // e.g. "KA", "TN"
+  stateName    String          // e.g. "Karnataka", "Tamilnadu"
+  effectiveDate String         // e.g. "October, 2026"
+  wefNotice    String          // e.g. "WEF 06-10-2026"
+  notes        String?         @db.LongText
+  displayOrder Int             @default(0)
+  isActive     Boolean         @default(true)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  items        PriceListItem[]
+
+  @@map("price_list_states")
+}
+
+model PriceListItem {
+  id           String   @id @default(cuid())
+  stateId      String
+  capacity     String   // e.g. "33.0 Kgs Refill"
+  amount       Decimal? @db.Decimal(10, 2) // nullable if quote on request
+  unit         String   @default("Refill")
+  isRefill     Boolean  @default(true)
+  isDomestic   Boolean  @default(false)
+  notes        String?
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  state PriceListState @relation(fields: [stateId], references: [id], onDelete: Cascade)
+
+  @@index([stateId])
+  @@map("price_list_items")
+}
+
+model GalleryCategory {
+  id        String         @id @default(cuid())
+  name      String
+  slug      String         @unique
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  images    GalleryImage[]
+
+  @@map("gallery_categories")
+}
+
+model GalleryImage {
+  id          String   @id @default(cuid())
+  categoryId  String?
+  title       String
+  description String?  @db.Text
+  imageUrl    String
+  isFeatured  Boolean  @default(false)
+  displayOrder Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category GalleryCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([categoryId])
+  @@map("gallery_images")
+}
+
+model Testimonial {
+  id           String   @id @default(cuid())
+  clientName   String
+  designation  String?
+  companyName  String
+  quote        String   @db.LongText
+  location     String?
+  rating       Int      @default(5)
+  avatarUrl    String?
+  isVerified   Boolean  @default(true)
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+model Award {
+  id             String   @id @default(cuid())
+  title          String
+  year           String
+  issuingBody    String?
+  certificateImg String?
+  trophyImg      String?
+  description    String?  @db.Text
+  displayOrder   Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("awards")
+}
+
+model Enquiry {
+  id                String        @id @default(cuid())
+  enquiryType       EnquiryType   @default(DOMESTIC)
+  customerName      String
+  companyName       String?
+  contactPerson     String?
+  email             String
+  phone             String
+  address           String?       @db.Text
+  consumption       String?       // e.g. "17 Kgs", "33 Kgs"
+  establishmentType String?       // e.g. "Hotel", "Restaurant", "Poultry", "Factory"
+  requiredDate      String?
+  message           String?       @db.LongText
+  status            EnquiryStatus @default(NEW)
+  adminNotes        String?       @db.Text
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([enquiryType, status])
+  @@map("enquiries")
+}
+
+model SEOSettings {
+  id             String   @id @default(cuid())
+  pageId         String?  @unique
+  pageSlug       String   @unique
+  metaTitle      String
+  metaDescription String? @db.Text
+  metaKeywords   String?  @db.Text
+  ogTitle        String?
+  ogDescription  String?  @db.Text
+  ogImage        String?
+  canonicalUrl   String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  page Page? @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@map("seo_settings")
+}
+
