@@ -129,16 +129,24 @@ export async function POST(req: NextRequest) {
         "utf8"
       );
 
-      // On Vercel, /tmp is ephemeral and not persistent across container teardown
-      if (process.env.VERCEL) {
-        console.warn("Notice: Stored in /tmp, but Vercel ephemeral containers require remote MySQL or webhook for durable persistence.");
+      // On Vercel / serverless platforms, /tmp is ephemeral and wiped upon container recycle.
+      // Do not give false assurance of permanent storage if running on serverless without remote DB or webhook.
+      if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+        console.warn("Vercel serverless alert: Database unavailable and webhook not configured. Lead written to /tmp buffer for inspection, but returning 503 to ensure customer contacts hotline.");
+        return NextResponse.json(
+          {
+            error: "Our online booking system is momentarily unavailable while database maintenance is underway. Please call our 24/7 marketing hotline directly at +91 78997 87101 or email kwalitygasmarketing@gmail.com for immediate booking.",
+          },
+          { status: 503 }
+        );
       }
 
+      // On dedicated/VPS servers (Hostinger Cloud Node.js), local disk is durable
       return NextResponse.json({
         success: true,
         message: "Your enquiry has been safely queued for immediate follow-up by our marketing team.",
         enquiryId: record.id,
-        persistedTo: process.env.VERCEL ? "container-tmp" : "local-storage",
+        persistedTo: "local-storage",
       });
     } catch (fsError: any) {
       console.error("Filesystem fallback failed as well:", fsError.message);
