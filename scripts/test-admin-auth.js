@@ -53,6 +53,12 @@ async function runAuthAudit() {
   }
   console.log('Test 6 - Tampered token rejection:', tamperedCaught ? 'PASS' : 'FAIL');
 
+  // Test 7: ADMIN_PASSWORD_HASH fallback verification
+  const testHash = await bcrypt.hash('CustomStagingPass#2026', 10);
+  const hashMatches = await bcrypt.compare('CustomStagingPass#2026', testHash);
+  const wrongHashMatches = await bcrypt.compare('BadPassword', testHash);
+  console.log('Test 7 - ADMIN_PASSWORD_HASH bcrypt verification:', hashMatches && !wrongHashMatches ? 'PASS' : 'FAIL');
+
   console.log('=== Admin Security & Auth Audit Completed Successfully ===\n');
 }
 

@@ -30,7 +30,12 @@ async function verifyTiDBCloud() {
   console.log(`[Configuration] Port:     ${port}`);
   console.log(`[Configuration] Database: ${database}`);
   console.log(`[Configuration] User:     ${username}`);
-  console.log(`[Configuration] SSL Mode: ${dbUrl.includes('sslaccept=strict') ? 'Strict (TLS Verified)' : 'Default'}`);
+  const hasStrictTls = dbUrl.includes('sslaccept=strict');
+  console.log(`[Configuration] SSL Mode: ${hasStrictTls ? 'Strict (TLS Certificate Validation Enabled)' : '⚠️ Default / Not Strict'}`);
+  if (!hasStrictTls) {
+    console.warn('\n⚠️ SECURITY WARNING: DATABASE_URL does not include `sslaccept=strict`.');
+    console.warn('To enforce strict TLS certificate validation with TiDB Cloud, ensure your connection string includes `sslaccept=strict`.\n');
+  }
 
   // Test 1: TCP Port 4000 Reachability
   console.log(`\n[Step 1] Testing TCP socket connection to ${host}:${port}...`);

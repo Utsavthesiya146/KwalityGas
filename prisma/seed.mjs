@@ -7,19 +7,21 @@ async function main() {
   console.log('--- Starting Kwality Gas Database Seeding ---');
 
   // 1. Admin User
-  const adminEmail = 'admin@kwalitygas.com';
+  const adminEmail = (process.env.ADMIN_EMAIL || 'admin@kwalitygas.com').toLowerCase().trim();
   const existingAdmin = await prisma.adminUser.findUnique({ where: { email: adminEmail } });
   if (!existingAdmin) {
-    const passwordHash = await bcrypt.hash('KwalityAdmin@2026', 10);
+    const passwordHash =
+      process.env.ADMIN_PASSWORD_HASH ||
+      (await bcrypt.hash(process.env.ADMIN_PASSWORD || 'KwalityAdmin@2026', 10));
     await prisma.adminUser.create({
       data: {
         email: adminEmail,
         passwordHash,
-        name: 'Kwality Superadmin',
+        name: process.env.ADMIN_NAME || 'Kwality Superadmin',
         role: 'SUPERADMIN',
       },
     });
-    console.log('Created Superadmin user: admin@kwalitygas.com');
+    console.log(`Created Superadmin user: ${adminEmail}`);
   } else {
     console.log('Preserved existing admin user (password and credentials untouched)');
   }

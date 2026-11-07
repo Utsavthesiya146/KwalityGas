@@ -6,7 +6,7 @@ services:
     region: singapore
     branch: main
     buildCommand: npm install && npx prisma generate && npm run build
-    startCommand: npm run start
+    startCommand: npx next start -H 0.0.0.0 -p $PORT
     healthCheckPath: /
     autoDeploy: true
     # Optional persistent disk for zero-downtime offline enquiry buffering:
@@ -18,6 +18,8 @@ services:
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
+        sync: false
+      - key: ADMIN_PASSWORD_HASH
         sync: false
       - key: JWT_SECRET
         generateValue: true
