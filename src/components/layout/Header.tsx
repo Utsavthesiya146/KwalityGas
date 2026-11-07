@@ -151,23 +151,22 @@ export default function Header() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
             
             {/* Logo on the left */}
-            <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg overflow-hidden border border-slate-100 shrink-0 bg-white shadow-xs">
+            <Link
+              href="/"
+              className="flex items-center shrink-0 group py-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1769AA] rounded-lg"
+              title="Kwality Gas Bottlers Pvt Ltd - Home"
+              aria-label="Kwality Gas Bottlers Home"
+            >
+              <div className="relative h-9 sm:h-10 md:h-11 w-36 sm:w-40 md:w-44 flex items-center">
                 <Image
                   src="/images/original/logo.jpg"
-                  alt="Kwality Gas Bottlers Logo"
+                  alt="Kwality Gas Bottlers Pvt Ltd"
                   fill
-                  className="object-contain p-0.5"
+                  className="object-contain object-left transition-transform duration-200 group-hover:scale-[1.02]"
                   priority
+                  unoptimized
+                  sizes="(max-width: 640px) 144px, (max-width: 768px) 160px, 176px"
                 />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-base sm:text-lg font-black tracking-tight text-[#102A43] group-hover:text-[#1769AA] transition-colors whitespace-nowrap leading-tight">
-                  KWALITY <span className="text-[#F28C28]">GAS</span>
-                </span>
-                <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider whitespace-nowrap leading-none mt-0.5">
-                  Bottlers Pvt Ltd
-                </span>
               </div>
             </Link>
 
