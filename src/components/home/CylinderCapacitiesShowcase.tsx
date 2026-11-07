@@ -19,7 +19,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Heavy Industrial / LOT",
       title: "33kg Heavy-Duty Industrial Cylinder",
       desc: "Designed for high-consumption industrial furnaces, powder coating, foundries, and multi-cylinder manifold banks with Liquid Off-Take (LOT) & Vapour Off-Take (VOT).",
-      image: "/images/original/p1.jpg",
+      image: "/images/corporate/product-cylinder-33kg.jpg",
       specs: ["High discharge rate", "Liquid & Vapour Off-Take", "Tested up to 25 kg/cm²", "Zero residue guarantee"],
     },
     {
@@ -37,7 +37,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Commercial Standard",
       title: "17kg Commercial Restaurant Cylinder",
       desc: "The standard choice for cafeterias, cloud kitchens, fast food chains, and bakeries. Provides maximum thermal efficiency and clean burning blue flame.",
-      image: "/images/original/p3.jpg",
+      image: "/images/corporate/product-cylinder-17kg.jpg",
       specs: ["Pure blue flame", "Low soot & clean cooking", "Cost saving vs PNG/Diesel", "Doorstep express delivery"],
     },
     {
@@ -55,7 +55,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Domestic Household Primary",
       title: "12kg Domestic Household Cylinder",
       desc: "Kwality Gas's flagship domestic cylinder engineered for household cooking. Delivers uniform pressure, total safety compliance, and rapid booking refills.",
-      image: "/images/original/p5.jpg",
+      image: "/images/corporate/product-cylinder-12kg.jpg",
       specs: ["Instant booking & delivery", "Compact domestic footring", "Self-closing safety valve", "100% weight assurance"],
     },
     {

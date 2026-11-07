@@ -125,7 +125,7 @@ export default async function ProductsPage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-sm h-80 sm:h-96 bg-slate-50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center">
                 <Image
-                  src="/images/original/p6-ne.png"
+                  src="/images/corporate/product-gas-geyser.jpg"
                   alt="Kwality Gas Water Heater with 8 Safety Features"
                   fill
                   className="object-contain p-4"

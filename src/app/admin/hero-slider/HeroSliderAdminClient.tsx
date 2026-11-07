@@ -48,13 +48,12 @@ interface HeroSliderAdminClientProps {
 }
 
 const PRESET_IMAGES = [
+  { label: "Domestic Luxury Kitchen (New AI)", url: "/images/corporate/hero-domestic-lpg.jpg" },
+  { label: "Commercial Restaurant Kitchen (New AI)", url: "/images/corporate/hero-commercial-lpg.jpg" },
+  { label: "Industrial Bulk Storage Terminal (New AI)", url: "/images/corporate/hero-industrial-lpg.jpg" },
+  { label: "Automated Bottling Plant (New AI)", url: "/images/corporate/hero-bottling-plant.jpg" },
+  { label: "Safety Regulators & Testing (New AI)", url: "/images/corporate/hero-safety-standards.jpg" },
   { label: "Plant Bulk Storage Bullets (Authentic)", url: "/images/original/service_style_16.jpg" },
-  { label: "Domestic 12kg Kitchen Setup", url: "/images/original/dom1.png" },
-  { label: "Commercial 33kg Hotel Kitchen", url: "/images/original/k3.jpg" },
-  { label: "Industrial Heavy Furnace Line", url: "/images/original/slide1.jpg" },
-  { label: "High-Efficiency Blue Flame Burner", url: "/images/original/service_style_12.jpg" },
-  { label: "Precision Gas Regulator & Gauge", url: "/images/original/g2.jpg" },
-  { label: "Full Cylinder Range Lineup", url: "/images/original/ban1-1.png" },
   { label: "Geneva Award 2015 Trophy", url: "/images/original/kwality-gas-award.jpg" },
 ];
 

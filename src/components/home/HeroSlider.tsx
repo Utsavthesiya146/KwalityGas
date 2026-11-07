@@ -50,7 +50,7 @@ const DEFAULT_SLIDES: HeroSlideData[] = [
     title: "Reliable LPG Supply Engineered for Every Household",
     description:
       "Clean, soot-free cooking energy for modern kitchens. Certified 12kg household cylinders, 5.5kg compact, and 4kg Cook & Light cylinders with guaranteed tare weight and tamper-evident safety seals.",
-    imageUrl: "/images/original/dom1.png",
+    imageUrl: "/images/corporate/hero-domestic-lpg.jpg",
     ctaText: "Book Domestic Connection",
     ctaLink: "MODAL_DOMESTIC",
     secondaryText: "View Cylinders",
@@ -67,7 +67,7 @@ const DEFAULT_SLIDES: HeroSlideData[] = [
     title: "High-Calorific Clean LPG for Hotels, Bakeries & Commercial Kitchens",
     description:
       "Continuous high-pressure flame engineered for heavy commercial burners, tandoors, and catering operations. Reliable bulk delivery in 17kg and 21kg cylinders with zero soot.",
-    imageUrl: "/images/original/k3.jpg",
+    imageUrl: "/images/corporate/hero-commercial-lpg.jpg",
     ctaText: "Request Commercial Quote",
     ctaLink: "MODAL_COMMERCIAL",
     secondaryText: "Commercial Range",
@@ -84,7 +84,7 @@ const DEFAULT_SLIDES: HeroSlideData[] = [
     title: "Bulk LPG Storage & Liquid Off-Take Systems for Heavy Industry",
     description:
       "Specialized 33kg LOT (Liquid Off-Take) & VOT systems with automatic changeover manifolds. Lower operational fuel costs and zero sulphur emissions for foundries and manufacturing plants.",
-    imageUrl: "/images/original/slide1.jpg",
+    imageUrl: "/images/corporate/hero-industrial-lpg.jpg",
     ctaText: "Explore Industrial Solutions",
     ctaLink: "MODAL_INDUSTRIAL",
     secondaryText: "Industrial Systems",
@@ -101,7 +101,7 @@ const DEFAULT_SLIDES: HeroSlideData[] = [
     title: "3 Modern Bottling Hubs with 30,000 MTPA Bulk Storage",
     description:
       "Showcasing verified bottling facilities in Hosur, Chennai, and Dharwad. Operating with 8,000 cylinders/day throughput, automated carousel filling, and PESO safety compliance.",
-    imageUrl: "/images/original/service_style_16.jpg",
+    imageUrl: "/images/corporate/hero-bottling-plant.jpg",
     ctaText: "Explore Our Infrastructure",
     ctaLink: "/group-company",
     secondaryText: "Plant Facilities",
@@ -118,7 +118,7 @@ const DEFAULT_SLIDES: HeroSlideData[] = [
     title: "Grade 1 Rated CARE Certification with Uncompromising Safety Standards",
     description:
       "Every cylinder undergoes rigorous 5-point hydrostatic, tare weight, and valve leakage inspections before dispatch. Certified by CARE MDRA and honored with the International Star for Quality.",
-    imageUrl: "/images/original/service_style_12.jpg",
+    imageUrl: "/images/corporate/hero-safety-standards.jpg",
     ctaText: "Explore Safety Standards",
     ctaLink: "/safety-features",
     secondaryText: "Safety Protocols",

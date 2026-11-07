@@ -144,12 +144,11 @@ export default function Header() {
 
         {/* Main Desktop Navigation - Clean, Single Horizontal Line */}
         <div
-          className={`border-b border-slate-100 transition-all duration-200 ${
-            isScrolled ? "py-2 shadow-md bg-white/98 backdrop-blur-md" : "py-3 bg-white"
-          }`}
+          className={`border-b border-slate-100 transition-all duration-200 ${isScrolled ? "py-2 shadow-md bg-white/98 backdrop-blur-md" : "py-3 bg-white"
+            }`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
-            
+
             {/* Logo on the left */}
             <Link
               href="/"
@@ -172,13 +171,12 @@ export default function Header() {
 
             {/* Navigation links in the center (Single line on all desktop viewports 1024px+) */}
             <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 text-xs xl:text-sm font-semibold text-slate-700">
-              
+
               {/* Home */}
               <Link
                 href="/"
-                className={`px-2 xl:px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                  pathname === "/" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
-                }`}
+                className={`px-2 xl:px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${pathname === "/" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
+                  }`}
               >
                 Home
               </Link>
@@ -193,11 +191,10 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => setLpgDropdownOpen(!lpgDropdownOpen)}
-                  className={`px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
-                    pathname.startsWith("/domestic") || pathname.startsWith("/commercial") || pathname.startsWith("/industrial")
-                      ? "text-[#1769AA] bg-blue-50/80 font-bold"
-                      : "hover:text-[#1769AA] hover:bg-slate-50"
-                  }`}
+                  className={`px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1 transition-colors whitespace-nowrap ${pathname.startsWith("/domestic") || pathname.startsWith("/commercial") || pathname.startsWith("/industrial")
+                    ? "text-[#1769AA] bg-blue-50/80 font-bold"
+                    : "hover:text-[#1769AA] hover:bg-slate-50"
+                    }`}
                   aria-expanded={lpgDropdownOpen}
                 >
                   <span>LPG Segments</span>
@@ -261,11 +258,10 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => setProductsDropdownOpen(!productsDropdownOpen)}
-                  className={`px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
-                    pathname.startsWith("/products") || pathname.startsWith("/cylinders") || pathname.startsWith("/gas-water-heater") || pathname.startsWith("/safety-devices") || pathname.startsWith("/accessories")
-                      ? "text-[#1769AA] bg-blue-50/80 font-bold"
-                      : "hover:text-[#1769AA] hover:bg-slate-50"
-                  }`}
+                  className={`px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1 transition-colors whitespace-nowrap ${pathname.startsWith("/products") || pathname.startsWith("/cylinders") || pathname.startsWith("/gas-water-heater") || pathname.startsWith("/safety-devices") || pathname.startsWith("/accessories")
+                    ? "text-[#1769AA] bg-blue-50/80 font-bold"
+                    : "hover:text-[#1769AA] hover:bg-slate-50"
+                    }`}
                   aria-expanded={productsDropdownOpen}
                 >
                   <span>Products</span>
@@ -412,9 +408,8 @@ export default function Header() {
               {/* Services */}
               <Link
                 href="/services"
-                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                  pathname === "/services" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
-                }`}
+                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${pathname === "/services" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
+                  }`}
               >
                 Services
               </Link>
@@ -422,9 +417,8 @@ export default function Header() {
               {/* Price List */}
               <Link
                 href="/price-list"
-                className={`px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap ${
-                  pathname === "/price-list" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
-                }`}
+                className={`px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap ${pathname === "/price-list" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
+                  }`}
               >
                 <span>Price List</span>
                 <span className="px-1.5 py-0.2 rounded-full text-[9px] font-black bg-[#F28C28] text-white uppercase tracking-wider">
@@ -435,9 +429,8 @@ export default function Header() {
               {/* Safety */}
               <Link
                 href="/safety-features"
-                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                  pathname === "/safety-features" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
-                }`}
+                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${pathname === "/safety-features" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
+                  }`}
               >
                 Safety
               </Link>
@@ -452,11 +445,10 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => setCompanyDropdownOpen(!companyDropdownOpen)}
-                  className={`px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
-                    pathname === "/about" || pathname === "/group-company" || pathname === "/testimonials" || pathname === "/gallery"
-                      ? "text-[#1769AA] bg-blue-50/80 font-bold"
-                      : "hover:text-[#1769AA] hover:bg-slate-50"
-                  }`}
+                  className={`px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1 transition-colors whitespace-nowrap ${pathname === "/about" || pathname === "/group-company" || pathname === "/testimonials" || pathname === "/gallery"
+                    ? "text-[#1769AA] bg-blue-50/80 font-bold"
+                    : "hover:text-[#1769AA] hover:bg-slate-50"
+                    }`}
                   aria-expanded={companyDropdownOpen}
                 >
                   <span>Company</span>
@@ -519,9 +511,8 @@ export default function Header() {
               {/* Contact */}
               <Link
                 href="/contact"
-                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                  pathname.startsWith("/contact") ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
-                }`}
+                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${pathname.startsWith("/contact") ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
+                  }`}
               >
                 Contact
               </Link>
@@ -555,7 +546,7 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="lg:hidden fixed inset-0 top-[88px] z-40 bg-slate-900/60 backdrop-blur-xs flex flex-col justify-between">
             <div className="bg-white w-full max-h-[calc(100vh-88px)] overflow-y-auto border-t border-slate-100 p-5 space-y-4 shadow-xl">
-              
+
               {/* Quick Actions */}
               <div className="grid grid-cols-2 gap-2 pb-2">
                 <button

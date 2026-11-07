@@ -85,7 +85,7 @@ export default function GroupCompanyPage() {
             <div className="lg:col-span-5">
               <div className="relative h-80 rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-900">
                 <Image
-                  src="/images/original/why-img-2.jpg"
+                  src="/images/corporate/hero-bottling-plant.jpg"
                   alt="Industrial Plant Infrastructure"
                   fill
                   className="object-cover"

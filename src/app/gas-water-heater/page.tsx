@@ -107,7 +107,7 @@ export default function GasWaterHeaterPage() {
               <div className="relative bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-2xl p-6 border border-slate-200">
                 <div className="relative w-full h-80 sm:h-96">
                   <Image
-                    src="/images/original/p6-ne.png"
+                    src="/images/corporate/product-gas-geyser.jpg"
                     alt="Kwality Gas Water Heater with 8 Safety Features"
                     fill
                     className="object-contain"

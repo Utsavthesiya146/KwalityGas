@@ -122,7 +122,7 @@ export default function IndustrialPage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-64 h-80 bg-slate-50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center">
                 <Image
-                  src="/images/original/p1.jpg"
+                  src="/images/corporate/product-cylinder-33kg.jpg"
                   alt="33kg Industrial LPG Cylinder"
                   fill
                   className="object-contain p-4"

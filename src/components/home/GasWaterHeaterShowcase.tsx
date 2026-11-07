@@ -78,7 +78,7 @@ export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeater
 
               <div className="relative w-full h-80 sm:h-96">
                 <Image
-                  src="/images/original/p6-ne.png"
+                  src="/images/corporate/product-gas-geyser.jpg"
                   alt="Kwality Gas Water Heater Geyser"
                   fill
                   className="object-contain"

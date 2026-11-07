@@ -110,7 +110,7 @@ export default function AboutPage() {
           <div className="lg:col-span-5">
             <div className="relative h-96 rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-900">
               <Image
-                src="/images/original/kwalit.jpg"
+                src="/images/corporate/hero-industrial-lpg.jpg"
                 alt="Kwality Gas Bottling Operations"
                 fill
                 className="object-cover"

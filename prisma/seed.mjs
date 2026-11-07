@@ -53,7 +53,7 @@ async function main() {
       capacity: '6L / 7L / 10L Instantaneous',
       shortDesc: 'Initially we have launched "Kwality Gas Water Heater" which again is an eco friendly product.',
       description: 'The Kwality Gas Water Heater is engineered for high energy efficiency, instant heating, and utmost household safety. Designed to operate smoothly even under low water pressure.',
-      imageUrl: '/images/original/gas.jpg',
+      imageUrl: '/images/corporate/product-gas-geyser.jpg',
       isDomestic: true,
       isCommercial: true,
       isIndustrial: false,
@@ -84,7 +84,7 @@ async function main() {
       capacity: '33.0 Kgs',
       shortDesc: 'Heavy-duty industrial LPG cylinder designed for factories, furnaces, manufacturing plants, and high-volume commercial kitchens.',
       description: 'Our flagship industrial fuel container offers maximum capacity and extended runtime, significantly reducing cylinder changeover downtime and optimizing production output.',
-      imageUrl: '/images/original/1433.png',
+      imageUrl: '/images/corporate/product-cylinder-33kg.jpg',
       isDomestic: false,
       isCommercial: true,
       isIndustrial: true,
@@ -133,7 +133,7 @@ async function main() {
       capacity: '17.0 Kgs',
       shortDesc: 'The versatile commercial workhorse for hotels, restaurants, caterers (HORECA) and poultry farms.',
       description: 'Widely preferred across Karnataka and Tamil Nadu for reliable and cost-effective heating and cooking.',
-      imageUrl: '/images/original/dar17.png',
+      imageUrl: '/images/corporate/product-cylinder-17kg.jpg',
       isDomestic: false,
       isCommercial: true,
       isIndustrial: false,
@@ -177,7 +177,7 @@ async function main() {
       capacity: '12.0 Kgs',
       shortDesc: 'Kwality Gas flagship household connection cylinder for every domestic family.',
       description: 'Kwality Gas was conceived to provide every household with a dependable, clean cooking gas connection. Clean blue flame leaves cookware soot-free and cooks food faster.',
-      imageUrl: '/images/original/dom2.png',
+      imageUrl: '/images/corporate/product-cylinder-12kg.jpg',
       isDomestic: true,
       isCommercial: false,
       isIndustrial: false,
@@ -509,7 +509,7 @@ async function main() {
       slug: 'service-and-delivery',
       shortDesc: 'Delivering products to customers on time everytime, wherever they may be located.',
       fullContent: 'The main force that drives Kwality Gas is its emphasis on quality product, quality service. It means delivering products to customers on time everytime, wherever they may be located, training manpower to always perform beyond expectations and maintaining an unmatched delivery network.',
-      imageUrl: '/images/original/service_style_11.jpg',
+      imageUrl: '/images/corporate/service-delivery-truck.jpg',
       icon: 'Truck',
       displayOrder: 1,
     },
@@ -518,7 +518,7 @@ async function main() {
       slug: 'service-no-compromise',
       shortDesc: 'Workforce well trained in every aspect of LPG distribution, safety, and customer care.',
       fullContent: 'The company’s workforce is well trained in every aspect of LPG distribution, maintenance and safety. They are also kept abreast of international trends in the market and oriented to be receptive to the customer’s needs.',
-      imageUrl: '/images/original/service_style_12.jpg',
+      imageUrl: '/images/corporate/service-safety-audit.jpg',
       icon: 'ShieldCheck',
       displayOrder: 2,
     },
@@ -527,7 +527,7 @@ async function main() {
       slug: 'committed-to-environment',
       shortDesc: 'Expanding rural LPG adoption to reduce deforestation and air pollution.',
       fullContent: 'Making LPG available in rural areas and in the process reducing deforestation and pollution. Creating and implementing indirect employment opportunities thereby contributing directly & indirectly to the welfare of the society.',
-      imageUrl: '/images/original/BBOQ8.png',
+      imageUrl: '/images/corporate/hero-industrial-lpg.jpg',
       icon: 'Leaf',
       displayOrder: 3,
     },
@@ -536,7 +536,7 @@ async function main() {
       slug: 'future-fuelled-with-promise',
       shortDesc: 'Replacing dirty legacy fuels with cleaner, superior, highly efficient LPG.',
       fullContent: 'The end result being to replace traditional fuels like wood, furnace oil, kerosene, and LDO/HDO with a definitely superior alternative: pure blue-flame Kwality LPG.',
-      imageUrl: '/images/original/service_style_16.jpg',
+      imageUrl: '/images/corporate/service-manifold-bank.jpg',
       icon: 'Flame',
       displayOrder: 4,
     },
@@ -570,14 +570,14 @@ async function main() {
   }
 
   const galleryImages = [
-    { title: 'Domestic LPG Regulator', imageUrl: '/images/original/g2.jpg', categoryId: galleryCatMap['regulators'], isFeatured: true, displayOrder: 1 },
-    { title: 'Safety Accessories & Hoses', imageUrl: '/images/original/g3.jpg', categoryId: galleryCatMap['regulators'], isFeatured: true, displayOrder: 2 },
-    { title: 'Kwality Gas Water Heater Unit', imageUrl: '/images/original/gas.jpg', categoryId: galleryCatMap['heaters'], isFeatured: true, displayOrder: 3 },
-    { title: '33 Kgs Industrial Cylinders', imageUrl: '/images/original/1433.png', categoryId: galleryCatMap['cylinders'], isFeatured: true, displayOrder: 4 },
-    { title: '21 Kgs Commercial Cylinder', imageUrl: '/images/original/dars2.png', categoryId: galleryCatMap['cylinders'], isFeatured: true, displayOrder: 5 },
-    { title: '17 Kgs Restaurant Cylinder', imageUrl: '/images/original/dar17.png', categoryId: galleryCatMap['cylinders'], isFeatured: true, displayOrder: 6 },
-    { title: 'Domestic Cylinders Line', imageUrl: '/images/original/dom1.png', categoryId: galleryCatMap['cylinders'], isFeatured: true, displayOrder: 7 },
-    { title: 'Kwality Bottling Operations', imageUrl: '/images/original/kwalit.jpg', categoryId: galleryCatMap['plants'], isFeatured: true, displayOrder: 8 },
+    { title: 'Domestic LPG Regulator', imageUrl: '/images/corporate/hero-safety-standards.jpg', categoryId: galleryCatMap['regulators'], isFeatured: true, displayOrder: 1 },
+    { title: 'Safety Accessories & Hoses', imageUrl: '/images/corporate/service-safety-audit.jpg', categoryId: galleryCatMap['regulators'], isFeatured: true, displayOrder: 2 },
+    { title: 'Kwality Gas Water Heater Unit', imageUrl: '/images/corporate/product-gas-geyser.jpg', categoryId: galleryCatMap['heaters'], isFeatured: true, displayOrder: 3 },
+    { title: '33 Kgs Industrial Cylinders', imageUrl: '/images/corporate/product-cylinder-33kg.jpg', categoryId: galleryCatMap['cylinders'], isFeatured: true, displayOrder: 4 },
+    { title: '21 Kgs Commercial Cylinder', imageUrl: '/images/corporate/product-cylinder-17kg.jpg', categoryId: galleryCatMap['cylinders'], isFeatured: true, displayOrder: 5 },
+    { title: '17 Kgs Restaurant Cylinder', imageUrl: '/images/corporate/product-cylinder-17kg.jpg', categoryId: galleryCatMap['cylinders'], isFeatured: true, displayOrder: 6 },
+    { title: 'Domestic Cylinders Line', imageUrl: '/images/corporate/product-cylinder-12kg.jpg', categoryId: galleryCatMap['cylinders'], isFeatured: true, displayOrder: 7 },
+    { title: 'Kwality Bottling Operations', imageUrl: '/images/corporate/hero-bottling-plant.jpg', categoryId: galleryCatMap['plants'], isFeatured: true, displayOrder: 8 },
   ];
 
   const existingGalleryCount = await prisma.galleryImage.count();
@@ -587,8 +587,108 @@ async function main() {
     }
     console.log(`Seeded ${galleryImages.length} Gallery Images`);
   } else {
-    console.log(`Preserved ${existingGalleryCount} existing Gallery Images`);
+    // Update existing gallery records with high-res corporate visuals
+    for (const gi of galleryImages) {
+      await prisma.galleryImage.updateMany({
+        where: { title: gi.title },
+        data: { imageUrl: gi.imageUrl }
+      });
+    }
+    console.log(`Updated ${existingGalleryCount} existing Gallery Images with corporate visuals`);
   }
+
+  // 8.5 Hero Slider Slides
+  const heroSlides = [
+    {
+      slideKey: 'domestic',
+      subtitle: 'Domestic LPG Solutions',
+      title: 'Reliable LPG Supply Engineered for Every Household',
+      description: 'Clean, soot-free cooking energy for modern kitchens. Certified 12kg household cylinders, 5.5kg compact, and 4kg Cook & Light cylinders with guaranteed tare weight and tamper-evident safety seals.',
+      imageUrl: '/images/corporate/hero-domestic-lpg.jpg',
+      ctaText: 'Book Domestic Connection',
+      ctaLink: 'MODAL_DOMESTIC',
+      secondaryText: 'View Cylinders',
+      secondaryLink: '/cylinders',
+      proofPoint1: '100% Tested Tare Weight',
+      proofPoint2: 'Tamper-Evident Safety Seals',
+      proofPoint3: 'Prompt Doorstep Delivery',
+      displayOrder: 1,
+      isActive: true,
+    },
+    {
+      slideKey: 'commercial',
+      subtitle: 'Commercial LPG Solutions',
+      title: 'High-Calorific Clean LPG for Hotels, Bakeries & Commercial Kitchens',
+      description: 'Continuous high-pressure flame engineered for heavy commercial burners, tandoors, and catering operations. Reliable bulk delivery in 17kg and 21kg cylinders with zero soot.',
+      imageUrl: '/images/corporate/hero-commercial-lpg.jpg',
+      ctaText: 'Request Commercial Quote',
+      ctaLink: 'MODAL_COMMERCIAL',
+      secondaryText: 'Commercial Range',
+      secondaryLink: '/commercial',
+      proofPoint1: 'Zero Kitchen Soot',
+      proofPoint2: 'Uninterrupted Delivery Supply',
+      proofPoint3: '17kg & 21kg High Heat',
+      displayOrder: 2,
+      isActive: true,
+    },
+    {
+      slideKey: 'industrial',
+      subtitle: 'Heavy Industrial Energy',
+      title: 'Bulk LPG Storage & Liquid Off-Take Systems for Heavy Industry',
+      description: 'Specialized 33kg LOT (Liquid Off-Take) & VOT systems with automatic changeover manifolds. Lower operational fuel costs and zero sulphur emissions for foundries and manufacturing plants.',
+      imageUrl: '/images/corporate/hero-industrial-lpg.jpg',
+      ctaText: 'Explore Industrial Solutions',
+      ctaLink: 'MODAL_INDUSTRIAL',
+      secondaryText: 'Industrial Systems',
+      secondaryLink: '/industrial',
+      proofPoint1: '33kg LOT & VOT Cylinders',
+      proofPoint2: 'Automatic Manifold Banks',
+      proofPoint3: 'Sulphur-Free Industrial Heat',
+      displayOrder: 3,
+      isActive: true,
+    },
+    {
+      slideKey: 'infrastructure',
+      subtitle: 'Verified Bottling Infrastructure',
+      title: '3 Modern Bottling Hubs with 30,000 MTPA Bulk Storage',
+      description: 'Showcasing verified bottling facilities in Hosur, Chennai, and Dharwad. Operating with 8,000 cylinders/day throughput, automated carousel filling, and PESO safety compliance.',
+      imageUrl: '/images/corporate/hero-bottling-plant.jpg',
+      ctaText: 'Explore Our Infrastructure',
+      ctaLink: '/group-company',
+      secondaryText: 'Plant Facilities',
+      secondaryLink: '/gallery',
+      proofPoint1: '30,000 MTPA Bulk Storage',
+      proofPoint2: '8,000 Cylinders / Day',
+      proofPoint3: 'PESO & SMPV Certified',
+      displayOrder: 4,
+      isActive: true,
+    },
+    {
+      slideKey: 'safety',
+      subtitle: 'Safety, Quality & Reliability',
+      title: 'Grade 1 Rated CARE Certification with Uncompromising Safety Standards',
+      description: 'Every cylinder undergoes rigorous 5-point hydrostatic, tare weight, and valve leakage inspections before dispatch. Certified by CARE MDRA and honored with the International Star for Quality.',
+      imageUrl: '/images/corporate/hero-safety-standards.jpg',
+      ctaText: 'Explore Safety Standards',
+      ctaLink: '/safety-features',
+      secondaryText: 'Safety Protocols',
+      secondaryLink: '/safety-devices',
+      proofPoint1: 'Grade 1 CARE MDRA Rating',
+      proofPoint2: '5-Point Valve & Leak Checks',
+      proofPoint3: '24/7 Priority Emergency Line',
+      displayOrder: 5,
+      isActive: true,
+    },
+  ];
+
+  for (const slide of heroSlides) {
+    await prisma.heroSlide.upsert({
+      where: { slideKey: slide.slideKey },
+      update: slide,
+      create: slide,
+    });
+  }
+  console.log(`Seeded/Updated ${heroSlides.length} Hero Slides`);
 
   // 9. Core Pages & SEO Settings
   const pagesData = [

@@ -55,7 +55,7 @@ export default function CompanyIntro() {
           <div className="lg:col-span-5 space-y-6">
             <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-900 h-96 sm:h-[420px]">
               <Image
-                src="/images/original/why-img-1.jpg"
+                src="/images/corporate/hero-bottling-plant.jpg"
                 alt="Kwality Gas Bottling Line"
                 fill
                 className="object-cover"

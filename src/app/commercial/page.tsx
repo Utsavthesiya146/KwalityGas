@@ -130,7 +130,7 @@ export default function CommercialPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-4">
               <div className="relative w-36 h-44 mx-auto">
-                <Image src="/images/original/p3.jpg" alt="17kg Commercial Cylinder" fill className="object-contain" />
+                <Image src="/images/corporate/product-cylinder-17kg.jpg" alt="17kg Commercial Cylinder" fill className="object-contain" />
               </div>
               <div>
                 <h3 className="font-black text-slate-900 text-lg">17 Kg Cylinder</h3>
@@ -162,7 +162,7 @@ export default function CommercialPage() {
 
             <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-4">
               <div className="relative w-36 h-44 mx-auto">
-                <Image src="/images/original/p1.jpg" alt="33kg Commercial Cylinder" fill className="object-contain" />
+                <Image src="/images/corporate/product-cylinder-33kg.jpg" alt="33kg Commercial Cylinder" fill className="object-contain" />
               </div>
               <div>
                 <h3 className="font-black text-slate-900 text-lg">33 Kg Manifold Bank</h3>

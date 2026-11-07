@@ -120,7 +120,7 @@ export default function DomesticPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-4">
               <div className="relative w-36 h-44 mx-auto">
-                <Image src="/images/original/p5.jpg" alt="12kg Domestic Cylinder" fill className="object-contain" />
+                <Image src="/images/corporate/product-cylinder-12kg.jpg" alt="12kg Domestic Cylinder" fill className="object-contain" />
               </div>
               <div>
                 <h3 className="font-black text-slate-900 text-lg">12 Kg Cylinder</h3>
