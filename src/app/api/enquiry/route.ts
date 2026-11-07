@@ -6,6 +6,14 @@ import path from "path";
 
 export const dynamic = "force-dynamic";
 
+function getStorageDir() {
+  // On Vercel / AWS Lambda, only /tmp is writable
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    return path.join("/tmp", "kwality_storage");
+  }
+  return path.join(process.cwd(), "storage");
+}
+
 export async function POST(req: NextRequest) {
   let body: any;
   try {
@@ -62,6 +70,7 @@ export async function POST(req: NextRequest) {
     status: EnquiryStatus.NEW,
   };
 
+  // 1. Primary persistence: Relational database via Prisma
   try {
     const newEnquiry = await prisma.enquiry.create({
       data: enquiryData,
@@ -74,11 +83,38 @@ export async function POST(req: NextRequest) {
       persistedTo: "database",
     });
   } catch (dbError: any) {
-    console.error("Database enquiry insertion failed, attempting safe storage fallback:", dbError.message);
+    console.warn("Database connection unavailable, checking durable webhook fallback:", dbError.message);
 
-    // Safe disk backup fallback if running in a Node environment with filesystem access
+    // 2. Secondary persistence: Cloud Webhook (e.g., Slack, CRM, Zapier, Google Sheets)
+    const webhookUrl = process.env.ENQUIRY_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        const webhookRes = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event: "new_enquiry",
+            timestamp: new Date().toISOString(),
+            data: enquiryData,
+          }),
+        });
+
+        if (webhookRes.ok) {
+          return NextResponse.json({
+            success: true,
+            message: "Your enquiry has been safely received and queued for priority processing.",
+            enquiryId: "webhook-" + Date.now(),
+            persistedTo: "webhook",
+          });
+        }
+      } catch (webhookErr: any) {
+        console.error("Webhook dispatch failed:", webhookErr.message);
+      }
+    }
+
+    // 3. Local/Container Queue Fallback
     try {
-      const storageDir = path.join(process.cwd(), "storage");
+      const storageDir = getStorageDir();
       if (!fs.existsSync(storageDir)) {
         fs.mkdirSync(storageDir, { recursive: true });
       }
@@ -93,11 +129,16 @@ export async function POST(req: NextRequest) {
         "utf8"
       );
 
+      // On Vercel, /tmp is ephemeral and not persistent across container teardown
+      if (process.env.VERCEL) {
+        console.warn("Notice: Stored in /tmp, but Vercel ephemeral containers require remote MySQL or webhook for durable persistence.");
+      }
+
       return NextResponse.json({
         success: true,
-        message: "Your enquiry has been safely received and queued for priority follow-up by our marketing team.",
+        message: "Your enquiry has been safely queued for immediate follow-up by our marketing team.",
         enquiryId: record.id,
-        persistedTo: "queue",
+        persistedTo: process.env.VERCEL ? "container-tmp" : "local-storage",
       });
     } catch (fsError: any) {
       console.error("Filesystem fallback failed as well:", fsError.message);

@@ -6,6 +6,14 @@ import path from "path";
 
 export const dynamic = "force-dynamic";
 
+function getOfflineFiles() {
+  const dirs = [
+    path.join("/tmp", "kwality_storage", "offline_enquiries.jsonl"),
+    path.join(process.cwd(), "storage", "offline_enquiries.jsonl"),
+  ];
+  return dirs;
+}
+
 export async function GET(req: NextRequest) {
   const admin = await getCurrentAdmin();
   if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -28,17 +36,24 @@ export async function GET(req: NextRequest) {
     console.error("Failed to query enquiries from DB:", err.message);
   }
 
-  // Also read any pending offline queued enquiries
+  // Also read any pending offline queued enquiries from available directories
   let offlineEnquiries: any[] = [];
-  try {
-    const storageFile = path.join(process.cwd(), "storage", "offline_enquiries.jsonl");
-    if (fs.existsSync(storageFile)) {
-      const content = fs.readFileSync(storageFile, "utf8");
-      const lines = content.split("\n").filter((l) => l.trim().length > 0);
-      offlineEnquiries = lines.map((l) => JSON.parse(l));
+  for (const storageFile of getOfflineFiles()) {
+    try {
+      if (fs.existsSync(storageFile)) {
+        const content = fs.readFileSync(storageFile, "utf8");
+        const lines = content.split("\n").filter((l) => l.trim().length > 0);
+        for (const l of lines) {
+          try {
+            offlineEnquiries.push(JSON.parse(l));
+          } catch {
+            // ignore malformed line
+          }
+        }
+      }
+    } catch {
+      // directory inaccessible
     }
-  } catch (err: any) {
-    console.error("Failed to read offline enquiries file:", err.message);
   }
 
   const combined = [...offlineEnquiries, ...dbEnquiries];
