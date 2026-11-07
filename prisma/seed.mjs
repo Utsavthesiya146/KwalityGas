@@ -20,6 +20,8 @@ async function main() {
       },
     });
     console.log('Created Superadmin user: admin@kwalitygas.com');
+  } else {
+    console.log('Preserved existing admin user (password and credentials untouched)');
   }
 
   // 2. Product Categories
@@ -396,7 +398,6 @@ async function main() {
   } else {
     console.log(`Preserved ${existingAwardCount} existing Awards`);
   }
-  console.log('Seeded Awards');
 
   // 7. Services (4 Audited Pillars)
   const services = [

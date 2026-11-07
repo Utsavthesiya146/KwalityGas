@@ -6,12 +6,21 @@ import path from "path";
 
 export const dynamic = "force-dynamic";
 
-function getStorageDir() {
-  // On Vercel / AWS Lambda, only /tmp is writable
-  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
-    return path.join("/tmp", "kwality_storage");
+function getStorageConfig() {
+  // 1. If an explicit Persistent Disk mount path is configured (e.g. Render Persistent Disk at /var/data/storage)
+  if (process.env.PERSISTENT_STORAGE_DIR) {
+    return { dir: process.env.PERSISTENT_STORAGE_DIR, isDurable: true };
   }
-  return path.join(process.cwd(), "storage");
+  // 2. On Vercel / serverless platforms, only /tmp is writable but is strictly ephemeral
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    return { dir: path.join("/tmp", "kwality_storage"), isDurable: false };
+  }
+  // 3. On Render Web Service default container (without a Persistent Disk), the filesystem is ephemeral across deploys
+  if (process.env.RENDER) {
+    return { dir: path.join(process.cwd(), "storage"), isDurable: false };
+  }
+  // 4. Local development environment
+  return { dir: path.join(process.cwd(), "storage"), isDurable: true };
 }
 
 export async function POST(req: NextRequest) {
@@ -112,9 +121,9 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Local/Container Queue Fallback
+    // 3. Persistent Disk or Emergency Buffer Fallback
     try {
-      const storageDir = getStorageDir();
+      const { dir: storageDir, isDurable } = getStorageConfig();
       if (!fs.existsSync(storageDir)) {
         fs.mkdirSync(storageDir, { recursive: true });
       }
@@ -129,30 +138,30 @@ export async function POST(req: NextRequest) {
         "utf8"
       );
 
-      // On Vercel / serverless platforms, /tmp is ephemeral and wiped upon container recycle.
-      // Do not give false assurance of permanent storage if running on serverless without remote DB or webhook.
-      if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
-        console.warn("Vercel serverless alert: Database unavailable and webhook not configured. Lead written to /tmp buffer for inspection, but returning 503 to ensure customer contacts hotline.");
-        return NextResponse.json(
-          {
-            error: "Our online booking system is momentarily unavailable while database maintenance is underway. Please call our 24/7 marketing hotline directly at +91 78997 87101 or email kwalitygasmarketing@gmail.com for immediate booking.",
-          },
-          { status: 503 }
-        );
+      // If the storage directory is a verified durable persistent disk (e.g. Render Persistent Disk mount)
+      if (isDurable) {
+        return NextResponse.json({
+          success: true,
+          message: "Your enquiry has been safely queued on secure persistent storage for priority follow-up.",
+          enquiryId: record.id,
+          persistedTo: "persistent-disk",
+        });
       }
 
-      // On dedicated/VPS servers (Hostinger Cloud Node.js), local disk is durable
-      return NextResponse.json({
-        success: true,
-        message: "Your enquiry has been safely queued for immediate follow-up by our marketing team.",
-        enquiryId: record.id,
-        persistedTo: "local-storage",
-      });
+      // If running on an ephemeral filesystem (Render default container or Vercel serverless):
+      // Record was written to disk for emergency admin inspection, but DO NOT claim durable success to customer.
+      console.warn("Storage warning: Database unavailable and filesystem is ephemeral. Returning 503 so customer contacts hotline.");
+      return NextResponse.json(
+        {
+          error: "Our online booking system is momentarily unavailable while database maintenance is underway. Please call our 24/7 marketing hotline directly at +91 78997 87101 or email kwalitygasmarketing@gmail.com for immediate priority assistance.",
+        },
+        { status: 503 }
+      );
     } catch (fsError: any) {
       console.error("Filesystem fallback failed as well:", fsError.message);
       return NextResponse.json(
         {
-          error: "Database service is momentarily unavailable. Please contact our 24/7 hotline directly at +91 78997 87101 or email kwalitygasmarketing@gmail.com.",
+          error: "Our online booking system is momentarily unavailable. Please contact our 24/7 hotline directly at +91 78997 87101 or email kwalitygasmarketing@gmail.com.",
         },
         { status: 503 }
       );

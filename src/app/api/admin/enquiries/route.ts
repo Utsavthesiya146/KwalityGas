@@ -8,6 +8,9 @@ export const dynamic = "force-dynamic";
 
 function getOfflineFiles() {
   const dirs = [
+    ...(process.env.PERSISTENT_STORAGE_DIR
+      ? [path.join(process.env.PERSISTENT_STORAGE_DIR, "offline_enquiries.jsonl")]
+      : []),
     path.join("/tmp", "kwality_storage", "offline_enquiries.jsonl"),
     path.join(process.cwd(), "storage", "offline_enquiries.jsonl"),
   ];

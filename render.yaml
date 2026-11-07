@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: kwality-gas
+    name: kwality-gas-staging
     runtime: node
     plan: starter
     region: singapore
@@ -9,6 +9,11 @@ services:
     startCommand: npm run start
     healthCheckPath: /
     autoDeploy: true
+    # Optional persistent disk for zero-downtime offline enquiry buffering:
+    # disk:
+    #   name: kwality-storage
+    #   mountPath: /var/data/storage
+    #   sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
@@ -19,7 +24,7 @@ services:
       - key: ADMIN_SESSION_NAME
         value: kwality_admin_session
       - key: NEXT_PUBLIC_APP_URL
-        value: https://kwalitygas.onrender.com
+        value: https://kwalitygas-staging.onrender.com
       - key: NEXT_PUBLIC_COMPANY_NAME
         value: "Kwality Gas Bottlers Pvt Ltd"
       - key: NEXT_PUBLIC_COMPANY_CIN
@@ -30,4 +35,6 @@ services:
         value: "+91 78997 87101"
       - key: NEXT_PUBLIC_OFFICE_EMAIL
         value: "kwalitygasmarketing@gmail.com"
+      - key: PERSISTENT_STORAGE_DIR
+        sync: false
 
