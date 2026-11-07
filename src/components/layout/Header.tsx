@@ -154,7 +154,7 @@ export default function Header() {
             <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
               <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg overflow-hidden border border-slate-100 shrink-0 bg-white shadow-xs">
                 <Image
-                  src="/images/original/logo.png"
+                  src="/images/original/logo.jpg"
                   alt="Kwality Gas Bottlers Logo"
                   fill
                   className="object-contain p-0.5"
