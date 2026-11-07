@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: kwality-gas
+    runtime: node
+    plan: starter
+    region: singapore
+    branch: main
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_SESSION_NAME
+        value: kwality_admin_session
+      - key: NEXT_PUBLIC_APP_URL
+        value: https://kwalitygas.onrender.com
+      - key: NEXT_PUBLIC_COMPANY_NAME
+        value: "Kwality Gas Bottlers Pvt Ltd"
+      - key: NEXT_PUBLIC_COMPANY_CIN
+        value: "U01120KA2005PTC036860"
+      - key: NEXT_PUBLIC_COMPANY_PHONE
+        value: "+91 80 2340 0459"
+      - key: NEXT_PUBLIC_MARKETING_PHONE
+        value: "+91 78997 87101"
+      - key: NEXT_PUBLIC_OFFICE_EMAIL
+        value: "kwalitygasmarketing@gmail.com"
+
