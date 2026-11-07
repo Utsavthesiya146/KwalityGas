@@ -21,6 +21,7 @@ import {
   User,
   ShieldCheck,
   Share2,
+  Sliders,
 } from "lucide-react";
 
 interface AdminLayoutClientProps {
@@ -63,6 +64,7 @@ export default function AdminLayoutClient({ admin, children }: AdminLayoutClient
 
   const navItems = [
     { name: "Dashboard Overview", href: "/admin", icon: LayoutDashboard },
+    { name: "Hero Image Slider", href: "/admin/hero-slider", icon: Sliders },
     { name: "Enquiries & Leads", href: "/admin/enquiries", icon: Inbox },
     { name: "Price List Manager", href: "/admin/price-list", icon: Tag },
     { name: "Product Management", href: "/admin/products", icon: Package },

@@ -15,6 +15,7 @@ import {
   Flame,
   Plus,
   Share2,
+  Sliders,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -26,6 +27,7 @@ export default async function AdminDashboardPage() {
   let totalProducts = 0;
   let totalTestimonials = 0;
   let totalSocial = 0;
+  let totalSlides = 0;
   let recentEnquiries: any[] = [];
   let recentProducts: any[] = [];
   let priceStates: any[] = [];
@@ -49,6 +51,7 @@ export default async function AdminDashboardPage() {
         include: { items: true },
       }),
       prisma.socialMediaLink.count({ where: { isActive: true } }),
+      prisma.heroSlide.count({ where: { isActive: true } }),
     ]);
 
     totalEnquiries = results[0];
@@ -59,6 +62,7 @@ export default async function AdminDashboardPage() {
     recentProducts = results[5];
     priceStates = results[6];
     totalSocial = results[7];
+    totalSlides = results[8];
   } catch (err) {
     console.error("Admin dashboard fetch error:", err);
   }
@@ -86,6 +90,13 @@ export default async function AdminDashboardPage() {
           >
             <Tag className="w-3.5 h-3.5" />
             <span>Update LPG Prices</span>
+          </Link>
+          <Link
+            href="/admin/hero-slider"
+            className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-white/20 transition-all flex items-center gap-1.5"
+          >
+            <Sliders className="w-3.5 h-3.5" />
+            <span>Hero Slider ({totalSlides})</span>
           </Link>
           <Link
             href="/admin/social-media"

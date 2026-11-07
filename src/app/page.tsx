@@ -12,8 +12,18 @@ export default async function HomePage() {
   let testimonials: any[] = [];
   let services: any[] = [];
   let awards: any[] = [];
+  let heroSlides: any[] = [];
 
   try {
+    try {
+      heroSlides = await prisma.heroSlide.findMany({
+        where: { isActive: true },
+        orderBy: { displayOrder: "asc" },
+      });
+    } catch (slideErr) {
+      console.warn("Could not query hero_slides, fallback safely:", slideErr);
+    }
+
     const priceStates = await prisma.priceListState.findMany({
       where: { isActive: true },
       include: {
@@ -64,6 +74,7 @@ export default async function HomePage() {
       testimonials={testimonials}
       services={services}
       awards={awards}
+      heroSlides={heroSlides}
     />
   );
 }

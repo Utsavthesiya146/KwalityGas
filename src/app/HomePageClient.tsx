@@ -22,6 +22,7 @@ interface HomePageClientProps {
   testimonials: any[];
   services: any[];
   awards: any[];
+  heroSlides?: any[];
 }
 
 export default function HomePageClient({
@@ -30,6 +31,7 @@ export default function HomePageClient({
   testimonials,
   services,
   awards,
+  heroSlides,
 }: HomePageClientProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL">("DOMESTIC");
@@ -51,7 +53,7 @@ export default function HomePageClient({
   return (
     <div className="w-full">
       {/* 1. Hero Slider */}
-      <HeroSlider onOpenEnquiry={openEnquiry} />
+      <HeroSlider onOpenEnquiry={openEnquiry} slides={heroSlides} />
 
       {/* 2. LPG Categories (Home, Commercial, Industrial) */}
       <CategoriesGrid onOpenEnquiry={openEnquiry} />

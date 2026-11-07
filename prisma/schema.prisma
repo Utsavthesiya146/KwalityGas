@@ -277,4 +277,27 @@ model SocialMediaLink {
   @@map("social_media_links")
 }
 
+model HeroSlide {
+  id            String   @id @default(cuid())
+  slideKey      String?  @unique // e.g. "domestic", "commercial", "industrial", "infrastructure", "safety"
+  title         String
+  subtitle      String?  // Badge/Pill e.g. "Domestic LPG Solutions"
+  description   String   @db.Text
+  imageUrl      String   @db.VarChar(500)
+  ctaText       String   // e.g. "Book Domestic Connection"
+  ctaLink       String   // e.g. "MODAL_DOMESTIC" or "/domestic"
+  secondaryText String?  // e.g. "View Cylinders"
+  secondaryLink String?  // e.g. "/cylinders"
+  proofPoint1   String?
+  proofPoint2   String?
+  proofPoint3   String?
+  displayOrder  Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("hero_slides")
+}
+
+
 
