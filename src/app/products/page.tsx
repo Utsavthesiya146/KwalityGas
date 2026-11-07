@@ -2,22 +2,22 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { Flame, CheckCircle2, ArrowRight, ShieldCheck, Tag, Phone } from "lucide-react";
+import { Flame, CheckCircle2, ArrowRight, ShieldCheck, Tag, Phone, Sparkles, Package, Wrench } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Products & Gas Water Heaters | Kwality Gas",
+  title: "Kwality Gas Products | LPG Cylinders, Gas Water Heaters & Industrial Valves",
   description:
-    "Explore Kwality Gas products: Kwality Gas Water Heater (Gas Geyser), domestic LPG cylinders (12kg, 5.5kg, 4kg), commercial cylinders (17kg, 21kg), and 33kg industrial cylinders.",
+    "Explore Kwality Gas products: Kwality Gas Water Heater (Gas Geyser), domestic LPG cylinders (12kg, 5.5kg, 4kg), commercial cylinders (17kg, 21kg), 33kg industrial cylinders, and safety devices.",
 };
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function ProductsPage() {
-  let products: any[] = [];
+  let dbProducts: any[] = [];
   try {
-    products = await prisma.product.findMany({
+    dbProducts = await prisma.product.findMany({
       where: { isActive: true },
       include: { category: true },
       orderBy: { displayOrder: "asc" },
@@ -40,217 +40,233 @@ export default async function ProductsPage() {
   return (
     <div className="w-full bg-slate-50 min-h-screen">
       {/* Banner */}
-      <div className="bg-brand-blue-dark text-white py-16 px-4">
+      <div className="bg-[#102A43] text-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-brand-orange text-xs font-bold uppercase tracking-wider mb-3">
-            <Flame className="w-3.5 h-3.5 fill-brand-orange" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
+            <Flame className="w-3.5 h-3.5 fill-[#F28C28]" />
             <span>Official Product Catalog</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Kwality Gas Products
+            Kwality Gas Products & Equipment
           </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl">
-            Clean energy solutions engineered for households, restaurants, commercial caterers, and heavy industrial furnaces.
+          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+            Clean thermal energy solutions engineered for households, restaurants, commercial caterers, and heavy industrial furnaces.
           </p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
-        {/* SECTION 1: KWALITY GAS WATER HEATER */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl p-6 sm:p-10">
+        {/* Quick Nav Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Link
+            href="/cylinders"
+            className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex items-center gap-3.5 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-orange-50 text-[#F28C28] flex items-center justify-center shrink-0">
+              <Flame className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="font-bold text-slate-900 text-sm group-hover:text-[#1769AA] transition-colors">
+                LPG Cylinders
+              </div>
+              <div className="text-[11px] text-slate-500">2kg to 33kg range</div>
+            </div>
+          </Link>
+
+          <Link
+            href="/gas-water-heater"
+            className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex items-center gap-3.5 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="font-bold text-slate-900 text-sm group-hover:text-[#1769AA] transition-colors">
+                Gas Water Heater
+              </div>
+              <div className="text-[11px] text-slate-500">8 safety devices included</div>
+            </div>
+          </Link>
+
+          <Link
+            href="/safety-devices"
+            className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex items-center gap-3.5 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="font-bold text-slate-900 text-sm group-hover:text-[#1769AA] transition-colors">
+                Safety Devices
+              </div>
+              <div className="text-[11px] text-slate-500">Gas detectors & shutoffs</div>
+            </div>
+          </Link>
+
+          <Link
+            href="/accessories"
+            className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex items-center gap-3.5 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+              <Wrench className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="font-bold text-slate-900 text-sm group-hover:text-[#1769AA] transition-colors">
+                Accessories
+              </div>
+              <div className="text-[11px] text-slate-500">IS 9573 hoses & regulators</div>
+            </div>
+          </Link>
+        </div>
+
+        {/* Featured Section: Kwality Gas Water Heater */}
+        <div id="water-heater" className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-card">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-sm h-80 sm:h-96 rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 p-4">
+              <div className="relative w-full max-w-sm h-80 sm:h-96 bg-slate-50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center">
                 <Image
-                  src="/images/original/gas.jpg"
-                  alt="Kwality Gas Water Heater (Gas Geyser)"
+                  src="/images/original/p6-ne.png"
+                  alt="Kwality Gas Water Heater with 8 Safety Features"
                   fill
-                  className="object-contain p-2"
+                  className="object-contain p-4"
                 />
               </div>
             </div>
 
-            <div className="lg:col-span-7 space-y-5">
-              <span className="text-xs font-bold text-brand-orange uppercase tracking-wider block">
-                Eco-Friendly Heating Product
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-brand-blue-dark">
-                Water Heater (Gas Heater)
+            <div className="lg:col-span-7 space-y-4">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 text-[#F28C28] text-xs font-bold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Featured Energy Saver</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-[#102A43] tracking-tight">
+                Kwality Gas Water Heater (Gas Geyser)
               </h2>
-              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                Initially we have launched <strong className="text-slate-900">“Kwality Gas Water Heater”</strong> which again is an eco friendly product. Engineered to deliver piping hot water on demand with exceptional fuel efficiency and multi-stage safety controls.
+              <p className="text-sm text-slate-600 leading-relaxed font-medium">
+                Engineered with 8 multi-stage safety protection devices, pure oxygen-free copper heat exchanger, and automatic electrical pulse ignition. Reduces water heating energy expenses by up to 60% compared to electric storage geysers.
               </p>
 
-              <div>
-                <h4 className="text-xs font-black uppercase text-slate-900 tracking-wider mb-3">
-                  Special Features & Safety Mechanisms:
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {waterHeaterSpecs.map((item, i) => (
-                    <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <h5 className="text-xs font-bold text-slate-900">{item.title}</h5>
-                        <p className="text-[11px] text-slate-600 mt-0.5">{item.desc}</p>
-                      </div>
+              {/* 8 Features compact list */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                {waterHeaterSpecs.map((spec, i) => (
+                  <div key={i} className="flex items-start gap-2 text-xs">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-slate-900 block font-bold">{spec.title}</strong>
+                      <span className="text-slate-500 text-[11px]">{spec.desc}</span>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
 
-              <div className="pt-2 flex items-center gap-3">
+              <div className="pt-4 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/contact"
-                  className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-bold px-6 py-3.5 rounded-xl transition-all shadow"
+                  href="/gas-water-heater"
+                  className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
                 >
-                  Enquire / Order Water Heater
+                  <span>Explore Water Heater Guide</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
-                <a
-                  href="tel:+917899787101"
-                  className="text-xs font-semibold text-slate-700 hover:text-brand-orange"
+                <Link
+                  href="/contact/domestic"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2.5 rounded-xl font-semibold text-xs transition-all"
                 >
-                  Call: +91 78997 87101
-                </a>
+                  Order Geyser Refill
+                </Link>
               </div>
             </div>
           </div>
         </div>
 
-        {/* SECTION 2: PRODUCTS RANGE (LPG CYLINDER) */}
-        <div>
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="text-2xl sm:text-3xl font-black text-brand-blue-dark">
-              Products Range (LPG Cylinder)
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1 font-semibold uppercase tracking-wider text-brand-orange">
-              KWALITY GAS IS AVAILABLE IN FOLLOWING CAPACITIES AND SEGMENTS
-            </p>
-            <p className="text-xs text-slate-500 mt-1">
-              15 Kgs, 17 Kgs & 33 Kgs for commercial and industries • 12 Kgs & 15 Kgs for Domestic consumers • 5.5 Kgs for Small Families • 4 Kgs for Cook and Light Cylinder
-            </p>
+        {/* Cylinder Lineup Grid */}
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-black text-[#102A43]">
+                LPG Cylinder Capacities
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                From micro 2kg portable cylinders to heavy-duty 33kg liquid off-take industrial installations.
+              </p>
+            </div>
+            <Link
+              href="/cylinders"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1769AA] hover:text-[#102A43] shrink-0"
+            >
+              <span>View Full Specs</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((prod) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {(dbProducts.length > 0 ? dbProducts : [
+              { id: "1", name: "33kg Industrial Cylinder", capacity: "33 Kg", imageUrl: "/images/original/p1.jpg", shortDesc: "LOT/VOT for high-consumption industrial furnaces and manifolds.", isIndustrial: true },
+              { id: "2", name: "21kg Commercial Cylinder", capacity: "21 Kg", imageUrl: "/images/original/p2.jpg", shortDesc: "Continuous high-pressure cooking for large restaurants and hotels.", isCommercial: true },
+              { id: "3", name: "17kg Commercial Cylinder", capacity: "17 Kg", imageUrl: "/images/original/p3.jpg", shortDesc: "Standard fuel for caterers, cloud kitchens, and bakeries.", isCommercial: true },
+              { id: "4", name: "15kg Commercial Cylinder", capacity: "15 Kg", imageUrl: "/images/original/p4.jpg", shortDesc: "Manageable ergonomics for fast food joints and tea stalls.", isCommercial: true },
+              { id: "5", name: "12kg Domestic Cylinder", capacity: "12 Kg", imageUrl: "/images/original/p5.jpg", shortDesc: "Flagship domestic cooking gas cylinder for households.", isDomestic: true },
+              { id: "6", name: "5.5kg Domestic Cylinder", capacity: "5.5 Kg", imageUrl: "/images/original/dom1.png", shortDesc: "Compact cylinder for small families and single executives.", isDomestic: true },
+              { id: "7", name: "4kg Cook & Light Cylinder", capacity: "4 Kg", imageUrl: "/images/original/dar17.png", shortDesc: "Direct burner and emergency lighting attachment support.", isDomestic: true },
+              { id: "8", name: "2kg Micro Cylinder", capacity: "2 Kg", imageUrl: "/images/original/dars2.png", shortDesc: "Ultra-portable cylinder for laboratories and jewellery soldering.", isDomestic: true },
+            ]).map((prod: any) => (
               <div
                 key={prod.id}
-                className="bg-white rounded-2xl p-6 border border-slate-200 shadow-card hover:shadow-cardHover transition-all flex flex-col justify-between"
+                className="bg-white rounded-2xl border border-slate-200/80 p-5 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all group"
               >
                 <div>
-                  <div className="relative h-56 w-full bg-slate-50 rounded-xl overflow-hidden mb-4 border border-slate-100">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xl font-black text-[#102A43]">
+                      {prod.capacity || "LPG"}
+                    </span>
+                    <span
+                      className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                        prod.isIndustrial
+                          ? "bg-slate-100 text-slate-800"
+                          : prod.isCommercial
+                          ? "bg-blue-50 text-[#1769AA]"
+                          : "bg-orange-50 text-[#F28C28]"
+                      }`}
+                    >
+                      {prod.isIndustrial ? "Industrial" : prod.isCommercial ? "Commercial" : "Domestic"}
+                    </span>
+                  </div>
+
+                  <div className="relative w-full h-40 bg-slate-50 rounded-xl overflow-hidden mb-3 border border-slate-100 flex items-center justify-center p-2">
                     <Image
-                      src={prod.imageUrl || "/images/original/dom2.png"}
+                      src={prod.imageUrl || "/images/original/p1.jpg"}
                       alt={prod.name}
                       fill
-                      className="object-contain p-4"
+                      className="object-contain p-2 group-hover:scale-105 transition-transform"
                     />
-                    {prod.capacity && (
-                      <span className="absolute top-3 right-3 bg-brand-blue text-white text-xs font-bold px-2.5 py-1 rounded-md shadow">
-                        {prod.capacity}
-                      </span>
-                    )}
                   </div>
 
-                  <h3 className="font-bold text-base text-slate-900 mb-1">{prod.name}</h3>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-3">{prod.shortDesc}</p>
-
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {prod.isDomestic && (
-                      <span className="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">
-                        Domestic
-                      </span>
-                    )}
-                    {prod.isCommercial && (
-                      <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded">
-                        Commercial
-                      </span>
-                    )}
-                    {prod.isIndustrial && (
-                      <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">
-                        Industrial
-                      </span>
-                    )}
-                  </div>
+                  <h3 className="font-bold text-slate-900 text-sm mb-1.5 leading-snug">
+                    {prod.name}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed mb-3">
+                    {prod.shortDesc || prod.description}
+                  </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="pt-3 border-t border-slate-100">
                   <Link
-                    href={`/price-list`}
-                    className="text-xs font-bold text-brand-blue hover:text-brand-orange"
+                    href={
+                      prod.isIndustrial
+                        ? "/contact/industrial"
+                        : prod.isCommercial
+                        ? "/contact/commercial"
+                        : "/contact/domestic"
+                    }
+                    className="w-full inline-flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-[#F28C28] text-white py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
                   >
-                    Check Rate
-                  </Link>
-
-                  <Link
-                    href="/contact"
-                    className="text-xs font-bold bg-brand-orange text-white px-3.5 py-1.5 rounded-lg hover:bg-brand-orange-hover transition-colors shadow-sm"
-                  >
-                    Book Refill
+                    <span>Order / Enquire</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
-        {/* SECTION 3: DOMESTIC & COMMERCIAL SEGMENTS (AUDITED VERBATIM) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* DOMESTIC SEGMENT */}
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-card space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider">
-              <span>Household Consumers</span>
-            </div>
-            <h3 className="text-2xl font-black text-brand-blue-dark">DOMESTIC SEGMENT</h3>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
-              LPG is a far superior fuel compared to traditional fuels and offers many advantages. From the customer’s point of view it is convenient, safe, a cleaner and better fuel, is healthy and easy to use.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              From the government’s point of view it helps in preservation of the forest wealth, reduces health hazards, reduces the dependence on fossil fuels and electricity and is an environmental friendly fuel.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium text-brand-blue">
-              Kwality Gas will focus on this segment and will strive to reach into the rural markets. The accent on service will be reflected in prompt deliveries at the customer’s doorstep being accessible 7 days a week, 15 hours a day and a dealer network that is ever receptive to the customer’s needs.
-            </p>
-
-            <div className="pt-2">
-              <Link
-                href="/domestic"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-orange hover:underline"
-              >
-                <span>Read Domestic Portal & Guidelines</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-
-          {/* COMMERCIAL SEGMENT */}
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-card space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-bold uppercase tracking-wider">
-              <span>HORECA & Poultry</span>
-            </div>
-            <h3 className="text-2xl font-black text-brand-blue-dark">COMMERCIAL SEGMENT</h3>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
-              In the commercial segment, Kwality Gas commitment and positive attitude to the changing requirements of customers will make it the preferred choice in this segment.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              In this context, Kwality Gas has always identified newer areas where LPG can be offered as a better alternative to conventional fuels, and has provided value added services, be it to hotels, restaurants & caterers (HORECA) or poultry and many other small commercial establishments that require better and clean fuels.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium text-slate-900">
-              Uninterrupted refills, technical advice on commercial manifold banks, and transparent volume billing.
-            </p>
-
-            <div className="pt-2">
-              <Link
-                href="/commercial"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-orange hover:underline"
-              >
-                <span>Read Commercial Portal & Requirements</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
 }
-

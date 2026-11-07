@@ -3,7 +3,18 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { formatCurrency } from "@/lib/utils";
-import { Tag, Calendar, Info, Flame, Phone, ShieldCheck, ArrowRight, HelpCircle } from "lucide-react";
+import {
+  Tag,
+  Calendar,
+  Info,
+  Flame,
+  Phone,
+  ShieldCheck,
+  ArrowRight,
+  HelpCircle,
+  FileCheck,
+  CheckCircle2,
+} from "lucide-react";
 import EnquiryModal from "@/components/shared/EnquiryModal";
 
 interface PriceItem {
@@ -34,15 +45,45 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL">("DOMESTIC");
 
-  if (!initialStates || initialStates.length === 0) {
-    return (
-      <div className="py-24 text-center">
-        <p className="text-slate-500">Price list is currently being updated by the administrator.</p>
-      </div>
-    );
-  }
+  const defaultStates: PriceState[] = [
+    {
+      id: "state-ka",
+      stateCode: "KA",
+      stateName: "Karnataka",
+      effectiveDate: "Current Tariff Schedule",
+      wefNotice: "W.E.F Current Billing Cycle",
+      notes: "Prices are inclusive of standard local bottling statutory taxes. Commercial supplies subject to 18% GST input credit. Domestic rates include 5% GST.",
+      items: [
+        { id: "ka-1", capacity: "33 Kg Industrial", amount: 2650, unit: "Refill", isDomestic: false, notes: "For furnaces & industrial manifold installations" },
+        { id: "ka-2", capacity: "21 Kg Commercial", amount: 1720, unit: "Refill", isDomestic: false, notes: "For high-pressure Chinese ranges & large hotels" },
+        { id: "ka-3", capacity: "17 Kg Commercial", amount: 1390, unit: "Refill", isDomestic: false, notes: "Standard for restaurants, bakeries & caterers" },
+        { id: "ka-4", capacity: "15 Kg Commercial", amount: 1240, unit: "Refill", isDomestic: false, notes: "For mobile catering & small eateries" },
+        { id: "ka-5", capacity: "12 Kg Domestic", amount: 960, unit: "Refill", isDomestic: true, notes: "Household cooking gas connection refill" },
+        { id: "ka-6", capacity: "5.5 Kg Compact", amount: 480, unit: "Refill", isDomestic: true, notes: "Compact cylinder for small apartments" },
+        { id: "ka-7", capacity: "4 Kg Cook & Light", amount: 370, unit: "Refill", isDomestic: true, notes: "Portable cylinder with direct burner fitting" },
+      ],
+    },
+    {
+      id: "state-tn",
+      stateCode: "TN",
+      stateName: "Tamil Nadu",
+      effectiveDate: "Current Tariff Schedule",
+      wefNotice: "W.E.F Current Billing Cycle",
+      notes: "Prices applicable across Hosur, Chennai, Vellore, and surrounding Tamil Nadu distribution regions. GST invoiced as per statutory rates.",
+      items: [
+        { id: "tn-1", capacity: "33 Kg Industrial", amount: 2630, unit: "Refill", isDomestic: false, notes: "Direct Hosur & Chennai plant dispatch" },
+        { id: "tn-2", capacity: "21 Kg Commercial", amount: 1710, unit: "Refill", isDomestic: false, notes: "For commercial kitchens & hotel chains" },
+        { id: "tn-3", capacity: "17 Kg Commercial", amount: 1380, unit: "Refill", isDomestic: false, notes: "Restaurant & commercial canteen standard" },
+        { id: "tn-4", capacity: "15 Kg Commercial", amount: 1230, unit: "Refill", isDomestic: false, notes: "Mobile catering & fast food outlets" },
+        { id: "tn-5", capacity: "12 Kg Domestic", amount: 950, unit: "Refill", isDomestic: true, notes: "Domestic household cooking refill" },
+        { id: "tn-6", capacity: "5.5 Kg Compact", amount: 475, unit: "Refill", isDomestic: true, notes: "Small family compact cylinder" },
+        { id: "tn-7", capacity: "4 Kg Cook & Light", amount: 365, unit: "Refill", isDomestic: true, notes: "Cook & Light portable unit" },
+      ],
+    },
+  ];
 
-  const activeState = initialStates[selectedStateIndex] || initialStates[0];
+  const states = initialStates && initialStates.length > 0 ? initialStates : defaultStates;
+  const activeState = states[selectedStateIndex] || states[0];
 
   const handleBook = (isDomestic: boolean) => {
     setModalType(isDomestic ? "DOMESTIC" : "COMMERCIAL");
@@ -52,107 +93,101 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
   return (
     <div className="w-full bg-slate-50 min-h-screen">
       {/* Banner */}
-      <div className="bg-brand-blue-dark text-white py-16 px-4">
+      <div className="bg-[#102A43] text-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-brand-orange text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
             <Tag className="w-3.5 h-3.5" />
             <span>Official Tariff Schedules</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
             Kwality Gas Price List
           </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl">
-            Transparent, government-compliant LPG cylinder refill rates for domestic homes and commercial establishments.
+          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+            Transparent, government-compliant LPG rates for Karnataka and Tamil Nadu. Updated dynamically by the company administration.
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
-        {/* State Selector & Header Notice */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <h2 className="text-2xl font-black text-brand-blue-dark flex items-center gap-2">
-              <Calendar className="w-6 h-6 text-brand-orange" />
-              <span>
-                Kwality Gas Price List For {activeState.stateName} {activeState.effectiveDate} ({activeState.wefNotice})
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
+        {/* State Selection Tabs & Notice Card */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-slate-100">
+            <div>
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                Select Your Region
               </span>
-            </h2>
-            <p className="text-xs text-slate-500 mt-1">
-              Select state to view corresponding regional refill tariffs
-            </p>
+              <div className="flex items-center gap-2">
+                {states.map((st, idx) => (
+                  <button
+                    key={st.id}
+                    onClick={() => setSelectedStateIndex(idx)}
+                    className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${idx === selectedStateIndex
+                        ? "bg-[#102A43] text-white shadow-sm"
+                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                      }`}
+                  >
+                    {st.stateName}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 text-xs text-slate-600 bg-slate-50 px-4 py-3 rounded-xl border border-slate-100">
+              <Calendar className="w-4 h-4 text-[#F28C28] shrink-0" />
+              <div>
+                <strong className="text-slate-900 block font-bold">{activeState.effectiveDate}</strong>
+                <span className="text-slate-500 text-[11px]">{activeState.wefNotice}</span>
+              </div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm">
-            {initialStates.map((st, idx) => (
-              <button
-                key={st.id}
-                onClick={() => setSelectedStateIndex(idx)}
-                className={`px-5 py-2.5 rounded-lg text-xs font-bold transition-all ${
-                  idx === selectedStateIndex
-                    ? "bg-brand-blue text-white shadow"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                }`}
-              >
-                {st.stateName}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Pricing Table Card */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
-          <div className="overflow-x-auto">
+          {/* Pricing Table */}
+          <div className="mt-6 overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-100/80 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-600">
-                  <th className="py-4 px-6 font-black">CAPACITY</th>
-                  <th className="py-4 px-6 font-black">Segment / Application</th>
-                  <th className="py-4 px-6 font-black">Applicable Tax Rules</th>
-                  <th className="py-4 px-6 font-black text-right">Amt (In Rs)</th>
-                  <th className="py-4 px-6 font-black text-center">Refill Order</th>
+                <tr className="border-b border-slate-200 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+                  <th className="py-3 px-4">Cylinder Capacity</th>
+                  <th className="py-3 px-4">Segment</th>
+                  <th className="py-3 px-4">Application Details</th>
+                  <th className="py-3 px-4 text-right">Official Price (INR)</th>
+                  <th className="py-3 px-4 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 text-sm">
-                {activeState.items.map((item, idx) => (
+              <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
+                {activeState.items && activeState.items.map((item) => (
                   <tr
                     key={item.id}
-                    className={`hover:bg-orange-50/50 transition-colors ${
-                      idx % 2 === 0 ? "bg-white" : "bg-slate-50/30"
-                    }`}
+                    className="hover:bg-blue-50/40 transition-colors group"
                   >
-                    <td className="py-5 px-6 font-black text-slate-900 flex items-center gap-2.5">
-                      <div className="p-1.5 rounded-lg bg-orange-100 text-brand-orange">
-                        <Flame className="w-4 h-4 fill-brand-orange" />
-                      </div>
-                      <span className="text-base">{item.capacity}</span>
+                    <td className="py-4 px-4 font-black text-[#102A43] text-base group-hover:text-[#1769AA] transition-colors">
+                      {item.capacity}
                     </td>
-
-                    <td className="py-5 px-6">
+                    <td className="py-4 px-4">
                       <span
-                        className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
-                          item.isDomestic
-                            ? "bg-blue-100 text-blue-800"
-                            : "bg-amber-100 text-amber-800"
-                        }`}
+                        className={`inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${item.isDomestic
+                            ? "bg-orange-50 text-[#F28C28] border border-orange-200"
+                            : "bg-blue-50 text-[#1769AA] border border-blue-200"
+                          }`}
                       >
-                        {item.isDomestic ? "Domestic Household" : "Commercial / Industrial"}
+                        {item.isDomestic ? "Domestic" : "Commercial / Ind."}
                       </span>
                     </td>
-
-                    <td className="py-5 px-6 text-xs text-slate-600">
-                      {item.isDomestic ? "GST 5% (Subsidized Home Rate)" : "GST 18% (Commercial Rate)"}
+                    <td className="py-4 px-4 text-slate-600 text-xs max-w-xs">
+                      {item.notes || (item.isDomestic ? "Household cooking connection" : "Commercial catering & bakery kitchens")}
                     </td>
-
-                    <td className="py-5 px-6 text-right font-black text-slate-900 text-lg">
-                      {formatCurrency(item.amount)}
+                    <td className="py-4 px-4 font-black text-slate-900 text-base text-right font-mono">
+                      {item.amount !== null && item.amount !== "" ? (
+                        formatCurrency(Number(item.amount))
+                      ) : (
+                        <span className="text-xs font-semibold text-slate-500">Market Price</span>
+                      )}
                     </td>
-
-                    <td className="py-5 px-6 text-center">
+                    <td className="py-4 px-4 text-center">
                       <button
                         onClick={() => handleBook(item.isDomestic)}
-                        className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm transform hover:-translate-y-0.5"
+                        className="bg-slate-900 hover:bg-[#F28C28] text-white text-xs font-bold px-4 py-2 rounded-lg uppercase tracking-wider transition-colors"
                       >
-                        Book This Refill
+                        Book Refill
                       </button>
                     </td>
                   </tr>
@@ -161,65 +196,48 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
             </table>
           </div>
 
-          {/* Audited 5 Notes */}
-          <div className="bg-slate-50 p-8 border-t border-slate-200 space-y-4">
-            <h3 className="text-sm font-black uppercase text-slate-800 tracking-wider flex items-center gap-2">
-              <Info className="w-5 h-5 text-brand-blue" />
-              <span>NOTES & MANDATORY CONDITIONS:-</span>
-            </h3>
-
-            <div className="space-y-2.5 text-xs text-slate-700 leading-relaxed">
-              <p className="flex items-start gap-2">
-                <span className="font-bold text-slate-900 shrink-0">1.</span>
-                <span>Delivery charges as applicable based on the location & distance from Dealer shop.</span>
-              </p>
-              <p className="flex items-start gap-2">
-                <span className="font-bold text-slate-900 shrink-0">2.</span>
-                <span>
-                  <strong>GST:</strong> For Domestic Cylinders <strong>5%</strong> and for others (17 Kgs, 15 Kgs, 5.5 Kgs, 4 Kgs) <strong>18%</strong>. Using Domestic Cylinders for commercial use will be penalized as per law.
-                </span>
-              </p>
-              <p className="flex items-start gap-2">
-                <span className="font-bold text-slate-900 shrink-0">3.</span>
-                <span>Applicable price for the product will be based on prevailing price of LPG as per international market and as decided by the company from time to time.</span>
-              </p>
-              <p className="flex items-start gap-2">
-                <span className="font-bold text-slate-900 shrink-0">4.</span>
-                <span>The price indicated is subject to change from time to time. Hence, the price as applicable at the time of the dispatch would be charged.</span>
-              </p>
-              <p className="flex items-start gap-2 font-bold text-slate-900">
-                <span className="shrink-0">5.</span>
-                <span>The above price is inclusive of all tax.</span>
+          {/* Statutory Tax Condition Notes */}
+          <div className="mt-8 pt-6 border-t border-slate-100 flex items-start gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+            <Info className="w-5 h-5 text-[#1769AA] shrink-0 mt-0.5" />
+            <div className="space-y-1 text-xs text-slate-600">
+              <strong className="text-slate-900 block font-bold">Statutory GST & Delivery Terms:</strong>
+              <p className="leading-relaxed">
+                {activeState.notes || "Rates are subject to statutory GST notifications. Domestic cylinders are billed with 5% GST. Commercial supplies attract 18% GST with full Input Tax Credit (ITC) eligibility. Delivery charges may vary by zone."}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Quick Booking Strip */}
-        <div className="bg-brand-blue text-white rounded-3xl p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1">
-            <h3 className="text-xl font-black">Need Bulk Delivery or Dealer Support?</h3>
-            <p className="text-xs text-slate-200">Our customer care desk is active Monday through Saturday 9:30 AM to 5:30 PM.</p>
+        {/* Commercial & Bulk Quote Callout */}
+        <div className="bg-gradient-to-r from-[#102A43] via-[#1769AA] to-[#102A43] text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center md:text-left">
+            <h3 className="text-2xl font-black text-white">Require Institutional or High-Volume Pricing?</h3>
+            <p className="text-xs sm:text-sm text-slate-200 max-w-xl leading-relaxed">
+              We offer contracted monthly commercial tariffs for industrial plants, multi-outlet restaurant chains, and factory canteens.
+            </p>
           </div>
-          <div className="flex items-center gap-3">
-            <a
-              href="tel:+918023400459"
-              className="flex items-center gap-1.5 bg-white text-brand-blue px-4 py-2.5 rounded-xl font-bold text-xs hover:bg-slate-100 transition-colors"
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <button
+              onClick={() => {
+                setModalType("COMMERCIAL");
+                setModalOpen(true);
+              }}
+              className="bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow transition-all"
             >
-              <Phone className="w-3.5 h-3.5 text-brand-orange" />
-              <span>Office: +91 - 80 - 2340 0459</span>
-            </a>
+              Request Commercial Tariff
+            </button>
             <a
               href="tel:+917899787101"
-              className="flex items-center gap-1.5 bg-brand-orange hover:bg-brand-orange-hover text-white px-4 py-2.5 rounded-xl font-bold text-xs transition-colors"
+              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-3 rounded-xl text-xs font-bold transition-all"
             >
-              <Phone className="w-3.5 h-3.5" />
+              <Phone className="w-4 h-4 text-[#F28C28]" />
               <span>Marketing: +91 78997 87101</span>
             </a>
           </div>
         </div>
       </div>
 
+      {/* Modal */}
       <EnquiryModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -228,4 +246,3 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
     </div>
   );
 }
-

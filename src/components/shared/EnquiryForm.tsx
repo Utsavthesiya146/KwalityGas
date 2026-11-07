@@ -5,16 +5,20 @@ import { CheckCircle2, AlertCircle, Loader2, Send, Flame, Building2, Factory, Ho
 
 interface EnquiryFormProps {
   initialType?: "DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL";
+  defaultType?: "DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL";
   onSuccess?: () => void;
   className?: string;
 }
 
 export default function EnquiryForm({
-  initialType = "DOMESTIC",
+  initialType,
+  defaultType,
   onSuccess,
   className = "",
 }: EnquiryFormProps) {
-  const [activeTab, setActiveTab] = useState<"DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL">(initialType);
+  const [activeTab, setActiveTab] = useState<"DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL">(
+    defaultType || initialType || "DOMESTIC"
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

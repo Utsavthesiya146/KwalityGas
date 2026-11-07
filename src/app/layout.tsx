@@ -1,7 +1,22 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kwalitygas.com"),
@@ -10,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Kwality Gas",
   },
   description:
-    "Kwality Gas Bottlers Private Limited – Grade 1 Rated LPG Bottling & Distribution Company with 3 plants in Hosur, Chennai, and Dharwad. 30,000 MTPA storage, 8,000 cylinders/day throughput.",
+    "Kwality Gas Bottlers Private Limited – Grade 1 Rated LPG Bottling & Distribution Company with plants in Hosur, Chennai, and Dharwad. 30,000 MTPA storage, 8,000 cylinders/day throughput.",
   keywords: [
     "Kwality Gas",
     "LPG gas Bangalore",
@@ -55,16 +70,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${plusJakartaSans.variable} ${inter.variable}`}>
       <head>
         <link rel="icon" href="/images/original/favicon.png" />
       </head>
-      <body className="antialiased flex flex-col min-h-screen">
+      <body className="min-h-screen flex flex-col bg-white text-[#182230] font-sans antialiased selection:bg-brand-orange selection:text-white">
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>
   );
 }
-

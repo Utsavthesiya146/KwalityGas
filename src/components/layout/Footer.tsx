@@ -11,201 +11,281 @@ import {
   ChevronRight,
   Flame,
   FileText,
+  Lock,
+  Building,
+  CheckCircle2,
+  Sparkles,
+  ExternalLink,
 } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-blue-dark text-slate-300">
-      {/* Pre-Footer Quick Contact Strip */}
-      <div className="bg-brand-blue border-b border-brand-blue-light/30 py-6 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-brand-orange/20 text-brand-orange rounded-xl">
-              <Flame className="w-6 h-6 fill-brand-orange" />
+    <footer className="bg-[#102A43] text-slate-300 border-t border-white/10">
+      {/* Pre-Footer Action Banner */}
+      <div className="bg-[#1769AA] text-white py-8 px-4">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-4 text-center lg:text-left">
+            <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0 mx-auto border border-white/20">
+              <Flame className="w-8 h-8 text-[#F28C28] fill-[#F28C28]" />
             </div>
             <div>
-              <h4 className="text-white font-bold text-lg">Need Immediate LPG Refill or Commercial Supply?</h4>
-              <p className="text-xs text-slate-300">Fast doorstep deliveries across Karnataka & Tamil Nadu</p>
+              <h4 className="text-white font-extrabold text-xl sm:text-2xl tracking-tight">
+                Need Immediate Domestic Refill or Commercial Supply?
+              </h4>
+              <p className="text-sm text-blue-100 mt-1">
+                Reliable doorstep delivery and bulk manifold installation across Karnataka & Tamil Nadu.
+              </p>
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+
+          <div className="flex flex-wrap items-center justify-center gap-3 flex-shrink-0">
             <a
               href="tel:+917899787101"
-              className="flex items-center gap-2 bg-brand-orange hover:bg-brand-orange-hover text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow transition-all"
+              className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-5 py-3 rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition-all"
             >
               <Phone className="w-4 h-4" />
-              <span>Call +91 78997 87101</span>
+              <span>Call Hotline: +91 78997 87101</span>
             </a>
             <Link
               href="/price-list"
-              className="bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition-all border border-white/20"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-5 py-3 rounded-xl text-sm font-bold transition-all"
             >
-              View Price List
+              Check Live Rates
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Main Footer Body */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
-          {/* Col 1: Corporate Profile (4 cols) */}
-          <div className="lg:col-span-4 space-y-4">
-            <div className="bg-white p-3 rounded-lg inline-block">
-              <div className="relative w-44 h-12">
+      {/* Main Footer Links & Info */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+          {/* Col 1: Brand & Credentials (4 cols) */}
+          <div className="lg:col-span-4 space-y-5">
+            <div className="bg-white p-3 rounded-xl inline-block shadow-sm">
+              <div className="relative w-48 h-12">
                 <Image
                   src="/images/original/logo.jpg"
-                  alt="Kwality Gas Bottlers"
+                  alt="Kwality Gas Bottlers Logo"
                   fill
                   className="object-contain object-left"
                 />
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Kwality Gas was conceived to produce and market L.P.G. cooking gas as a domestic and commercial fuel. Backed by an Industrial group that has been in existence for over 35 years. Kwality Gas Bottlers Private Limited is situated in Bangalore, with 3 advanced bottling plants—2 in Tamil Nadu (Hosur, Chennai) & 1 in Karnataka (Dharwad). Storage facility of 30,000 MTPA and a bottling capacity of 8,000 cylinders per day.
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Kwality Gas Bottlers Private Limited is an ISO 9001:2015 certified, Grade 1 Rated LPG bottling and distribution enterprise operating 3 state-of-the-art facilities with 30,000 MTPA storage and 8,000 cylinders/day throughput.
             </p>
 
-            <div className="pt-2 border-t border-slate-700/60 space-y-1.5 text-xs">
-              <p className="flex items-center gap-2 text-slate-300">
-                <span className="font-semibold text-brand-orange">CIN:</span>
-                <span>U01120KA2005PTC036860</span>
-              </p>
-              <p className="flex items-center gap-2 text-slate-300">
-                <Award className="w-3.5 h-3.5 text-amber-400 inline" />
-                <span className="font-semibold text-white">Rating:</span>
-                <span className="text-emerald-400 font-bold">GRADE 1</span> (MDRA DOI 29-04-2017)
-              </p>
+            {/* Badges */}
+            <div className="grid grid-cols-2 gap-2 text-xs pt-1">
+              <div className="bg-white/5 border border-white/10 rounded-lg p-2.5">
+                <div className="text-[#F28C28] font-bold">CARE Grade 1</div>
+                <div className="text-[11px] text-slate-400">Highest Safety & Credit Rating</div>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-lg p-2.5">
+                <div className="text-white font-bold">Quality Era Award</div>
+                <div className="text-[11px] text-slate-400">Geneva, Switzerland (2015)</div>
+              </div>
+            </div>
+
+            <div className="text-xs text-slate-400 font-mono">
+              CIN: U01120KA2005PTC036860
             </div>
           </div>
 
-          {/* Col 2: Quick Links (2 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-brand-orange/40 pb-2">
-              Quick Links
-            </h3>
-            <ul className="space-y-2 text-xs">
-              {[
-                { name: "Home", href: "/" },
-                { name: "About Us", href: "/about" },
-                { name: "Products Range", href: "/products" },
-                { name: "LPG Cylinders", href: "/cylinders" },
-                { name: "Services", href: "/services" },
-                { name: "Price List", href: "/price-list" },
-                { name: "Safety Features", href: "/safety-features" },
-                { name: "Testimonials", href: "/testimonials" },
-                { name: "Group Company", href: "/group-company" },
-                { name: "Privacy Policy", href: "/privacy-policy" },
-              ].map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="flex items-center gap-1.5 text-slate-300 hover:text-brand-orange transition-colors"
-                  >
-                    <ChevronRight className="w-3 h-3 text-brand-orange/70" />
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
+          {/* Col 2: LPG Segments & Products (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="text-white font-bold text-sm uppercase tracking-wider border-b border-white/10 pb-2 flex items-center gap-2">
+              <Flame className="w-4 h-4 text-[#F28C28]" />
+              <span>Gas & Appliances</span>
+            </h4>
+            <ul className="space-y-2 text-xs sm:text-sm">
+              <li>
+                <Link href="/domestic" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-[#F28C28]" />
+                  <span>Domestic LPG (12kg, 5.5kg, 4kg)</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/commercial" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-[#F28C28]" />
+                  <span>Commercial LPG (17kg, 21kg)</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/industrial" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-[#F28C28]" />
+                  <span>Industrial LPG (33kg Manifold)</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/cylinders" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-[#F28C28]" />
+                  <span>LPG Cylinders Catalog</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/gas-water-heater" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-[#F28C28]" />
+                  <span>Kwality Gas Water Heater</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/safety-devices" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-[#F28C28]" />
+                  <span>Industrial Safety Devices</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/accessories" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-[#F28C28]" />
+                  <span>Accessories & Regulators</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Col 3: Cylinders & Segment (2 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-brand-orange/40 pb-2">
-              LPG Segments
-            </h3>
-            <ul className="space-y-2 text-xs">
-              {[
-                { name: "LPG for Domestic", href: "/domestic" },
-                { name: "LPG for Commercial", href: "/commercial" },
-                { name: "LPG for Industrial", href: "/industrial" },
-                { name: "Gas Water Heaters", href: "/products#water-heater" },
-                { name: "12kg Domestic Cylinder", href: "/cylinders" },
-                { name: "17kg Commercial Refill", href: "/cylinders" },
-                { name: "33kg Industrial Cylinder", href: "/cylinders" },
-                { name: "4kg Cook & Light", href: "/cylinders" },
-                { name: "Domestic Regulators", href: "/gallery" },
-              ].map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="flex items-center gap-1.5 text-slate-300 hover:text-brand-orange transition-colors"
-                  >
-                    <ChevronRight className="w-3 h-3 text-brand-orange/70" />
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
+          {/* Col 3: Quick Navigation (2 cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="text-white font-bold text-sm uppercase tracking-wider border-b border-white/10 pb-2 flex items-center gap-2">
+              <FileText className="w-4 h-4 text-[#1769AA]" />
+              <span>Company</span>
+            </h4>
+            <ul className="space-y-2 text-xs sm:text-sm">
+              <li>
+                <Link href="/about" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                  <span>About Us</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/group-company" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Group Company</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Services</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/price-list" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Live Price List</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/safety-features" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Safety Features</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Testimonials</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/gallery" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Plant Gallery</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy-policy" className="hover:text-white transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Privacy Policy</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Col 4: Contact Us & Map (4 cols) */}
-          <div className="lg:col-span-4 space-y-3">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-brand-orange/40 pb-2">
-              Head Office & Contact
-            </h3>
+          {/* Col 4: Corporate Office & Plants (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="text-white font-bold text-sm uppercase tracking-wider border-b border-white/10 pb-2 flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-[#F28C28]" />
+              <span>Head Office & Plants</span>
+            </h4>
             
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3 text-xs sm:text-sm">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
-                <p className="text-slate-300 leading-relaxed">
-                  <strong className="text-white block font-medium">Kwality Gas Bottlers Pvt Ltd</strong>
-                  V M C House, D-41, 3rd Floor, Rajaji nagar Industrial Estate, Bangalore – 560 044, Karnataka, India.
-                </p>
+                <Building className="w-4 h-4 text-[#F28C28] flex-shrink-0 mt-1" />
+                <div>
+                  <strong className="text-white block text-xs">Registered Office:</strong>
+                  <span className="text-slate-300 text-xs">
+                    2nd Floor, Above Syndicate Bank, Magadi Chord Road, Vijayanagar, Bangalore - 560040, Karnataka.
+                  </span>
+                </div>
               </div>
 
               <div className="flex items-start gap-2.5">
-                <Phone className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
-                <div className="space-y-0.5">
-                  <p className="text-slate-200">Office: <a href="tel:+918023400459" className="hover:text-white">+91 - 80 - 2340 0459</a> / <a href="tel:+918023151130" className="hover:text-white">2315 1130</a></p>
-                  <p className="text-slate-200">Marketing: <a href="tel:+917899787101" className="hover:text-white font-medium">+91 78997 87101</a> / <a href="tel:+919108248073" className="hover:text-white font-medium">+91 91082 48073</a></p>
-                  <p className="text-slate-200">Commercial: <a href="tel:+919108001989" className="hover:text-white">+91 91080 01989</a> / <a href="tel:+919108001990" className="hover:text-white">+91 91080 01990</a></p>
-                  <p className="text-slate-200">Front Office: <a href="tel:+919606861082" className="hover:text-white">+91 96068 61082</a></p>
+                <MapPin className="w-4 h-4 text-[#1769AA] flex-shrink-0 mt-1" />
+                <div>
+                  <strong className="text-white block text-xs">Bottling Plants:</strong>
+                  <span className="text-slate-300 text-xs block">
+                    • Hosur Plant (Tamil Nadu)
+                  </span>
+                  <span className="text-slate-300 text-xs block">
+                    • Chennai Bottling Unit
+                  </span>
+                  <span className="text-slate-300 text-xs block">
+                    • Dharwad Plant (Karnataka)
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 pt-1">
+                <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <div className="text-xs">
+                  <span className="text-slate-400">Marketing: </span>
+                  <a href="tel:+917899787101" className="text-white font-bold hover:text-[#F28C28]">
+                    +91 78997 87101
+                  </a>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-brand-orange shrink-0" />
-                <div className="space-y-0.5">
-                  <a href="mailto:kwalitygasmarketing@gmail.com" className="text-slate-200 hover:text-white block">kwalitygasmarketing@gmail.com</a>
-                  <a href="mailto:kwalitygas45@gmail.com" className="text-slate-200 hover:text-white block">kwalitygas45@gmail.com</a>
+                <Phone className="w-4 h-4 text-[#1769AA] flex-shrink-0" />
+                <div className="text-xs">
+                  <span className="text-slate-400">Office: </span>
+                  <a href="tel:+918023400459" className="text-white font-bold hover:text-[#F28C28]">
+                    +91 80 2340 0459
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#F28C28] flex-shrink-0" />
+                <div className="text-xs">
+                  <a href="mailto:kwalitygasmarketing@gmail.com" className="text-slate-300 hover:text-white">
+                    kwalitygasmarketing@gmail.com
+                  </a>
                 </div>
               </div>
             </div>
-
-            {/* Google Map Embed */}
-            <div className="w-full h-28 rounded-lg overflow-hidden border border-slate-700/80 mt-2">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1943.9274372978896!2d77.54628892764606!3d12.981132576470541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3deea2e5b96b%3A0xd699744297dbab7f!2skwality+gas+bottlers!5e0!3m2!1sen!2s!4v1435910580441"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                title="Kwality Gas Bottlers Rajajinagar Bangalore Location"
-              />
-            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Legal Bar */}
-      <div className="border-t border-slate-800 bg-[#041624] py-4 text-xs text-slate-400">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-center sm:text-left">
-            Copyright © 2026 <strong className="text-white">Kwality Gas Bottlers Private Limited</strong>. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4 text-slate-400">
+        {/* Bottom Legal Copyright & Staff Link */}
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <div>
+            © {new Date().getFullYear()} Kwality Gas Bottlers Private Limited. All Rights Reserved.
+          </div>
+          <div className="flex items-center gap-4">
             <Link href="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
             <span>•</span>
-            <Link href="/safety-features" className="hover:text-white transition-colors">
-              Emergency Guidelines
+            <Link href="/price-list" className="hover:text-white transition-colors">
+              Price Terms
             </Link>
             <span>•</span>
-            <Link href="/admin" className="hover:text-amber-400 text-[11px] transition-colors">
-              Staff Portal
+            <Link href="/admin/login" className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-300 transition-colors">
+              <Lock className="w-3 h-3" />
+              <span>Staff Login</span>
             </Link>
           </div>
         </div>
@@ -213,4 +293,3 @@ export default function Footer() {
     </footer>
   );
 }
-

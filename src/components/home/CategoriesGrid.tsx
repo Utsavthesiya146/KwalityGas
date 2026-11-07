@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Home, Building2, Factory, Flame } from "lucide-react";
+import { Home, Briefcase, Factory, ArrowRight, CheckCircle2, Flame, ShieldCheck } from "lucide-react";
 
 interface CategoriesGridProps {
   onOpenEnquiry: (type: "DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL") => void;
@@ -12,118 +12,143 @@ interface CategoriesGridProps {
 export default function CategoriesGrid({ onOpenEnquiry }: CategoriesGridProps) {
   const categories = [
     {
-      title: "HOME & DOMESTIC",
-      tagline: "A Clean Cooking Connection for Every Household",
-      description: "Convenient, safe, and cleaner fuel for homes. Faster cooking, cooler kitchens, and soot-free cookware with prompt doorstep refill service.",
-      sizes: "12 Kgs • 5.5 Kgs • 4 Kgs Refill",
-      image: "/images/original/k5.jpg",
+      id: "domestic",
+      title: "LPG for Domestic",
+      subtitle: "For Modern Households & Apartments",
+      description: "Clean, soot-free cooking fuel. Available in 12kg household cylinders, 5.5kg compact cylinders for small families, and 4kg Cook & Light cylinders.",
+      capacities: ["12 Kg", "5.5 Kg", "4 Kg"],
+      icon: <Home className="w-6 h-6 text-[#F28C28]" />,
+      image: "/images/original/dom1.png",
       href: "/domestic",
       type: "DOMESTIC" as const,
-      icon: Home,
-      accentColor: "border-blue-500",
+      accentColor: "border-orange-200 hover:border-[#F28C28]",
+      badge: "Fast Doorstep Delivery",
     },
     {
-      title: "COMMERCIAL (HORECA)",
-      tagline: "High-Heat Consistency for Professional Kitchens",
-      description: "Preferred partner for hotels, restaurants, caterers, bakeries, and poultry farms. Uninterrupted supply and dependable blue flame.",
-      sizes: "17 Kgs • 21 Kgs • 15 Kgs Refill",
-      image: "/images/original/k4.jpg",
+      id: "commercial",
+      title: "LPG for Commercial",
+      subtitle: "Hotels, Restaurants, Bakeries & Caterers",
+      description: "High-pressure continuous gas supply engineered for high-heat commercial burners, tandoors, cloud kitchens, and institutional canteens.",
+      capacities: ["17 Kg", "21 Kg", "33 Kg"],
+      icon: <Briefcase className="w-6 h-6 text-[#1769AA]" />,
+      image: "/images/original/p3.jpg",
       href: "/commercial",
       type: "COMMERCIAL" as const,
-      icon: Building2,
-      accentColor: "border-brand-orange",
+      accentColor: "border-blue-200 hover:border-[#1769AA]",
+      badge: "Zero Kitchen Soot",
     },
     {
-      title: "INDUSTRIAL SOLUTIONS",
-      tagline: "Heavy-Duty Fuel for Furnaces & Manufacturing",
-      description: "Large capacity 33 Kgs cylinders and custom cylinder bank manifold engineering for high discharge heat processes and industrial manufacturing.",
-      sizes: "33.0 Kgs Refill & Manifold Banks",
-      image: "/images/original/k3.jpg",
+      id: "industrial",
+      title: "LPG for Industrial",
+      subtitle: "Heavy Furnaces & Multi-Cylinder Banks",
+      description: "Specialized 33kg LOT (Liquid Off-Take) & VOT cylinders, automatic changeover manifolds, and engineering consultation for manufacturing plants.",
+      capacities: ["33 Kg LOT", "33 Kg VOT", "Manifolds"],
+      icon: <Factory className="w-6 h-6 text-slate-800" />,
+      image: "/images/original/p1.jpg",
       href: "/industrial",
       type: "INDUSTRIAL" as const,
-      icon: Factory,
-      accentColor: "border-emerald-600",
+      accentColor: "border-slate-300 hover:border-slate-800",
+      badge: "Sulphur-Free Flame",
     },
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-slate-50">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/10 text-brand-orange text-xs font-bold uppercase tracking-wider mb-3">
-            <Flame className="w-3.5 h-3.5 fill-brand-orange" />
-            <span>Core LPG Business Categories</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-2.5">
+            <Flame className="w-3.5 h-3.5 text-[#F28C28]" />
+            <span>Tailored Energy Verticals</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-brand-blue-dark tracking-tight">
-            Tailored LPG Fuel Solutions Across All Segments
+          <h2 className="text-3xl sm:text-5xl font-black text-[#102A43] tracking-tight">
+            LPG Business Categories
           </h2>
           <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
-            Delivering clean, high-calorific energy with strict quality compliance, reliable refills, and complete safety support.
+            Whether for your kitchen stove, high-volume restaurant burners, or heavy industrial furnace lines, Kwality Gas delivers certified clean energy.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {categories.map((cat) => {
-            const Icon = cat.icon;
-            return (
-              <div
-                key={cat.title}
-                className="bg-white rounded-2xl shadow-card hover:shadow-cardHover transition-all duration-300 flex flex-col overflow-hidden group border border-slate-100"
-              >
-                {/* Image Header */}
-                <div className="relative h-60 w-full overflow-hidden bg-slate-100">
+        {/* 3 Large Category Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {categories.map((cat) => (
+            <div
+              key={cat.id}
+              className={`bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-cardHover transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1`}
+            >
+              <div>
+                {/* Visual Top Preview */}
+                <div className="relative h-60 w-full bg-slate-50 overflow-hidden flex items-center justify-center p-6 border-b border-slate-100">
                   <Image
                     src={cat.image}
                     alt={cat.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  
-                  <div className="absolute top-4 left-4 p-2 rounded-xl bg-white/90 backdrop-blur-sm text-brand-blue shadow">
-                    <Icon className="w-5 h-5 text-brand-orange" />
-                  </div>
-
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className="text-[11px] font-bold text-amber-300 uppercase tracking-widest block mb-0.5">
-                      {cat.sizes}
-                    </span>
-                    <h3 className="text-xl font-black text-white">{cat.title}</h3>
+                  <div className="absolute top-4 left-4 bg-white/90 text-slate-800 text-[11px] font-bold px-3 py-1 rounded-full shadow-xs border border-slate-200">
+                    {cat.badge}
                   </div>
                 </div>
 
-                {/* Card Body */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <h4 className="font-bold text-slate-900 text-sm">{cat.tagline}</h4>
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      {cat.description}
-                    </p>
+                {/* Content */}
+                <div className="p-8 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-100">
+                      {cat.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#1769AA] transition-colors">
+                        {cat.title}
+                      </h3>
+                      <p className="text-xs text-[#F28C28] font-bold">
+                        {cat.subtitle}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
-                    <Link
-                      href={cat.href}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-blue hover:text-brand-orange transition-colors"
-                    >
-                      <span>Explore Segment</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {cat.description}
+                  </p>
 
-                    <button
-                      onClick={() => onOpenEnquiry(cat.type)}
-                      className="px-3.5 py-1.5 rounded-lg bg-brand-orange-light text-brand-orange font-bold text-xs hover:bg-brand-orange hover:text-white transition-all shadow-sm"
-                    >
-                      Book Refill
-                    </button>
+                  {/* Capacities Pill list */}
+                  <div className="pt-2 border-t border-slate-100">
+                    <span className="text-[11px] font-bold uppercase text-slate-400 tracking-wider block mb-2">
+                      Available Capacities:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {cat.capacities.map((cap, cIdx) => (
+                        <span
+                          key={cIdx}
+                          className="px-2.5 py-1 rounded-md text-xs font-bold bg-slate-100 text-slate-700"
+                        >
+                          {cap}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            );
-          })}
+
+              {/* Bottom Buttons */}
+              <div className="p-8 pt-0 border-t border-slate-100 mt-2 flex items-center gap-3">
+                <button
+                  onClick={() => onOpenEnquiry(cat.type)}
+                  className="flex-1 bg-slate-900 hover:bg-[#F28C28] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors text-center shadow-xs"
+                >
+                  Book / Enquire
+                </button>
+                <Link
+                  href={cat.href}
+                  className="px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center"
+                  title="Read More"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-

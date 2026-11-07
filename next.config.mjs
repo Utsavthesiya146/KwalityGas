@@ -43,6 +43,13 @@ const nextConfig = {
       { source: '/faq.html', destination: '/safety-features', permanent: true },
       { source: '/blog.html', destination: '/', permanent: true },
       { source: '/blog-details.html', destination: '/', permanent: true },
+      { source: '/products/gas-water-heater', destination: '/gas-water-heater', permanent: true },
+      { source: '/gas-water-heater.html', destination: '/gas-water-heater', permanent: true },
+      { source: '/products/safety-devices', destination: '/safety-devices', permanent: true },
+      { source: '/safety-devices.html', destination: '/safety-devices', permanent: true },
+      { source: '/products/accessories', destination: '/accessories', permanent: true },
+      { source: '/accessories.html', destination: '/accessories', permanent: true },
+      { source: '/contact-domestic.html', destination: '/contact/domestic', permanent: true },
     ];
   },
 };

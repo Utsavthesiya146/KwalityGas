@@ -1,176 +1,148 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, Award, ShieldCheck, Flame, ArrowRight, Eye, X } from "lucide-react";
+import {
+  Award,
+  ShieldCheck,
+  CheckCircle2,
+  Clock,
+  ArrowRight,
+  Flame,
+  Factory,
+  Scale,
+  Sparkles,
+} from "lucide-react";
 
 export default function CompanyIntro() {
-  const [activeCert, setActiveCert] = useState<string | null>(null);
-
   const advantages = [
-    { key: "A", title: "Eco-Friendly & Non-Polluting", desc: "Clean blue flame fuel that burns cleanly without toxic soot or hazardous residues." },
-    { key: "B", title: "Cost-Effective & High Efficiency", desc: "Superior calorific value gives maximum thermal energy per rupee spent." },
-    { key: "C", title: "Faster Cooking & Instant Heat", desc: "The burner reaches working temperatures more quickly, cooking food faster and saving precious time." },
-    { key: "D", title: "Minimal Heat Wastage", desc: "Direct focused heat transfer ensures concentrated thermal energy to pans and vessels." },
-    { key: "E", title: "Cooler Working Kitchens", desc: "Significantly reduced radiant heat keeps domestic and restaurant kitchens cooler." },
-    { key: "F", title: "Cleaner Cookware & Utensils", desc: "Clean combustion eliminates black soot on pots, pans, and kitchen surfaces." },
+    {
+      title: "Grade 1 Rating by CARE (MDRA)",
+      desc: "Audited and awarded Grade 1 standing for financial resilience, exceptional safety protocols, and operational transparency.",
+      icon: <ShieldCheck className="w-5 h-5 text-emerald-600" />,
+    },
+    {
+      title: "Pure High-Calorific Blue Flame",
+      desc: "Delivers maximum heat transfer with zero carbon soot, keeping kitchen vessels bright and saving up to 15% on monthly fuel bills.",
+      icon: <Flame className="w-5 h-5 text-[#F28C28]" />,
+    },
+    {
+      title: "Electronic Weight Verification",
+      desc: "Zero tolerance for under-filling. Every single cylinder is digitally weighed and stamped with certified tare weight before dispatch.",
+      icon: <Scale className="w-5 h-5 text-[#1769AA]" />,
+    },
+    {
+      title: "3 High-Capacity Bottling Hubs",
+      desc: "Facilities in Hosur, Chennai, and Dharwad with 30,000 MTPA storage capacity and 8,000 cylinders/day throughput.",
+      icon: <Factory className="w-5 h-5 text-[#102A43]" />,
+    },
+    {
+      title: "Century International Quality Award",
+      desc: "Winner of the prestigious Quality ERA Award presented in Geneva, Switzerland (2015) for excellence in clean energy bottling.",
+      icon: <Award className="w-5 h-5 text-amber-500" />,
+    },
+    {
+      title: "PESO & BIS Mandatory Compliance",
+      desc: "Manufactured strictly as per IS 3196 standards, inspected in illuminated water test baths for 100% leak-proof reliability.",
+      icon: <CheckCircle2 className="w-5 h-5 text-purple-600" />,
+    },
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-20 bg-slate-50 border-t border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Text Column (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-blue-surface text-brand-blue text-xs font-bold uppercase tracking-wider">
-              <ShieldCheck className="w-3.5 h-3.5 text-brand-orange" />
-              <span>About Kwality Gas Bottlers</span>
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-blue-dark tracking-tight leading-tight">
-              WELCOME to Kwality Gas
-            </h2>
-
-            <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
-              Kwality Gas was conceived to produce and market L.P.G. a cooking gas as a domestic fuel for cooking. Backed by an Industrial group that has been in existence for over 35 years. Kwality Gas Bottlers Private Limited is situated in Bangalore, having 3 plants—2 in Tamil Nadu (Hosur, Chennai) & 1 in Karnataka (Dharwad). It has a storage facility of 30,000 MTPA and a bottling capacity of 8,000 cylinders per day.
-            </p>
-
-            {/* Sub-card: Connection for Every Household */}
-            <div className="p-6 bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
-              <div>
-                <h3 className="text-xl font-bold text-brand-blue-dark flex items-center gap-2">
-                  <Flame className="w-5 h-5 text-brand-orange fill-brand-orange" />
-                  <span>Kwality Gas, A Connection For Every Household:</span>
+          {/* Left Column: Visuals & Award (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-900 h-96 sm:h-[420px]">
+              <Image
+                src="/images/original/why-img-1.jpg"
+                alt="Kwality Gas Bottling Line"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#102A43]/95 via-[#102A43]/40 to-transparent flex flex-col justify-end p-6 sm:p-8">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F28C28] text-white text-[11px] font-black uppercase tracking-wider mb-2 self-start">
+                  <Award className="w-3.5 h-3.5" />
+                  <span>Geneva Award Winner 2015</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-white leading-tight">
+                  Over 35 Years of Engineering Heritage
                 </h3>
-                <p className="text-xs text-slate-600 mt-1">
-                  It is the company’s dream to provide every household with a safe, affordable, and clean cooking gas connection.
+                <p className="text-xs text-slate-200 mt-1">
+                  Backed by an industrial group dedicated to South India's energy and infrastructure security.
                 </p>
               </div>
-
-              <div className="pt-2">
-                <h4 className="text-xs font-black uppercase text-brand-orange tracking-widest mb-3">
-                  Key Advantages of Kwality LPG:
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {advantages.map((adv) => (
-                    <div key={adv.key} className="flex items-start gap-2.5 p-2.5 bg-white rounded-xl border border-slate-100 shadow-sm">
-                      <span className="w-6 h-6 rounded-full bg-brand-orange/10 text-brand-orange font-black text-xs flex items-center justify-center shrink-0 mt-0.5">
-                        {adv.key}
-                      </span>
-                      <div>
-                        <h5 className="text-xs font-bold text-slate-900">{adv.title}</h5>
-                        <p className="text-[11px] text-slate-600 mt-0.5 leading-snug">{adv.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
 
-            <div className="pt-2 flex flex-wrap items-center gap-4">
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-bold px-5 py-3 rounded-xl transition-all shadow"
-              >
-                <span>Full Company Profile & Plants</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              <Link
-                href="/group-company"
-                className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-brand-orange transition-colors"
-              >
-                <span>Sister Company: The Bangalore Tin Works</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+            {/* Quick Plant Stat Strip */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs text-center">
+                <div className="text-2xl font-black text-[#102A43]">30,000 MTPA</div>
+                <div className="text-xs text-slate-500 mt-0.5">Bulk Storage Facility</div>
+              </div>
+              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs text-center">
+                <div className="text-2xl font-black text-[#F28C28]">8,000 / Day</div>
+                <div className="text-xs text-slate-500 mt-0.5">Bottling Capacity</div>
+              </div>
             </div>
           </div>
 
-          {/* Right Awards Column (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-gradient-to-br from-brand-blue-surface to-white p-6 rounded-3xl border border-blue-100 shadow-xl space-y-5">
-              <div className="flex items-center gap-2">
-                <Award className="w-6 h-6 text-brand-orange" />
-                <div>
-                  <span className="text-[10px] font-bold text-brand-orange uppercase tracking-widest block">
-                    Verified Industry Recognition
-                  </span>
-                  <h3 className="text-lg font-black text-brand-blue-dark">
-                    BUSINESS EXCELLENCE & ACHIEVEMENT AWARDS 2015
-                  </h3>
-                </div>
+          {/* Right Column: Narrative & 6 Advantages (7 cols) */}
+          <div className="lg:col-span-7 space-y-6">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-2.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#F28C28]" />
+                <span>Why Kwality Gas Stands Out</span>
               </div>
-
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Awarded to Kwality Gas Bottlers Private Limited in recognition of outstanding LPG distribution service, strict safety compliance, and Grade 1 MDRA credit rating.
+              <h2 className="text-3xl sm:text-4xl font-black text-[#102A43] tracking-tight">
+                A Name Synonymous with Quality & Fuel Safety
+              </h2>
+              <p className="mt-2 text-slate-600 text-sm leading-relaxed">
+                Kwality Gas Bottlers Private Limited was conceived to produce and market LPG as a premier domestic and commercial fuel. Headquartered in Bangalore, we operate 3 advanced bottling plants—2 in Tamil Nadu (Hosur, Chennai) and 1 in Karnataka (Dharwad).
               </p>
+            </div>
 
-              {/* Award Images Grid */}
-              <div className="grid grid-cols-2 gap-4">
+            {/* 6 Advantages Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {advantages.map((adv, idx) => (
                 <div
-                  onClick={() => setActiveCert("/images/original/kwality-gas-certificate.jpg")}
-                  className="relative h-48 rounded-xl overflow-hidden border border-slate-200 cursor-pointer group shadow-sm bg-slate-50"
+                  key={idx}
+                  className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs hover:border-[#1769AA]/40 hover:shadow-cardHover transition-all flex items-start gap-3.5"
                 >
-                  <Image
-                    src="/images/original/kwality-gas-certificate.jpg"
-                    alt="Business Excellence Certificate 2015"
-                    fill
-                    className="object-contain p-2 group-hover:scale-105 transition-transform"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1">
-                    <Eye className="w-4 h-4" />
-                    <span>View Certificate</span>
+                  <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 mt-0.5 border border-slate-100">
+                    {adv.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm">
+                      {adv.title}
+                    </h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                      {adv.desc}
+                    </p>
                   </div>
                 </div>
+              ))}
+            </div>
 
-                <div
-                  onClick={() => setActiveCert("/images/original/kwality-gas-award.jpg")}
-                  className="relative h-48 rounded-xl overflow-hidden border border-slate-200 cursor-pointer group shadow-sm bg-slate-50"
-                >
-                  <Image
-                    src="/images/original/kwality-gas-award.jpg"
-                    alt="Kwality Gas Achievement Award Trophy 2015"
-                    fill
-                    className="object-contain p-2 group-hover:scale-105 transition-transform"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1">
-                    <Eye className="w-4 h-4" />
-                    <span>View Trophy</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-3 bg-white rounded-xl border border-slate-100 text-xs text-slate-600 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Grade 1 Rating certified by MDRA (DOI 29-04-2017)</span>
-              </div>
+            {/* CTA */}
+            <div className="pt-2 flex flex-wrap items-center gap-4">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 bg-[#102A43] hover:bg-[#1769AA] text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
+              >
+                <span>Read Full Company Profile</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="/group-company"
+                className="text-xs font-bold text-[#1769AA] hover:text-[#102A43] transition-colors"
+              >
+                Learn About Our Group Companies &rarr;
+              </Link>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Lightbox Modal */}
-      {activeCert && (
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setActiveCert(null)}
-        >
-          <div className="relative max-w-3xl w-full max-h-[85vh] bg-white rounded-2xl p-4 overflow-hidden">
-            <button
-              onClick={() => setActiveCert(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-slate-800 text-white hover:bg-slate-700 z-10"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="relative h-[70vh] w-full">
-              <Image src={activeCert} alt="Kwality Award Full" fill className="object-contain" />
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
-
