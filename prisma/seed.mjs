@@ -361,6 +361,16 @@ async function main() {
   }
 
   // TN Items
+  const tnItems = [
+    { capacity: '33.0 Kgs Refill', amount: 5050.00, isRefill: true, isDomestic: false, displayOrder: 1 },
+    { capacity: '21.0 Kgs Refill', amount: 3220.00, isRefill: true, isDomestic: false, displayOrder: 2 },
+    { capacity: '17.0 Kgs Refill', amount: 2610.00, isRefill: true, isDomestic: false, displayOrder: 3 },
+    { capacity: '15.0 Kgs Refill', amount: null, isRefill: true, isDomestic: false, notes: 'Quote on request', displayOrder: 4 },
+    { capacity: '12.0 Kgs Refill (Domestic)', amount: 1715.00, isRefill: true, isDomestic: true, displayOrder: 5 },
+    { capacity: '5.5 Kgs Refill', amount: null, isRefill: true, isDomestic: true, notes: 'Quote on request', displayOrder: 6 },
+    { capacity: '4.0 Kgs Refill', amount: 625.00, isRefill: true, isDomestic: true, displayOrder: 7 },
+  ];
+
   const tnCount = await prisma.priceListItem.count({ where: { stateId: stateTN.id } });
   if (tnCount === 0) {
     for (const it of tnItems) {
@@ -371,7 +381,98 @@ async function main() {
   }
   console.log('Seeded / Verified State Price Lists (Karnataka & Tamil Nadu)');
 
-  // 5. Testimonials (All 8 verified customer statements - non-destructive)
+  // 5. Testimonials (All 8 verified authentic customer statements - non-destructive)
+  const testimonials = [
+    {
+      clientName: 'Mr. S. Nagaraj',
+      designation: 'Proprietor',
+      companyName: 'Perfect Flame Gas',
+      location: 'Gandhi Bazar, Bangalore',
+      avatarUrl: '/images/original/testi_1.jpg',
+      quote: 'Narration-Partner Mr. S. Nagaraj says, Kwality & Nagaraj are inseparable without each other. Associated with Kwality for more than 15 years & have been only growing along with Kwality & has never looked back. Very innovative company with excellent product basket & aggressive & customer oriented & customer caring company. He lives & breathes day in & day out with Kwality name chanting 24 hours. Because of Kwality has been able to build & maintain a big network of dealers & retain all of them for many years. Quality & on time service is the Mantra for success of Kwality & Perfect Flame.',
+      rating: 5,
+      isVerified: true,
+      displayOrder: 1,
+    },
+    {
+      clientName: 'Mr. Mahadevappa',
+      designation: 'Proprietor',
+      companyName: 'Sri Venkateshwara Fine-Chem Laboratory',
+      location: 'Bangalore',
+      avatarUrl: '/images/original/testi_2.jpg',
+      quote: 'The Proprietor Mr. Mahadevappa says Kwality marketing team is a very customer friendly team who are there 24 hours ready to serve & never lets me down. Also very competitive & dependable supply on time & every time. They value customer needs and are there always to support and take care of needs any time.',
+      rating: 5,
+      isVerified: true,
+      displayOrder: 2,
+    },
+    {
+      clientName: 'Quality Closures',
+      designation: 'Industrial Partner',
+      companyName: 'Quality Closures',
+      location: 'Machohalli, Bangalore-North',
+      avatarUrl: '/images/original/testi_5.jpg',
+      quote: 'Very Happy with Kwality gas for their technical support & guidance & uninterrupted on time supplies & with 33 kgs cylinders, saved lot of time by not changing cylinders often & more production & no down time. Has been able to save time and get higher productivity. Supply on time and every time has been Kwality’s Philosophy. 3 Cheers to Kwality team.',
+      rating: 5,
+      isVerified: true,
+      displayOrder: 3,
+    },
+    {
+      clientName: 'Mr. Rajendra Bhat',
+      designation: 'Director',
+      companyName: 'S L V Corner-Veg Restaurant',
+      location: 'Gandhi Bazar, Bangalore',
+      avatarUrl: '/images/original/testi_6.jpg',
+      quote: 'Mr. Rajendra Bhat, Director says as a channel partner for supply of LPG to Run our kitchens Kwality gas are very dependable & have never let down us. No need to follow up or remind for supplies. Very Good quality with Blue Flames and company takes care of any support required by their Excellent Marketing Team. We can always count on them for any additional requirement in case of increase in consumption. Happy to be with Kwality Gas. Kitchen with blue flame always.',
+      rating: 5,
+      isVerified: true,
+      displayOrder: 4,
+    },
+    {
+      clientName: 'Mr. R. J. Mehta',
+      designation: 'Managing Director',
+      companyName: 'Silcore Industries',
+      location: 'Magadi Road, Bangalore',
+      avatarUrl: '/images/original/testi_07.jpg',
+      quote: 'Mr. R. J. Mehta, Managing Director says Kwality Team has supported us both for Technical & also for putting up the cylinder bank. Kwality takes care of all my LPG requirement of Furnace for my manufacturing of Stampings for Transformers and have never been let down any time. Additional demands in short notice also have been taken care by their Excellent Customer supportive Marketing team. Always would strongly recommend any Industries / Customer who needs LPG can get supplies from Kwality and take them as long term dependable channel partner.',
+      rating: 5,
+      isVerified: true,
+      displayOrder: 5,
+    },
+    {
+      clientName: 'Mrs. Saloni',
+      designation: 'Working Professional',
+      companyName: 'Residential Customer',
+      location: 'Bangalore',
+      avatarUrl: '/images/original/testi_4.jpg',
+      quote: 'A very Happy Kwality Customer for last several years has to say - Kwality has never let me down or my family ever. They are always there with their delivery even at last minute call & my kids & husband have never starved. My kitchen 24 hours ready whether for my family or guest with Kwality gas ever ready. No tension whatsoever of running out of Gas when Kwality Gas is with her 24 x 7. Thumbs up to Kwality.',
+      rating: 5,
+      isVerified: true,
+      displayOrder: 6,
+    },
+    {
+      clientName: 'Mr. Tony',
+      designation: 'Owner',
+      companyName: 'China Pearl - Chinese & Italian Restaurant',
+      location: 'Banaswadi, Bangalore',
+      avatarUrl: '/images/original/tsti_10.jpg',
+      quote: 'Mr. Tony, Owner says happy to be with Kwality Gas as our LPG supplier. Very Dependable company for Timely supplies & Technical support and always can count on them for my requirements.',
+      rating: 5,
+      isVerified: true,
+      displayOrder: 7,
+    },
+    {
+      clientName: 'Mr. Krupashankar',
+      designation: 'Proprietor',
+      companyName: 'Sri Balaji Enterprises',
+      location: 'Chamarajpet, Bangalore',
+      avatarUrl: '/images/original/testi_3.jpg',
+      quote: 'Distributor for Kwality more than a decade. Mr. Krupashankar, Proprietor says Privileged to be a distributor of Kwality Gas who value Service, on time delivery first time & every time & fully transparent dealings. Proud to be Kwality team member & growing with company continuously. Has been catering to more than 45+ dealers in & around Bangalore.',
+      rating: 5,
+      isVerified: true,
+      displayOrder: 8,
+    },
+  ];
+
   const existingTestiCount = await prisma.testimonial.count();
   if (existingTestiCount === 0) {
     for (const t of testimonials) {
