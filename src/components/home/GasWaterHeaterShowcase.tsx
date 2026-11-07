@@ -86,7 +86,7 @@ export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeater
               </div>
 
               {/* Specs highlight strip */}
-              <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-200/80 text-center">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-200/80 text-center">
                 <div className="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
                   <div className="text-sm font-black text-[#102A43]">Instant</div>
                   <div className="text-[10px] text-slate-500">Hot Water</div>

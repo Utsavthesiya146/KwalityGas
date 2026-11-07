@@ -75,7 +75,7 @@ export default function CompanyIntro() {
             </div>
 
             {/* Quick Plant Stat Strip */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs text-center">
                 <div className="text-2xl font-black text-[#102A43]">30,000 MTPA</div>
                 <div className="text-xs text-slate-500 mt-0.5">Bulk Storage Facility</div>

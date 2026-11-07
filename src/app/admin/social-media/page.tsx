@@ -21,3 +21,4 @@ export default async function AdminSocialMediaPage() {
 
   return <SocialMediaClient initialLinks={initialLinks} />;
 }
+

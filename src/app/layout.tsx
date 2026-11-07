@@ -74,9 +74,9 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/images/original/favicon.png" />
       </head>
-      <body className="min-h-screen flex flex-col bg-white text-[#182230] font-sans antialiased selection:bg-brand-orange selection:text-white">
+      <body className="min-h-screen flex flex-col bg-white text-[#182230] font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden w-full max-w-full">
         <Header />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow w-full max-w-full overflow-x-hidden">{children}</main>
         <Footer />
       </body>
     </html>

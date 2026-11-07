@@ -7,24 +7,22 @@ import { usePathname } from "next/navigation";
 import {
   Phone,
   ShieldCheck,
-  Award,
   Menu,
   X,
   ChevronDown,
   Flame,
   Clock,
-  Send,
   Building2,
   Home,
   Briefcase,
   Factory,
   Sparkles,
-  HelpCircle,
   FileText,
   BadgeCheck,
   Images,
   MessageSquare,
   ArrowRight,
+  Award,
 } from "lucide-react";
 import EnquiryModal from "@/components/shared/EnquiryModal";
 
@@ -34,17 +32,19 @@ export default function Header() {
   const [lpgDropdownOpen, setLpgDropdownOpen] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);
-  const [contactDropdownOpen, setContactDropdownOpen] = useState(false);
 
-  // Mobile Accordion States
+  // Mobile Accordions
   const [mobileLpgOpen, setMobileLpgOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
-  const [mobileContactOpen, setMobileContactOpen] = useState(false);
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
   const [enquiryInitialType, setEnquiryInitialType] = useState<"DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL">("DOMESTIC");
+
+  const lpgMenuRef = useRef<HTMLDivElement>(null);
+  const productsMenuRef = useRef<HTMLDivElement>(null);
+  const companyMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,14 +54,45 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close dropdowns on route change
+  // Close all menus on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setLpgDropdownOpen(false);
     setProductsDropdownOpen(false);
     setCompanyDropdownOpen(false);
-    setContactDropdownOpen(false);
   }, [pathname]);
+
+  // Click outside listener for all desktop dropdowns
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (lpgMenuRef.current && !lpgMenuRef.current.contains(target)) {
+        setLpgDropdownOpen(false);
+      }
+      if (productsMenuRef.current && !productsMenuRef.current.contains(target)) {
+        setProductsDropdownOpen(false);
+      }
+      if (companyMenuRef.current && !companyMenuRef.current.contains(target)) {
+        setCompanyDropdownOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setLpgDropdownOpen(false);
+        setProductsDropdownOpen(false);
+        setCompanyDropdownOpen(false);
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const openEnquiry = (type: "DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL" = "DOMESTIC") => {
     setEnquiryInitialType(type);
@@ -71,44 +102,39 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-white shadow-sm transition-all duration-300">
-        {/* Top Utility Bar */}
-        <div className="bg-[#0B1D2F] text-white border-b border-white/10 text-xs">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-3">
-            {/* Left: Certifications & CIN */}
-            <div className="flex items-center gap-3 sm:gap-4 flex-wrap text-slate-200">
-              <span className="inline-flex items-center gap-1.5 font-bold tracking-tight">
-                <BadgeCheck className="w-3.5 h-3.5 text-[#F28C28]" />
-                <span className="text-white">Grade 1 Rated</span>
-                <span className="text-slate-400 font-normal hidden sm:inline">LPG Bottlers & Distributors</span>
+      <header className="sticky top-0 z-50 w-full max-w-full overflow-x-clip bg-white transition-all duration-200">
+        {/* Top Utility Strip */}
+        <div className="bg-[#0B1D2F] text-white text-xs border-b border-white/10 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 sm:py-2 flex items-center justify-between gap-2 text-[11px] sm:text-xs">
+            {/* Left: Rating & Quality */}
+            <div className="flex items-center gap-2 sm:gap-4 text-slate-300 truncate">
+              <span className="inline-flex items-center gap-1.5 font-bold text-white tracking-tight truncate">
+                <BadgeCheck className="w-3.5 h-3.5 text-[#F28C28] shrink-0" />
+                <span>Grade 1 Rated</span>
+                <span className="text-slate-400 font-normal hidden md:inline">• CARE MDRA Certified</span>
               </span>
-              <span className="hidden md:inline-block text-slate-600">|</span>
-              <span className="hidden md:inline-flex items-center gap-1 text-slate-300 font-medium">
-                <span className="text-slate-400">CIN:</span>
-                <span className="text-white font-mono text-[11px]">U01120KA2005PTC036860</span>
-              </span>
-              <span className="hidden xl:inline-block text-slate-600">|</span>
-              <span className="hidden xl:inline-flex items-center gap-1 text-slate-300">
+              <span className="hidden lg:inline-block text-slate-600">|</span>
+              <span className="hidden lg:inline-flex items-center gap-1 text-slate-300">
                 <Clock className="w-3 h-3 text-[#F28C28]" />
-                <span>Mon - Sat: 9:30 AM - 5:30 PM</span>
+                <span>Plants: Hosur • Chennai • Dharwad</span>
               </span>
             </div>
 
-            {/* Right: Hotline & Office */}
-            <div className="flex items-center gap-3 sm:gap-4 text-xs ml-auto whitespace-nowrap">
+            {/* Right: Hotline */}
+            <div className="flex items-center gap-2 sm:gap-4 ml-auto shrink-0 whitespace-nowrap">
               <a
                 href="tel:+917899787101"
-                className="inline-flex items-center gap-1.5 font-black text-white hover:text-[#F28C28] transition-colors"
-                title="24/7 Priority Hotline"
+                className="inline-flex items-center gap-1.5 font-bold text-white hover:text-[#F28C28] transition-colors"
+                title="Priority LPG Helpline"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <Phone className="w-3.5 h-3.5 text-[#F28C28]" />
+                <Phone className="w-3 h-3 text-[#F28C28]" />
                 <span>Hotline: +91 78997 87101</span>
               </a>
-              <span className="text-slate-600 hidden sm:inline">|</span>
+              <span className="text-slate-600 hidden xl:inline">|</span>
               <a
                 href="tel:+918023400459"
-                className="hidden sm:inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
+                className="hidden xl:inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
               >
                 <span>Office: +91 80 2340 0459</span>
               </a>
@@ -116,13 +142,17 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Main Navigation Bar - Strictly 1-line on all desktop viewports */}
-        <div className={`transition-all duration-300 ${isScrolled ? "py-2 sm:py-2.5 shadow-md bg-white/98 backdrop-blur-md" : "py-3 sm:py-3.5 bg-white"}`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2 lg:gap-4">
+        {/* Main Desktop Navigation - Clean, Single Horizontal Line */}
+        <div
+          className={`border-b border-slate-100 transition-all duration-200 ${
+            isScrolled ? "py-2 shadow-md bg-white/98 backdrop-blur-md" : "py-3 bg-white"
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
             
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden shadow-xs border border-slate-100 shrink-0 bg-white">
+            {/* Logo on the left */}
+            <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg overflow-hidden border border-slate-100 shrink-0 bg-white shadow-xs">
                 <Image
                   src="/images/original/logo.png"
                   alt="Kwality Gas Bottlers Logo"
@@ -132,23 +162,23 @@ export default function Header() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg sm:text-xl xl:text-2xl font-black tracking-tight text-[#102A43] group-hover:text-[#1769AA] transition-colors whitespace-nowrap">
+                <span className="text-base sm:text-lg font-black tracking-tight text-[#102A43] group-hover:text-[#1769AA] transition-colors whitespace-nowrap leading-tight">
                   KWALITY <span className="text-[#F28C28]">GAS</span>
                 </span>
-                <span className="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider -mt-0.5 whitespace-nowrap">
+                <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider whitespace-nowrap leading-none mt-0.5">
                   Bottlers Pvt Ltd
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation Links - Visible lg+ (1024px+) on ONE clean line */}
-            <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-[13px] xl:text-sm font-bold text-[#102A43]">
+            {/* Navigation links in the center (Single line on all desktop viewports 1024px+) */}
+            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 text-xs xl:text-sm font-semibold text-slate-700">
               
               {/* Home */}
               <Link
                 href="/"
-                className={`px-2.5 xl:px-3 py-2 rounded-xl transition-colors whitespace-nowrap ${
-                  pathname === "/" ? "text-[#1769AA] bg-blue-50/80 font-black" : "hover:text-[#1769AA] hover:bg-slate-50"
+                className={`px-2 xl:px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
+                  pathname === "/" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
                 }`}
               >
                 Home
@@ -156,152 +186,226 @@ export default function Header() {
 
               {/* LPG Segments Dropdown */}
               <div
+                ref={lpgMenuRef}
                 className="relative"
                 onMouseEnter={() => setLpgDropdownOpen(true)}
                 onMouseLeave={() => setLpgDropdownOpen(false)}
               >
                 <button
                   type="button"
-                  className={`px-2.5 xl:px-3 py-2 rounded-xl inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
+                  onClick={() => setLpgDropdownOpen(!lpgDropdownOpen)}
+                  className={`px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
                     pathname.startsWith("/domestic") || pathname.startsWith("/commercial") || pathname.startsWith("/industrial")
-                      ? "text-[#1769AA] bg-blue-50/80 font-black"
+                      ? "text-[#1769AA] bg-blue-50/80 font-bold"
                       : "hover:text-[#1769AA] hover:bg-slate-50"
                   }`}
                   aria-expanded={lpgDropdownOpen}
                 >
                   <span>LPG Segments</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${lpgDropdownOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-150 ${lpgDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {lpgDropdownOpen && (
-                  <div className="absolute top-full left-0 w-80 bg-white rounded-2xl shadow-cardHover border border-slate-100 py-2.5 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150">
+                  <div className="absolute top-full left-0 w-72 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in-50 duration-150">
                     <Link
                       href="/domestic"
-                      className="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 transition-colors"
+                      onClick={() => setLpgDropdownOpen(false)}
+                      className="flex items-center gap-3 px-3.5 py-2 hover:bg-slate-50 transition-colors"
                     >
-                      <div className="w-9 h-9 rounded-xl bg-orange-50 text-[#F28C28] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                        <Home className="w-4 h-4" />
+                      <div className="w-7 h-7 rounded-lg bg-orange-50 text-[#F28C28] flex items-center justify-center shrink-0">
+                        <Home className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <div className="font-bold text-slate-900 text-sm">Domestic LPG</div>
-                        <div className="text-xs text-slate-500 mt-0.5">12kg, 5.5kg & 4kg Cook & Light for households</div>
+                        <div className="font-bold text-slate-900 text-xs">Domestic LPG</div>
+                        <div className="text-[11px] text-slate-500">12kg, 5.5kg & 4kg households</div>
                       </div>
                     </Link>
 
                     <Link
                       href="/commercial"
-                      className="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 transition-colors"
+                      onClick={() => setLpgDropdownOpen(false)}
+                      className="flex items-center gap-3 px-3.5 py-2 hover:bg-slate-50 transition-colors"
                     >
-                      <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                        <Briefcase className="w-4 h-4" />
+                      <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0">
+                        <Briefcase className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <div className="font-bold text-slate-900 text-sm">Commercial LPG</div>
-                        <div className="text-xs text-slate-500 mt-0.5">17kg & 21kg for hotels, restaurants & catering</div>
+                        <div className="font-bold text-slate-900 text-xs">Commercial LPG</div>
+                        <div className="text-[11px] text-slate-500">17kg & 21kg for hotels & kitchens</div>
                       </div>
                     </Link>
 
                     <Link
                       href="/industrial"
-                      className="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 transition-colors"
+                      onClick={() => setLpgDropdownOpen(false)}
+                      className="flex items-center gap-3 px-3.5 py-2 hover:bg-slate-50 transition-colors"
                     >
-                      <div className="w-9 h-9 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                        <Factory className="w-4 h-4" />
+                      <div className="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 flex items-center justify-center shrink-0">
+                        <Factory className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <div className="font-bold text-slate-900 text-sm">Industrial LPG</div>
-                        <div className="text-xs text-slate-500 mt-0.5">33kg LOT/VOT & multi-cylinder manifold systems</div>
+                        <div className="font-bold text-slate-900 text-xs">Industrial LPG</div>
+                        <div className="text-[11px] text-slate-500">33kg LOT/VOT & manifold banks</div>
                       </div>
                     </Link>
                   </div>
                 )}
               </div>
 
-              {/* Products & Appliances Dropdown */}
+              {/* Products Compact Mega-Menu */}
               <div
+                ref={productsMenuRef}
                 className="relative"
                 onMouseEnter={() => setProductsDropdownOpen(true)}
                 onMouseLeave={() => setProductsDropdownOpen(false)}
               >
                 <button
                   type="button"
-                  className={`px-2.5 xl:px-3 py-2 rounded-xl inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
+                  onClick={() => setProductsDropdownOpen(!productsDropdownOpen)}
+                  className={`px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
                     pathname.startsWith("/products") || pathname.startsWith("/cylinders") || pathname.startsWith("/gas-water-heater") || pathname.startsWith("/safety-devices") || pathname.startsWith("/accessories")
-                      ? "text-[#1769AA] bg-blue-50/80 font-black"
+                      ? "text-[#1769AA] bg-blue-50/80 font-bold"
                       : "hover:text-[#1769AA] hover:bg-slate-50"
                   }`}
                   aria-expanded={productsDropdownOpen}
                 >
                   <span>Products</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${productsDropdownOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-150 ${productsDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {productsDropdownOpen && (
-                  <div className="absolute top-full left-0 w-84 bg-white rounded-2xl shadow-cardHover border border-slate-100 py-2.5 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150">
-                    <Link
-                      href="/products"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors border-b border-slate-100"
-                    >
-                      <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0 mt-0.5">
-                        <Flame className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-sm">All Products Overview</div>
-                        <div className="text-xs text-slate-500">Complete catalog of gas & appliances</div>
-                      </div>
-                    </Link>
+                  <div
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-[540px] xl:w-[580px] bg-white rounded-2xl shadow-xl border border-slate-200/90 p-4 z-50 animate-in fade-in-50 duration-150 text-slate-900"
+                  >
+                    <div className="grid grid-cols-2 gap-4">
+                      {/* Col 1: LPG Cylinders Range */}
+                      <div className="space-y-1">
+                        <div className="px-2 pb-1 text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                          LPG Cylinders
+                        </div>
+                        <Link
+                          href="/cylinders"
+                          onClick={() => setProductsDropdownOpen(false)}
+                          className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 transition-colors group"
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-orange-50 text-[#F28C28] flex items-center justify-center shrink-0">
+                            <Flame className="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 group-hover:text-[#1769AA] transition-colors">
+                              Domestic Cylinders
+                            </div>
+                            <div className="text-[10px] text-slate-500">12kg, 5.5kg & 4kg Cook & Light</div>
+                          </div>
+                        </Link>
 
-                    <Link
-                      href="/cylinders"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-xl bg-orange-50 text-[#F28C28] flex items-center justify-center shrink-0 mt-0.5">
-                        <Flame className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-sm">LPG Cylinders Range</div>
-                        <div className="text-xs text-slate-500">2kg to 33kg heavy-duty cylinders</div>
-                      </div>
-                    </Link>
+                        <Link
+                          href="/commercial"
+                          onClick={() => setProductsDropdownOpen(false)}
+                          className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 transition-colors group"
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0">
+                            <Briefcase className="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 group-hover:text-[#1769AA] transition-colors">
+                              Commercial Cylinders
+                            </div>
+                            <div className="text-[10px] text-slate-500">17kg & 21kg for HORECA</div>
+                          </div>
+                        </Link>
 
-                    <Link
-                      href="/gas-water-heater"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0 mt-0.5">
-                        <Sparkles className="w-4 h-4" />
+                        <Link
+                          href="/industrial"
+                          onClick={() => setProductsDropdownOpen(false)}
+                          className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 transition-colors group"
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 flex items-center justify-center shrink-0">
+                            <Factory className="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 group-hover:text-[#1769AA] transition-colors">
+                              Industrial 33kg LOT/VOT
+                            </div>
+                            <div className="text-[10px] text-slate-500">Liquid & vapor off-take systems</div>
+                          </div>
+                        </Link>
                       </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-sm">Gas Water Heater</div>
-                        <div className="text-xs text-slate-500">Instant geysers with 8 built-in safety devices</div>
-                      </div>
-                    </Link>
 
-                    <Link
-                      href="/safety-devices"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
-                        <ShieldCheck className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-sm">Safety Devices</div>
-                        <div className="text-xs text-slate-500">Gas detectors, auto-shutoffs & valves</div>
-                      </div>
-                    </Link>
+                      {/* Col 2: Appliances & Safety */}
+                      <div className="space-y-1">
+                        <div className="px-2 pb-1 text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                          Appliances & Safety
+                        </div>
+                        <Link
+                          href="/gas-water-heater"
+                          onClick={() => setProductsDropdownOpen(false)}
+                          className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 transition-colors group"
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0">
+                            <Sparkles className="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 group-hover:text-[#1769AA] transition-colors">
+                              Kwality Gas Water Heater
+                            </div>
+                            <div className="text-[10px] text-slate-500">8 built-in safety devices</div>
+                          </div>
+                        </Link>
 
-                    <Link
-                      href="/accessories"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 mt-0.5">
-                        <FileText className="w-4 h-4" />
+                        <Link
+                          href="/safety-devices"
+                          onClick={() => setProductsDropdownOpen(false)}
+                          className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 transition-colors group"
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                            <ShieldCheck className="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 group-hover:text-[#1769AA] transition-colors">
+                              Safety Devices
+                            </div>
+                            <div className="text-[10px] text-slate-500">Auto shut-offs & leak detectors</div>
+                          </div>
+                        </Link>
+
+                        <Link
+                          href="/accessories"
+                          onClick={() => setProductsDropdownOpen(false)}
+                          className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 transition-colors group"
+                        >
+                          <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                            <FileText className="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 group-hover:text-[#1769AA] transition-colors">
+                              Accessories & Valves
+                            </div>
+                            <div className="text-[10px] text-slate-500">Hoses, click-ons & regulators</div>
+                          </div>
+                        </Link>
                       </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-sm">Accessories & Regulators</div>
-                        <div className="text-xs text-slate-500">IS 9573 rubber hoses & click-on regulators</div>
-                      </div>
-                    </Link>
+                    </div>
+
+                    {/* Bottom Strip */}
+                    <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs px-2">
+                      <Link
+                        href="/products"
+                        onClick={() => setProductsDropdownOpen(false)}
+                        className="font-bold text-[#1769AA] hover:text-[#F28C28] inline-flex items-center gap-1 transition-colors"
+                      >
+                        <span>All Products Catalog</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
+                      <Link
+                        href="/price-list"
+                        onClick={() => setProductsDropdownOpen(false)}
+                        className="font-bold text-slate-600 hover:text-[#F28C28] inline-flex items-center gap-1 transition-colors"
+                      >
+                        <span>Check Live Rates</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </div>
                   </div>
                 )}
               </div>
@@ -309,22 +413,22 @@ export default function Header() {
               {/* Services */}
               <Link
                 href="/services"
-                className={`px-2.5 xl:px-3 py-2 rounded-xl transition-colors whitespace-nowrap ${
-                  pathname === "/services" ? "text-[#1769AA] bg-blue-50/80 font-black" : "hover:text-[#1769AA] hover:bg-slate-50"
+                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
+                  pathname === "/services" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
                 }`}
               >
                 Services
               </Link>
 
-              {/* Price List with dynamic Live indicator */}
+              {/* Price List */}
               <Link
                 href="/price-list"
-                className={`relative px-2.5 xl:px-3 py-2 rounded-xl transition-colors inline-flex items-center gap-1.5 whitespace-nowrap ${
-                  pathname === "/price-list" ? "text-[#1769AA] bg-blue-50/80 font-black" : "hover:text-[#1769AA] hover:bg-slate-50"
+                className={`px-2.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5 whitespace-nowrap ${
+                  pathname === "/price-list" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
                 }`}
               >
                 <span>Price List</span>
-                <span className="px-1.5 py-0.5 rounded-full text-[10px] font-black bg-[#F28C28] text-white tracking-wider uppercase shadow-xs">
+                <span className="px-1.5 py-0.2 rounded-full text-[9px] font-black bg-[#F28C28] text-white uppercase tracking-wider">
                   Live
                 </span>
               </Link>
@@ -332,174 +436,108 @@ export default function Header() {
               {/* Safety */}
               <Link
                 href="/safety-features"
-                className={`px-2.5 xl:px-3 py-2 rounded-xl transition-colors whitespace-nowrap ${
-                  pathname === "/safety-features" ? "text-[#1769AA] bg-blue-50/80 font-black" : "hover:text-[#1769AA] hover:bg-slate-50"
+                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
+                  pathname === "/safety-features" ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
                 }`}
               >
                 Safety
               </Link>
 
-              {/* Company Dropdown (Consolidated: About, Group Company, Testimonials, Gallery, Awards) */}
+              {/* Company Dropdown */}
               <div
+                ref={companyMenuRef}
                 className="relative"
                 onMouseEnter={() => setCompanyDropdownOpen(true)}
                 onMouseLeave={() => setCompanyDropdownOpen(false)}
               >
                 <button
                   type="button"
-                  className={`px-2.5 xl:px-3 py-2 rounded-xl inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
+                  onClick={() => setCompanyDropdownOpen(!companyDropdownOpen)}
+                  className={`px-2.5 py-1.5 rounded-lg inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
                     pathname === "/about" || pathname === "/group-company" || pathname === "/testimonials" || pathname === "/gallery"
-                      ? "text-[#1769AA] bg-blue-50/80 font-black"
+                      ? "text-[#1769AA] bg-blue-50/80 font-bold"
                       : "hover:text-[#1769AA] hover:bg-slate-50"
                   }`}
                   aria-expanded={companyDropdownOpen}
                 >
                   <span>Company</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${companyDropdownOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-150 ${companyDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {companyDropdownOpen && (
-                  <div className="absolute top-full left-0 w-80 bg-white rounded-2xl shadow-cardHover border border-slate-100 py-2.5 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150">
+                  <div className="absolute top-full left-0 w-64 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in-50 duration-150">
                     <Link
                       href="/about"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors border-b border-slate-100"
+                      onClick={() => setCompanyDropdownOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 hover:bg-slate-50 transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0 mt-0.5">
-                        <Building2 className="w-4 h-4" />
-                      </div>
+                      <Building2 className="w-4 h-4 text-[#1769AA]" />
                       <div>
-                        <div className="font-bold text-slate-900 text-sm">About Kwality Gas</div>
-                        <div className="text-xs text-slate-500">History, Grade 1 rating & 3 bottling plants</div>
+                        <div className="font-bold text-slate-900 text-xs">About Kwality Gas</div>
+                        <div className="text-[10px] text-slate-500">Heritage & 3 bottling plants</div>
                       </div>
                     </Link>
 
                     <Link
                       href="/group-company"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors"
+                      onClick={() => setCompanyDropdownOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 hover:bg-slate-50 transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-xl bg-orange-50 text-[#F28C28] flex items-center justify-center shrink-0 mt-0.5">
-                        <Award className="w-4 h-4" />
-                      </div>
+                      <Award className="w-4 h-4 text-[#F28C28]" />
                       <div>
-                        <div className="font-bold text-slate-900 text-sm">Group Company</div>
-                        <div className="text-xs text-slate-500">Diversified 35+ years industrial profile</div>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/testimonials"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
-                        <MessageSquare className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-sm">Customer Testimonials</div>
-                        <div className="text-xs text-slate-500">8 genuine verified customer reviews</div>
+                        <div className="font-bold text-slate-900 text-xs">Group Profile</div>
+                        <div className="text-[10px] text-slate-500">Over 35 years in energy</div>
                       </div>
                     </Link>
 
                     <Link
                       href="/gallery"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors"
+                      onClick={() => setCompanyDropdownOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 hover:bg-slate-50 transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 mt-0.5">
-                        <Images className="w-4 h-4" />
-                      </div>
+                      <Images className="w-4 h-4 text-purple-600" />
                       <div>
-                        <div className="font-bold text-slate-900 text-sm">Plant Photo Gallery</div>
-                        <div className="text-xs text-slate-500">Hosur, Chennai & Dharwad facilities</div>
+                        <div className="font-bold text-slate-900 text-xs">Plant Infrastructure</div>
+                        <div className="text-[10px] text-slate-500">Hosur, Chennai & Dharwad photos</div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/testimonials"
+                      onClick={() => setCompanyDropdownOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2 hover:bg-slate-50 transition-colors"
+                    >
+                      <MessageSquare className="w-4 h-4 text-emerald-600" />
+                      <div>
+                        <div className="font-bold text-slate-900 text-xs">Testimonials</div>
+                        <div className="text-[10px] text-slate-500">Verified client feedback</div>
                       </div>
                     </Link>
                   </div>
                 )}
               </div>
 
-              {/* Contact Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setContactDropdownOpen(true)}
-                onMouseLeave={() => setContactDropdownOpen(false)}
+              {/* Contact */}
+              <Link
+                href="/contact"
+                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
+                  pathname.startsWith("/contact") ? "text-[#1769AA] bg-blue-50/80 font-bold" : "hover:text-[#1769AA] hover:bg-slate-50"
+                }`}
               >
-                <button
-                  type="button"
-                  className={`px-2.5 xl:px-3 py-2 rounded-xl inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
-                    pathname.startsWith("/contact")
-                      ? "text-[#1769AA] bg-blue-50/80 font-black"
-                      : "hover:text-[#1769AA] hover:bg-slate-50"
-                  }`}
-                  aria-expanded={contactDropdownOpen}
-                >
-                  <span>Contact</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${contactDropdownOpen ? "rotate-180" : ""}`} />
-                </button>
-
-                {contactDropdownOpen && (
-                  <div className="absolute top-full right-0 w-80 bg-white rounded-2xl shadow-cardHover border border-slate-100 py-2.5 z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150">
-                    <Link
-                      href="/contact"
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors border-b border-slate-100"
-                    >
-                      <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0 mt-0.5">
-                        <Phone className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-sm">Corporate Offices & Plants</div>
-                        <div className="text-xs text-slate-500">Bengaluru HQ & bottling plant hotlines</div>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/contact/domestic"
-                      className="flex items-start gap-3 px-4 py-2 hover:bg-slate-50 transition-colors"
-                    >
-                      <div className="w-7 h-7 rounded-lg bg-orange-50 text-[#F28C28] flex items-center justify-center shrink-0 mt-0.5">
-                        <Home className="w-3.5 h-3.5" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-xs">Domestic Gas Connection</div>
-                        <div className="text-[11px] text-slate-500">Household cylinder refill inquiry</div>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/contact/commercial"
-                      className="flex items-start gap-3 px-4 py-2 hover:bg-slate-50 transition-colors"
-                    >
-                      <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0 mt-0.5">
-                        <Briefcase className="w-3.5 h-3.5" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-xs">Commercial Supply</div>
-                        <div className="text-[11px] text-slate-500">HORECA bulk quotation request</div>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/contact/industrial"
-                      className="flex items-start gap-3 px-4 py-2 hover:bg-slate-50 transition-colors"
-                    >
-                      <div className="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 flex items-center justify-center shrink-0 mt-0.5">
-                        <Factory className="w-3.5 h-3.5" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-xs">Industrial Manifold Consultation</div>
-                        <div className="text-[11px] text-slate-500">33kg LOT manifold sizing & survey</div>
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </div>
+                Contact
+              </Link>
             </nav>
 
-            {/* Right: CTA & Mobile Hamburger */}
+            {/* Right: One Prominent Enquiry CTA & Mobile Toggle */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               <button
                 onClick={() => openEnquiry("DOMESTIC")}
-                className="hidden sm:inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-3.5 xl:px-5 py-2.5 rounded-xl text-xs xl:text-sm font-extrabold shadow-sm hover:shadow transition-all whitespace-nowrap"
+                className="hidden sm:inline-flex items-center gap-1.5 bg-[#F28C28] hover:bg-[#D9771A] text-white px-3 py-2 xl:px-4 xl:py-2.5 rounded-xl text-xs xl:text-sm font-bold shadow-xs hover:shadow transition-all whitespace-nowrap active:scale-95"
               >
-                <Flame className="w-4 h-4 fill-white" />
-                <span>Book Cylinder / Enquire</span>
+                <Flame className="w-3.5 h-3.5 fill-white" />
+                <span>
+                  <span className="hidden xl:inline">Book Cylinder / </span>Enquire
+                </span>
               </button>
 
               <button
@@ -516,32 +554,33 @@ export default function Header() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 top-[90px] z-40 bg-slate-900/60 backdrop-blur-xs flex flex-col justify-between">
-            <div className="bg-white w-full max-h-[calc(100vh-90px)] overflow-y-auto border-t border-slate-100 p-5 space-y-4 shadow-xl">
+          <div className="lg:hidden fixed inset-0 top-[88px] z-40 bg-slate-900/60 backdrop-blur-xs flex flex-col justify-between">
+            <div className="bg-white w-full max-h-[calc(100vh-88px)] overflow-y-auto border-t border-slate-100 p-5 space-y-4 shadow-xl">
               
-              {/* Quick Booking Buttons */}
+              {/* Quick Actions */}
               <div className="grid grid-cols-2 gap-2 pb-2">
                 <button
                   onClick={() => openEnquiry("DOMESTIC")}
-                  className="bg-[#F28C28] text-white p-3 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1.5 shadow-sm"
+                  className="bg-[#F28C28] text-white p-3 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1.5 shadow-xs"
                 >
                   <Home className="w-4 h-4" />
                   <span>Domestic Refill</span>
                 </button>
                 <button
                   onClick={() => openEnquiry("COMMERCIAL")}
-                  className="bg-[#1769AA] text-white p-3 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1.5 shadow-sm"
+                  className="bg-[#1769AA] text-white p-3 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1.5 shadow-xs"
                 >
                   <Briefcase className="w-4 h-4" />
                   <span>Commercial Quote</span>
                 </button>
               </div>
 
-              {/* Nav Links List */}
+              {/* Navigation Items */}
               <div className="space-y-1 text-sm font-bold text-slate-900 divide-y divide-slate-100">
                 <Link
                   href="/"
-                  className="block py-2.5 px-3 rounded-xl hover:bg-slate-50 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors"
                 >
                   Home
                 </Link>
@@ -549,22 +588,35 @@ export default function Header() {
                 {/* LPG Segments Accordion */}
                 <div className="pt-1">
                   <button
+                    type="button"
                     onClick={() => setMobileLpgOpen(!mobileLpgOpen)}
-                    className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors"
                   >
                     <span>LPG Segments</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileLpgOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${mobileLpgOpen ? "rotate-180" : ""}`} />
                   </button>
                   {mobileLpgOpen && (
-                    <div className="pl-4 pr-2 pb-2 space-y-1 text-xs font-medium text-slate-600 bg-slate-50 rounded-xl my-1 p-2">
-                      <Link href="/domestic" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
+                    <div className="pl-5 pr-2 py-1 space-y-1 text-xs font-semibold text-slate-600">
+                      <Link
+                        href="/domestic"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
                         Domestic LPG (12kg, 5.5kg, 4kg)
                       </Link>
-                      <Link href="/commercial" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
+                      <Link
+                        href="/commercial"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
                         Commercial LPG (17kg, 21kg)
                       </Link>
-                      <Link href="/industrial" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        Industrial LPG (33kg Manifold)
+                      <Link
+                        href="/industrial"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
+                        Industrial 33kg LOT/VOT
                       </Link>
                     </div>
                   )}
@@ -573,53 +625,78 @@ export default function Header() {
                 {/* Products Accordion */}
                 <div className="pt-1">
                   <button
+                    type="button"
                     onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-                    className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors"
                   >
                     <span>Products & Appliances</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileProductsOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${mobileProductsOpen ? "rotate-180" : ""}`} />
                   </button>
                   {mobileProductsOpen && (
-                    <div className="pl-4 pr-2 pb-2 space-y-1 text-xs font-medium text-slate-600 bg-slate-50 rounded-xl my-1 p-2">
-                      <Link href="/products" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        All Products Catalog
+                    <div className="pl-5 pr-2 py-1 space-y-1 text-xs font-semibold text-slate-600">
+                      <Link
+                        href="/products"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100 font-bold text-[#1769AA]"
+                      >
+                        All Products Overview
                       </Link>
-                      <Link href="/cylinders" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        LPG Cylinders Range (2kg to 33kg)
+                      <Link
+                        href="/cylinders"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
+                        LPG Cylinders (2kg to 33kg)
                       </Link>
-                      <Link href="/gas-water-heater" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        Instant Gas Water Heater
+                      <Link
+                        href="/gas-water-heater"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
+                        Gas Water Heater (Geyser)
                       </Link>
-                      <Link href="/safety-devices" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        Safety Devices & Auto-Shutoff
+                      <Link
+                        href="/safety-devices"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
+                        Safety Devices & Auto-Shutoffs
                       </Link>
-                      <Link href="/accessories" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
+                      <Link
+                        href="/accessories"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
                         Accessories & Regulators
                       </Link>
                     </div>
                   )}
                 </div>
 
+                {/* Services */}
                 <Link
                   href="/services"
-                  className="block py-2.5 px-3 rounded-xl hover:bg-slate-50 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors"
                 >
                   Services
                 </Link>
 
+                {/* Price List */}
                 <Link
                   href="/price-list"
-                  className="flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-slate-50 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors"
                 >
-                  <span>Live Price List</span>
-                  <span className="px-1.5 py-0.5 rounded-full text-[10px] font-black bg-[#F28C28] text-white uppercase">
-                    Live
-                  </span>
+                  <span>Price List</span>
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#F28C28] text-white">LIVE</span>
                 </Link>
 
+                {/* Safety */}
                 <Link
                   href="/safety-features"
-                  className="block py-2.5 px-3 rounded-xl hover:bg-slate-50 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors"
                 >
                   Safety Guidelines
                 </Link>
@@ -627,80 +704,65 @@ export default function Header() {
                 {/* Company Accordion */}
                 <div className="pt-1">
                   <button
+                    type="button"
                     onClick={() => setMobileCompanyOpen(!mobileCompanyOpen)}
-                    className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors"
                   >
                     <span>Company</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileCompanyOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${mobileCompanyOpen ? "rotate-180" : ""}`} />
                   </button>
                   {mobileCompanyOpen && (
-                    <div className="pl-4 pr-2 pb-2 space-y-1 text-xs font-medium text-slate-600 bg-slate-50 rounded-xl my-1 p-2">
-                      <Link href="/about" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        About Kwality Gas & Plants
+                    <div className="pl-5 pr-2 py-1 space-y-1 text-xs font-semibold text-slate-600">
+                      <Link
+                        href="/about"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
+                        About Kwality Gas
                       </Link>
-                      <Link href="/group-company" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
+                      <Link
+                        href="/group-company"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
                         Group Company Profile
                       </Link>
-                      <Link href="/testimonials" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        Customer Testimonials
-                      </Link>
-                      <Link href="/gallery" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
+                      <Link
+                        href="/gallery"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
                         Plant Photo Gallery
                       </Link>
+                      <Link
+                        href="/testimonials"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block py-2 px-2 rounded hover:bg-slate-100"
+                      >
+                        Customer Testimonials
+                      </Link>
                     </div>
                   )}
                 </div>
 
-                {/* Contact Accordion */}
-                <div className="pt-1">
-                  <button
-                    onClick={() => setMobileContactOpen(!mobileContactOpen)}
-                    className="w-full flex items-center justify-between py-2.5 px-3 rounded-xl hover:bg-slate-50 transition-colors text-left"
-                  >
-                    <span>Contact</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileContactOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {mobileContactOpen && (
-                    <div className="pl-4 pr-2 pb-2 space-y-1 text-xs font-medium text-slate-600 bg-slate-50 rounded-xl my-1 p-2">
-                      <Link href="/contact" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        Main Contact & Offices
-                      </Link>
-                      <Link href="/contact/domestic" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        Domestic Gas Booking
-                      </Link>
-                      <Link href="/contact/commercial" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        Commercial Quotation
-                      </Link>
-                      <Link href="/contact/industrial" className="block py-2 px-2 rounded-lg hover:text-[#1769AA]">
-                        Industrial Consultation
-                      </Link>
-                    </div>
-                  )}
-                </div>
+                {/* Contact */}
+                <Link
+                  href="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors"
+                >
+                  Contact & Hotlines
+                </Link>
               </div>
 
-              {/* Direct Call Hotlines */}
-              <div className="pt-4 border-t border-slate-100 space-y-2">
+              {/* Direct Call hotline */}
+              <div className="pt-4 border-t border-slate-100 text-center">
                 <a
                   href="tel:+917899787101"
-                  className="flex items-center justify-between p-3 rounded-xl bg-orange-50 text-[#F28C28] font-bold text-xs"
+                  className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0B1D2F] text-white font-bold text-xs shadow-sm"
                 >
-                  <span className="flex items-center gap-2">
-                    <Phone className="w-4 h-4" />
-                    <span>24/7 Hotline: +91 78997 87101</span>
-                  </span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-
-                <a
-                  href="tel:+918023400459"
-                  className="flex items-center justify-between p-3 rounded-xl bg-slate-50 text-slate-700 font-bold text-xs"
-                >
-                  <span className="flex items-center gap-2">
-                    <Building2 className="w-4 h-4" />
-                    <span>Bangalore Office: +91 80 2340 0459</span>
-                  </span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <Phone className="w-4 h-4 text-[#F28C28]" />
+                  <span>Call 24/7 Hotline: +91 78997 87101</span>
                 </a>
               </div>
             </div>
@@ -708,7 +770,7 @@ export default function Header() {
         )}
       </header>
 
-      {/* Global Controlled Enquiry Modal */}
+      {/* Shared Enquiry Modal */}
       <EnquiryModal
         isOpen={enquiryModalOpen}
         onClose={() => setEnquiryModalOpen(false)}

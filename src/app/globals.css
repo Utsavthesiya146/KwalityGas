@@ -13,12 +13,21 @@
   --text-muted: #667085;
 }
 
+html,
 body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
   color: var(--text-dark);
   background: #FFFFFF;
   font-family: var(--font-sans);
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+main {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {

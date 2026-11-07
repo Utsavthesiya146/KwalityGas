@@ -12,7 +12,7 @@ export default function PlantInfrastructureSection() {
       location: "SIPCOT Industrial Complex, Tamil Nadu",
       highlight: "Primary High-Capacity Hub",
       desc: "Equipped with state-of-the-art electronic carousels, hydrostatic cylinder test bays, and automated electronic leak detection stations.",
-      image: "/images/original/kwalit.jpg",
+      image: "/images/original/service_style_16.jpg",
     },
     {
       name: "Chennai Bottling Plant",
@@ -52,7 +52,7 @@ export default function PlantInfrastructureSection() {
         </div>
 
         {/* 4 Stat Metrics */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-14">
           <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center">
             <div className="text-3xl sm:text-4xl font-black text-[#F28C28] tracking-tight">30,000</div>
             <div className="text-xs sm:text-sm font-bold text-white mt-1">MTPA Storage</div>

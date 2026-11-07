@@ -46,8 +46,8 @@ export default function PriceTablePreview({ initialStates, onOpenEnquiry }: Pric
   const activeState = states[selectedStateIndex] || states[0];
 
   return (
-    <section className="py-20 bg-white border-t border-slate-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-white border-t border-slate-200/80 w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-w-0">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
@@ -82,7 +82,7 @@ export default function PriceTablePreview({ initialStates, onOpenEnquiry }: Pric
         </div>
 
         {/* Pricing Card */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-card overflow-hidden">
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-card overflow-hidden w-full min-w-0">
           {/* Header Strip */}
           <div className="bg-slate-50 px-6 sm:px-8 py-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs">
             <div className="flex items-center gap-2 text-slate-700">
@@ -98,8 +98,8 @@ export default function PriceTablePreview({ initialStates, onOpenEnquiry }: Pric
           </div>
 
           {/* Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+          <div className="w-full overflow-x-auto min-w-0">
+            <table className="w-full min-w-[540px] text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-200 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
                   <th className="py-3 px-6 sm:px-8">Cylinder Capacity</th>
