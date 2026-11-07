@@ -23,21 +23,21 @@ export default function AboutPage() {
       state: "Tamil Nadu",
       type: "Major Bottling & Storage Terminal",
       highlight: "State-of-the-art carousel bottling with direct access to South Indian highway networks",
-      image: "/images/original/p7.jpg",
+      image: "/images/original/kwalit.jpg",
     },
     {
       name: "Chennai Plant",
       state: "Tamil Nadu",
       type: "Coastal Bulk Storage & Distribution",
       highlight: "Dedicated tanker decanting gantries and express commercial turnaround for Tamil Nadu",
-      image: "/images/original/service_details.jpg",
+      image: "/images/original/slide2.jpg",
     },
     {
       name: "Dharwad Plant",
       state: "Karnataka",
       type: "North Karnataka Bottling Hub",
       highlight: "Hubli-Dharwad, Belgaum & industrial clusters with heavy 33kg LOT manifold capability",
-      image: "/images/original/g2.jpg",
+      image: "/images/original/service_style_11.jpg",
     },
   ];
 

@@ -15,7 +15,7 @@ export default function GalleryClient({ categories, initialImages }: GalleryClie
 
   const defaultImages = [
     { id: "img-1", title: "Bulk Storage & Bottling Plant", imageUrl: "/images/original/kwalit.jpg", categoryName: "Plants & Facilities", description: "30,000 MTPA bulk storage facility with mounded LPG bullets." },
-    { id: "img-2", title: "Automated Carousel Bottling", imageUrl: "/images/original/p7.jpg", categoryName: "Plants & Facilities", description: "High-speed electronic carousel bottling 8,000 cylinders per day." },
+    { id: "img-2", title: "Automated Carousel Bottling", imageUrl: "/images/original/slide2.jpg", categoryName: "Plants & Facilities", description: "High-speed electronic carousel bottling 8,000 cylinders per day." },
     { id: "img-3", title: "33kg Industrial LOT Cylinders", imageUrl: "/images/original/p1.jpg", categoryName: "Cylinders Range", description: "Heavy-duty 33kg liquid off-take cylinders ready for dispatch." },
     { id: "img-4", title: "21kg Commercial High-Output Cylinders", imageUrl: "/images/original/p2.jpg", categoryName: "Cylinders Range", description: "Commercial cylinders engineered for 24/7 restaurant kitchens." },
     { id: "img-5", title: "17kg Commercial Standard Cylinders", imageUrl: "/images/original/p3.jpg", categoryName: "Cylinders Range", description: "Standard commercial cylinders for bakeries and catering." },

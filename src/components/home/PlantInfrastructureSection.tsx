@@ -12,21 +12,21 @@ export default function PlantInfrastructureSection() {
       location: "SIPCOT Industrial Complex, Tamil Nadu",
       highlight: "Primary High-Capacity Hub",
       desc: "Equipped with state-of-the-art electronic carousels, hydrostatic cylinder test bays, and automated electronic leak detection stations.",
-      image: "/images/original/p7.jpg",
+      image: "/images/original/kwalit.jpg",
     },
     {
       name: "Chennai Bottling Plant",
       location: "Chennai Metro & Coastal Zone",
       highlight: "Strategic Coastal Logistics",
       desc: "Serving northern Tamil Nadu and Andhra border zones with dedicated tanker decanting gantries and express commercial turnaround.",
-      image: "/images/original/service_details.jpg",
+      image: "/images/original/slide2.jpg",
     },
     {
       name: "Dharwad Bottling Facility",
       location: "North Karnataka Industrial Corridor",
       highlight: "Hub for Karnataka Distribution",
       desc: "Strategically located along key highway corridors to guarantee uninterrupted LPG supply to commercial bakeries and industrial foundries.",
-      image: "/images/original/g2.jpg",
+      image: "/images/original/service_style_11.jpg",
     },
   ];
 

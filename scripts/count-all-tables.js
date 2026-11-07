@@ -18,6 +18,7 @@ async function main() {
     { name: 'Awards', model: 'award' },
     { name: 'Enquiries', model: 'enquiry' },
     { name: 'SEO Settings', model: 'sEOSettings' },
+    { name: 'Social Media Links', model: 'socialMediaLink' },
   ];
 
   for (const { name, model } of models) {

@@ -20,6 +20,7 @@ import {
   X,
   User,
   ShieldCheck,
+  Share2,
 } from "lucide-react";
 
 interface AdminLayoutClientProps {
@@ -68,6 +69,7 @@ export default function AdminLayoutClient({ admin, children }: AdminLayoutClient
     { name: "Customer Testimonials", href: "/admin/testimonials", icon: MessageSquare },
     { name: "Photo Gallery", href: "/admin/gallery", icon: Images },
     { name: "Awards & Certificates", href: "/admin/awards", icon: Award },
+    { name: "Social Media Channels", href: "/admin/social-media", icon: Share2 },
     { name: "Pages & Sections", href: "/admin/pages", icon: FileText },
     { name: "SEO & Open Graph", href: "/admin/seo", icon: Search },
   ];

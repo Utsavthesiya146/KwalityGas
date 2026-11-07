@@ -9,15 +9,27 @@ const models = schema
 console.log(`=== Prisma Models in schema.prisma (${models.length}) ===`);
 models.forEach((m, idx) => console.log(`${idx + 1}. ${m}`));
 
-const migration = fs.readFileSync('prisma/migrations/0_init/migration.sql', 'utf8');
+const path = require('path');
+
+const migrationsDir = 'prisma/migrations';
 const tables = [];
-const regex = /CREATE TABLE `([^`]+)`/g;
-let match;
-while ((match = regex.exec(migration)) !== null) {
-  tables.push(match[1]);
+const migrationDirs = fs.readdirSync(migrationsDir).filter((d) => fs.statSync(path.join(migrationsDir, d)).isDirectory());
+
+for (const dir of migrationDirs) {
+  const sqlPath = path.join(migrationsDir, dir, 'migration.sql');
+  if (fs.existsSync(sqlPath)) {
+    const migration = fs.readFileSync(sqlPath, 'utf8');
+    const regex = /CREATE TABLE (?:IF NOT EXISTS )?`([^`]+)`/gi;
+    let match;
+    while ((match = regex.exec(migration)) !== null) {
+      if (!tables.includes(match[1])) {
+        tables.push(match[1]);
+      }
+    }
+  }
 }
 
-console.log(`\n=== SQL Tables in migration.sql (${tables.length}) ===`);
+console.log(`\n=== SQL Tables across all migrations (${tables.length}) ===`);
 tables.forEach((t, idx) => console.log(`${idx + 1}. ${t}`));
 
 // Check mapping

@@ -723,6 +723,55 @@ async function main() {
   }
   console.log(`Seeded ${pagesData.length} Pages & SEO configurations`);
 
+  // 10. Social Media Links (non-destructive)
+  const existingSocialCount = await prisma.socialMediaLink.count();
+  if (existingSocialCount === 0) {
+    const defaultSocialLinks = [
+      {
+        platform: 'WhatsApp',
+        url: 'https://wa.me/917899787101?text=Hello%20Kwality%20Gas%2C%20I%20would%20like%20to%20enquire%20about%20LPG%20cylinders.',
+        icon: 'whatsapp',
+        isActive: true,
+        sortOrder: 1,
+      },
+      {
+        platform: 'LinkedIn',
+        url: 'https://www.linkedin.com/company/kwality-gas-bottlers-private-limited',
+        icon: 'linkedin',
+        isActive: true,
+        sortOrder: 2,
+      },
+      {
+        platform: 'Facebook',
+        url: 'https://www.facebook.com/kwalitygas',
+        icon: 'facebook',
+        isActive: true,
+        sortOrder: 3,
+      },
+      {
+        platform: 'Instagram',
+        url: 'https://www.instagram.com/kwalitygas',
+        icon: 'instagram',
+        isActive: true,
+        sortOrder: 4,
+      },
+      {
+        platform: 'YouTube',
+        url: 'https://www.youtube.com/@kwalitygas',
+        icon: 'youtube',
+        isActive: true,
+        sortOrder: 5,
+      },
+    ];
+
+    for (const link of defaultSocialLinks) {
+      await prisma.socialMediaLink.create({ data: link });
+    }
+    console.log(`Seeded ${defaultSocialLinks.length} Social Media Links`);
+  } else {
+    console.log(`Preserved ${existingSocialCount} existing Social Media Links`);
+  }
+
   console.log('--- Database Seeding Finished Successfully! ---');
 }
 

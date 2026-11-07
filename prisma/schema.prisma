@@ -264,3 +264,17 @@ model SEOSettings {
   @@map("seo_settings")
 }
 
+model SocialMediaLink {
+  id        String   @id @default(cuid())
+  platform  String   // e.g. "Facebook", "Instagram", "LinkedIn", "YouTube", "X", "WhatsApp"
+  url       String   @db.VarChar(500)
+  icon      String?  // icon key or SVG name
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("social_media_links")
+}
+
+
