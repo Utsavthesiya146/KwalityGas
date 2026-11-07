@@ -62,22 +62,32 @@ export default function ContactPage() {
 
           {/* Right: Directory & Plant Locations (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            {/* Registered Head Office */}
+            {/* Registered & Marketing Offices */}
             <div className="bg-white rounded-3xl border border-slate-200 shadow-card p-6 sm:p-8 space-y-4">
               <div className="border-b border-slate-100 pb-3">
                 <span className="text-xs font-bold text-[#F28C28] uppercase tracking-wider block">
-                  Registered Corporate Office
+                  Official Corporate Presence
                 </span>
                 <h3 className="text-lg font-black text-[#102A43] mt-0.5">
                   Kwality Gas Bottlers Pvt Ltd
                 </h3>
               </div>
 
-              <div className="space-y-3.5 text-xs sm:text-sm text-slate-700">
+              <div className="space-y-4 text-xs sm:text-sm text-slate-700">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-[#F28C28] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900 block font-bold">Office Address:</strong>
+                    <strong className="text-slate-900 block font-bold">Registered Office:</strong>
+                    <span className="text-slate-600 leading-relaxed block mt-0.5">
+                      V M C House, D-41, 3rd Floor, Rajajinagar Industrial Estate, Bangalore – 560 044, Karnataka, India.
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Building className="w-5 h-5 text-[#1769AA] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-slate-900 block font-bold">Marketing & Administration Office:</strong>
                     <span className="text-slate-600 leading-relaxed block mt-0.5">
                       2nd Floor, Above Syndicate Bank, Magadi Chord Road, Vijayanagar, Bangalore - 560040, Karnataka, India.
                     </span>
@@ -87,30 +97,35 @@ export default function ContactPage() {
                 <div className="flex items-start gap-3">
                   <Phone className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900 block font-bold">Marketing Hotline:</strong>
-                    <a href="tel:+917899787101" className="text-[#1769AA] font-bold hover:underline block mt-0.5">
-                      +91 78997 87101
-                    </a>
+                    <strong className="text-slate-900 block font-bold">Marketing Team Hotlines:</strong>
+                    <span className="text-slate-600 block mt-0.5">
+                      <a href="tel:+917899787101" className="text-[#1769AA] font-bold hover:underline">+91 78997 87101</a> / <a href="tel:+919108248073" className="text-[#1769AA] font-bold hover:underline">+91 91082 48073</a> / <a href="tel:+917899787886" className="text-[#1769AA] font-bold hover:underline">+91 78997 87886</a>
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <Phone className="w-5 h-5 text-[#1769AA] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900 block font-bold">Head Office Landline:</strong>
-                    <a href="tel:+918023400459" className="text-slate-700 font-semibold hover:underline block mt-0.5">
-                      +91 80 2340 0459
-                    </a>
+                    <strong className="text-slate-900 block font-bold">Board & Front Desk:</strong>
+                    <span className="text-slate-600 block mt-0.5">
+                      <a href="tel:+918023400459" className="text-slate-800 font-semibold hover:underline">+91 80 2340 0459</a> / <a href="tel:+918023151130" className="text-slate-800 font-semibold hover:underline">+91 80 2315 1130</a> / <a href="tel:+919606861082" className="text-slate-800 font-semibold hover:underline">+91 96068 61082</a>
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <Mail className="w-5 h-5 text-[#F28C28] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900 block font-bold">Official Email:</strong>
-                    <a href="mailto:kwalitygasmarketing@gmail.com" className="text-slate-600 hover:text-[#1769AA] block mt-0.5">
-                      kwalitygasmarketing@gmail.com
-                    </a>
+                    <strong className="text-slate-900 block font-bold">Official Emails:</strong>
+                    <div className="text-slate-600 space-y-0.5 mt-0.5">
+                      <a href="mailto:kwalitygasmarketing@gmail.com" className="text-slate-600 hover:text-[#1769AA] block">
+                        kwalitygasmarketing@gmail.com
+                      </a>
+                      <a href="mailto:kwalitygas45@gmail.com" className="text-slate-600 hover:text-[#1769AA] block">
+                        kwalitygas45@gmail.com
+                      </a>
+                    </div>
                   </div>
                 </div>
 
@@ -118,13 +133,14 @@ export default function ContactPage() {
                   <Clock className="w-5 h-5 text-purple-600 shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-slate-900 block font-bold">Operating Hours:</strong>
-                    <span className="text-slate-600 block mt-0.5">Monday to Saturday: 9:00 AM – 6:30 PM</span>
+                    <span className="text-slate-600 block mt-0.5">Monday to Saturday: 9:30 AM – 5:30 PM</span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-slate-100 text-[11px] text-slate-400 font-mono">
-                CIN: U01120KA2005PTC036860
+              <div className="pt-2 border-t border-slate-100 text-[11px] text-slate-400 font-mono flex items-center justify-between">
+                <span>CIN: U01120KA2005PTC036860</span>
+                <span>Rating: CARE Grade 1</span>
               </div>
             </div>
 

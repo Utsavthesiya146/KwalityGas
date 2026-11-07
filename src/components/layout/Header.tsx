@@ -79,7 +79,7 @@ export default function Header() {
               <span className="hidden lg:inline-block text-slate-400">|</span>
               <span className="hidden lg:inline-flex items-center gap-1 text-slate-300">
                 <Clock className="w-3 h-3 text-[#F28C28]" />
-                <span>Mon - Sat: 9:00 AM - 6:30 PM</span>
+                <span>Mon - Sat: 9:30 AM - 5:30 PM</span>
               </span>
             </div>
 

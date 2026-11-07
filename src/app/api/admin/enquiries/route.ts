@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentAdmin } from "@/lib/auth";
+import fs from "fs";
+import path from "path";
 
 export const dynamic = "force-dynamic";
 
@@ -16,12 +18,36 @@ export async function GET(req: NextRequest) {
   if (type) where.enquiryType = type;
   if (status) where.status = status;
 
-  const enquiries = await prisma.enquiry.findMany({
-    where,
-    orderBy: { createdAt: "desc" },
-  });
+  let dbEnquiries: any[] = [];
+  try {
+    dbEnquiries = await prisma.enquiry.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (err: any) {
+    console.error("Failed to query enquiries from DB:", err.message);
+  }
 
-  return NextResponse.json({ enquiries });
+  // Also read any pending offline queued enquiries
+  let offlineEnquiries: any[] = [];
+  try {
+    const storageFile = path.join(process.cwd(), "storage", "offline_enquiries.jsonl");
+    if (fs.existsSync(storageFile)) {
+      const content = fs.readFileSync(storageFile, "utf8");
+      const lines = content.split("\n").filter((l) => l.trim().length > 0);
+      offlineEnquiries = lines.map((l) => JSON.parse(l));
+    }
+  } catch (err: any) {
+    console.error("Failed to read offline enquiries file:", err.message);
+  }
+
+  const combined = [...offlineEnquiries, ...dbEnquiries];
+
+  return NextResponse.json({
+    enquiries: combined,
+    dbCount: dbEnquiries.length,
+    offlineQueueCount: offlineEnquiries.length,
+  });
 }
 
 export async function PATCH(req: NextRequest) {
@@ -55,4 +81,3 @@ export async function DELETE(req: NextRequest) {
   await prisma.enquiry.delete({ where: { id } });
   return NextResponse.json({ success: true });
 }
-

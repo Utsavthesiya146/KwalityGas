@@ -50,34 +50,34 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
       id: "state-ka",
       stateCode: "KA",
       stateName: "Karnataka",
-      effectiveDate: "Current Tariff Schedule",
-      wefNotice: "W.E.F Current Billing Cycle",
-      notes: "Prices are inclusive of standard local bottling statutory taxes. Commercial supplies subject to 18% GST input credit. Domestic rates include 5% GST.",
+      effectiveDate: "October, 2026",
+      wefNotice: "WEF 06-10-2026",
+      notes: "Delivery charges applicable based on location & distance. Domestic GST 5%, Commercial/Industrial 18%. Price subject to prevailing international LPG rates and dispatch schedule.",
       items: [
-        { id: "ka-1", capacity: "33 Kg Industrial", amount: 2650, unit: "Refill", isDomestic: false, notes: "For furnaces & industrial manifold installations" },
-        { id: "ka-2", capacity: "21 Kg Commercial", amount: 1720, unit: "Refill", isDomestic: false, notes: "For high-pressure Chinese ranges & large hotels" },
-        { id: "ka-3", capacity: "17 Kg Commercial", amount: 1390, unit: "Refill", isDomestic: false, notes: "Standard for restaurants, bakeries & caterers" },
-        { id: "ka-4", capacity: "15 Kg Commercial", amount: 1240, unit: "Refill", isDomestic: false, notes: "For mobile catering & small eateries" },
-        { id: "ka-5", capacity: "12 Kg Domestic", amount: 960, unit: "Refill", isDomestic: true, notes: "Household cooking gas connection refill" },
-        { id: "ka-6", capacity: "5.5 Kg Compact", amount: 480, unit: "Refill", isDomestic: true, notes: "Compact cylinder for small apartments" },
-        { id: "ka-7", capacity: "4 Kg Cook & Light", amount: 370, unit: "Refill", isDomestic: true, notes: "Portable cylinder with direct burner fitting" },
+        { id: "ka-1", capacity: "33.0 Kgs Refill", amount: 5037, unit: "Refill", isDomestic: false, notes: "For industrial furnaces & heavy manifold banks" },
+        { id: "ka-2", capacity: "21.0 Kgs Refill", amount: 3205, unit: "Refill", isDomestic: false, notes: "High pressure for commercial kitchens & bakeries" },
+        { id: "ka-3", capacity: "17.0 Kgs Refill", amount: 2595, unit: "Refill", isDomestic: false, notes: "Standard for hotels, restaurants & caterers (HORECA)" },
+        { id: "ka-4", capacity: "15.0 Kgs Refill", amount: null, unit: "Refill", isDomestic: false, notes: "Quote on request based on dispatch volume" },
+        { id: "ka-5", capacity: "12.0 Kgs Refill (Domestic)", amount: 1702, unit: "Refill", isDomestic: true, notes: "Domestic household cooking connection refill" },
+        { id: "ka-6", capacity: "5.5 Kgs Refill", amount: null, unit: "Refill", isDomestic: true, notes: "Quote on request for compact household setups" },
+        { id: "ka-7", capacity: "4.0 Kgs Refill", amount: 617, unit: "Refill", isDomestic: true, notes: "Cook & Light portable cylinder refill" },
       ],
     },
     {
       id: "state-tn",
       stateCode: "TN",
       stateName: "Tamil Nadu",
-      effectiveDate: "Current Tariff Schedule",
-      wefNotice: "W.E.F Current Billing Cycle",
-      notes: "Prices applicable across Hosur, Chennai, Vellore, and surrounding Tamil Nadu distribution regions. GST invoiced as per statutory rates.",
+      effectiveDate: "February, 2026",
+      wefNotice: "WEF 03-02-2026",
+      notes: "Direct dispatch from Hosur & Chennai bottling terminals. Domestic GST 5%, Commercial/Industrial 18%. Prices based on prevailing international LPG rates.",
       items: [
-        { id: "tn-1", capacity: "33 Kg Industrial", amount: 2630, unit: "Refill", isDomestic: false, notes: "Direct Hosur & Chennai plant dispatch" },
-        { id: "tn-2", capacity: "21 Kg Commercial", amount: 1710, unit: "Refill", isDomestic: false, notes: "For commercial kitchens & hotel chains" },
-        { id: "tn-3", capacity: "17 Kg Commercial", amount: 1380, unit: "Refill", isDomestic: false, notes: "Restaurant & commercial canteen standard" },
-        { id: "tn-4", capacity: "15 Kg Commercial", amount: 1230, unit: "Refill", isDomestic: false, notes: "Mobile catering & fast food outlets" },
-        { id: "tn-5", capacity: "12 Kg Domestic", amount: 950, unit: "Refill", isDomestic: true, notes: "Domestic household cooking refill" },
-        { id: "tn-6", capacity: "5.5 Kg Compact", amount: 475, unit: "Refill", isDomestic: true, notes: "Small family compact cylinder" },
-        { id: "tn-7", capacity: "4 Kg Cook & Light", amount: 365, unit: "Refill", isDomestic: true, notes: "Cook & Light portable unit" },
+        { id: "tn-1", capacity: "33.0 Kgs Refill", amount: 5050, unit: "Refill", isDomestic: false, notes: "Direct Hosur & Chennai terminal dispatch" },
+        { id: "tn-2", capacity: "21.0 Kgs Refill", amount: 3220, unit: "Refill", isDomestic: false, notes: "Commercial kitchens, restaurants & food courts" },
+        { id: "tn-3", capacity: "17.0 Kgs Refill", amount: 2610, unit: "Refill", isDomestic: false, notes: "HORECA standard commercial refill" },
+        { id: "tn-4", capacity: "15.0 Kgs Refill", amount: null, unit: "Refill", isDomestic: false, notes: "Quote on request for commercial canteens" },
+        { id: "tn-5", capacity: "12.0 Kgs Refill (Domestic)", amount: 1715, unit: "Refill", isDomestic: true, notes: "Domestic cooking cylinder refill" },
+        { id: "tn-6", capacity: "5.5 Kgs Refill", amount: null, unit: "Refill", isDomestic: true, notes: "Quote on request for compact cylinders" },
+        { id: "tn-7", capacity: "4.0 Kgs Refill", amount: 625, unit: "Refill", isDomestic: true, notes: "Cook & Light portable unit refill" },
       ],
     },
   ];
@@ -197,14 +197,33 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
           </div>
 
           {/* Statutory Tax Condition Notes */}
-          <div className="mt-8 pt-6 border-t border-slate-100 flex items-start gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-            <Info className="w-5 h-5 text-[#1769AA] shrink-0 mt-0.5" />
-            <div className="space-y-1 text-xs text-slate-600">
-              <strong className="text-slate-900 block font-bold">Statutory GST & Delivery Terms:</strong>
-              <p className="leading-relaxed">
-                {activeState.notes || "Rates are subject to statutory GST notifications. Domestic cylinders are billed with 5% GST. Commercial supplies attract 18% GST with full Input Tax Credit (ITC) eligibility. Delivery charges may vary by zone."}
-              </p>
+          <div className="mt-8 pt-6 border-t border-slate-100 bg-slate-50 p-6 rounded-2xl border border-slate-200/80 space-y-4">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#102A43] uppercase tracking-wider">
+              <Info className="w-4 h-4 text-[#F28C28]" />
+              <span>Official Commercial Terms & Statutory Conditions</span>
             </div>
+            <ol className="list-decimal list-inside space-y-2 text-xs text-slate-700 leading-relaxed font-medium">
+              <li>
+                <span className="font-semibold text-slate-900">Delivery Charges:</span> As applicable based on the location & distance from the Dealer shop.
+              </li>
+              <li>
+                <span className="font-semibold text-slate-900">GST Compliance:</span> For Domestic Cylinders 5% and for others (17 Kgs, 15 Kgs, 5.5 Kgs, 4 Kgs) 18%. Using Domestic Cylinders for commercial use will be penalized as per law.
+              </li>
+              <li>
+                <span className="font-semibold text-slate-900">Market Indexation:</span> Applicable price for the product will be based on the prevailing price of LPG as per international market and as decided by the company from time to time.
+              </li>
+              <li>
+                <span className="font-semibold text-slate-900">Dispatch Price:</span> The price indicated is subject to change from time to time. Hence, the price as applicable at the time of the dispatch would be charged.
+              </li>
+              <li>
+                <span className="font-semibold text-slate-900">Tax Inclusivity:</span> The above published price schedule is inclusive of all taxes.
+              </li>
+            </ol>
+            {activeState.notes && (
+              <p className="text-[11px] text-slate-500 pt-2 border-t border-slate-200">
+                Regional Dispatch Note: {activeState.notes}
+              </p>
+            )}
           </div>
         </div>
 

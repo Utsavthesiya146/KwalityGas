@@ -32,9 +32,26 @@ export default function AdminLayoutClient({ admin, children }: AdminLayoutClient
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  React.useEffect(() => {
+    if (!admin && pathname !== "/admin/login") {
+      router.replace("/admin/login");
+    }
+  }, [admin, pathname, router]);
+
   // If on login page, render children directly without dashboard chrome
   if (pathname === "/admin/login") {
     return <>{children}</>;
+  }
+
+  if (!admin) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
+        <div className="text-center text-white space-y-3">
+          <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-sm text-slate-300">Checking authorization...</p>
+        </div>
+      </div>
+    );
   }
 
   const handleLogout = async () => {

@@ -214,9 +214,12 @@ export default function Footer() {
               <div className="flex items-start gap-2.5">
                 <Building className="w-4 h-4 text-[#F28C28] flex-shrink-0 mt-1" />
                 <div>
-                  <strong className="text-white block text-xs">Registered Office:</strong>
-                  <span className="text-slate-300 text-xs">
-                    2nd Floor, Above Syndicate Bank, Magadi Chord Road, Vijayanagar, Bangalore - 560040, Karnataka.
+                  <strong className="text-white block text-xs">Offices:</strong>
+                  <span className="text-slate-300 text-xs block">
+                    • Regd: V M C House, D-41, 3rd Flr, Rajajinagar Ind. Estate, Bangalore - 560044
+                  </span>
+                  <span className="text-slate-300 text-xs block">
+                    • Mktg: 2nd Flr, Above Syndicate Bank, Magadi Chord Rd, Vijayanagar, Bangalore - 560040
                   </span>
                 </div>
               </div>
