@@ -112,3 +112,4 @@ runLiveEnquiryPersistenceTest()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
