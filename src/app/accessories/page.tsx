@@ -28,7 +28,7 @@ export default function AccessoriesPage() {
     {
       title: "Domestic Click-On LPG Regulator",
       category: "Domestic Household",
-      image: "/images/original/r1.jpg",
+      image: "/images/corporate/hero-safety-standards.jpg",
       rating: "25.6 mm Standard Neck",
       desc: "Precision calibrated low-pressure regulator with quick-fit click-on collar and self-closing security ball check. Engineered for 12kg, 5.5kg, and 4kg domestic cylinders.",
       specs: [
@@ -41,7 +41,7 @@ export default function AccessoriesPage() {
     {
       title: "Commercial High-Pressure Adjustable Regulator",
       category: "Commercial Kitchens & Burners",
-      image: "/images/original/r2.jpg",
+      image: "/images/corporate/hero-safety-standards.jpg",
       rating: "High-Discharge Heavy-Duty",
       desc: "Equipped with high-precision top adjustment dial to regulate gas pressure between 0.5 to 2.0 bar for commercial Chinese wok ranges, tandoors, and bulk boiling cauldrons.",
       specs: [
@@ -54,7 +54,7 @@ export default function AccessoriesPage() {
     {
       title: "IS 9573 Steel Wire Braided Rubber Hose (Suraksha)",
       category: "Mandatory Safety Tubing",
-      image: "/images/original/r3.jpg",
+      image: "/images/corporate/hero-safety-standards.jpg",
       rating: "IS 9573:1998 Type 4",
       desc: "Triple-layer safety tubing with central high-tensile steel wire mesh braid. Rodent-proof, puncture-proof, flame-retardant, and resistant to atmospheric ozone cracking.",
       specs: [
@@ -67,7 +67,7 @@ export default function AccessoriesPage() {
     {
       title: "High-Pressure Copper & SS Wire Pigtails",
       category: "Manifold Cylinder Banks",
-      image: "/images/original/s1.jpg",
+      image: "/images/corporate/service-manifold-bank.jpg",
       rating: "Heavy-Duty Manifold Connecting",
       desc: "Flexible annealed copper and braided stainless steel pigtail assemblies used to link 33kg LOT/VOT cylinders directly to the main commercial manifold header pipe.",
       specs: [
@@ -80,7 +80,7 @@ export default function AccessoriesPage() {
     {
       title: "Industrial 2-Way & 4-Way Manifold Headers",
       category: "Centralized Gas Banks",
-      image: "/images/original/s2.jpg",
+      image: "/images/corporate/service-manifold-bank.jpg",
       rating: "Heavy Seamless Pipe Sch 80",
       desc: "Prefabricated heavy-gauge steel manifold headers complete with isolating ball valves, non-return check valves, and master emergency slam-shut mounting plates.",
       specs: [
@@ -93,7 +93,7 @@ export default function AccessoriesPage() {
     {
       title: "Heavy-Duty Forged Brass Ball Valves & Adaptors",
       category: "Pipeline Accessories",
-      image: "/images/original/s3.jpg",
+      image: "/images/corporate/service-safety-audit.jpg",
       rating: "Gas Certified PN 40",
       desc: "Full-bore quarter-turn brass ball valves with Teflon (PTFE) seals engineered specifically for volatile LPG liquid and vapour service in kitchen piping lines.",
       specs: [
@@ -150,7 +150,7 @@ export default function AccessoriesPage() {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
 

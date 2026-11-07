@@ -14,18 +14,18 @@ export default function GalleryClient({ categories, initialImages }: GalleryClie
   const [activeImage, setActiveImage] = useState<any | null>(null);
 
   const defaultImages = [
-    { id: "img-1", title: "Bulk Storage & Bottling Plant", imageUrl: "/images/original/kwalit.jpg", categoryName: "Plants & Facilities", description: "30,000 MTPA bulk storage facility with mounded LPG bullets." },
-    { id: "img-2", title: "Automated Carousel Bottling", imageUrl: "/images/original/slide2.jpg", categoryName: "Plants & Facilities", description: "High-speed electronic carousel bottling 8,000 cylinders per day." },
-    { id: "img-3", title: "33kg Industrial LOT Cylinders", imageUrl: "/images/original/p1.jpg", categoryName: "Cylinders Range", description: "Heavy-duty 33kg liquid off-take cylinders ready for dispatch." },
-    { id: "img-4", title: "21kg Commercial High-Output Cylinders", imageUrl: "/images/original/p2.jpg", categoryName: "Cylinders Range", description: "Commercial cylinders engineered for 24/7 restaurant kitchens." },
-    { id: "img-5", title: "17kg Commercial Standard Cylinders", imageUrl: "/images/original/p3.jpg", categoryName: "Cylinders Range", description: "Standard commercial cylinders for bakeries and catering." },
-    { id: "img-6", title: "Kwality Gas Water Heater (Geyser)", imageUrl: "/images/original/p6-ne.png", categoryName: "Appliances", description: "Instant gas water geyser with 8 safety protection devices." },
-    { id: "img-7", title: "Domestic Regulators & Accessories", imageUrl: "/images/original/r1.jpg", categoryName: "Accessories", description: "Certified click-on domestic regulators with self-closing check valve." },
-    { id: "img-8", title: "Commercial Adjustable Regulators", imageUrl: "/images/original/r2.jpg", categoryName: "Accessories", description: "High-pressure adjustable brass regulators for commercial burners." },
-    { id: "img-9", title: "IS 9573 Steel Braided Rubber Hose", imageUrl: "/images/original/r3.jpg", categoryName: "Accessories", description: "Rodent-proof, flame-retardant high pressure gas tubing." },
-    { id: "img-10", title: "Quality ERA Award 2015 (Geneva)", imageUrl: "/images/original/kwality-gas-award.jpg", categoryName: "Awards & Events", description: "Century International Quality ERA Award presented in Geneva, Switzerland." },
-    { id: "img-11", title: "CARE Grade 1 Certification", imageUrl: "/images/original/kwality-gas-certificate.jpg", categoryName: "Awards & Events", description: "Highest safety & credit rating by MDRA audit agency." },
-    { id: "img-12", title: "Bottling Inspection Bay", imageUrl: "/images/original/g2.jpg", categoryName: "Plants & Facilities", description: "Mandatory water bath leak test bay for valve safety." },
+    { id: "img-1", title: "Bulk Storage & Bottling Plant", imageUrl: "/images/corporate/hero-industrial-lpg.jpg", categoryName: "Plants & Facilities", description: "30,000 MTPA bulk storage facility with mounded LPG bullets." },
+    { id: "img-2", title: "Automated Carousel Bottling", imageUrl: "/images/corporate/hero-bottling-plant.jpg", categoryName: "Plants & Facilities", description: "High-speed electronic carousel bottling 8,000 cylinders per day." },
+    { id: "img-3", title: "33kg Industrial LOT Cylinders", imageUrl: "/images/corporate/product-cylinder-33kg.jpg", categoryName: "Cylinders Range", description: "Heavy-duty 33kg liquid off-take cylinders ready for dispatch." },
+    { id: "img-4", title: "21kg Commercial High-Output Cylinders", imageUrl: "/images/corporate/hero-commercial-lpg.jpg", categoryName: "Cylinders Range", description: "Commercial cylinders engineered for 24/7 restaurant kitchens." },
+    { id: "img-5", title: "17kg Commercial Standard Cylinders", imageUrl: "/images/corporate/product-cylinder-17kg.jpg", categoryName: "Cylinders Range", description: "Standard commercial cylinders for bakeries and catering." },
+    { id: "img-6", title: "Kwality Gas Water Heater (Geyser)", imageUrl: "/images/corporate/product-gas-geyser.jpg", categoryName: "Appliances", description: "Instant gas water geyser with 8 safety protection devices." },
+    { id: "img-7", title: "Domestic Regulators & Accessories", imageUrl: "/images/corporate/hero-safety-standards.jpg", categoryName: "Accessories", description: "Certified click-on domestic regulators with self-closing check valve." },
+    { id: "img-8", title: "Commercial Manifold Bank Infrastructure", imageUrl: "/images/corporate/service-manifold-bank.jpg", categoryName: "Accessories", description: "Heavy seamless manifold headers with multi-cylinder connection pigtails." },
+    { id: "img-9", title: "IS 9573 Steel Braided Rubber Hose", imageUrl: "/images/corporate/hero-safety-standards.jpg", categoryName: "Accessories", description: "Rodent-proof, flame-retardant high pressure gas tubing." },
+    { id: "img-10", title: "Quality ERA Award 2015 (Geneva)", imageUrl: "/images/brand/kwality-gas-award.jpg", categoryName: "Awards & Events", description: "Century International Quality ERA Award presented in Geneva, Switzerland." },
+    { id: "img-11", title: "LPG Express Transport Logistics", imageUrl: "/images/corporate/service-delivery-truck.jpg", categoryName: "Plants & Facilities", description: "Dedicated fleet of Kwality Gas transport trucks ensuring on-time delivery across South India." },
+    { id: "img-12", title: "Comprehensive LPG Safety Inspection", imageUrl: "/images/corporate/service-safety-audit.jpg", categoryName: "Plants & Facilities", description: "Certified safety engineers conducting periodic pipeline inspections and gas leak audits." },
   ];
 
   const images = initialImages && initialImages.length > 0 ? initialImages : defaultImages;

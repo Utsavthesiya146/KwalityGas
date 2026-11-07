@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     siteName: "Kwality Gas",
     images: [
       {
-        url: "/images/original/ban1-1.png",
+        url: "/images/corporate/hero-industrial-lpg.jpg",
         width: 1200,
         height: 630,
         alt: "Kwality Gas Bottlers Pvt Ltd",
@@ -59,8 +59,8 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/images/original/favicon.png",
-    apple: "/images/original/apple-touch-icon.png",
+    icon: "/images/brand/favicon.png",
+    apple: "/images/brand/apple-touch-icon.png",
   },
 };
 
@@ -72,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${plusJakartaSans.variable} ${inter.variable}`}>
       <head>
-        <link rel="icon" href="/images/original/favicon.png" />
+        <link rel="icon" href="/images/brand/favicon.png" />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-[#182230] font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden w-full max-w-full">
         <Header />

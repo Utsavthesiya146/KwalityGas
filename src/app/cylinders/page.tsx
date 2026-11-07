@@ -44,7 +44,7 @@ export default async function CylindersPage() {
       id: "cyl-33",
       name: "33 Kg Industrial Cylinder (LOT / VOT)",
       capacity: "33 Kg",
-      imageUrl: "/images/original/p1.jpg",
+      imageUrl: "/images/corporate/product-cylinder-33kg.jpg",
       shortDesc: "Engineered for high-rate thermal discharge in furnaces, foundries, industrial powder coating, and heavy manifold banks.",
       isIndustrial: true,
       features: JSON.stringify(["Liquid Off-Take (LOT) valve", "Vapour Off-Take (VOT) compatible", "Zero pressure drop during high flow", "High calorific blue flame"]),
@@ -53,7 +53,7 @@ export default async function CylindersPage() {
       id: "cyl-21",
       name: "21 Kg Commercial High-Output Cylinder",
       capacity: "21 Kg",
-      imageUrl: "/images/original/p2.jpg",
+      imageUrl: "/images/corporate/hero-commercial-lpg.jpg",
       shortDesc: "High-capacity commercial cylinder designed for 24-hour restaurant kitchens, high-pressure Chinese ranges, and live event caterers.",
       isCommercial: true,
       features: JSON.stringify(["Anti-freezing vaporisation", "Forged brass heavy valve", "High continuous BTU output", "Express doorstep swap"]),
@@ -62,7 +62,7 @@ export default async function CylindersPage() {
       id: "cyl-17",
       name: "17 Kg Commercial Standard Cylinder",
       capacity: "17 Kg",
-      imageUrl: "/images/original/p3.jpg",
+      imageUrl: "/images/corporate/product-cylinder-17kg.jpg",
       shortDesc: "The prime fuel source for commercial bakeries, cloud kitchens, hotel kitchens, and canteens across Karnataka & Tamil Nadu.",
       isCommercial: true,
       features: JSON.stringify(["100% net weight guarantee", "Tested at 25 kg/cm²", "Lower soot emissions", "Direct commercial invoicing"]),
@@ -71,7 +71,7 @@ export default async function CylindersPage() {
       id: "cyl-15",
       name: "15 Kg Multi-Purpose Commercial Cylinder",
       capacity: "15 Kg",
-      imageUrl: "/images/original/p4.jpg",
+      imageUrl: "/images/corporate/hero-commercial-lpg.jpg",
       shortDesc: "Convenient ergonomic commercial cylinder ideal for roadside eateries, mobile food trucks, and small tea cafeterias.",
       isCommercial: true,
       features: JSON.stringify(["Sturdy footring base", "Easy manual shifting", "Grade 1 certified gas", "Competitive commercial pricing"]),
@@ -80,7 +80,7 @@ export default async function CylindersPage() {
       id: "cyl-12",
       name: "12 Kg Domestic Cooking Gas Cylinder",
       capacity: "12 Kg",
-      imageUrl: "/images/original/p5.jpg",
+      imageUrl: "/images/corporate/product-cylinder-12kg.jpg",
       shortDesc: "Kwality Gas's flagship domestic household cylinder. Pure blue flame cooking, maximum economy, and instant refill booking.",
       isDomestic: true,
       features: JSON.stringify(["Electronic carousel filled", "Self-closing safety valve", "Tamper-proof security seal", "Leak checked test bath"]),
@@ -89,7 +89,7 @@ export default async function CylindersPage() {
       id: "cyl-5",
       name: "5.5 Kg Compact Domestic Cylinder",
       capacity: "5.5 Kg",
-      imageUrl: "/images/original/dom1.png",
+      imageUrl: "/images/corporate/hero-domestic-lpg.jpg",
       shortDesc: "Convenient compact cylinder for single professionals, nuclear apartments, student hostels, and backup emergency supply.",
       isDomestic: true,
       features: JSON.stringify(["Lightweight 5.5kg net", "Fits modular kitchen units", "Quick documentation process", "Fast exchange booking"]),
@@ -98,7 +98,7 @@ export default async function CylindersPage() {
       id: "cyl-4",
       name: "4 Kg Cook & Light Cylinder",
       capacity: "4 Kg",
-      imageUrl: "/images/original/dar17.png",
+      imageUrl: "/images/corporate/hero-domestic-lpg.jpg",
       shortDesc: "Equipped with direct-fit stove fixtures and emergency light lantern burners. Ideal for outdoor catering, lighting, and camping.",
       isDomestic: true,
       features: JSON.stringify(["Direct burner mounting", "Lantern light compatible", "Heavy-duty steel carry handle", "Compact portable design"]),
@@ -107,7 +107,7 @@ export default async function CylindersPage() {
       id: "cyl-2",
       name: "2 Kg Micro Portable Cylinder",
       capacity: "2 Kg",
-      imageUrl: "/images/original/dars2.png",
+      imageUrl: "/images/corporate/product-cylinder-12kg.jpg",
       shortDesc: "Ultra-compact cylinder for precision laboratory burners, jewellery melting, micro soldering, and lightweight camping stoves.",
       isDomestic: true,
       features: JSON.stringify(["Precision flame needle valve", "Factory pressure tested", "Ultra-portable weight", "Safe indoor laboratory use"]),
@@ -205,7 +205,7 @@ export default async function CylindersPage() {
 
                   <div className="relative w-full h-48 bg-slate-50 rounded-xl overflow-hidden mb-4 border border-slate-100 flex items-center justify-center p-3">
                     <Image
-                      src={cyl.imageUrl || "/images/original/p1.jpg"}
+                      src={cyl.imageUrl || "/images/corporate/product-cylinder-33kg.jpg"}
                       alt={cyl.name}
                       fill
                       className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"

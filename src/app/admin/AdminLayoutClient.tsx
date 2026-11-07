@@ -85,7 +85,7 @@ export default function AdminLayoutClient({ admin, children }: AdminLayoutClient
           <div className="bg-white p-2 rounded-lg">
             <div className="relative w-36 h-10">
               <Image
-                src="/images/original/logo.jpg"
+                src="/images/brand/logo.jpg"
                 alt="Kwality Gas"
                 fill
                 className="object-contain"

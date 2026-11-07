@@ -18,7 +18,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
       id: "prod-1",
       name: "33 Kg Industrial LOT Cylinder",
       capacity: "33 Kg",
-      imageUrl: "/images/original/p1.jpg",
+      imageUrl: "/images/corporate/product-cylinder-33kg.jpg",
       shortDesc: "High-discharge liquid off-take cylinder for heavy industrial furnaces, kilns, and centralized manifold banks.",
       isIndustrial: true,
       features: JSON.stringify(["Liquid Off-Take (LOT)", "Tested at 25 kg/cm²", "Zero pressure drop", "High calorific blue flame"]),
@@ -27,7 +27,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
       id: "prod-2",
       name: "21 Kg Commercial Cylinder",
       capacity: "21 Kg",
-      imageUrl: "/images/original/p2.jpg",
+      imageUrl: "/images/corporate/hero-commercial-lpg.jpg",
       shortDesc: "Heavy-duty commercial cooking cylinder designed for high-heat wok burners and busy 24/7 restaurant kitchens.",
       isCommercial: true,
       features: JSON.stringify(["Anti-freezing vaporisation", "Forged brass heavy valve", "High continuous BTU output", "Express doorstep swap"]),
@@ -36,7 +36,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
       id: "prod-3",
       name: "17 Kg Commercial Standard",
       capacity: "17 Kg",
-      imageUrl: "/images/original/p3.jpg",
+      imageUrl: "/images/corporate/product-cylinder-17kg.jpg",
       shortDesc: "The prime fuel standard for commercial bakeries, cloud kitchens, and cafeterias across Karnataka & Tamil Nadu.",
       isCommercial: true,
       features: JSON.stringify(["100% net weight guarantee", "Tested at 25 kg/cm²", "Lower soot emissions", "Direct commercial invoicing"]),
@@ -45,7 +45,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
       id: "prod-4",
       name: "12 Kg Domestic Household Cylinder",
       capacity: "12 Kg",
-      imageUrl: "/images/original/p5.jpg",
+      imageUrl: "/images/corporate/product-cylinder-12kg.jpg",
       shortDesc: "Kwality Gas's flagship domestic household cylinder. Pure blue flame cooking, maximum economy, and fast refill booking.",
       isDomestic: true,
       features: JSON.stringify(["Electronic carousel filled", "Self-closing safety valve", "Tamper-proof security seal", "Leak checked test bath"]),
@@ -54,7 +54,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
       id: "prod-5",
       name: "Kwality Gas Water Heater (Geyser)",
       capacity: "6 Liters/min",
-      imageUrl: "/images/original/p6-ne.png",
+      imageUrl: "/images/corporate/product-gas-geyser.jpg",
       shortDesc: "Energy-saving instant gas geyser with 8 safety protection devices, pulse ignition, and winter-summer gas saving switch.",
       isDomestic: true,
       features: JSON.stringify(["Low water pressure start", "Double pulse ignition", "Flame failure device", "12 Months Warranty"]),
@@ -63,7 +63,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
       id: "prod-6",
       name: "5.5 Kg Compact Domestic Cylinder",
       capacity: "5.5 Kg",
-      imageUrl: "/images/original/dom1.png",
+      imageUrl: "/images/corporate/hero-domestic-lpg.jpg",
       shortDesc: "Convenient compact cylinder for small families, single working professionals, and standby emergency backup.",
       isDomestic: true,
       features: JSON.stringify(["Lightweight 5.5kg net", "Fits modular kitchen units", "Quick documentation process", "Fast exchange booking"]),
@@ -154,7 +154,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
 
                   <div className="relative w-full h-48 bg-slate-50 rounded-2xl overflow-hidden mb-4 border border-slate-100 flex items-center justify-center p-3">
                     <Image
-                      src={item.imageUrl || "/images/original/p1.jpg"}
+                      src={item.imageUrl || "/images/corporate/product-cylinder-33kg.jpg"}
                       alt={item.name}
                       fill
                       className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"

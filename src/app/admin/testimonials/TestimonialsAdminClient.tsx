@@ -36,7 +36,7 @@ export default function TestimonialsAdminClient({
       companyName: "",
       quote: "",
       location: "Bangalore",
-      avatarUrl: "/images/original/testi_1.jpg",
+      avatarUrl: "",
       rating: 5,
       isVerified: true,
       displayOrder: testimonials.length + 1,
@@ -160,8 +160,18 @@ export default function TestimonialsAdminClient({
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-slate-200 bg-slate-50">
-                  <Image src={t.avatarUrl || "/images/original/testi_1.jpg"} alt={t.clientName} fill className="object-cover" />
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-slate-200 bg-gradient-to-br from-[#102A43] to-[#1769AA] text-white flex items-center justify-center font-bold text-xs shrink-0">
+                  {t.avatarUrl && !t.avatarUrl.includes("original") && !t.avatarUrl.includes("testi") ? (
+                    <Image src={t.avatarUrl} alt={t.clientName} fill className="object-cover" />
+                  ) : (
+                    <span>
+                      {t.clientName
+                        .split(" ")
+                        .map((n: string) => n[0])
+                        .slice(0, 2)
+                        .join("")}
+                    </span>
+                  )}
                 </div>
                 <div>
                   <h4 className="font-bold text-xs text-slate-900">{t.companyName}</h4>
@@ -261,7 +271,7 @@ export default function TestimonialsAdminClient({
                     type="text"
                     value={editingItem.avatarUrl || ""}
                     onChange={(e) => setEditingItem({ ...editingItem, avatarUrl: e.target.value })}
-                    placeholder="/images/original/testi_..."
+                    placeholder="/images/corporate/..."
                     className="w-full px-3 py-2 rounded-xl border border-slate-200"
                   />
                 </div>

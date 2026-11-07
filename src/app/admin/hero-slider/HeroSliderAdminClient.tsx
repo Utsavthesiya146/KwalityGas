@@ -53,8 +53,9 @@ const PRESET_IMAGES = [
   { label: "Industrial Bulk Storage Terminal (New AI)", url: "/images/corporate/hero-industrial-lpg.jpg" },
   { label: "Automated Bottling Plant (New AI)", url: "/images/corporate/hero-bottling-plant.jpg" },
   { label: "Safety Regulators & Testing (New AI)", url: "/images/corporate/hero-safety-standards.jpg" },
-  { label: "Plant Bulk Storage Bullets (Authentic)", url: "/images/original/service_style_16.jpg" },
-  { label: "Geneva Award 2015 Trophy", url: "/images/original/kwality-gas-award.jpg" },
+  { label: "LPG Delivery Fleet", url: "/images/corporate/service-delivery-truck.jpg" },
+  { label: "Industrial Manifold System", url: "/images/corporate/service-manifold-bank.jpg" },
+  { label: "Geneva Award 2015 Trophy", url: "/images/brand/kwality-gas-award.jpg" },
 ];
 
 const PRESET_ACTIONS = [
@@ -86,7 +87,7 @@ export default function HeroSliderAdminClient({ initialSlides }: HeroSliderAdmin
     title: "",
     subtitle: "",
     description: "",
-    imageUrl: "/images/original/service_style_16.jpg",
+    imageUrl: "/images/corporate/hero-industrial-lpg.jpg",
     ctaText: "",
     ctaLink: "MODAL_DOMESTIC",
     secondaryText: "",
@@ -108,7 +109,7 @@ export default function HeroSliderAdminClient({ initialSlides }: HeroSliderAdmin
       title: "",
       subtitle: "",
       description: "",
-      imageUrl: "/images/original/service_style_16.jpg",
+      imageUrl: "/images/corporate/hero-industrial-lpg.jpg",
       ctaText: "Book Refill Now",
       ctaLink: "MODAL_DOMESTIC",
       secondaryText: "View Live Rates",
@@ -534,7 +535,7 @@ export default function HeroSliderAdminClient({ initialSlides }: HeroSliderAdmin
                   required
                   value={formData.imageUrl}
                   onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                  placeholder="/images/original/service_style_16.jpg"
+                  placeholder="/images/corporate/hero-industrial-lpg.jpg"
                   className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-mono focus:ring-2 focus:ring-[#1769AA] focus:border-transparent outline-none"
                 />
 

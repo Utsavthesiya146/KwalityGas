@@ -19,7 +19,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
       location: "Gandhi Bazar, Bangalore",
       quote: "Associated with Kwality for more than 15 years & have been only growing along with Kwality & has never looked back. Very innovative company with excellent product basket & customer oriented service. Quality & on-time service is the Mantra for success of Kwality & Perfect Flame.",
       rating: 5,
-      avatarUrl: "/images/original/testi_1.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -30,7 +30,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
       location: "Bangalore",
       quote: "Kwality marketing team is a very customer friendly team who are there 24 hours ready to serve & never lets me down. Also very competitive & dependable supply on time & every time. They value customer needs and are there always to support.",
       rating: 5,
-      avatarUrl: "/images/original/testi_2.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -41,7 +41,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
       location: "Machohalli, Bangalore-North",
       quote: "Very Happy with Kwality gas for their technical support & guidance & uninterrupted on time supplies & with 33 kgs cylinders, saved lot of time by not changing cylinders often & more production & no down time. 3 Cheers to Kwality team.",
       rating: 5,
-      avatarUrl: "/images/original/testi_5.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -52,7 +52,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
       location: "Gandhi Bazar, Bangalore",
       quote: "As a channel partner for supply of LPG to run our kitchens, Kwality gas is very dependable & has never let us down. No need to follow up or remind for supplies. Very Good quality with pure Blue Flames and company takes care of any support.",
       rating: 5,
-      avatarUrl: "/images/original/testi_6.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
   ];
@@ -96,13 +96,23 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
               <div>
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-slate-100 bg-slate-100 shrink-0">
-                      <Image
-                        src={t.avatarUrl || "/images/original/testi_1.jpg"}
-                        alt={t.clientName}
-                        fill
-                        className="object-cover"
-                      />
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[#1769AA]/20 bg-gradient-to-br from-[#102A43] to-[#1769AA] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-sm">
+                      {t.avatarUrl && !t.avatarUrl.includes("original") && !t.avatarUrl.includes("testi") ? (
+                        <Image
+                          src={t.avatarUrl}
+                          alt={t.clientName}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <span>
+                          {t.clientName
+                            .split(" ")
+                            .map((n: string) => n[0])
+                            .slice(0, 2)
+                            .join("")}
+                        </span>
+                      )}
                     </div>
                     <div>
                       <h3 className="font-bold text-slate-900 text-sm leading-snug group-hover:text-[#1769AA] transition-colors">

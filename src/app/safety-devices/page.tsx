@@ -30,7 +30,7 @@ export default function SafetyDevicesPage() {
     {
       title: "Automatic Gas Leak Detector & Solenoid Shut-Off",
       category: "Commercial Kitchens & Bakeries",
-      image: "/images/original/locked.png",
+      image: "/images/corporate/hero-safety-standards.jpg",
       desc: "Microprocessor-based catalytic sensor detects LPG concentrations at 10% LEL (Lower Explosive Limit), triggers a 95dB audiovisual siren, and activates an instantaneous magnetic solenoid valve to shut down gas flow at the manifold.",
       features: [
         "Instant solenoid cut-off (< 1 second)",
@@ -42,7 +42,7 @@ export default function SafetyDevicesPage() {
     {
       title: "Emergency Slam-Shut Manifold Valve",
       category: "Industrial Manifolds & Furnaces",
-      image: "/images/original/r1.jpg",
+      image: "/images/corporate/service-manifold-bank.jpg",
       desc: "Fail-safe mechanical slam-shut safety valve mounted on 33kg LOT/VOT manifold headers. Automatically trips closed during upstream line rupture, over-pressure, or structural hose severance.",
       features: [
         "Manual reset preventer",
@@ -54,7 +54,7 @@ export default function SafetyDevicesPage() {
     {
       title: "Excess Flow Check Valve (EFCV)",
       category: "Cylinder Bank Protection",
-      image: "/images/original/r2.jpg",
+      image: "/images/corporate/hero-safety-standards.jpg",
       desc: "Fitted between pigtails and manifold header pipes. If an operator disconnects a pressurized hose or if a burner pipe breaks, the EFCV instantly seals itself to prevent high-pressure liquid LPG release.",
       features: [
         "Heavy forged brass construction",
@@ -66,7 +66,7 @@ export default function SafetyDevicesPage() {
     {
       title: "Flame Failure Safety Controller",
       category: "Commercial Ranges & Tandoors",
-      image: "/images/original/s1.jpg",
+      image: "/images/corporate/hero-commercial-lpg.jpg",
       desc: "Thermo-electric flame sensor paired with a pilot solenoid. In the event of flame extinction due to liquid spillage or air drafts, gas flow to the main burner is shut off in under 2 seconds.",
       features: [
         "Fast 2-second cutoff response",
@@ -78,7 +78,7 @@ export default function SafetyDevicesPage() {
     {
       title: "Hydrostatic Safety Relief Valve (SRV)",
       category: "Liquid Off-Take Pipelines",
-      image: "/images/original/s2.jpg",
+      image: "/images/corporate/service-manifold-bank.jpg",
       desc: "Installed between blocked sections of liquid LPG pipelines to relieve trapped hydrostatic thermal expansion, venting safe excess vapour back into the header before pipe deformation occurs.",
       features: [
         "Factory calibrated release setting",
@@ -90,7 +90,7 @@ export default function SafetyDevicesPage() {
     {
       title: "Digital Manometer & Pressure Gauges",
       category: "Pipeline Monitoring",
-      image: "/images/original/s3.jpg",
+      image: "/images/corporate/service-safety-audit.jpg",
       desc: "Stainless steel oil-filled pressure gauge with dual kg/cm² and PSI scales, offering vibration-free pressure monitoring for primary and secondary stage regulators in industrial furnace lines.",
       features: [
         "Glycerin filled for needle dampening",
@@ -183,7 +183,7 @@ export default function SafetyDevicesPage() {
                     src={dev.image}
                     alt={dev.title}
                     fill
-                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
 

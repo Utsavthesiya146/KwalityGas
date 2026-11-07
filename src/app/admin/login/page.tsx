@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
         <div className="text-center space-y-3 mb-8">
           <div className="relative w-48 h-14 mx-auto">
             <Image
-              src="/images/original/logo.jpg"
+              src="/images/brand/logo.jpg"
               alt="Kwality Gas Bottlers"
               fill
               className="object-contain"

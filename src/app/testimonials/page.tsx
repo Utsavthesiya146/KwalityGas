@@ -34,7 +34,7 @@ export default async function TestimonialsPage() {
       location: "Gandhi Bazar, Bangalore",
       quote: "Associated with Kwality for more than 15 years & have been only growing along with Kwality & has never looked back. Very innovative company with excellent product basket & customer oriented service. Because of Kwality has been able to build & maintain a big network of dealers & retain all of them for many years. Quality & on-time service is the Mantra for success of Kwality & Perfect Flame.",
       rating: 5,
-      avatarUrl: "/images/original/testi_1.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -45,7 +45,7 @@ export default async function TestimonialsPage() {
       location: "Bangalore",
       quote: "Kwality marketing team is a very customer friendly team who are there 24 hours ready to serve & never lets me down. Also very competitive & dependable supply on time & every time. They value customer needs and are there always to support and take care of needs any time.",
       rating: 5,
-      avatarUrl: "/images/original/testi_2.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -56,7 +56,7 @@ export default async function TestimonialsPage() {
       location: "Machohalli, Bangalore-North",
       quote: "Very Happy with Kwality gas for their technical support & guidance & uninterrupted on time supplies & with 33 kgs cylinders, saved lot of time by not changing cylinders often & more production & no down time. Has been able to save time and get higher productivity. Supply on time and every time has been Kwality's Philosophy. 3 Cheers to Kwality team.",
       rating: 5,
-      avatarUrl: "/images/original/testi_5.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -67,7 +67,7 @@ export default async function TestimonialsPage() {
       location: "Gandhi Bazar, Bangalore",
       quote: "As a channel partner for supply of LPG to run our kitchens, Kwality gas is very dependable & has never let us down. No need to follow up or remind for supplies. Very Good quality with pure Blue Flames and company takes care of any support required by their Excellent Marketing Team. We can always count on them for any additional requirement.",
       rating: 5,
-      avatarUrl: "/images/original/testi_6.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -78,7 +78,7 @@ export default async function TestimonialsPage() {
       location: "Magadi Road, Bangalore",
       quote: "Kwality Team has supported us both for Technical & also for putting up the cylinder bank. Kwality takes care of all my LPG requirement of Furnace for my manufacturing of Stampings for Transformers and have never been let down any time. Additional demands on short notice also taken care by their Excellent Customer supportive Marketing team.",
       rating: 5,
-      avatarUrl: "/images/original/testi_07.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -89,7 +89,7 @@ export default async function TestimonialsPage() {
       location: "Bangalore",
       quote: "A very Happy Kwality Customer for last several years. Kwality has never let me or my family down. They are always there with their delivery even at last minute call & my kids & husband have never starved. My kitchen is 24 hours ready with Kwality gas ever ready. No tension whatsoever of running out of Gas when Kwality Gas is with her 24 x 7.",
       rating: 5,
-      avatarUrl: "/images/original/testi_4.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -100,7 +100,7 @@ export default async function TestimonialsPage() {
       location: "Banaswadi, Bangalore",
       quote: "Happy to be with Kwality Gas as our LPG supplier. Very Dependable company for Timely supplies & Technical support and always can count on them for my restaurant kitchen requirements.",
       rating: 5,
-      avatarUrl: "/images/original/tsti_10.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
     {
@@ -111,7 +111,7 @@ export default async function TestimonialsPage() {
       location: "Chamarajpet, Bangalore",
       quote: "Distributor for Kwality more than a decade. Privileged to be a distributor of Kwality Gas who value Service, on time delivery first time & every time & fully transparent dealings. Proud to be Kwality team member & growing with company continuously. Has been catering to more than 45+ dealers in & around Bangalore.",
       rating: 5,
-      avatarUrl: "/images/original/testi_3.jpg",
+      avatarUrl: "",
       isVerified: true,
     },
   ];
@@ -148,13 +148,23 @@ export default async function TestimonialsPage() {
                 {/* Header: Avatar, Name & Verified Badge */}
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-slate-100 bg-slate-100 flex-shrink-0">
-                      <Image
-                        src={t.avatarUrl || "/images/original/testi_1.jpg"}
-                        alt={t.clientName}
-                        fill
-                        className="object-cover"
-                      />
+                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#1769AA]/20 bg-gradient-to-br from-[#102A43] to-[#1769AA] text-white flex items-center justify-center font-bold text-lg shrink-0 shadow-sm">
+                      {t.avatarUrl && !t.avatarUrl.includes("original") && !t.avatarUrl.includes("testi") ? (
+                        <Image
+                          src={t.avatarUrl}
+                          alt={t.clientName}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <span>
+                          {t.clientName
+                            .split(" ")
+                            .map((n: string) => n[0])
+                            .slice(0, 2)
+                            .join("")}
+                        </span>
+                      )}
                     </div>
                     <div>
                       <h3 className="font-bold text-slate-900 text-base leading-snug group-hover:text-[#1769AA] transition-colors">

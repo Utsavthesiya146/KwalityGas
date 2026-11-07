@@ -15,7 +15,7 @@ export default function GalleryAdminClient({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newImage, setNewImage] = useState({
     title: "",
-    imageUrl: "/images/original/",
+    imageUrl: "/images/corporate/",
     categoryId: categories[0]?.id || "",
     description: "",
   });
@@ -51,7 +51,7 @@ export default function GalleryAdminClient({
       setImages((prev) => [...prev, data.image]);
       setMsg("Image added successfully!");
       setIsModalOpen(false);
-      setNewImage({ title: "", imageUrl: "/images/original/", categoryId: categories[0]?.id || "", description: "" });
+      setNewImage({ title: "", imageUrl: "/images/corporate/", categoryId: categories[0]?.id || "", description: "" });
     } catch (err: any) {
       alert(err.message || "Failed to add image");
     } finally {

@@ -45,7 +45,7 @@ export default function ProductsAdminClient({
       capacity: "",
       shortDesc: "",
       description: "",
-      imageUrl: "/images/original/dom2.png",
+      imageUrl: "/images/corporate/product-cylinder-12kg.jpg",
       isDomestic: true,
       isCommercial: false,
       isIndustrial: false,
@@ -164,7 +164,7 @@ export default function ProductsAdminClient({
                   <td className="py-3 px-6">
                     <div className="relative w-12 h-12 rounded-lg bg-slate-50 border border-slate-200 overflow-hidden">
                       <Image
-                        src={p.imageUrl || "/images/original/dom2.png"}
+                        src={p.imageUrl || "/images/corporate/product-cylinder-12kg.jpg"}
                         alt={p.name}
                         fill
                         className="object-contain p-1"
@@ -290,7 +290,7 @@ export default function ProductsAdminClient({
                     type="text"
                     value={editingProduct.imageUrl || ""}
                     onChange={(e) => setEditingProduct({ ...editingProduct, imageUrl: e.target.value })}
-                    placeholder="/images/original/..."
+                    placeholder="/images/corporate/..."
                     className="w-full px-3 py-2 rounded-xl border border-slate-200"
                   />
                 </div>

@@ -110,7 +110,7 @@ async function main() {
       capacity: '21.0 Kgs',
       shortDesc: 'Engineered specifically for commercial kitchens, mid-size restaurants, and bakeries requiring continuous high heat.',
       description: 'A dedicated commercial cooking cylinder engineered to deliver superior thermal efficiency and quick burner ignition, lowering operating expenses for food businesses.',
-      imageUrl: '/images/original/dars2.png',
+      imageUrl: '/images/corporate/hero-commercial-lpg.jpg',
       isDomestic: false,
       isCommercial: true,
       isIndustrial: false,
@@ -156,7 +156,7 @@ async function main() {
       capacity: '15.0 Kgs',
       shortDesc: 'Popular mid-weight cylinder versatile for high-consumption households and commercial canteens.',
       description: 'Provides generous cooking hours with robust safety standards.',
-      imageUrl: '/images/original/dom1.png',
+      imageUrl: '/images/corporate/product-cylinder-17kg.jpg',
       isDomestic: true,
       isCommercial: true,
       isIndustrial: false,
@@ -203,7 +203,7 @@ async function main() {
       capacity: '5.5 Kgs',
       shortDesc: 'Compact, safe, and convenient cylinder designed for small families, bachelors, and compact urban kitchens.',
       description: 'Lightweight and easy to carry, ideal for space-constrained households.',
-      imageUrl: '/images/original/dom3.png',
+      imageUrl: '/images/corporate/hero-domestic-lpg.jpg',
       isDomestic: true,
       isCommercial: false,
       isIndustrial: false,
@@ -225,7 +225,7 @@ async function main() {
       capacity: '4.0 Kgs',
       shortDesc: 'Multi-purpose portable cylinder for cooking, domestic lighting fixtures, and outdoor emergency fuel backup.',
       description: 'Convenient size offering immediate fuel for rural kitchens, domestic light burners, and secondary household connections.',
-      imageUrl: '/images/original/k5.jpg',
+      imageUrl: '/images/corporate/product-cylinder-12kg.jpg',
       isDomestic: true,
       isCommercial: false,
       isIndustrial: false,
@@ -248,7 +248,7 @@ async function main() {
       capacity: 'Standard 25.6mm Valve Collar',
       shortDesc: 'ISI marked precision pressure reduction regulator with high-security auto-locking bush collar.',
       description: 'Engineered to maintain strict low-pressure domestic gas flow to cooking stoves, with visual ON/OFF locking knob.',
-      imageUrl: '/images/original/g2.jpg',
+      imageUrl: '/images/corporate/hero-safety-standards.jpg',
       isDomestic: true,
       isCommercial: false,
       isIndustrial: false,
@@ -271,7 +271,7 @@ async function main() {
       capacity: '1.5m Standard Length',
       shortDesc: 'Flame-retardant, rat-proof steel-wire reinforced rubber tubing with ISI mark.',
       description: 'Recommended replacement every 2 years as per safety regulations. Heat-resistant and leak-tested.',
-      imageUrl: '/images/original/g3.jpg',
+      imageUrl: '/images/corporate/hero-safety-standards.jpg',
       isDomestic: true,
       isCommercial: true,
       isIndustrial: false,
@@ -388,7 +388,7 @@ async function main() {
       designation: 'Proprietor',
       companyName: 'Perfect Flame Gas',
       location: 'Gandhi Bazar, Bangalore',
-      avatarUrl: '/images/original/testi_1.jpg',
+      avatarUrl: '',
       quote: 'Narration-Partner Mr. S. Nagaraj says, Kwality & Nagaraj are inseparable without each other. Associated with Kwality for more than 15 years & have been only growing along with Kwality & has never looked back. Very innovative company with excellent product basket & aggressive & customer oriented & customer caring company. He lives & breathes day in & day out with Kwality name chanting 24 hours. Because of Kwality has been able to build & maintain a big network of dealers & retain all of them for many years. Quality & on time service is the Mantra for success of Kwality & Perfect Flame.',
       rating: 5,
       isVerified: true,
@@ -399,7 +399,7 @@ async function main() {
       designation: 'Proprietor',
       companyName: 'Sri Venkateshwara Fine-Chem Laboratory',
       location: 'Bangalore',
-      avatarUrl: '/images/original/testi_2.jpg',
+      avatarUrl: '',
       quote: 'The Proprietor Mr. Mahadevappa says Kwality marketing team is a very customer friendly team who are there 24 hours ready to serve & never lets me down. Also very competitive & dependable supply on time & every time. They value customer needs and are there always to support and take care of needs any time.',
       rating: 5,
       isVerified: true,
@@ -410,7 +410,7 @@ async function main() {
       designation: 'Industrial Partner',
       companyName: 'Quality Closures',
       location: 'Machohalli, Bangalore-North',
-      avatarUrl: '/images/original/testi_5.jpg',
+      avatarUrl: '',
       quote: 'Very Happy with Kwality gas for their technical support & guidance & uninterrupted on time supplies & with 33 kgs cylinders, saved lot of time by not changing cylinders often & more production & no down time. Has been able to save time and get higher productivity. Supply on time and every time has been Kwality’s Philosophy. 3 Cheers to Kwality team.',
       rating: 5,
       isVerified: true,
@@ -421,7 +421,7 @@ async function main() {
       designation: 'Director',
       companyName: 'S L V Corner-Veg Restaurant',
       location: 'Gandhi Bazar, Bangalore',
-      avatarUrl: '/images/original/testi_6.jpg',
+      avatarUrl: '',
       quote: 'Mr. Rajendra Bhat, Director says as a channel partner for supply of LPG to Run our kitchens Kwality gas are very dependable & have never let down us. No need to follow up or remind for supplies. Very Good quality with Blue Flames and company takes care of any support required by their Excellent Marketing Team. We can always count on them for any additional requirement in case of increase in consumption. Happy to be with Kwality Gas. Kitchen with blue flame always.',
       rating: 5,
       isVerified: true,
@@ -432,7 +432,7 @@ async function main() {
       designation: 'Managing Director',
       companyName: 'Silcore Industries',
       location: 'Magadi Road, Bangalore',
-      avatarUrl: '/images/original/testi_07.jpg',
+      avatarUrl: '',
       quote: 'Mr. R. J. Mehta, Managing Director says Kwality Team has supported us both for Technical & also for putting up the cylinder bank. Kwality takes care of all my LPG requirement of Furnace for my manufacturing of Stampings for Transformers and have never been let down any time. Additional demands in short notice also have been taken care by their Excellent Customer supportive Marketing team. Always would strongly recommend any Industries / Customer who needs LPG can get supplies from Kwality and take them as long term dependable channel partner.',
       rating: 5,
       isVerified: true,
@@ -443,7 +443,7 @@ async function main() {
       designation: 'Working Professional',
       companyName: 'Residential Customer',
       location: 'Bangalore',
-      avatarUrl: '/images/original/testi_4.jpg',
+      avatarUrl: '',
       quote: 'A very Happy Kwality Customer for last several years has to say - Kwality has never let me down or my family ever. They are always there with their delivery even at last minute call & my kids & husband have never starved. My kitchen 24 hours ready whether for my family or guest with Kwality gas ever ready. No tension whatsoever of running out of Gas when Kwality Gas is with her 24 x 7. Thumbs up to Kwality.',
       rating: 5,
       isVerified: true,
@@ -454,7 +454,7 @@ async function main() {
       designation: 'Owner',
       companyName: 'China Pearl - Chinese & Italian Restaurant',
       location: 'Banaswadi, Bangalore',
-      avatarUrl: '/images/original/tsti_10.jpg',
+      avatarUrl: '',
       quote: 'Mr. Tony, Owner says happy to be with Kwality Gas as our LPG supplier. Very Dependable company for Timely supplies & Technical support and always can count on them for my requirements.',
       rating: 5,
       isVerified: true,
@@ -465,7 +465,7 @@ async function main() {
       designation: 'Proprietor',
       companyName: 'Sri Balaji Enterprises',
       location: 'Chamarajpet, Bangalore',
-      avatarUrl: '/images/original/testi_3.jpg',
+      avatarUrl: '',
       quote: 'Distributor for Kwality more than a decade. Mr. Krupashankar, Proprietor says Privileged to be a distributor of Kwality Gas who value Service, on time delivery first time & every time & fully transparent dealings. Proud to be Kwality team member & growing with company continuously. Has been catering to more than 45+ dealers in & around Bangalore.',
       rating: 5,
       isVerified: true,
@@ -480,7 +480,12 @@ async function main() {
     }
     console.log(`Seeded ${testimonials.length} Testimonials`);
   } else {
-    console.log(`Preserved ${existingTestiCount} existing Testimonials`);
+    // Clear any legacy avatarUrls in existing testimonials
+    await prisma.testimonial.updateMany({
+      where: { avatarUrl: { contains: 'original' } },
+      data: { avatarUrl: '' },
+    });
+    console.log(`Preserved ${existingTestiCount} existing Testimonials & cleaned legacy avatars`);
   }
 
   // 6. Awards (non-destructive)
@@ -491,15 +496,22 @@ async function main() {
         title: 'Business Excellence & Achievement Awards 2015',
         year: '2015',
         issuingBody: 'Business Excellence Forum & National LPG Industry Association',
-        certificateImg: '/images/original/kwality-gas-certificate.jpg',
-        trophyImg: '/images/original/kwality-gas-award.jpg',
+        certificateImg: '/images/brand/kwality-gas-award.jpg',
+        trophyImg: '/images/brand/kwality-gas-award.jpg',
         description: 'Awarded to Kwality Gas Bottlers Private Limited in recognition of outstanding quality standards, continuous infrastructure growth, prompt customer service, and Grade 1 credit rating.',
         displayOrder: 1,
       },
     });
     console.log('Seeded Awards');
   } else {
-    console.log(`Preserved ${existingAwardCount} existing Awards`);
+    await prisma.award.updateMany({
+      where: { trophyImg: { contains: 'original' } },
+      data: {
+        certificateImg: '/images/brand/kwality-gas-award.jpg',
+        trophyImg: '/images/brand/kwality-gas-award.jpg',
+      },
+    });
+    console.log(`Preserved ${existingAwardCount} existing Awards & cleaned legacy paths`);
   }
 
   // 7. Services (4 Audited Pillars)

@@ -199,14 +199,14 @@ export default async function ProductsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {(dbProducts.length > 0 ? dbProducts : [
-              { id: "1", name: "33kg Industrial Cylinder", capacity: "33 Kg", imageUrl: "/images/original/p1.jpg", shortDesc: "LOT/VOT for high-consumption industrial furnaces and manifolds.", isIndustrial: true },
-              { id: "2", name: "21kg Commercial Cylinder", capacity: "21 Kg", imageUrl: "/images/original/p2.jpg", shortDesc: "Continuous high-pressure cooking for large restaurants and hotels.", isCommercial: true },
-              { id: "3", name: "17kg Commercial Cylinder", capacity: "17 Kg", imageUrl: "/images/original/p3.jpg", shortDesc: "Standard fuel for caterers, cloud kitchens, and bakeries.", isCommercial: true },
-              { id: "4", name: "15kg Commercial Cylinder", capacity: "15 Kg", imageUrl: "/images/original/p4.jpg", shortDesc: "Manageable ergonomics for fast food joints and tea stalls.", isCommercial: true },
-              { id: "5", name: "12kg Domestic Cylinder", capacity: "12 Kg", imageUrl: "/images/original/p5.jpg", shortDesc: "Flagship domestic cooking gas cylinder for households.", isDomestic: true },
-              { id: "6", name: "5.5kg Domestic Cylinder", capacity: "5.5 Kg", imageUrl: "/images/original/dom1.png", shortDesc: "Compact cylinder for small families and single executives.", isDomestic: true },
-              { id: "7", name: "4kg Cook & Light Cylinder", capacity: "4 Kg", imageUrl: "/images/original/dar17.png", shortDesc: "Direct burner and emergency lighting attachment support.", isDomestic: true },
-              { id: "8", name: "2kg Micro Cylinder", capacity: "2 Kg", imageUrl: "/images/original/dars2.png", shortDesc: "Ultra-portable cylinder for laboratories and jewellery soldering.", isDomestic: true },
+              { id: "1", name: "33kg Industrial Cylinder", capacity: "33 Kg", imageUrl: "/images/corporate/product-cylinder-33kg.jpg", shortDesc: "LOT/VOT for high-consumption industrial furnaces and manifolds.", isIndustrial: true },
+              { id: "2", name: "21kg Commercial Cylinder", capacity: "21 Kg", imageUrl: "/images/corporate/hero-commercial-lpg.jpg", shortDesc: "Continuous high-pressure cooking for large restaurants and hotels.", isCommercial: true },
+              { id: "3", name: "17kg Commercial Cylinder", capacity: "17 Kg", imageUrl: "/images/corporate/product-cylinder-17kg.jpg", shortDesc: "Standard fuel for caterers, cloud kitchens, and bakeries.", isCommercial: true },
+              { id: "4", name: "15kg Commercial Cylinder", capacity: "15 Kg", imageUrl: "/images/corporate/hero-commercial-lpg.jpg", shortDesc: "Manageable ergonomics for fast food joints and tea stalls.", isCommercial: true },
+              { id: "5", name: "12kg Domestic Cylinder", capacity: "12 Kg", imageUrl: "/images/corporate/product-cylinder-12kg.jpg", shortDesc: "Flagship domestic cooking gas cylinder for households.", isDomestic: true },
+              { id: "6", name: "5.5kg Domestic Cylinder", capacity: "5.5 Kg", imageUrl: "/images/corporate/hero-domestic-lpg.jpg", shortDesc: "Compact cylinder for small families and single executives.", isDomestic: true },
+              { id: "7", name: "4kg Cook & Light Cylinder", capacity: "4 Kg", imageUrl: "/images/corporate/hero-domestic-lpg.jpg", shortDesc: "Direct burner and emergency lighting attachment support.", isDomestic: true },
+              { id: "8", name: "2kg Micro Cylinder", capacity: "2 Kg", imageUrl: "/images/corporate/product-cylinder-12kg.jpg", shortDesc: "Ultra-portable cylinder for laboratories and jewellery soldering.", isDomestic: true },
             ]).map((prod: any) => (
               <div
                 key={prod.id}
@@ -232,7 +232,7 @@ export default async function ProductsPage() {
 
                   <div className="relative w-full h-40 bg-slate-50 rounded-xl overflow-hidden mb-3 border border-slate-100 flex items-center justify-center p-2">
                     <Image
-                      src={prod.imageUrl || "/images/original/p1.jpg"}
+                      src={prod.imageUrl || "/images/corporate/product-cylinder-33kg.jpg"}
                       alt={prod.name}
                       fill
                       className="object-contain p-2 group-hover:scale-105 transition-transform"

@@ -128,7 +128,7 @@ export default async function Footer() {
             <div className="bg-white p-3 rounded-2xl inline-block shadow-md">
               <div className="relative w-48 h-12">
                 <Image
-                  src="/images/original/logo.jpg"
+                  src="/images/brand/logo.jpg"
                   alt="Kwality Gas Bottlers Logo"
                   fill
                   className="object-contain object-left"

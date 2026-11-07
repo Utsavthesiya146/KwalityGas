@@ -136,7 +136,7 @@ export default function DomesticPage() {
 
             <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-4">
               <div className="relative w-36 h-44 mx-auto">
-                <Image src="/images/original/dom1.png" alt="5.5kg Compact Cylinder" fill className="object-contain" />
+                <Image src="/images/corporate/hero-domestic-lpg.jpg" alt="5.5kg Compact Cylinder" fill className="object-contain" />
               </div>
               <div>
                 <h3 className="font-black text-slate-900 text-lg">5.5 Kg Cylinder</h3>
@@ -152,7 +152,7 @@ export default function DomesticPage() {
 
             <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-4">
               <div className="relative w-36 h-44 mx-auto">
-                <Image src="/images/original/dar17.png" alt="4kg Cook & Light Cylinder" fill className="object-contain" />
+                <Image src="/images/corporate/product-cylinder-12kg.jpg" alt="4kg Cook & Light Cylinder" fill className="object-contain" />
               </div>
               <div>
                 <h3 className="font-black text-slate-900 text-lg">4 Kg Cook & Light</h3>

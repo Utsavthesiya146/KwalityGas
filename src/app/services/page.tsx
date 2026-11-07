@@ -45,7 +45,7 @@ export default async function ServicesPage() {
       icon: "Truck",
       shortDesc: "Dedicated delivery tanker fleet and cylinder transport logistics operating 6 days a week across Karnataka and Tamil Nadu.",
       fullContent: "Our expansive distribution fleet ensures you never run out of cooking fuel. With strategically located regional bottling hubs in Hosur, Chennai, and Dharwad, we guarantee prompt delivery turnaround for domestic homes, restaurants, and factory shifts.",
-      image: "/images/original/service_style_11.jpg",
+      image: "/images/corporate/service-delivery-truck.jpg",
     },
     {
       id: "srv-2",
@@ -53,7 +53,7 @@ export default async function ServicesPage() {
       icon: "Wrench",
       shortDesc: "Turn-key design, fabrication, and testing of multi-cylinder LPG manifold headers for hotels, bakeries, and industrial furnaces.",
       fullContent: "Our certified gas engineers design custom manifold banks with auto-changeover regulators, slam-shut emergency valves, and pressure reducing stations. Fully compliant with Chief Controller of Explosives (PESO) and Indian Fire Department standards.",
-      image: "/images/original/service_style_12.jpg",
+      image: "/images/corporate/service-manifold-bank.jpg",
     },
     {
       id: "srv-3",
@@ -61,7 +61,7 @@ export default async function ServicesPage() {
       icon: "ShieldCheck",
       shortDesc: "Preventative safety check-ups for commercial kitchens, pressure testing, and practical training for kitchen staff on leak protocols.",
       fullContent: "We conduct periodic on-site safety inspections checking cylinder footring stability, regulator O-ring health, and pipe integrity. We train your kitchen personnel on immediate emergency protocols, eliminating hazardous blind spots.",
-      image: "/images/original/service_style_16.jpg",
+      image: "/images/corporate/service-safety-audit.jpg",
     },
     {
       id: "srv-4",
@@ -69,7 +69,7 @@ export default async function ServicesPage() {
       icon: "Phone",
       shortDesc: "Round-the-clock emergency assistance helpline with rapid technician dispatch for gas odor or pressure anomalies.",
       fullContent: "Gas safety does not adhere to office hours. Our emergency response team is available 24/7 at +91 78997 87101 to guide you through emergency isolation procedures and dispatch qualified technicians immediately.",
-      image: "/images/original/service_details.jpg",
+      image: "/images/corporate/hero-safety-standards.jpg",
     },
   ];
 
@@ -117,7 +117,7 @@ export default async function ServicesPage() {
               <div>
                 <div className="relative w-full h-56 bg-slate-800">
                   <Image
-                    src={srv.imageUrl || srv.image || "/images/original/service_style_11.jpg"}
+                    src={srv.imageUrl || srv.image || "/images/corporate/service-delivery-truck.jpg"}
                     alt={srv.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"

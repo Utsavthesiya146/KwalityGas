@@ -158,7 +158,7 @@ export default function Header() {
             >
               <div className="relative h-9 sm:h-10 md:h-11 w-36 sm:w-40 md:w-44 flex items-center">
                 <Image
-                  src="/images/original/logo.jpg"
+                  src="/images/brand/logo.jpg"
                   alt="Kwality Gas Bottlers Pvt Ltd"
                   fill
                   className="object-contain object-left transition-transform duration-200 group-hover:scale-[1.02]"
