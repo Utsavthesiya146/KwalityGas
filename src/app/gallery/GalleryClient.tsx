@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Images, Eye, X, Flame, Sparkles, Factory, ShieldCheck, Tag } from "lucide-react";
+import { sanitizeImageUrl } from "@/lib/sanitize-image";
 
 interface GalleryClientProps {
   categories: any[];
@@ -108,7 +109,7 @@ export default function GalleryClient({ categories, initialImages }: GalleryClie
             >
               <div className="relative h-64 w-full bg-slate-900 overflow-hidden">
                 <Image
-                  src={img.imageUrl}
+                  src={sanitizeImageUrl(img.imageUrl, "/images/corporate/hero-bottling-plant.jpg")}
                   alt={img.title}
                   fill
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
@@ -158,7 +159,7 @@ export default function GalleryClient({ categories, initialImages }: GalleryClie
 
             <div className="relative h-96 sm:h-[480px] w-full bg-slate-900">
               <Image
-                src={activeImage.imageUrl}
+                src={sanitizeImageUrl(activeImage.imageUrl, "/images/corporate/hero-bottling-plant.jpg")}
                 alt={activeImage.title}
                 fill
                 className="object-contain"

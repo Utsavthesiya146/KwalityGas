@@ -1,6 +1,7 @@
 import React from "react";
 import { prisma } from "@/lib/prisma";
 import GalleryClient from "./GalleryClient";
+import { sanitizeGalleryImage } from "@/lib/sanitize-image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,18 +17,23 @@ export default async function GalleryPage() {
   let categories: any[] = [];
   let allImages: any[] = [];
   try {
-    categories = await prisma.galleryCategory.findMany({
+    const rawCategories = await prisma.galleryCategory.findMany({
       include: {
         images: {
           orderBy: { displayOrder: "asc" },
         },
       },
     });
+    categories = rawCategories.map((cat) => ({
+      ...cat,
+      images: (cat.images || []).map(sanitizeGalleryImage),
+    }));
 
-    allImages = await prisma.galleryImage.findMany({
+    const rawImages = await prisma.galleryImage.findMany({
       include: { category: true },
       orderBy: { displayOrder: "asc" },
     });
+    allImages = rawImages.map(sanitizeGalleryImage);
   } catch (err) {
     console.error("GalleryPage data fetch error:", err);
   }

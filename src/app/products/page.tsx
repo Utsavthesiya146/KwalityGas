@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { sanitizeProduct } from "@/lib/sanitize-image";
 import { Flame, CheckCircle2, ArrowRight, ShieldCheck, Tag, Phone, Sparkles, Package, Wrench } from "lucide-react";
 import { Metadata } from "next";
 
@@ -17,11 +18,12 @@ export const revalidate = 0;
 export default async function ProductsPage() {
   let dbProducts: any[] = [];
   try {
-    dbProducts = await prisma.product.findMany({
+    const raw = await prisma.product.findMany({
       where: { isActive: true },
       include: { category: true },
       orderBy: { displayOrder: "asc" },
     });
+    dbProducts = raw.map(sanitizeProduct);
   } catch (err) {
     console.error("ProductsPage data fetch error:", err);
   }

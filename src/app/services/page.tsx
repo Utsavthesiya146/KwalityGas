@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { sanitizeService } from "@/lib/sanitize-image";
 import {
   Truck,
   ShieldCheck,
@@ -30,10 +31,11 @@ export const revalidate = 0;
 export default async function ServicesPage() {
   let dbServices: any[] = [];
   try {
-    dbServices = await prisma.service.findMany({
+    const rawServices = await prisma.service.findMany({
       where: { isActive: true },
       orderBy: { displayOrder: "asc" },
     });
+    dbServices = rawServices.map(sanitizeService);
   } catch (err) {
     console.error("ServicesPage fetch error:", err);
   }

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Flame, CheckCircle2, ArrowRight, ShieldCheck, Tag, Sparkles } from "lucide-react";
+import { sanitizeImageUrl } from "@/lib/sanitize-image";
 
 interface ProductsShowcaseProps {
   products: any[];
@@ -154,7 +155,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
 
                   <div className="relative w-full h-48 bg-slate-50 rounded-2xl overflow-hidden mb-4 border border-slate-100 flex items-center justify-center p-3">
                     <Image
-                      src={item.imageUrl || "/images/corporate/product-cylinder-33kg.jpg"}
+                      src={sanitizeImageUrl(item.imageUrl, "/images/corporate/product-cylinder-33kg.jpg")}
                       alt={item.name}
                       fill
                       className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"

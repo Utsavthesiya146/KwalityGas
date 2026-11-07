@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { sanitizeProduct } from "@/lib/sanitize-image";
 import {
   Flame,
   ShieldCheck,
@@ -27,13 +28,14 @@ export const revalidate = 0;
 export default async function CylindersPage() {
   let dbCylinders: any[] = [];
   try {
-    dbCylinders = await prisma.product.findMany({
+    const rawCylinders = await prisma.product.findMany({
       where: {
         category: { slug: "cylinders" },
         isActive: true,
       },
       orderBy: { displayOrder: "asc" },
     });
+    dbCylinders = rawCylinders.map(sanitizeProduct);
   } catch (err) {
     console.error("CylindersPage data fetch error:", err);
   }

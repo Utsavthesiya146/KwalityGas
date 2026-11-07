@@ -1,6 +1,7 @@
 import React from "react";
 import { prisma } from "@/lib/prisma";
 import HomePageClient from "./HomePageClient";
+import { sanitizeProduct, sanitizeHeroSlide, sanitizeService, sanitizeImageUrl } from "@/lib/sanitize-image";
 
 // Force dynamic so admin changes reflect immediately without code redeploy
 export const dynamic = "force-dynamic";
@@ -16,10 +17,11 @@ export default async function HomePage() {
 
   try {
     try {
-      heroSlides = await prisma.heroSlide.findMany({
+      const rawSlides = await prisma.heroSlide.findMany({
         where: { isActive: true },
         orderBy: { displayOrder: "asc" },
       });
+      heroSlides = rawSlides.map(sanitizeHeroSlide);
     } catch (slideErr) {
       console.warn("Could not query hero_slides, fallback safely:", slideErr);
     }
@@ -35,25 +37,32 @@ export default async function HomePage() {
       orderBy: { displayOrder: "asc" },
     });
 
-    products = await prisma.product.findMany({
+    const rawProducts = await prisma.product.findMany({
       where: { isActive: true },
       include: { category: true },
       orderBy: { displayOrder: "asc" },
     });
+    products = rawProducts.map(sanitizeProduct);
 
     testimonials = await prisma.testimonial.findMany({
       where: { isActive: true },
       orderBy: { displayOrder: "asc" },
     });
 
-    services = await prisma.service.findMany({
+    const rawServices = await prisma.service.findMany({
       where: { isActive: true },
       orderBy: { displayOrder: "asc" },
     });
+    services = rawServices.map(sanitizeService);
 
-    awards = await prisma.award.findMany({
+    const rawAwards = await prisma.award.findMany({
       orderBy: { displayOrder: "asc" },
     });
+    awards = rawAwards.map((a) => ({
+      ...a,
+      certificateImg: sanitizeImageUrl(a.certificateImg, "/images/brand/kwality-gas-award.jpg"),
+      trophyImg: sanitizeImageUrl(a.trophyImg, "/images/brand/kwality-gas-award.jpg"),
+    }));
 
     // Serialize Decimals for Client Components
     serializedStates = priceStates.map((st) => ({
