@@ -17,3 +17,4 @@ export default async function AdminHeroSliderPage() {
 
   return <HeroSliderAdminClient initialSlides={slides} />;
 }
+

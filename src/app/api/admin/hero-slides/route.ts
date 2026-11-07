@@ -127,3 +127,4 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: error.message || "Failed to delete slide" }, { status: 500 });
   }
 }
+

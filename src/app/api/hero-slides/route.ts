@@ -14,3 +14,4 @@ export async function GET() {
     return NextResponse.json({ error: err.message || "Failed to fetch hero slides" }, { status: 500 });
   }
 }
+
