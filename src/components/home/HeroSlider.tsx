@@ -142,8 +142,8 @@ export default function HeroSlider({
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Check reduced motion preference
@@ -186,10 +186,13 @@ export default function HeroSlider({
     };
   }, [isPaused, prefersReducedMotion, activeSlides.length, autoplayInterval, goToNext]);
 
-  // Touch swipe support for mobile
+  // Touch & Pointer swipe support for mobile with directional vector filtering
   const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-    setIsPaused(true);
+    const touch = e.touches[0] || e.targetTouches[0] || e.changedTouches[0];
+    if (touch) {
+      touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+      setIsPaused(true);
+    }
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -197,18 +200,45 @@ export default function HeroSlider({
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStart === null) return;
-    const touchEnd = e.changedTouches[0].clientX;
-    const diff = touchStart - touchEnd;
+    if (!touchStartRef.current) return;
+    const touch = e.changedTouches[0] || e.touches[0];
+    if (!touch) return;
+    const diffX = touchStartRef.current.x - touch.clientX;
+    const diffY = touchStartRef.current.y - touch.clientY;
 
-    // Minimum swipe threshold 50px
-    if (diff > 50) {
-      goToNext();
-    } else if (diff < -50) {
-      goToPrev();
+    // Minimum swipe threshold 40px; horizontal distance must exceed vertical distance
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        goToNext();
+      } else {
+        goToPrev();
+      }
     }
 
-    setTouchStart(null);
+    touchStartRef.current = null;
+    setIsPaused(false);
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    touchStartRef.current = { x: e.clientX, y: e.clientY };
+    setIsPaused(true);
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (!touchStartRef.current) return;
+    const diffX = touchStartRef.current.x - e.clientX;
+    const diffY = touchStartRef.current.y - e.clientY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        goToNext();
+      } else {
+        goToPrev();
+      }
+    }
+
+    touchStartRef.current = null;
     setIsPaused(false);
   };
 
@@ -240,7 +270,7 @@ export default function HeroSlider({
           HERO STAGE: FULL-WIDTH CINEMATIC IMMERSIVE CANVAS
           ========================================================================= */}
       <section
-        className="relative w-full min-h-[560px] sm:min-h-[600px] lg:min-h-[640px] xl:min-h-[680px] flex flex-col justify-center overflow-hidden select-none outline-none"
+        className="relative w-full min-h-[560px] sm:min-h-[600px] lg:min-h-[640px] xl:min-h-[680px] flex flex-col justify-center overflow-hidden select-none outline-none touch-pan-y"
         role="region"
         aria-roledescription="carousel"
         aria-label="Kwality Gas Corporate Overview Slideshow"
@@ -251,6 +281,8 @@ export default function HeroSlider({
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
       >
         {/* -----------------------------------------------------------------------
             BACKGROUND LAYER: PHOTOGRAPHIC BACKDROPS WITH DYNAMIC CROSS-FADE
@@ -314,7 +346,7 @@ export default function HeroSlider({
             FOREGROUND CONTENT LAYER: EDITORIAL TEXT & ACTION BUTTONS
             ----------------------------------------------------------------------- */}
         <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-14 sm:pt-16 lg:pt-20 pb-14 sm:pb-16 flex-1 flex flex-col justify-center">
-          <div className="w-full lg:w-[62%] xl:w-[56%] space-y-5 sm:space-y-6">
+          <div className="w-full md:max-w-[78%] lg:max-w-none lg:w-[62%] xl:w-[56%] space-y-5 sm:space-y-6">
             {/* Top Eyebrow / Category Badge & Numerical Counter */}
             <div className="flex items-center gap-3 flex-wrap">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/15 text-[#F28C28] text-xs font-bold tracking-wider uppercase shadow-xs">
@@ -409,9 +441,9 @@ export default function HeroSlider({
         </div>
 
         {/* -----------------------------------------------------------------------
-            FLOATING EXECUTIVE NAVIGATION ARROWS (Responsive on all viewports)
+            FLOATING EXECUTIVE NAVIGATION ARROWS (Hidden on mobile <768px, visible on tablet & desktop)
             ----------------------------------------------------------------------- */}
-        <div className="absolute right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2.5 sm:gap-3">
+        <div className="hidden md:flex absolute right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-2.5 sm:gap-3">
           <button
             type="button"
             onClick={goToPrev}
