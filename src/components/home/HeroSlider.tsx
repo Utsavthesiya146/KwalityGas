@@ -131,14 +131,6 @@ const DEFAULT_SLIDES: HeroSlideData[] = [
   },
 ];
 
-const SLIDE_NAV_LABELS = [
-  { key: "domestic", label: "Domestic LPG", short: "Domestic" },
-  { key: "commercial", label: "Commercial Kitchens", short: "Commercial" },
-  { key: "industrial", label: "Heavy Industry", short: "Industrial" },
-  { key: "infrastructure", label: "Bottling Plants", short: "Plants" },
-  { key: "safety", label: "Safety & Quality", short: "Safety" },
-];
-
 export default function HeroSlider({
   slides: propSlides,
   onOpenEnquiry,
@@ -248,7 +240,7 @@ export default function HeroSlider({
           HERO STAGE: FULL-WIDTH CINEMATIC IMMERSIVE CANVAS
           ========================================================================= */}
       <section
-        className="relative w-full min-h-[660px] sm:min-h-[700px] lg:min-h-[740px] xl:min-h-[780px] flex flex-col justify-between overflow-hidden select-none outline-none"
+        className="relative w-full min-h-[560px] sm:min-h-[600px] lg:min-h-[640px] xl:min-h-[680px] flex flex-col justify-center overflow-hidden select-none outline-none"
         role="region"
         aria-roledescription="carousel"
         aria-label="Kwality Gas Corporate Overview Slideshow"
@@ -321,7 +313,7 @@ export default function HeroSlider({
         {/* -----------------------------------------------------------------------
             FOREGROUND CONTENT LAYER: EDITORIAL TEXT & ACTION BUTTONS
             ----------------------------------------------------------------------- */}
-        <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-12 sm:pt-16 lg:pt-20 pb-8 flex-1 flex flex-col justify-center">
+        <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-14 sm:pt-16 lg:pt-20 pb-14 sm:pb-16 flex-1 flex flex-col justify-center">
           <div className="w-full lg:w-[62%] xl:w-[56%] space-y-5 sm:space-y-6">
             {/* Top Eyebrow / Category Badge & Numerical Counter */}
             <div className="flex items-center gap-3 flex-wrap">
@@ -338,8 +330,8 @@ export default function HeroSlider({
               </div>
             </div>
 
-            {/* Main Headline: Bold, High-Stature Energy Brand Typography */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] xl:text-[54px] font-black text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)] transition-all duration-300 min-h-[72px] sm:min-h-[96px] lg:min-h-[120px] flex items-center">
+            {/* Main Headline: Bold, Modern, High-Readability Energy Brand Typography (10-15% reduced) */}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] xl:text-[45px] font-black text-white tracking-tight leading-[1.16] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)] transition-all duration-300 min-h-[58px] sm:min-h-[72px] lg:min-h-[92px] flex items-center">
               {currentSlide.title}
             </h1>
 
@@ -417,110 +409,25 @@ export default function HeroSlider({
         </div>
 
         {/* -----------------------------------------------------------------------
-            FLOATING EXECUTIVE NAVIGATION ARROWS (Placed on Desktop Right)
+            FLOATING EXECUTIVE NAVIGATION ARROWS (Responsive on all viewports)
             ----------------------------------------------------------------------- */}
-        <div className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-3">
+        <div className="absolute right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2.5 sm:gap-3">
           <button
             type="button"
             onClick={goToPrev}
-            className="w-12 h-12 rounded-full bg-white/10 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-xl group"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-xl group"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 group-hover:-translate-x-0.5 transition-transform" />
           </button>
           <button
             type="button"
             onClick={goToNext}
-            className="w-12 h-12 rounded-full bg-white/10 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-xl group"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-xl group"
             aria-label="Next slide"
           >
-            <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-0.5 transition-transform" />
           </button>
-        </div>
-
-        {/* -----------------------------------------------------------------------
-            BOTTOM SLIDE NAVIGATION BAR: MULTI-SEGMENT PROGRESS CONTROLS
-            ----------------------------------------------------------------------- */}
-        <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-6 pt-2">
-          <div className="bg-black/40 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
-            
-            {/* Desktop / Tablet Segmented Slide Tabs */}
-            <div className="grid grid-cols-5 gap-2 w-full md:w-auto md:flex-1">
-              {activeSlides.map((slide, idx) => {
-                const isCurrent = idx === currentIndex;
-                const navMeta = SLIDE_NAV_LABELS[idx] || { label: slide.slideKey || `Slide ${idx + 1}`, short: `0${idx + 1}` };
-                return (
-                  <button
-                    key={slide.id || idx}
-                    type="button"
-                    onClick={() => goToSlide(idx)}
-                    className={`relative text-left p-2 sm:p-2.5 rounded-xl transition-all duration-300 overflow-hidden group ${
-                      isCurrent
-                        ? "bg-white/[0.12] border border-white/25 shadow-md"
-                        : "bg-white/[0.03] hover:bg-white/[0.08] border border-white/5"
-                    }`}
-                    aria-label={`Go to slide ${idx + 1}: ${slide.title}`}
-                    aria-current={isCurrent ? "true" : "false"}
-                  >
-                    {/* Top Progress Line Indicator */}
-                    <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-1.5">
-                      <div
-                        className={`h-full rounded-full transition-all ${
-                          isCurrent
-                            ? "bg-[#F28C28] w-full"
-                            : "bg-transparent w-0 group-hover:w-1/3 group-hover:bg-white/30"
-                        }`}
-                        style={{
-                          transitionDuration: isCurrent && !isPaused ? `${autoplayInterval}ms` : "300ms",
-                        }}
-                      />
-                    </div>
-
-                    {/* Tab Text: Number & Section Title */}
-                    <div className="flex items-center justify-between text-[11px] leading-tight">
-                      <span className={`font-mono font-bold ${isCurrent ? "text-[#F28C28]" : "text-slate-400 group-hover:text-slate-200"}`}>
-                        0{idx + 1}
-                      </span>
-                      <span className={`font-bold truncate hidden sm:inline ml-1.5 ${isCurrent ? "text-white" : "text-slate-300 group-hover:text-white"}`}>
-                        {navMeta.short}
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Mobile / Tablet Compact Arrow Controls & Autoplay State */}
-            <div className="flex items-center justify-between w-full md:w-auto gap-4 shrink-0 border-t md:border-t-0 md:border-l border-white/10 pt-2 md:pt-0 md:pl-4">
-              {/* Autoplay Pulse Indicator */}
-              <div className="flex items-center gap-2 text-[11px] text-slate-300">
-                <span className={`w-2 h-2 rounded-full ${isPaused ? "bg-amber-400" : "bg-emerald-400 animate-pulse"}`} />
-                <span className="font-mono text-[10px] tracking-wide uppercase text-slate-400">
-                  {isPaused ? "Paused" : "Live Autoplay"}
-                </span>
-              </div>
-
-              {/* Mobile Prev / Next Buttons */}
-              <div className="flex lg:hidden items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={goToPrev}
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#F28C28] text-white flex items-center justify-center transition-colors active:scale-95"
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={goToNext}
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#F28C28] text-white flex items-center justify-center transition-colors active:scale-95"
-                  aria-label="Next slide"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
