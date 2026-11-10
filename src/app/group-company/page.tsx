@@ -12,6 +12,7 @@ import {
   Briefcase,
   Users,
 } from "lucide-react";
+import PageHero from "@/components/shared/PageHero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -44,22 +45,14 @@ export default function GroupCompanyPage() {
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Banner */}
-      <div className="relative bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white py-18 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3.5 border border-white/15 shadow-xs">
-            <Building2 className="w-3.5 h-3.5" />
-            <span>Industrial Heritage & Synergy</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Our Group Company
-          </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-            Backed by a multi-disciplinary industrial group that has been driving manufacturing and energy infrastructure for over 35 years.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        badge={{
+          icon: <Building2 className="w-3.5 h-3.5" />,
+          text: "Industrial Heritage & Synergy",
+        }}
+        title="Our Group Company"
+        description="Backed by a multi-disciplinary industrial group that has been driving manufacturing and energy infrastructure for over 35 years."
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
         {/* Core Corporate Profile */}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { sanitizeProduct } from "@/lib/sanitize-image";
 import { Flame, CheckCircle2, ArrowRight, ShieldCheck, Tag, Phone, Sparkles, Package, Wrench } from "lucide-react";
+import PageHero from "@/components/shared/PageHero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -41,22 +42,14 @@ export default async function ProductsPage() {
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Banner */}
-      <div className="relative bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white py-18 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3.5 border border-white/15 shadow-xs">
-            <Flame className="w-3.5 h-3.5 fill-[#F28C28]" />
-            <span>Official Product Catalog</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Kwality Gas Products & Equipment
-          </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-            Clean thermal energy solutions engineered for households, restaurants, commercial caterers, and heavy industrial furnaces.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        badge={{
+          icon: <Flame className="w-3.5 h-3.5 fill-[#F28C28]" />,
+          text: "Official Product Catalog",
+        }}
+        title="Kwality Gas Products & Equipment"
+        description="Clean thermal energy solutions engineered for households, restaurants, commercial caterers, and heavy industrial furnaces."
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
         {/* Quick Nav Cards */}

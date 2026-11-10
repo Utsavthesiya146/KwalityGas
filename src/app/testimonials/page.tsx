@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Star, Quote, CheckCircle2, MessageSquare, ArrowRight, Building, MapPin } from "lucide-react";
+import PageHero from "@/components/shared/PageHero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -120,22 +121,14 @@ export default async function TestimonialsPage() {
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Banner */}
-      <div className="relative bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white py-18 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3.5 border border-white/15 shadow-xs">
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>Real Customer Experiences</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            What Our Clients Say About Kwality Gas
-          </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-            Hear from restaurant directors, manufacturing heads, commercial bakeries, and domestic households across Karnataka and Tamil Nadu.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        badge={{
+          icon: <MessageSquare className="w-3.5 h-3.5" />,
+          text: "Real Customer Experiences",
+        }}
+        title="What Our Clients Say About Kwality Gas"
+        description="Hear from restaurant directors, manufacturing heads, commercial bakeries, and domestic households across Karnataka and Tamil Nadu."
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
         {/* Testimonials Grid (All 8 verified reviews) */}

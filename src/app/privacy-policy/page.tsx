@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import PageHero from "@/components/shared/PageHero";
 import { ShieldCheck, ArrowRight, Lock, CheckCircle2 } from "lucide-react";
 import { Metadata } from "next";
 
@@ -14,23 +15,15 @@ export const dynamic = "force-dynamic";
 export default function PrivacyPolicyPage() {
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Hero Banner */}
-      <section className="relative bg-[#07131F] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-slate-800">
-        <div className="absolute inset-0 bg-grid-pattern-dark opacity-40 pointer-events-none" />
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#1769AA]/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-            <Lock className="w-3.5 h-3.5" />
-            <span>Data Privacy & Trust</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Privacy Policy
-          </h1>
-          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-            How Kwality Gas Bottlers Private Limited collects, safeguards, and utilizes customer contact information and transactional supply records.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        badge={{
+          icon: <Lock className="w-3.5 h-3.5" />,
+          text: "Data Privacy & Trust",
+          color: "text-emerald-400",
+        }}
+        title="Privacy Policy"
+        description="How Kwality Gas Bottlers Private Limited collects, safeguards, and utilizes customer contact information and transactional supply records."
+      />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-card space-y-8 text-xs sm:text-sm text-slate-700 leading-relaxed">

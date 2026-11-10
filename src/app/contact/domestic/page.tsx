@@ -12,6 +12,7 @@ import {
   Truck,
 } from "lucide-react";
 import EnquiryForm from "@/components/shared/EnquiryForm";
+import PageHero from "@/components/shared/PageHero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -43,23 +44,14 @@ export default function DomesticContactPage() {
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Hero Banner */}
-      <section className="relative bg-[#07131F] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-slate-800">
-        <div className="absolute inset-0 bg-grid-pattern-dark opacity-40 pointer-events-none" />
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#1769AA]/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-            <Home className="w-3.5 h-3.5" />
-            <span>Domestic Household Onboarding</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Book a New Domestic LPG Connection
-          </h1>
-          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-            Hassle-free household gas connections without lengthy waitlists. Get your 12kg or 5.5kg cylinder delivered directly to your kitchen in 24 to 48 hours.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        badge={{
+          icon: <Home className="w-3.5 h-3.5" />,
+          text: "Domestic Household Onboarding",
+        }}
+        title="Book a New Domestic LPG Connection"
+        description="Hassle-free household gas connections without lengthy waitlists. Get your 12kg or 5.5kg cylinder delivered directly to your kitchen in 24 to 48 hours."
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">

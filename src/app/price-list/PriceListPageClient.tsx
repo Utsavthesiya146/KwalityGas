@@ -16,6 +16,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import EnquiryModal from "@/components/shared/EnquiryModal";
+import PageHero from "@/components/shared/PageHero";
 
 interface PriceItem {
   id: string;
@@ -92,23 +93,14 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Hero Banner */}
-      <section className="relative bg-[#07131F] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-slate-800">
-        <div className="absolute inset-0 bg-grid-pattern-dark opacity-40 pointer-events-none" />
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#1769AA]/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-            <Tag className="w-3.5 h-3.5" />
-            <span>Official Tariff Schedules</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Kwality Gas Price List
-          </h1>
-          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-            Transparent, government-compliant LPG rates for Karnataka and Tamil Nadu. Updated dynamically by the company administration.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        badge={{
+          icon: <Tag className="w-3.5 h-3.5" />,
+          text: "Official Tariff Schedules",
+        }}
+        title="Kwality Gas Price List"
+        description="Transparent, government-compliant LPG rates for Karnataka and Tamil Nadu. Updated dynamically by the company administration."
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
         {/* State Selection Tabs & Notice Card */}
