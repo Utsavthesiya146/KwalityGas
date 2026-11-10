@@ -81,7 +81,7 @@ export default async function Footer() {
     socialLinks = [];
   }
 
-  const developerUrl = process.env.NEXT_PUBLIC_DEVELOPER_URL || null;
+  const developerUrl = process.env.NEXT_PUBLIC_DEVELOPER_URL || "https://webhostingbaba.com/";
 
   return (
     <footer className="bg-[#050D15] text-slate-300 border-t border-slate-800/80 selection:bg-[#F28C28] selection:text-white">
@@ -395,37 +395,23 @@ export default async function Footer() {
               <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 inline-block animate-pulse shrink-0" aria-label="love" />
               <span>by</span>
             </span>
-            {developerUrl ? (
-              <a
-                href={developerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center transition-transform hover:scale-105"
-                title="HostingBaba"
-              >
-                <Image
-                  src="/images/hostingbaba-logo.webp"
-                  alt="HostingBaba"
-                  width={105}
-                  height={26}
-                  priority
-                  unoptimized
-                  className="h-6 sm:h-7 w-auto object-contain inline-block rounded-md shadow-xs"
-                />
-              </a>
-            ) : (
-              <div className="inline-flex items-center" title="HostingBaba">
-                <Image
-                  src="/images/hostingbaba-logo.webp"
-                  alt="HostingBaba"
-                  width={105}
-                  height={26}
-                  priority
-                  unoptimized
-                  className="h-6 sm:h-7 w-auto object-contain inline-block rounded-md shadow-xs"
-                />
-              </div>
-            )}
+            <a
+              href={developerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center transition-transform hover:scale-105"
+              title="HostingBaba"
+            >
+              <Image
+                src="/images/hostingbaba-logo.webp"
+                alt="HostingBaba"
+                width={105}
+                height={26}
+                priority
+                unoptimized
+                className="h-6 sm:h-7 w-auto object-contain inline-block rounded-md shadow-xs hover:opacity-95 transition-opacity"
+              />
+            </a>
           </div>
         </div>
       </div>
