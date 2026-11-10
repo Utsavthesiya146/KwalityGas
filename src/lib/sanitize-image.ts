@@ -51,6 +51,9 @@ const LEGACY_IMAGE_MAP: Record<string, string> = {
   "/images/original/why-img-2.jpg": "/images/corporate/service-delivery-truck.jpg",
   "/images/original/why-img-3.jpg": "/images/corporate/service-safety-audit.jpg",
   "/images/original/IMG_20190903_182027.jpg": "/images/corporate/hero-bottling-plant.jpg",
+  "/images/original/b1.jpg": "/images/corporate/hero-bottling-plant.jpg",
+  "/images/original/b2.jpg": "/images/corporate/hero-bottling-plant.jpg",
+  "/images/original/b3.jpg": "/images/corporate/hero-bottling-plant.jpg",
 
   // Brand & Awards
   "/images/original/logo.jpg": "/images/brand/logo.jpg",
@@ -110,19 +113,78 @@ export function sanitizeImageUrl(url: string | null | undefined, defaultFallback
 
 export function sanitizeProduct(p: any): any {
   if (!p) return p;
+
+  const cap = (p.capacity || "").toLowerCase();
+  const name = (p.name || "").toLowerCase();
+
+  let resolvedImage = p.imageUrl;
+
+  if (name.includes("geyser") || name.includes("water heater") || cap.includes("instantaneous")) {
+    resolvedImage = "/images/corporate/product-gas-geyser.jpg";
+  } else if (cap.includes("33") || name.includes("33")) {
+    resolvedImage = "/images/corporate/product-cylinder-33kg.jpg";
+  } else if (cap.includes("21") || name.includes("21")) {
+    resolvedImage = "/images/corporate/product-cylinder-21kg.jpg";
+  } else if (cap.includes("17") || name.includes("17")) {
+    resolvedImage = "/images/corporate/product-cylinder-17kg.jpg";
+  } else if (cap.includes("15") || name.includes("15")) {
+    resolvedImage = "/images/corporate/product-cylinder-15kg.jpg";
+  } else if (cap.includes("12") || name.includes("12")) {
+    resolvedImage = "/images/corporate/product-cylinder-12kg.jpg";
+  } else if (cap.includes("5.5") || cap.includes("4.0") || cap.includes("4kg") || cap.includes("2kg") || name.includes("5.5") || name.includes("4.0")) {
+    resolvedImage = "/images/corporate/product-cylinder-5-5kg.jpg";
+  } else if (name.includes("regulator") || name.includes("tubing") || name.includes("valve") || name.includes("safety")) {
+    resolvedImage = "/images/corporate/hero-safety-standards.jpg";
+  } else {
+    resolvedImage = sanitizeImageUrl(p.imageUrl, "/images/corporate/product-cylinder-33kg.jpg");
+  }
+
   return {
     ...p,
-    imageUrl: sanitizeImageUrl(p.imageUrl, "/images/corporate/product-cylinder-33kg.jpg"),
+    imageUrl: resolvedImage,
   };
 }
 
 export function sanitizeGalleryImage(img: any): any {
   if (!img) return img;
+
+  const title = (img.title || "").toLowerCase();
+  const cat = ((img.category && img.category.name) || img.categoryName || "").toLowerCase();
+
+  let resolved = img.imageUrl;
+
+  if (title.includes("regulator") || title.includes("hose") || title.includes("safety") || cat.includes("regulator")) {
+    resolved = "/images/corporate/hero-safety-standards.jpg";
+  } else if (title.includes("geyser") || title.includes("water heater") || cat.includes("heater")) {
+    resolved = "/images/corporate/product-gas-geyser.jpg";
+  } else if (title.includes("33") || cat.includes("33")) {
+    resolved = "/images/corporate/product-cylinder-33kg.jpg";
+  } else if (title.includes("21") || cat.includes("21")) {
+    resolved = "/images/corporate/product-cylinder-21kg.jpg";
+  } else if (title.includes("17") || cat.includes("17")) {
+    resolved = "/images/corporate/product-cylinder-17kg.jpg";
+  } else if (title.includes("15") || cat.includes("15")) {
+    resolved = "/images/corporate/product-cylinder-15kg.jpg";
+  } else if (title.includes("12") || title.includes("domestic") || cat.includes("domestic")) {
+    resolved = "/images/corporate/product-cylinder-12kg.jpg";
+  } else if (title.includes("bottling") || title.includes("fleet") || cat.includes("bottling") || cat.includes("fleet") || cat.includes("plant")) {
+    resolved = "/images/corporate/hero-bottling-plant.jpg";
+  } else if (title.includes("manifold")) {
+    resolved = "/images/corporate/service-manifold-bank.jpg";
+  } else if (title.includes("truck") || title.includes("logistics")) {
+    resolved = "/images/corporate/service-delivery-truck.jpg";
+  } else if (title.includes("award") || title.includes("quality era")) {
+    resolved = "/images/brand/kwality-gas-award.jpg";
+  } else {
+    resolved = sanitizeImageUrl(img.imageUrl, "/images/corporate/hero-bottling-plant.jpg");
+  }
+
   return {
     ...img,
-    imageUrl: sanitizeImageUrl(img.imageUrl, "/images/corporate/hero-bottling-plant.jpg"),
+    imageUrl: resolved,
   };
 }
+
 
 export function sanitizeHeroSlide(slide: any): any {
   if (!slide) return slide;

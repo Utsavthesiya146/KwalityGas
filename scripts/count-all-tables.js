@@ -17,6 +17,8 @@ async function main() {
     { name: 'Testimonials', model: 'testimonial' },
     { name: 'Awards', model: 'award' },
     { name: 'Enquiries', model: 'enquiry' },
+    { name: 'Orders', model: 'order' },
+    { name: 'Order Items', model: 'orderItem' },
     { name: 'SEO Settings', model: 'sEOSettings' },
     { name: 'Social Media Links', model: 'socialMediaLink' },
   ];

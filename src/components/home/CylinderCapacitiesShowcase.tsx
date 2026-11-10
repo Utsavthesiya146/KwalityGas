@@ -28,7 +28,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "HORECA Large Kitchens",
       title: "21kg Commercial High-Capacity Cylinder",
       desc: "Ideal for high-heat Chinese burners, large hotel cooking ranges, tandoors, and institutional caterers needing continuous high-pressure gas without freezing.",
-      image: "/images/corporate/hero-commercial-lpg.jpg",
+      image: "/images/corporate/product-cylinder-21kg.jpg",
       specs: ["Continuous peak pressure", "Heavy-duty brass valve", "Anti-freezing vaporisation", "Daily replenishment"],
     },
     {
@@ -46,7 +46,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Commercial Compact",
       title: "15kg Commercial Cylinder",
       desc: "Optimal for mobile catering units, outdoor live counters, and medium tea/snack establishments looking for manageable ergonomics and high calorific value.",
-      image: "/images/corporate/hero-commercial-lpg.jpg",
+      image: "/images/corporate/product-cylinder-15kg.jpg",
       specs: ["Easy maneuvering", "Sturdy base footring", "Grade 1 certified gas", "Available across Karnataka & TN"],
     },
     {
@@ -64,7 +64,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Compact Household",
       title: "5.5kg Domestic Cylinder",
       desc: "Convenient for small families, single working professionals, students, and as a dependable standby backup cylinder for domestic kitchens.",
-      image: "/images/corporate/hero-domestic-lpg.jpg",
+      image: "/images/corporate/product-cylinder-5-5kg.jpg",
       specs: ["Lightweight handling", "Fits compact kitchen cabinets", "No lengthy documentation", "Quick exchange scheme"],
     },
     {
@@ -73,7 +73,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Cook & Light / Portable",
       title: "4kg Cook & Light Cylinder",
       desc: "Equipped with specialized direct-screw burner support and light attachments. Ideal for small outdoor cooking, weekend camping, and domestic lighting.",
-      image: "/images/corporate/product-cylinder-12kg.jpg",
+      image: "/images/corporate/product-cylinder-5-5kg.jpg",
       specs: ["Direct burner compatible", "Emergency light fixture", "Portable steel handle", "Complete safety seal"],
     },
     {
@@ -82,7 +82,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Micro Portable",
       title: "2kg Mini Cylinder",
       desc: "Ultra-compact cylinder for laboratory burners, jewellery soldering, mobile welding, and light portable camping stoves.",
-      image: "/images/corporate/hero-domestic-lpg.jpg",
+      image: "/images/corporate/product-cylinder-5-5kg.jpg",
       specs: ["Ultra-portable ergonomics", "Precision pressure flow", "Factory sealed & stamped", "Safe for laboratory use"],
     },
   ];

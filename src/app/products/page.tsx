@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { sanitizeProduct } from "@/lib/sanitize-image";
 import { Flame, CheckCircle2, ArrowRight, ShieldCheck, Tag, Phone, Sparkles, Package, Wrench } from "lucide-react";
 import PageHero from "@/components/shared/PageHero";
+import ProductsGridClient from "@/components/products/ProductsGridClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -193,75 +194,22 @@ export default async function ProductsPage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {(dbProducts.length > 0 ? dbProducts : [
-              { id: "1", name: "33kg Industrial Cylinder", capacity: "33 Kg", imageUrl: "/images/corporate/product-cylinder-33kg.jpg", shortDesc: "LOT/VOT for high-consumption industrial furnaces and manifolds.", isIndustrial: true },
-              { id: "2", name: "21kg Commercial Cylinder", capacity: "21 Kg", imageUrl: "/images/corporate/hero-commercial-lpg.jpg", shortDesc: "Continuous high-pressure cooking for large restaurants and hotels.", isCommercial: true },
-              { id: "3", name: "17kg Commercial Cylinder", capacity: "17 Kg", imageUrl: "/images/corporate/product-cylinder-17kg.jpg", shortDesc: "Standard fuel for caterers, cloud kitchens, and bakeries.", isCommercial: true },
-              { id: "4", name: "15kg Commercial Cylinder", capacity: "15 Kg", imageUrl: "/images/corporate/hero-commercial-lpg.jpg", shortDesc: "Manageable ergonomics for fast food joints and tea stalls.", isCommercial: true },
-              { id: "5", name: "12kg Domestic Cylinder", capacity: "12 Kg", imageUrl: "/images/corporate/product-cylinder-12kg.jpg", shortDesc: "Flagship domestic cooking gas cylinder for households.", isDomestic: true },
-              { id: "6", name: "5.5kg Domestic Cylinder", capacity: "5.5 Kg", imageUrl: "/images/corporate/hero-domestic-lpg.jpg", shortDesc: "Compact cylinder for small families and single executives.", isDomestic: true },
-              { id: "7", name: "4kg Cook & Light Cylinder", capacity: "4 Kg", imageUrl: "/images/corporate/product-cylinder-12kg.jpg", shortDesc: "Direct burner and emergency lighting attachment support.", isDomestic: true },
-              { id: "8", name: "2kg Micro Cylinder", capacity: "2 Kg", imageUrl: "/images/corporate/hero-domestic-lpg.jpg", shortDesc: "Ultra-portable cylinder for laboratories and jewellery soldering.", isDomestic: true },
-            ]).map((prod: any) => (
-              <div
-                key={prod.id}
-                className="bg-white rounded-3xl border border-slate-200/80 p-6 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 group hover:-translate-y-1"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3.5">
-                    <span className="text-xl font-black text-[#102A43] group-hover:text-[#1769AA] transition-colors">
-                      {prod.capacity || "LPG"}
-                    </span>
-                    <span
-                      className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
-                        prod.isIndustrial
-                          ? "bg-slate-100 text-slate-800 border border-slate-300"
-                          : prod.isCommercial
-                          ? "bg-blue-50 text-[#1769AA] border border-blue-200"
-                          : "bg-orange-50 text-[#F28C28] border border-orange-200"
-                      }`}
-                    >
-                      {prod.isIndustrial ? "Industrial" : prod.isCommercial ? "Commercial" : "Domestic"}
-                    </span>
-                  </div>
-
-                  <div className="relative w-full h-48 bg-slate-900 rounded-2xl overflow-hidden mb-4 border border-slate-100 shadow-inner group">
-                    <Image
-                      src={prod.imageUrl || "/images/corporate/product-cylinder-33kg.jpg"}
-                      alt={prod.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                  </div>
-
-                  <h3 className="font-bold text-slate-900 text-sm mb-1.5 leading-snug group-hover:text-[#1769AA] transition-colors">
-                    {prod.name}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-4 min-h-[2.5rem]">
-                    {prod.shortDesc || prod.description}
-                  </p>
-                </div>
-
-                <div className="pt-3.5 border-t border-slate-100">
-                  <Link
-                    href={
-                      prod.isIndustrial
-                        ? "/contact/industrial"
-                        : prod.isCommercial
-                        ? "/contact/commercial"
-                        : "/contact/domestic"
-                    }
-                    className="w-full inline-flex items-center justify-center gap-1.5 bg-[#102A43] hover:bg-[#F28C28] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
-                  >
-                    <span>Order / Enquire</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ProductsGridClient
+            products={
+              dbProducts.length > 0
+                ? dbProducts
+                : [
+                    { id: "1", name: "33kg Industrial Cylinder", capacity: "33 Kg", imageUrl: "/images/corporate/product-cylinder-33kg.jpg", shortDesc: "LOT/VOT for high-consumption industrial furnaces and manifolds.", isIndustrial: true },
+                    { id: "2", name: "21kg Commercial Cylinder", capacity: "21 Kg", imageUrl: "/images/corporate/product-cylinder-21kg.jpg", shortDesc: "Continuous high-pressure cooking for large restaurants and hotels.", isCommercial: true },
+                    { id: "3", name: "17kg Commercial Cylinder", capacity: "17 Kg", imageUrl: "/images/corporate/product-cylinder-17kg.jpg", shortDesc: "Standard fuel for caterers, cloud kitchens, and bakeries.", isCommercial: true },
+                    { id: "4", name: "15kg Commercial Cylinder", capacity: "15 Kg", imageUrl: "/images/corporate/product-cylinder-15kg.jpg", shortDesc: "Manageable ergonomics for fast food joints and tea stalls.", isCommercial: true },
+                    { id: "5", name: "12kg Domestic Cylinder", capacity: "12 Kg", imageUrl: "/images/corporate/product-cylinder-12kg.jpg", shortDesc: "Flagship domestic cooking gas cylinder for households.", isDomestic: true },
+                    { id: "6", name: "5.5kg Domestic Cylinder", capacity: "5.5 Kg", imageUrl: "/images/corporate/product-cylinder-5-5kg.jpg", shortDesc: "Compact cylinder for small families and single executives.", isDomestic: true },
+                    { id: "7", name: "4kg Cook & Light Cylinder", capacity: "4 Kg", imageUrl: "/images/corporate/product-cylinder-5-5kg.jpg", shortDesc: "Direct burner and emergency lighting attachment support.", isDomestic: true },
+                    { id: "8", name: "2kg Micro Cylinder", capacity: "2 Kg", imageUrl: "/images/corporate/product-cylinder-5-5kg.jpg", shortDesc: "Ultra-portable cylinder for laboratories and jewellery soldering.", isDomestic: true },
+                  ]
+            }
+          />
         </div>
       </div>
     </div>

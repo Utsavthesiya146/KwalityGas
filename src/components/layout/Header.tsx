@@ -23,8 +23,10 @@ import {
   MessageSquare,
   ArrowRight,
   Award,
+  ShoppingBag,
 } from "lucide-react";
 import EnquiryModal from "@/components/shared/EnquiryModal";
+import { useCart } from "@/context/CartContext";
 
 export default function Header() {
   const pathname = usePathname();
@@ -41,6 +43,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
   const [enquiryInitialType, setEnquiryInitialType] = useState<"DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL">("DOMESTIC");
+  const { totalCount, openCart } = useCart();
 
   const lpgMenuRef = useRef<HTMLDivElement>(null);
   const productsMenuRef = useRef<HTMLDivElement>(null);
@@ -547,8 +550,23 @@ export default function Header() {
               </Link>
             </nav>
 
-            {/* Right: One Prominent Enquiry CTA & Mobile Toggle */}
+            {/* Right: Cart Trigger, Prominent Enquiry CTA & Mobile Toggle */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              <button
+                type="button"
+                onClick={openCart}
+                className="relative inline-flex items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-[#1769AA] bg-slate-50 hover:bg-white text-slate-800 hover:text-[#1769AA] transition-all duration-200 shadow-xs hover:shadow-sm group"
+                title="View Shopping Cart & WhatsApp Order"
+                aria-label="View Shopping Cart"
+              >
+                <ShoppingBag className="w-5 h-5 text-slate-700 group-hover:text-[#1769AA] transition-colors" />
+                {totalCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#F28C28] text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow-xs animate-in zoom-in">
+                    {totalCount}
+                  </span>
+                )}
+              </button>
+
               <button
                 onClick={() => openEnquiry("DOMESTIC")}
                 className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-[#F28C28] to-[#EA580C] hover:from-[#E65100] hover:to-[#D9771A] text-white px-3.5 py-2.5 xl:px-5 xl:py-2.5 rounded-xl text-xs xl:text-sm font-extrabold shadow-md hover:shadow-lg transition-all duration-200 whitespace-nowrap hover:-translate-y-0.5 active:scale-95"
@@ -577,7 +595,7 @@ export default function Header() {
             <div className="bg-white w-full max-h-[calc(100vh-92px)] overflow-y-auto border-t border-slate-100 p-5 space-y-4 shadow-2xl">
 
               {/* Quick Actions */}
-              <div className="grid grid-cols-2 gap-2.5 pb-2">
+              <div className="grid grid-cols-2 gap-2.5 pb-1">
                 <button
                   onClick={() => openEnquiry("DOMESTIC")}
                   className="bg-[#F28C28] hover:bg-[#D9771A] text-white p-3 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-2 shadow-xs transition-colors"
@@ -593,6 +611,19 @@ export default function Header() {
                   <span>Commercial Quote</span>
                 </button>
               </div>
+
+              {/* Mobile Cart Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  openCart();
+                }}
+                className="w-full bg-[#102A43] hover:bg-slate-800 text-white p-3 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-2 shadow-xs transition-colors"
+              >
+                <ShoppingBag className="w-4 h-4 text-[#F28C28]" />
+                <span>View Shopping Cart ({totalCount} items)</span>
+              </button>
 
               {/* Navigation Items */}
               <div className="space-y-1 text-sm font-bold text-slate-900 divide-y divide-slate-100">

@@ -3,8 +3,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Flame, CheckCircle2, ArrowRight, ShieldCheck, Tag, Sparkles } from "lucide-react";
+import { Flame, CheckCircle2, ArrowRight, ShieldCheck, Tag, Sparkles, Plus, Minus, ShoppingBag } from "lucide-react";
 import { sanitizeImageUrl } from "@/lib/sanitize-image";
+import { useCart } from "@/context/CartContext";
 
 interface ProductsShowcaseProps {
   products: any[];
@@ -13,6 +14,16 @@ interface ProductsShowcaseProps {
 
 export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsShowcaseProps) {
   const [activeTab, setActiveTab] = useState<"ALL" | "DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL">("ALL");
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
+  const { addToCart } = useCart();
+
+  const getQty = (id: string) => quantities[id] || 1;
+  const setQty = (id: string, delta: number) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [id]: Math.max(1, (prev[id] || 1) + delta),
+    }));
+  };
 
   const defaultProducts = [
     {
@@ -28,7 +39,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
       id: "prod-2",
       name: "21 Kg Commercial Cylinder",
       capacity: "21 Kg",
-      imageUrl: "/images/corporate/hero-commercial-lpg.jpg",
+      imageUrl: "/images/corporate/product-cylinder-21kg.jpg",
       shortDesc: "Heavy-duty commercial cooking cylinder designed for high-heat wok burners and busy 24/7 restaurant kitchens.",
       isCommercial: true,
       features: JSON.stringify(["Anti-freezing vaporisation", "Forged brass heavy valve", "High continuous BTU output", "Express doorstep swap"]),
@@ -64,7 +75,7 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
       id: "prod-6",
       name: "5.5 Kg Compact Domestic Cylinder",
       capacity: "5.5 Kg",
-      imageUrl: "/images/corporate/hero-domestic-lpg.jpg",
+      imageUrl: "/images/corporate/product-cylinder-5-5kg.jpg",
       shortDesc: "Convenient compact cylinder for small families, single working professionals, and standby emergency backup.",
       isDomestic: true,
       features: JSON.stringify(["Lightweight 5.5kg net", "Fits modular kitchen units", "Quick documentation process", "Fast exchange booking"]),
@@ -189,25 +200,86 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
                   )}
                 </div>
 
-                <div className="pt-3.5 border-t border-slate-100 flex items-center gap-2.5">
-                  <button
-                    onClick={() =>
-                      onOpenEnquiry(
-                        item.isIndustrial ? "INDUSTRIAL" : item.isCommercial ? "COMMERCIAL" : "DOMESTIC"
-                      )
-                    }
-                    className="flex-1 inline-flex items-center justify-center gap-2 bg-[#102A43] hover:bg-[#F28C28] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors text-center shadow-xs"
-                  >
-                    <span>Order Refill</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                  <Link
-                    href={item.isDomestic ? "/cylinders" : item.isCommercial ? "/commercial" : "/industrial"}
-                    className="px-3.5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl transition-colors shrink-0"
-                    title="View Details"
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                {/* E-Commerce Quantity, Add to Cart & WhatsApp Order Refill */}
+                <div className="pt-3.5 border-t border-slate-100 space-y-2.5">
+                  <div className="flex items-center justify-between gap-2.5">
+                    {/* Quantity Selector */}
+                    <div className="inline-flex items-center border border-slate-200 rounded-xl bg-slate-50/80 p-0.5 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setQty(item.id, -1)}
+                        className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-slate-200 text-slate-600 transition-colors"
+                        aria-label="Decrease quantity"
+                      >
+                        <Minus className="w-3.5 h-3.5" />
+                      </button>
+                      <span className="w-7 text-center text-xs font-bold text-slate-900">
+                        {getQty(item.id)}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setQty(item.id, 1)}
+                        className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-slate-200 text-slate-600 transition-colors"
+                        aria-label="Increase quantity"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+
+                    {/* Add to Cart Button */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        addToCart(
+                          {
+                            id: item.id,
+                            name: item.name,
+                            capacity: item.capacity,
+                            imageUrl: sanitizeImageUrl(item.imageUrl, "/images/corporate/product-cylinder-33kg.jpg"),
+                            price: item.capacity?.includes("17") ? 2595 : item.capacity?.includes("4.0") ? 617 : null,
+                            orderType: item.isIndustrial ? "INDUSTRIAL" : item.isCommercial ? "COMMERCIAL" : "DOMESTIC",
+                          },
+                          getQty(item.id)
+                        );
+                      }}
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 bg-blue-50/80 hover:bg-blue-100 text-[#1769AA] py-2 rounded-xl font-bold text-xs transition-colors"
+                      title="Add to cart"
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Add to Cart</span>
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        addToCart(
+                          {
+                            id: item.id,
+                            name: item.name,
+                            capacity: item.capacity,
+                            imageUrl: sanitizeImageUrl(item.imageUrl, "/images/corporate/product-cylinder-33kg.jpg"),
+                            price: item.capacity?.includes("17") ? 2595 : item.capacity?.includes("4.0") ? 617 : null,
+                            orderType: item.isIndustrial ? "INDUSTRIAL" : item.isCommercial ? "COMMERCIAL" : "DOMESTIC",
+                          },
+                          getQty(item.id)
+                        );
+                      }}
+                      className="flex-1 inline-flex items-center justify-center gap-2 bg-[#102A43] hover:bg-[#F28C28] text-white py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors text-center shadow-xs"
+                    >
+                      <span>Order Refill</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    <Link
+                      href={item.isDomestic ? "/cylinders" : item.isCommercial ? "/commercial" : "/industrial"}
+                      className="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl transition-colors shrink-0"
+                      title="View Details"
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             );

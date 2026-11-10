@@ -299,5 +299,64 @@ model HeroSlide {
   @@map("hero_slides")
 }
 
+enum OrderStatus {
+  NEW
+  WHATSAPP_CONTACT_PENDING
+  WHATSAPP_CONTACTED
+  PAYMENT_PENDING
+  PAYMENT_CONFIRMED
+  PROCESSING
+  DISPATCHED
+  DELIVERED
+  CANCELLED
+}
+
+enum OrderType {
+  DOMESTIC
+  COMMERCIAL
+  INDUSTRIAL
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique // e.g. "KWG-ORD-202611-9876"
+  customerName    String
+  customerPhone   String
+  customerEmail   String?
+  deliveryAddress String      @db.Text
+  orderType       OrderType   @default(DOMESTIC)
+  subtotal        Decimal?    @db.Decimal(10, 2)
+  notes           String?     @db.Text
+  status          OrderStatus @default(NEW)
+  adminNotes      String?     @db.Text
+  whatsappSentAt  DateTime?
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([status, createdAt])
+  @@index([customerPhone])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(cuid())
+  orderId     String
+  productId   String?
+  productName String
+  capacity    String?  // e.g. "12.0 Kgs", "17.0 Kgs", "33.0 Kgs"
+  unitPrice   Decimal? @db.Decimal(10, 2)
+  quantity    Int      @default(1)
+  lineTotal   Decimal? @db.Decimal(10, 2)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@map("order_items")
+}
+
+
 
 

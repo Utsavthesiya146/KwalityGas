@@ -15,13 +15,16 @@ import {
   Gauge,
   Timer,
   Award,
+  ShoppingBag,
 } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 interface GasWaterHeaterShowcaseProps {
   onOpenEnquiry: (type: "DOMESTIC") => void;
 }
 
 export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeaterShowcaseProps) {
+  const { addToCart } = useCart();
   const specs = [
     {
       icon: <Droplets className="w-5 h-5 text-[#1769AA]" />,
@@ -142,6 +145,25 @@ export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeater
 
             {/* CTAs */}
             <div className="pt-3 flex flex-wrap items-center gap-3.5">
+              <button
+                type="button"
+                onClick={() =>
+                  addToCart(
+                    {
+                      id: "kwality-gas-geyser-unit",
+                      name: "Kwality Gas Water Heater (Gas Geyser)",
+                      capacity: "6L / 7L / 10L Instantaneous",
+                      imageUrl: "/images/corporate/product-gas-geyser.jpg",
+                      orderType: "DOMESTIC",
+                    },
+                    1
+                  )
+                }
+                className="inline-flex items-center gap-2 bg-[#102A43] hover:bg-slate-800 text-white px-5 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-xs"
+              >
+                <ShoppingBag className="w-4 h-4 text-[#F28C28]" />
+                <span>Add to Cart</span>
+              </button>
               <button
                 onClick={() => onOpenEnquiry("DOMESTIC")}
                 className="bg-gradient-to-r from-[#F28C28] to-[#EA580C] hover:from-[#E65100] hover:to-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 active:scale-95"

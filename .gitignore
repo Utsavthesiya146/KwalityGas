@@ -48,6 +48,8 @@ dump_page_details.mjs
 extract_page_content.mjs
 print_full_page_details.mjs
 analyze_audit.mjs
+prompt*.txt
+/tmp/
 audit_extractor.mjs
 test_system_integration.mjs
 

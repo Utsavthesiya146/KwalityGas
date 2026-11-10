@@ -3,6 +3,8 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { CartProvider } from "@/context/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -75,9 +77,12 @@ export default function RootLayout({
         <link rel="icon" href="/images/brand/favicon.png" />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-[#182230] font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden w-full max-w-full">
-        <Header />
-        <main className="flex-grow w-full max-w-full overflow-x-hidden">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="flex-grow w-full max-w-full overflow-x-hidden">{children}</main>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );
