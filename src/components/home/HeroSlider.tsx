@@ -14,9 +14,9 @@ import {
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
-  Briefcase,
-  Home,
-  Check,
+  Pause,
+  Play,
+  Sparkles,
 } from "lucide-react";
 
 export interface HeroSlideData {
@@ -131,10 +131,18 @@ const DEFAULT_SLIDES: HeroSlideData[] = [
   },
 ];
 
+const SLIDE_NAV_LABELS = [
+  { key: "domestic", label: "Domestic LPG", short: "Domestic" },
+  { key: "commercial", label: "Commercial Kitchens", short: "Commercial" },
+  { key: "industrial", label: "Heavy Industry", short: "Industrial" },
+  { key: "infrastructure", label: "Bottling Plants", short: "Plants" },
+  { key: "safety", label: "Safety & Quality", short: "Safety" },
+];
+
 export default function HeroSlider({
   slides: propSlides,
   onOpenEnquiry,
-  autoplayInterval = 5500,
+  autoplayInterval = 6000,
 }: HeroSliderProps) {
   const activeSlides = (propSlides && propSlides.length > 0 ? propSlides : DEFAULT_SLIDES).filter(
     (s) => s.isActive !== false
@@ -146,7 +154,7 @@ export default function HeroSlider({
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Check reduced motion
+  // Check reduced motion preference
   useEffect(() => {
     if (typeof window !== "undefined") {
       const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -212,6 +220,15 @@ export default function HeroSlider({
     setIsPaused(false);
   };
 
+  // Keyboard navigation
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      goToPrev();
+    } else if (e.key === "ArrowRight") {
+      goToNext();
+    }
+  };
+
   // Execute CTA action
   const handleCtaClick = (link: string) => {
     if (link === "MODAL_DOMESTIC") {
@@ -226,60 +243,118 @@ export default function HeroSlider({
   const currentSlide = activeSlides[currentIndex] || activeSlides[0];
 
   return (
-    <section
-      className="relative w-full bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white overflow-hidden select-none"
-      role="region"
-      aria-roledescription="carousel"
-      aria-label="Kwality Gas Corporate Overview Slideshow"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
-      {/* Subtle Ambient Lighting Overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#F28C28]/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="w-full relative bg-[#040A12] text-white overflow-hidden">
+      {/* =========================================================================
+          HERO STAGE: FULL-WIDTH CINEMATIC IMMERSIVE CANVAS
+          ========================================================================= */}
+      <section
+        className="relative w-full min-h-[660px] sm:min-h-[700px] lg:min-h-[740px] xl:min-h-[780px] flex flex-col justify-between overflow-hidden select-none outline-none"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Kwality Gas Corporate Overview Slideshow"
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* -----------------------------------------------------------------------
+            BACKGROUND LAYER: PHOTOGRAPHIC BACKDROPS WITH DYNAMIC CROSS-FADE
+            ----------------------------------------------------------------------- */}
+        <div className="absolute inset-0 z-0">
+          {activeSlides.map((slide, idx) => {
+            const isCurrent = idx === currentIndex;
+            return (
+              <div
+                key={slide.id || slide.slideKey || idx}
+                className={`absolute inset-0 transition-all duration-1000 ease-out ${
+                  isCurrent
+                    ? "opacity-100 scale-100 z-10 pointer-events-auto"
+                    : "opacity-0 scale-105 z-0 pointer-events-none"
+                }`}
+                aria-hidden={!isCurrent}
+              >
+                <Image
+                  src={slide.imageUrl}
+                  alt={slide.title}
+                  fill
+                  priority={idx === 0}
+                  className="object-cover object-center lg:object-[center_right] select-none"
+                  sizes="100vw"
+                  quality={90}
+                />
+              </div>
+            );
+          })}
 
-      {/* Main 50/50 Balanced Hero Container */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-14 sm:pt-14 sm:pb-16 lg:pt-16 lg:pb-18 min-h-[580px] lg:min-h-[540px] flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          {/* Left Column: Corporate Narrative & CTAs (7 cols) */}
-          <div className="lg:col-span-7 space-y-4 sm:space-y-5">
-            
-            {/* Top Pill Bar with Category Badge & Slide Counter */}
+          {/* ART-DIRECTED CINEMATIC SCRIMS & GRADIENTS */}
+          {/* 1. Desktop Horizontal Editorial Scrim (Deep solid dark on text side, crystal clear on photography side) */}
+          <div
+            className="absolute inset-0 z-20 pointer-events-none hidden lg:block"
+            style={{
+              background:
+                "linear-gradient(90deg, #040A12 0%, #040A12 36%, rgba(4,10,18,0.92) 50%, rgba(4,10,18,0.65) 66%, rgba(4,10,18,0.2) 85%, rgba(4,10,18,0.05) 100%)",
+            }}
+          />
+
+          {/* 2. Tablet / Mobile Scrim (Vertical gradient to guarantee flawless text contrast while keeping photo visible) */}
+          <div
+            className="absolute inset-0 z-20 pointer-events-none lg:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(4,10,18,0.94) 0%, rgba(4,10,18,0.85) 45%, rgba(4,10,18,0.7) 70%, rgba(4,10,18,0.95) 100%)",
+            }}
+          />
+
+          {/* 3. Subtle Top Vignette for seamless header blending */}
+          <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-[#040A12] via-[#040A12]/60 to-transparent z-20 pointer-events-none" />
+
+          {/* 4. Subtle Bottom Vignette for seamless dock & metrics bar blending */}
+          <div className="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-[#040A12] via-[#040A12]/80 to-transparent z-20 pointer-events-none" />
+
+          {/* 5. Brand Warmth Glow Ambient Accent (Very subtle, high-end energy feel) */}
+          <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-[#F28C28]/8 rounded-full blur-[120px] pointer-events-none z-20" />
+        </div>
+
+        {/* -----------------------------------------------------------------------
+            FOREGROUND CONTENT LAYER: EDITORIAL TEXT & ACTION BUTTONS
+            ----------------------------------------------------------------------- */}
+        <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-12 sm:pt-16 lg:pt-20 pb-8 flex-1 flex flex-col justify-center">
+          <div className="w-full lg:w-[62%] xl:w-[56%] space-y-5 sm:space-y-6">
+            {/* Top Eyebrow / Category Badge & Numerical Counter */}
             <div className="flex items-center gap-3 flex-wrap">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold tracking-wider uppercase backdrop-blur-md border border-white/15 shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/15 text-[#F28C28] text-xs font-bold tracking-wider uppercase shadow-xs">
                 <Flame className="w-3.5 h-3.5 fill-[#F28C28] shrink-0" />
                 <span>{currentSlide.subtitle || "Grade 1 Rated • CARE MDRA Certified"}</span>
               </div>
 
-              {/* Slide Counter Badge */}
-              <div className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-slate-300 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                <span className="text-white">0{currentIndex + 1}</span>
+              {/* Minimalist Corporate Slide Number */}
+              <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-slate-300 bg-white/[0.05] px-3 py-1 rounded-full border border-white/10 backdrop-blur-xs">
+                <span className="text-[#F28C28]">0{currentIndex + 1}</span>
                 <span className="text-slate-500">/</span>
                 <span>0{activeSlides.length}</span>
               </div>
             </div>
 
-            {/* Main Headline with Smooth Transition */}
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.14] break-words transition-opacity duration-300 min-h-[64px] sm:min-h-[88px] lg:min-h-[110px] flex items-center">
+            {/* Main Headline: Bold, High-Stature Energy Brand Typography */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] xl:text-[54px] font-black text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)] transition-all duration-300 min-h-[72px] sm:min-h-[96px] lg:min-h-[120px] flex items-center">
               {currentSlide.title}
             </h1>
 
-            {/* Short Supporting Description */}
-            <p className="text-xs sm:text-base text-slate-300 leading-relaxed font-normal max-w-xl break-words min-h-[48px] sm:min-h-[60px] lg:min-h-[72px]">
+            {/* Supporting Description: Refined Width & Excellent Readability */}
+            <p className="text-sm sm:text-base lg:text-lg text-slate-200 leading-relaxed font-normal max-w-xl drop-shadow-sm min-h-[50px] sm:min-h-[64px] lg:min-h-[76px]">
               {currentSlide.description}
             </p>
 
-            {/* Two Clear CTA Buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 max-w-md">
+            {/* Integrated CTA Actions */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 max-w-md">
               {currentSlide.ctaLink.startsWith("MODAL_") ? (
                 <button
                   type="button"
                   onClick={() => handleCtaClick(currentSlide.ctaLink)}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#F28C28] to-[#EA580C] hover:from-[#E65100] hover:to-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#F28C28] via-[#EA580C] to-[#D97706] hover:from-[#E65100] hover:to-[#C2410C] text-white px-7 py-4 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-[0_10px_25px_-5px_rgba(242,140,40,0.4)] hover:shadow-[0_15px_30px_-5px_rgba(242,140,40,0.6)] transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
                 >
                   <span>{currentSlide.ctaText}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -287,7 +362,7 @@ export default function HeroSlider({
               ) : (
                 <Link
                   href={currentSlide.ctaLink}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#F28C28] to-[#EA580C] hover:from-[#E65100] hover:to-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#F28C28] via-[#EA580C] to-[#D97706] hover:from-[#E65100] hover:to-[#C2410C] text-white px-7 py-4 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-[0_10px_25px_-5px_rgba(242,140,40,0.4)] hover:shadow-[0_15px_30px_-5px_rgba(242,140,40,0.6)] transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
                 >
                   <span>{currentSlide.ctaText}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -297,186 +372,204 @@ export default function HeroSlider({
               {currentSlide.secondaryText && currentSlide.secondaryLink && (
                 <Link
                   href={currentSlide.secondaryLink}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md px-5 py-3.5 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md px-6 py-4 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm"
                 >
                   <span>{currentSlide.secondaryText}</span>
                 </Link>
               )}
             </div>
 
-            {/* Helpline Link */}
+            {/* Direct Official Helpline */}
             <div className="pt-1">
               <a
                 href="tel:+917899787101"
-                className="inline-flex items-center gap-2 text-slate-300 hover:text-white text-xs font-semibold transition-colors group"
+                className="inline-flex items-center gap-2.5 text-slate-300 hover:text-white text-xs sm:text-sm font-semibold transition-colors group"
               >
-                <PhoneCall className="w-3.5 h-3.5 text-[#F28C28] group-hover:scale-110 transition-transform" />
-                <span>Helpline: +91 78997 87101</span>
+                <div className="w-6 h-6 rounded-full bg-[#F28C28]/20 flex items-center justify-center text-[#F28C28] group-hover:bg-[#F28C28] group-hover:text-white transition-all">
+                  <PhoneCall className="w-3.5 h-3.5" />
+                </div>
+                <span>Helpline: <strong className="text-white">+91 78997 87101</strong></span>
               </a>
             </div>
 
-            {/* 3 Quick Inline Proof Points */}
-            <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-6 text-xs text-slate-300">
+            {/* 3 Executive Proof Points with Verification Badges */}
+            <div className="pt-4 border-t border-white/15 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-xs text-slate-200">
               {currentSlide.proofPoint1 && (
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>{currentSlide.proofPoint1}</span>
+                  <span className="font-medium">{currentSlide.proofPoint1}</span>
                 </div>
               )}
               {currentSlide.proofPoint2 && (
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>{currentSlide.proofPoint2}</span>
+                  <span className="font-medium">{currentSlide.proofPoint2}</span>
                 </div>
               )}
               {currentSlide.proofPoint3 && (
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>{currentSlide.proofPoint3}</span>
+                  <span className="font-medium">{currentSlide.proofPoint3}</span>
                 </div>
               )}
             </div>
           </div>
+        </div>
 
-          {/* Right Column: High-Quality LPG Photograph with Overlaid Controls (5 cols) */}
-          <div className="lg:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] aspect-[4/3] bg-slate-900 group">
-              {/* Slide Images */}
-              {activeSlides.map((slide, idx) => (
-                <div
-                  key={slide.id || idx}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    idx === currentIndex
-                      ? "opacity-100 z-10 pointer-events-auto"
-                      : "opacity-0 z-0 pointer-events-none"
-                  }`}
-                >
-                  <Image
-                    src={slide.imageUrl}
-                    alt={slide.title}
-                    fill
-                    priority={idx === 0}
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#06121E]/90 via-[#06121E]/20 to-transparent" />
-                </div>
-              ))}
+        {/* -----------------------------------------------------------------------
+            FLOATING EXECUTIVE NAVIGATION ARROWS (Placed on Desktop Right)
+            ----------------------------------------------------------------------- */}
+        <div className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-3">
+          <button
+            type="button"
+            onClick={goToPrev}
+            className="w-12 h-12 rounded-full bg-white/10 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-xl group"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
+          </button>
+          <button
+            type="button"
+            onClick={goToNext}
+            className="w-12 h-12 rounded-full bg-white/10 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 shadow-xl group"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
+          </button>
+        </div>
 
-              {/* Previous / Next Arrow Controls floating on the image */}
-              <div className="absolute inset-y-0 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
+        {/* -----------------------------------------------------------------------
+            BOTTOM SLIDE NAVIGATION BAR: MULTI-SEGMENT PROGRESS CONTROLS
+            ----------------------------------------------------------------------- */}
+        <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-6 pt-2">
+          <div className="bg-black/40 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            {/* Desktop / Tablet Segmented Slide Tabs */}
+            <div className="grid grid-cols-5 gap-2 w-full md:w-auto md:flex-1">
+              {activeSlides.map((slide, idx) => {
+                const isCurrent = idx === currentIndex;
+                const navMeta = SLIDE_NAV_LABELS[idx] || { label: slide.slideKey || `Slide ${idx + 1}`, short: `0${idx + 1}` };
+                return (
+                  <button
+                    key={slide.id || idx}
+                    type="button"
+                    onClick={() => goToSlide(idx)}
+                    className={`relative text-left p-2 sm:p-2.5 rounded-xl transition-all duration-300 overflow-hidden group ${
+                      isCurrent
+                        ? "bg-white/[0.12] border border-white/25 shadow-md"
+                        : "bg-white/[0.03] hover:bg-white/[0.08] border border-white/5"
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}: ${slide.title}`}
+                    aria-current={isCurrent ? "true" : "false"}
+                  >
+                    {/* Top Progress Line Indicator */}
+                    <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-1.5">
+                      <div
+                        className={`h-full rounded-full transition-all ${
+                          isCurrent
+                            ? "bg-[#F28C28] w-full"
+                            : "bg-transparent w-0 group-hover:w-1/3 group-hover:bg-white/30"
+                        }`}
+                        style={{
+                          transitionDuration: isCurrent && !isPaused ? `${autoplayInterval}ms` : "300ms",
+                        }}
+                      />
+                    </div>
+
+                    {/* Tab Text: Number & Section Title */}
+                    <div className="flex items-center justify-between text-[11px] leading-tight">
+                      <span className={`font-mono font-bold ${isCurrent ? "text-[#F28C28]" : "text-slate-400 group-hover:text-slate-200"}`}>
+                        0{idx + 1}
+                      </span>
+                      <span className={`font-bold truncate hidden sm:inline ml-1.5 ${isCurrent ? "text-white" : "text-slate-300 group-hover:text-white"}`}>
+                        {navMeta.short}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Mobile / Tablet Compact Arrow Controls & Autoplay State */}
+            <div className="flex items-center justify-between w-full md:w-auto gap-4 shrink-0 border-t md:border-t-0 md:border-l border-white/10 pt-2 md:pt-0 md:pl-4">
+              {/* Autoplay Pulse Indicator */}
+              <div className="flex items-center gap-2 text-[11px] text-slate-300">
+                <span className={`w-2 h-2 rounded-full ${isPaused ? "bg-amber-400" : "bg-emerald-400 animate-pulse"}`} />
+                <span className="font-mono text-[10px] tracking-wide uppercase text-slate-400">
+                  {isPaused ? "Paused" : "Live Autoplay"}
+                </span>
+              </div>
+
+              {/* Mobile Prev / Next Buttons */}
+              <div className="flex lg:hidden items-center gap-1.5">
                 <button
                   type="button"
                   onClick={goToPrev}
-                  className="pointer-events-auto w-10 h-10 rounded-full bg-[#07131F]/70 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/25 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xl"
+                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#F28C28] text-white flex items-center justify-center transition-colors active:scale-95"
                   aria-label="Previous slide"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-4 h-4" />
                 </button>
-
                 <button
                   type="button"
                   onClick={goToNext}
-                  className="pointer-events-auto w-10 h-10 rounded-full bg-[#07131F]/70 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/25 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xl"
+                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-[#F28C28] text-white flex items-center justify-center transition-colors active:scale-95"
                   aria-label="Next slide"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
-
-              {/* Bottom Caption Overlay */}
-              <div className="absolute bottom-3 left-3 right-3 bg-[#07131F]/85 backdrop-blur-md p-3 rounded-xl border border-white/15 text-xs z-20 shadow-lg">
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="font-bold text-white flex items-center gap-1.5 truncate">
-                    <Factory className="w-3.5 h-3.5 text-[#F28C28] shrink-0" />
-                    <span className="truncate">{currentSlide.subtitle || "Kwality Gas Bottlers"}</span>
-                  </span>
-                  <span className="text-[#F28C28] font-bold shrink-0 ml-2">
-                    Slide {currentIndex + 1} of {activeSlides.length}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Slider Indicator Controls below image on mobile/desktop */}
-            <div className="mt-4 flex items-center justify-between gap-4">
-              {/* Dot Indicators */}
-              <div className="flex items-center gap-2">
-                {activeSlides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => goToSlide(idx)}
-                    className={`transition-all duration-300 rounded-full ${
-                      idx === currentIndex
-                        ? "w-8 h-2.5 bg-[#F28C28]"
-                        : "w-2.5 h-2.5 bg-white/30 hover:bg-white/60"
-                    }`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                    aria-current={idx === currentIndex ? "true" : "false"}
-                  />
-                ))}
-              </div>
-
-              {/* Pause / Autoplay Indicator & Slide Title */}
-              <div className="text-[11px] text-slate-400 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="hidden sm:inline">
-                  {isPaused ? "Paused on hover" : "Autoplay active"}
-                </span>
-                <span className="text-slate-600 hidden sm:inline">|</span>
-                <span className="font-mono text-white text-[10px] uppercase font-bold">
-                  {currentSlide.slideKey || `Slide ${currentIndex + 1}`}
-                </span>
-              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Bottom Key Value Bar */}
-      <div className="relative z-30 bg-[#07131F] border-t border-white/10 py-4 px-4 overflow-hidden">
+      {/* =========================================================================
+          BOTTOM CORPORATE CREDIBILITY BAR: 4 SOLID ENERGY PILLARS
+          ========================================================================= */}
+      <div className="relative z-30 bg-[#06121E] border-t border-b border-white/10 py-5 px-4 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-white text-xs">
-          <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border border-white/5">
-            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-[#F28C28] shrink-0">
-              <Scale className="w-4 h-4" />
+          <div className="flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.04] border border-white/10 shadow-xs hover:border-[#F28C28]/40 transition-colors">
+            <div className="w-10 h-10 rounded-xl bg-[#F28C28]/15 border border-[#F28C28]/30 flex items-center justify-center text-[#F28C28] shrink-0">
+              <Scale className="w-5 h-5" />
             </div>
             <div>
-              <strong className="block font-bold text-slate-100">100% Certified Tare Weight</strong>
-              <span className="text-slate-400 text-[11px]">Zero-tolerance digital verification</span>
+              <strong className="block font-bold text-white text-xs sm:text-sm">100% Certified Tare Weight</strong>
+              <span className="text-slate-400 text-[11px] block mt-0.5">Zero-tolerance digital verification</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border border-white/5">
-            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 shrink-0">
-              <Factory className="w-4 h-4" />
+          <div className="flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.04] border border-white/10 shadow-xs hover:border-emerald-500/40 transition-colors">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+              <Factory className="w-5 h-5" />
             </div>
             <div>
-              <strong className="block font-bold text-slate-100">3 Modern Bottling Hubs</strong>
-              <span className="text-slate-400 text-[11px]">Hosur • Chennai • Dharwad</span>
+              <strong className="block font-bold text-white text-xs sm:text-sm">3 Modern Bottling Hubs</strong>
+              <span className="text-slate-400 text-[11px] block mt-0.5">Hosur • Chennai • Dharwad</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border border-white/5">
-            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-amber-400 shrink-0">
-              <Award className="w-4 h-4" />
+          <div className="flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.04] border border-white/10 shadow-xs hover:border-amber-500/40 transition-colors">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+              <Award className="w-5 h-5" />
             </div>
             <div>
-              <strong className="block font-bold text-slate-100">Grade 1 Rating by CARE</strong>
-              <span className="text-slate-400 text-[11px]">Highest safety audit score</span>
+              <strong className="block font-bold text-white text-xs sm:text-sm">Grade 1 Rating by CARE</strong>
+              <span className="text-slate-400 text-[11px] block mt-0.5">Highest safety audit score</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border border-white/5">
-            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-blue-400 shrink-0">
-              <Flame className="w-4 h-4" />
+          <div className="flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.04] border border-white/10 shadow-xs hover:border-sky-500/40 transition-colors">
+            <div className="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 shrink-0">
+              <Flame className="w-5 h-5" />
             </div>
             <div>
-              <strong className="block font-bold text-slate-100">Pure Blue-Flame LPG</strong>
-              <span className="text-slate-400 text-[11px]">Clean burning with zero soot</span>
+              <strong className="block font-bold text-white text-xs sm:text-sm">Pure Blue-Flame LPG</strong>
+              <span className="text-slate-400 text-[11px] block mt-0.5">Clean burning with zero soot</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
