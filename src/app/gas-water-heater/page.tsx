@@ -82,29 +82,31 @@ export default function GasWaterHeaterPage() {
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
+      {/* Hero Banner */}
+      <section className="relative bg-[#07131F] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-slate-800">
+        <div className="absolute inset-0 bg-grid-pattern-dark opacity-40 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#1769AA]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Official Household Energy Appliance</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             Kwality Gas Water Heater (Gas Geyser)
           </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
             Instant continuous hot water engineered with 8 multi-stage safety protection devices, pure copper heat exchangers, and dual seasonal gas saving switches.
           </p>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Top Product Hero Block */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-card mb-16">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-card mb-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Image (5 cols) */}
             <div className="lg:col-span-5">
-              <div className="relative bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-2xl p-6 border border-slate-200">
+              <div className="relative bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-2xl p-6 border border-slate-200/80 shadow-xs">
                 <div className="relative w-full h-80 sm:h-96">
                   <Image
                     src="/images/corporate/product-gas-geyser.jpg"
@@ -115,8 +117,8 @@ export default function GasWaterHeaterPage() {
                   />
                 </div>
                 <div className="mt-4 text-center">
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-slate-700 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-white px-3.5 py-1.5 rounded-full border border-slate-200/80 shadow-xs">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                     <span>Pure Oxygen-Free Copper Heat Exchanger</span>
                   </span>
                 </div>
@@ -126,10 +128,10 @@ export default function GasWaterHeaterPage() {
             {/* Overview & Quick Specs (7 cols) */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-xs font-extrabold uppercase text-[#F28C28] tracking-wider">
+                <span className="text-xs font-extrabold uppercase text-[#F28C28] tracking-wider block">
                   Model: Kwality Instant-Flow 6L
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-[#102A43] mt-1">
+                <h2 className="text-2xl sm:text-3xl font-black text-[#102A43] mt-1 tracking-tight">
                   Energy-Efficient Domestic Hot Water
                 </h2>
                 <p className="text-sm text-slate-600 mt-2 leading-relaxed">
@@ -138,38 +140,38 @@ export default function GasWaterHeaterPage() {
               </div>
 
               {/* Comparison Matrix */}
-              <div className="bg-slate-50 rounded-2xl p-5 border border-slate-200/80">
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">
+              <div className="bg-slate-50/80 rounded-2xl p-5 sm:p-6 border border-slate-200/80">
+                <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider mb-3.5">
                   Why Switch from Electric Geysers to Kwality Gas Geyser?
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div className="space-y-1.5">
-                    <div className="font-bold text-[#102A43] flex items-center gap-1">
-                      <Check className="w-4 h-4 text-emerald-600" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+                  <div className="space-y-1">
+                    <div className="font-bold text-[#102A43] flex items-center gap-1.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Instant On-Demand Flow</span>
                     </div>
-                    <p className="text-slate-500 pl-5">No waiting for tanks to heat up</p>
+                    <p className="text-slate-500 pl-5.5 leading-relaxed">No waiting for tanks to heat up</p>
                   </div>
-                  <div className="space-y-1.5">
-                    <div className="font-bold text-[#102A43] flex items-center gap-1">
-                      <Check className="w-4 h-4 text-emerald-600" />
+                  <div className="space-y-1">
+                    <div className="font-bold text-[#102A43] flex items-center gap-1.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Up to 60% Cost Reduction</span>
                     </div>
-                    <p className="text-slate-500 pl-5">LPG costs far less per liter than electricity</p>
+                    <p className="text-slate-500 pl-5.5 leading-relaxed">LPG costs far less per liter than electricity</p>
                   </div>
-                  <div className="space-y-1.5">
-                    <div className="font-bold text-[#102A43] flex items-center gap-1">
-                      <Check className="w-4 h-4 text-emerald-600" />
+                  <div className="space-y-1">
+                    <div className="font-bold text-[#102A43] flex items-center gap-1.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Works During Power Cuts</span>
                     </div>
-                    <p className="text-slate-500 pl-5">Operates on 2x D-size batteries & LPG</p>
+                    <p className="text-slate-500 pl-5.5 leading-relaxed">Operates on 2x D-size batteries & LPG</p>
                   </div>
-                  <div className="space-y-1.5">
-                    <div className="font-bold text-[#102A43] flex items-center gap-1">
-                      <Check className="w-4 h-4 text-emerald-600" />
+                  <div className="space-y-1">
+                    <div className="font-bold text-[#102A43] flex items-center gap-1.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Zero Standing Heat Loss</span>
                     </div>
-                    <p className="text-slate-500 pl-5">Only burns gas while water is running</p>
+                    <p className="text-slate-500 pl-5.5 leading-relaxed">Only burns gas while water is running</p>
                   </div>
                 </div>
               </div>
@@ -178,12 +180,12 @@ export default function GasWaterHeaterPage() {
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <a
                   href="tel:+917899787101"
-                  className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
+                  className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm hover:shadow-md hover:scale-[1.02] transition-all"
                 >
                   <Phone className="w-4 h-4" />
                   <span>Call to Order: +91 78997 87101</span>
                 </a>
-                <span className="text-xs text-slate-500">Free installation guidance included</span>
+                <span className="text-xs text-slate-500 font-medium">Free installation guidance included</span>
               </div>
             </div>
           </div>
@@ -191,15 +193,15 @@ export default function GasWaterHeaterPage() {
 
         {/* 8 Authentic Safety Features Grid */}
         <div className="mb-16">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-3 border border-blue-100/60">
               <ShieldCheck className="w-3.5 h-3.5 text-[#F28C28]" />
               <span>Multi-Stage Protection</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#102A43] tracking-tight">
               8 Standard Safety Devices
             </h2>
-            <p className="mt-2 text-slate-600 text-sm">
+            <p className="mt-3 text-slate-600 text-sm max-w-xl mx-auto leading-relaxed">
               Your family's safety is built directly into every component of the Kwality Gas Water Heater.
             </p>
           </div>
@@ -208,18 +210,18 @@ export default function GasWaterHeaterPage() {
             {specs.map((sp, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-5 border border-slate-200/80 hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex flex-col justify-between"
+                className="bg-white rounded-3xl p-6 border border-slate-200/80 hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-100">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-11 h-11 rounded-2xl bg-slate-50 flex items-center justify-center border border-slate-100 group-hover:bg-blue-50 group-hover:border-blue-100 transition-colors">
                       {sp.icon}
                     </div>
-                    <span className="text-xs font-black text-slate-400 font-mono">
+                    <span className="text-xs font-black text-slate-300 font-mono group-hover:text-[#1769AA] transition-colors">
                       {sp.num}
                     </span>
                   </div>
-                  <h3 className="font-bold text-slate-900 text-sm mb-2">
+                  <h3 className="font-bold text-slate-900 text-sm mb-2 group-hover:text-[#1769AA] transition-colors">
                     {sp.title}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed">
@@ -232,9 +234,11 @@ export default function GasWaterHeaterPage() {
         </div>
 
         {/* Safety Installation Notice */}
-        <div className="bg-amber-50 rounded-2xl p-6 border border-amber-200/80 mb-16 flex items-start gap-4">
-          <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
-          <div className="space-y-1">
+        <div className="bg-amber-50/90 rounded-3xl p-6 sm:p-8 border border-amber-200/90 mb-16 flex items-start gap-4 shadow-xs">
+          <div className="w-10 h-10 rounded-2xl bg-amber-100 border border-amber-200 flex items-center justify-center shrink-0 mt-0.5">
+            <AlertTriangle className="w-5 h-5 text-amber-600" />
+          </div>
+          <div className="space-y-1.5">
             <h4 className="font-bold text-amber-900 text-sm">
               Important Mandatory Installation Notice:
             </h4>
@@ -245,13 +249,16 @@ export default function GasWaterHeaterPage() {
         </div>
 
         {/* Enquiry Form */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-card">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-card">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-black text-[#102A43]">
+              <span className="text-xs font-extrabold text-[#F28C28] uppercase tracking-wider block mb-1">
+                Direct Booking
+              </span>
+              <h3 className="text-2xl font-black text-[#102A43] tracking-tight">
                 Order Your Kwality Gas Geyser
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
                 Fill out the quick form below. Our customer care desk will contact you to confirm delivery, cylinder connection, and technician dispatch.
               </p>
             </div>

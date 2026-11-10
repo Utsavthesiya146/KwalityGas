@@ -14,24 +14,26 @@ export const dynamic = "force-dynamic";
 export default function PrivacyPolicyPage() {
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3">
+      {/* Hero Banner */}
+      <section className="relative bg-[#07131F] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-slate-800">
+        <div className="absolute inset-0 bg-grid-pattern-dark opacity-40 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#1769AA]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
             <Lock className="w-3.5 h-3.5" />
             <span>Data Privacy & Trust</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             Privacy Policy
           </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
             How Kwality Gas Bottlers Private Limited collects, safeguards, and utilizes customer contact information and transactional supply records.
           </p>
         </div>
-      </div>
+      </section>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-card space-y-8 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-card space-y-8 text-xs sm:text-sm text-slate-700 leading-relaxed">
           <div className="border-b border-slate-100 pb-4">
             <span className="text-xs font-mono text-slate-400">Effective Date: Current Calendar Year</span>
             <h2 className="text-xl font-bold text-[#102A43] mt-1">
@@ -71,12 +73,12 @@ export default function PrivacyPolicyPage() {
             <p>
               If you have inquiries regarding your customer record or wish to update your registered delivery address, please contact our administrative desk:
             </p>
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-1 text-xs">
-              <div><strong>Company:</strong> Kwality Gas Bottlers Private Limited</div>
-              <div><strong>CIN:</strong> U01120KA2005PTC036860</div>
-              <div><strong>Address:</strong> 2nd Floor, Above Syndicate Bank, Magadi Chord Road, Vijayanagar, Bangalore - 560040</div>
-              <div><strong>Email:</strong> kwalitygasmarketing@gmail.com</div>
-              <div><strong>Phone:</strong> +91 80 2340 0459 / +91 78997 87101</div>
+            <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200/80 space-y-1.5 text-xs">
+              <div><strong className="text-slate-900">Company:</strong> Kwality Gas Bottlers Private Limited</div>
+              <div><strong className="text-slate-900">CIN:</strong> U01120KA2005PTC036860</div>
+              <div><strong className="text-slate-900">Address:</strong> 2nd Floor, Above Syndicate Bank, Magadi Chord Road, Vijayanagar, Bangalore - 560040</div>
+              <div><strong className="text-slate-900">Email:</strong> <a href="mailto:kwalitygasmarketing@gmail.com" className="text-[#1769AA] hover:underline">kwalitygasmarketing@gmail.com</a></div>
+              <div><strong className="text-slate-900">Phone:</strong> +91 80 2340 0459 / +91 78997 87101</div>
             </div>
           </div>
         </div>

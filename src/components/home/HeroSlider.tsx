@@ -227,7 +227,7 @@ export default function HeroSlider({
 
   return (
     <section
-      className="relative w-full bg-[#0A192F] text-white overflow-hidden select-none"
+      className="relative w-full bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white overflow-hidden select-none"
       role="region"
       aria-roledescription="carousel"
       aria-label="Kwality Gas Corporate Overview Slideshow"
@@ -238,10 +238,11 @@ export default function HeroSlider({
       onTouchEnd={handleTouchEnd}
     >
       {/* Subtle Ambient Lighting Overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#F28C28]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main 50/50 Balanced Hero Container */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 sm:pt-12 sm:pb-16 lg:pt-14 lg:pb-16 min-h-[580px] lg:min-h-[520px] flex flex-col justify-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-14 sm:pt-14 sm:pb-16 lg:pt-16 lg:pb-18 min-h-[580px] lg:min-h-[540px] flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Corporate Narrative & CTAs (7 cols) */}
@@ -249,21 +250,21 @@ export default function HeroSlider({
             
             {/* Top Pill Bar with Category Badge & Slide Counter */}
             <div className="flex items-center gap-3 flex-wrap">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold tracking-wider uppercase backdrop-blur-md border border-white/15">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold tracking-wider uppercase backdrop-blur-md border border-white/15 shadow-xs">
                 <Flame className="w-3.5 h-3.5 fill-[#F28C28] shrink-0" />
                 <span>{currentSlide.subtitle || "Grade 1 Rated • CARE MDRA Certified"}</span>
               </div>
 
               {/* Slide Counter Badge */}
-              <div className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-slate-400 bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
+              <div className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-slate-300 bg-white/5 px-3 py-1 rounded-full border border-white/10">
                 <span className="text-white">0{currentIndex + 1}</span>
-                <span>/</span>
+                <span className="text-slate-500">/</span>
                 <span>0{activeSlides.length}</span>
               </div>
             </div>
 
             {/* Main Headline with Smooth Transition */}
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.15] break-words transition-opacity duration-300 min-h-[64px] sm:min-h-[88px] lg:min-h-[110px] flex items-center">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.14] break-words transition-opacity duration-300 min-h-[64px] sm:min-h-[88px] lg:min-h-[110px] flex items-center">
               {currentSlide.title}
             </h1>
 
@@ -273,12 +274,12 @@ export default function HeroSlider({
             </p>
 
             {/* Two Clear CTA Buttons */}
-            <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 max-w-md">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 max-w-md">
               {currentSlide.ctaLink.startsWith("MODAL_") ? (
                 <button
                   type="button"
                   onClick={() => handleCtaClick(currentSlide.ctaLink)}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#F28C28] hover:bg-[#D9771A] text-white px-5 py-3 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#F28C28] to-[#EA580C] hover:from-[#E65100] hover:to-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
                 >
                   <span>{currentSlide.ctaText}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -286,7 +287,7 @@ export default function HeroSlider({
               ) : (
                 <Link
                   href={currentSlide.ctaLink}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#F28C28] hover:bg-[#D9771A] text-white px-5 py-3 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#F28C28] to-[#EA580C] hover:from-[#E65100] hover:to-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
                 >
                   <span>{currentSlide.ctaText}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -296,7 +297,7 @@ export default function HeroSlider({
               {currentSlide.secondaryText && currentSlide.secondaryLink && (
                 <Link
                   href={currentSlide.secondaryLink}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-3 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md px-5 py-3.5 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200"
                 >
                   <span>{currentSlide.secondaryText}</span>
                 </Link>
@@ -307,30 +308,30 @@ export default function HeroSlider({
             <div className="pt-1">
               <a
                 href="tel:+917899787101"
-                className="inline-flex items-center gap-2 text-slate-300 hover:text-white text-xs font-semibold transition-colors"
+                className="inline-flex items-center gap-2 text-slate-300 hover:text-white text-xs font-semibold transition-colors group"
               >
-                <PhoneCall className="w-3.5 h-3.5 text-[#F28C28]" />
+                <PhoneCall className="w-3.5 h-3.5 text-[#F28C28] group-hover:scale-110 transition-transform" />
                 <span>Helpline: +91 78997 87101</span>
               </a>
             </div>
 
             {/* 3 Quick Inline Proof Points */}
-            <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5 text-xs text-slate-300">
+            <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-6 text-xs text-slate-300">
               {currentSlide.proofPoint1 && (
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>{currentSlide.proofPoint1}</span>
                 </div>
               )}
               {currentSlide.proofPoint2 && (
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>{currentSlide.proofPoint2}</span>
                 </div>
               )}
               {currentSlide.proofPoint3 && (
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>{currentSlide.proofPoint3}</span>
                 </div>
               )}
@@ -339,7 +340,7 @@ export default function HeroSlider({
 
           {/* Right Column: High-Quality LPG Photograph with Overlaid Controls (5 cols) */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl aspect-[4/3] bg-slate-900 group">
+            <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] aspect-[4/3] bg-slate-900 group">
               {/* Slide Images */}
               {activeSlides.map((slide, idx) => (
                 <div
@@ -355,9 +356,9 @@ export default function HeroSlider({
                     alt={slide.title}
                     fill
                     priority={idx === 0}
-                    className="object-cover object-center group-hover:scale-102 transition-transform duration-700"
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F]/85 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#06121E]/90 via-[#06121E]/20 to-transparent" />
                 </div>
               ))}
 
@@ -366,7 +367,7 @@ export default function HeroSlider({
                 <button
                   type="button"
                   onClick={goToPrev}
-                  className="pointer-events-auto w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0A192F]/70 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-lg"
+                  className="pointer-events-auto w-10 h-10 rounded-full bg-[#07131F]/70 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/25 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xl"
                   aria-label="Previous slide"
                 >
                   <ChevronLeft className="w-5 h-5" />
@@ -375,7 +376,7 @@ export default function HeroSlider({
                 <button
                   type="button"
                   onClick={goToNext}
-                  className="pointer-events-auto w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0A192F]/70 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-lg"
+                  className="pointer-events-auto w-10 h-10 rounded-full bg-[#07131F]/70 hover:bg-[#F28C28] text-white backdrop-blur-md border border-white/25 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xl"
                   aria-label="Next slide"
                 >
                   <ChevronRight className="w-5 h-5" />
@@ -383,7 +384,7 @@ export default function HeroSlider({
               </div>
 
               {/* Bottom Caption Overlay */}
-              <div className="absolute bottom-3 left-3 right-3 bg-[#0A192F]/85 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border border-white/15 text-xs z-20">
+              <div className="absolute bottom-3 left-3 right-3 bg-[#07131F]/85 backdrop-blur-md p-3 rounded-xl border border-white/15 text-xs z-20 shadow-lg">
                 <div className="flex items-center justify-between text-[11px]">
                   <span className="font-bold text-white flex items-center gap-1.5 truncate">
                     <Factory className="w-3.5 h-3.5 text-[#F28C28] shrink-0" />
@@ -433,11 +434,11 @@ export default function HeroSlider({
       </div>
 
       {/* Bottom Key Value Bar */}
-      <div className="relative z-30 bg-[#081624] border-t border-white/10 py-3.5 px-4 overflow-hidden">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 text-white text-xs">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-[#F28C28] shrink-0">
-              <Scale className="w-3.5 h-3.5" />
+      <div className="relative z-30 bg-[#07131F] border-t border-white/10 py-4 px-4 overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-white text-xs">
+          <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border border-white/5">
+            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-[#F28C28] shrink-0">
+              <Scale className="w-4 h-4" />
             </div>
             <div>
               <strong className="block font-bold text-slate-100">100% Certified Tare Weight</strong>
@@ -445,9 +446,9 @@ export default function HeroSlider({
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 shrink-0">
-              <Factory className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border border-white/5">
+            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 shrink-0">
+              <Factory className="w-4 h-4" />
             </div>
             <div>
               <strong className="block font-bold text-slate-100">3 Modern Bottling Hubs</strong>
@@ -455,9 +456,9 @@ export default function HeroSlider({
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-amber-400 shrink-0">
-              <Award className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border border-white/5">
+            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-amber-400 shrink-0">
+              <Award className="w-4 h-4" />
             </div>
             <div>
               <strong className="block font-bold text-slate-100">Grade 1 Rating by CARE</strong>
@@ -465,9 +466,9 @@ export default function HeroSlider({
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-blue-400 shrink-0">
-              <Flame className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.03] border border-white/5">
+            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-blue-400 shrink-0">
+              <Flame className="w-4 h-4" />
             </div>
             <div>
               <strong className="block font-bold text-slate-100">Pure Blue-Flame LPG</strong>

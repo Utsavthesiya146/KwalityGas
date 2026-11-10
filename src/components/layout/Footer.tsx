@@ -84,35 +84,37 @@ export default async function Footer() {
   const developerUrl = process.env.NEXT_PUBLIC_DEVELOPER_URL || null;
 
   return (
-    <footer className="bg-[#0B1D2F] text-slate-300 border-t border-white/10 selection:bg-[#F28C28] selection:text-white">
+    <footer className="bg-[#050D15] text-slate-300 border-t border-slate-800/80 selection:bg-[#F28C28] selection:text-white">
       {/* Pre-Footer Action Banner */}
-      <div className="bg-gradient-to-r from-[#102A43] via-[#1769AA] to-[#0B1D2F] text-white py-10 px-4 border-b border-white/10">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-4 text-center lg:text-left">
-            <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0 mx-auto border border-white/20 shadow-inner">
+      <div className="relative bg-gradient-to-r from-[#07131F] via-[#102A43] to-[#07131F] text-white py-12 px-4 border-b border-slate-800/80 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern-dark opacity-35 pointer-events-none" />
+        <div className="absolute top-0 right-1/3 w-80 h-80 bg-[#1769AA]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10 flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-5 text-center lg:text-left">
+            <div className="w-14 h-14 bg-gradient-to-br from-orange-500/20 to-orange-500/10 rounded-2xl flex items-center justify-center shrink-0 mx-auto border border-orange-500/30 shadow-inner">
               <Flame className="w-8 h-8 text-[#F28C28] fill-[#F28C28]" />
             </div>
             <div>
-              <h4 className="text-white font-black text-xl sm:text-2xl tracking-tight">
+              <h4 className="text-white font-black text-xl sm:text-2xl tracking-tight leading-snug">
                 Immediate Domestic Refill or Bulk Commercial Gas Connection?
               </h4>
-              <p className="text-xs sm:text-sm text-blue-100 mt-1 max-w-2xl">
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
                 Grade 1 Rated bottling infrastructure with 30,000 MTPA storage, guaranteed blue flame efficiency, and prompt delivery across Karnataka & Tamil Nadu.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3.5 flex-shrink-0">
+          <div className="flex flex-wrap items-center justify-center gap-3.5 shrink-0">
             <a
               href="tel:+917899787101"
-              className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3.5 rounded-xl text-sm font-extrabold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all"
+              className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3.5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all"
             >
               <Phone className="w-4 h-4" />
               <span>Call 24/7 Hotline: +91 78997 87101</span>
             </a>
             <Link
               href="/price-list"
-              className="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-3.5 rounded-xl text-sm font-bold transition-all hover:border-white/40"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-3.5 rounded-xl text-xs sm:text-sm font-bold transition-all hover:border-white/40"
             >
               Check Live Rates
             </Link>
@@ -136,17 +138,17 @@ export default async function Footer() {
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
               Kwality Gas Bottlers Private Limited is an ISO 9001:2015 certified, Grade 1 Rated LPG bottling and distribution corporation. We operate 3 advanced automated facilities with 30,000 MTPA storage and 8,000 cylinders/day throughput.
             </p>
 
             {/* Quality Badges */}
             <div className="grid grid-cols-2 gap-2.5 text-xs pt-1">
-              <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-xs">
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-3.5 backdrop-blur-xs">
                 <div className="text-[#F28C28] font-black tracking-wide text-xs">CARE Grade 1 Rated</div>
                 <div className="text-[11px] text-slate-400 mt-0.5">Highest Safety & Credit Evaluation</div>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-xs">
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-3.5 backdrop-blur-xs">
                 <div className="text-white font-black tracking-wide text-xs">International Era Award</div>
                 <div className="text-[11px] text-slate-400 mt-0.5">Geneva, Switzerland (2015)</div>
               </div>
@@ -191,43 +193,43 @@ export default async function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
-                <Link href="/domestic" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/domestic" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-[#F28C28] group-hover:translate-x-0.5 transition-transform" />
                   <span>Domestic LPG (12kg, 5.5kg, 4kg)</span>
                 </Link>
               </li>
               <li>
-                <Link href="/commercial" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/commercial" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-[#F28C28] group-hover:translate-x-0.5 transition-transform" />
                   <span>Commercial LPG (17kg, 21kg HORECA)</span>
                 </Link>
               </li>
               <li>
-                <Link href="/industrial" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/industrial" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-[#F28C28] group-hover:translate-x-0.5 transition-transform" />
                   <span>Industrial LPG (33kg Manifold LOT)</span>
                 </Link>
               </li>
               <li>
-                <Link href="/cylinders" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/cylinders" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-[#F28C28] group-hover:translate-x-0.5 transition-transform" />
                   <span>Heavy-Duty Cylinders Catalog</span>
                 </Link>
               </li>
               <li>
-                <Link href="/gas-water-heater" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/gas-water-heater" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-[#F28C28] group-hover:translate-x-0.5 transition-transform" />
                   <span>Instant Gas Geysers (8 Safety Devices)</span>
                 </Link>
               </li>
               <li>
-                <Link href="/safety-devices" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/safety-devices" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-[#F28C28] group-hover:translate-x-0.5 transition-transform" />
                   <span>Safety Devices & Auto Shut-Offs</span>
                 </Link>
               </li>
               <li>
-                <Link href="/accessories" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/accessories" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-[#F28C28] group-hover:translate-x-0.5 transition-transform" />
                   <span>Certified Regulators & IS 9573 Tubing</span>
                 </Link>
@@ -243,49 +245,49 @@ export default async function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
-                <Link href="/about" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/about" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>About Us</span>
                 </Link>
               </li>
               <li>
-                <Link href="/group-company" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/group-company" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>Group Company</span>
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/services" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>Technical Services</span>
                 </Link>
               </li>
               <li>
-                <Link href="/price-list" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/price-list" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>Verified Price List</span>
                 </Link>
               </li>
               <li>
-                <Link href="/safety-features" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/safety-features" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>Safety Protocols</span>
                 </Link>
               </li>
               <li>
-                <Link href="/testimonials" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/testimonials" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>Client Testimonials</span>
                 </Link>
               </li>
               <li>
-                <Link href="/gallery" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/gallery" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>Plant Gallery</span>
                 </Link>
               </li>
               <li>
-                <Link href="/privacy-policy" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                <Link href="/privacy-policy" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>Privacy Policy</span>
                 </Link>
@@ -302,37 +304,37 @@ export default async function Footer() {
             
             <div className="space-y-3.5 text-xs sm:text-sm">
               <div className="flex items-start gap-2.5">
-                <Building className="w-4 h-4 text-[#F28C28] flex-shrink-0 mt-0.5" />
+                <Building className="w-4 h-4 text-[#F28C28] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white block text-xs">Bengaluru Corporate Offices:</strong>
-                  <span className="text-slate-300 text-xs block leading-relaxed">
+                  <span className="text-slate-400 text-xs block leading-relaxed mt-0.5">
                     • Regd: V M C House, D-41, 3rd Flr, Rajajinagar Ind. Estate, Bangalore - 560044
                   </span>
-                  <span className="text-slate-300 text-xs block leading-relaxed mt-1">
+                  <span className="text-slate-400 text-xs block leading-relaxed mt-1">
                     • Mktg: 2nd Flr, Above Syndicate Bank, Magadi Chord Rd, Vijayanagar, Bangalore - 560040
                   </span>
                 </div>
               </div>
 
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#1769AA] flex-shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#1769AA] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white block text-xs">Automated Bottling Plants:</strong>
-                  <span className="text-slate-300 text-xs block leading-relaxed">
+                  <span className="text-slate-400 text-xs block leading-relaxed mt-0.5">
                     • Hosur LPG Plant (Tamil Nadu)
                   </span>
-                  <span className="text-slate-300 text-xs block leading-relaxed">
+                  <span className="text-slate-400 text-xs block leading-relaxed">
                     • Chennai Bottling Facility (Tamil Nadu)
                   </span>
-                  <span className="text-slate-300 text-xs block leading-relaxed">
+                  <span className="text-slate-400 text-xs block leading-relaxed">
                     • Dharwad LPG Plant (Karnataka)
                   </span>
                 </div>
               </div>
 
-              <div className="pt-1 space-y-2 border-t border-white/10">
+              <div className="pt-2 space-y-2 border-t border-white/10">
                 <div className="flex items-center gap-2.5">
-                  <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                  <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
                   <div className="text-xs">
                     <span className="text-slate-400">Marketing Hotline: </span>
                     <a href="tel:+917899787101" className="text-white font-bold hover:text-[#F28C28] transition-colors">
@@ -342,7 +344,7 @@ export default async function Footer() {
                 </div>
 
                 <div className="flex items-center gap-2.5">
-                  <Phone className="w-4 h-4 text-[#1769AA] flex-shrink-0" />
+                  <Phone className="w-4 h-4 text-[#1769AA] shrink-0" />
                   <div className="text-xs">
                     <span className="text-slate-400">Board Office: </span>
                     <a href="tel:+918023400459" className="text-white font-bold hover:text-[#F28C28] transition-colors">
@@ -352,9 +354,9 @@ export default async function Footer() {
                 </div>
 
                 <div className="flex items-center gap-2.5">
-                  <Mail className="w-4 h-4 text-[#F28C28] flex-shrink-0" />
+                  <Mail className="w-4 h-4 text-[#F28C28] shrink-0" />
                   <div className="text-xs">
-                    <a href="mailto:kwalitygasmarketing@gmail.com" className="text-slate-300 hover:text-white transition-colors truncate block">
+                    <a href="mailto:kwalitygasmarketing@gmail.com" className="text-slate-400 hover:text-white transition-colors truncate block">
                       kwalitygasmarketing@gmail.com
                     </a>
                   </div>

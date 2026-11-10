@@ -43,36 +43,40 @@ export default function DomesticContactPage() {
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
+      {/* Hero Banner */}
+      <section className="relative bg-[#07131F] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-slate-800">
+        <div className="absolute inset-0 bg-grid-pattern-dark opacity-40 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#1769AA]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
             <Home className="w-3.5 h-3.5" />
             <span>Domestic Household Onboarding</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             Book a New Domestic LPG Connection
           </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
             Hassle-free household gas connections without lengthy waitlists. Get your 12kg or 5.5kg cylinder delivered directly to your kitchen in 24 to 48 hours.
           </p>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Left Column: Requirements & Advantages (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             {/* Quick 3-step process */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
-              <h3 className="font-bold text-slate-900 text-base mb-4 flex items-center gap-2">
-                <Truck className="w-5 h-5 text-[#F28C28]" />
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card">
+              <h3 className="font-black text-slate-900 text-base mb-5 flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center shrink-0">
+                  <Truck className="w-4 h-4 text-[#F28C28]" />
+                </div>
                 <span>Simple 3-Step Connection</span>
               </h3>
               <div className="space-y-4">
                 {steps.map((st, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="w-7 h-7 rounded-full bg-orange-50 text-[#F28C28] font-black text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-orange-200">
+                  <div key={idx} className="flex items-start gap-3.5">
+                    <div className="w-8 h-8 rounded-xl bg-orange-50 text-[#F28C28] font-black text-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-orange-200 shadow-2xs">
                       {st.num}
                     </div>
                     <div>
@@ -85,21 +89,23 @@ export default function DomesticContactPage() {
             </div>
 
             {/* Checklist Card */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
-              <h3 className="font-bold text-slate-900 text-base mb-3 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-[#1769AA]" />
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-card">
+              <h3 className="font-black text-slate-900 text-base mb-4 flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+                  <FileText className="w-4 h-4 text-[#1769AA]" />
+                </div>
                 <span>Documents Required</span>
               </h3>
-              <ul className="space-y-2 text-xs text-slate-700">
-                <li className="flex items-center gap-2">
+              <ul className="space-y-2.5 text-xs text-slate-700 font-medium">
+                <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                   <span>Aadhaar Card / Voter ID / Passport (Any 1)</span>
                 </li>
-                <li className="flex items-center gap-2">
+                <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                   <span>Electricity Bill / Rent Agreement / Gas connection NOC</span>
                 </li>
-                <li className="flex items-center gap-2">
+                <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                   <span>1 Passport Size Photograph</span>
                 </li>
@@ -107,43 +113,46 @@ export default function DomesticContactPage() {
             </div>
 
             {/* Helpline Card */}
-            <div className="bg-gradient-to-br from-[#102A43] to-[#1769AA] text-white rounded-2xl p-6 shadow-sm">
-              <h4 className="font-bold text-white text-sm mb-1">
-                Prefer to Book via Phone?
-              </h4>
-              <p className="text-xs text-blue-100 mb-4">
-                Our domestic booking desk is open Monday to Saturday, 9:00 AM to 6:30 PM.
-              </p>
-              <div className="space-y-2">
-                <a
-                  href="tel:+917899787101"
-                  className="flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>Hotline: +91 78997 87101</span>
-                </a>
-                <a
-                  href="tel:+918023400459"
-                  className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl font-semibold text-xs transition-colors"
-                >
-                  <Phone className="w-3.5 h-3.5" />
-                  <span>Office: +91 80 2340 0459</span>
-                </a>
+            <div className="bg-gradient-to-br from-[#07131F] via-[#102A43] to-[#07131F] text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl relative overflow-hidden">
+              <div className="absolute inset-0 bg-grid-pattern-dark opacity-30 pointer-events-none" />
+              <div className="relative z-10">
+                <h4 className="font-black text-white text-base mb-1.5 tracking-tight">
+                  Prefer to Book via Phone?
+                </h4>
+                <p className="text-xs text-slate-300 mb-5 leading-relaxed">
+                  Our domestic booking desk is open Monday to Saturday, 9:00 AM to 6:30 PM.
+                </p>
+                <div className="space-y-2.5">
+                  <a
+                    href="tel:+917899787101"
+                    className="flex items-center gap-2.5 bg-[#F28C28] hover:bg-[#D9771A] text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-[1.02]"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>Hotline: +91 78997 87101</span>
+                  </a>
+                  <a
+                    href="tel:+918023400459"
+                    className="flex items-center gap-2.5 bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-2.5 rounded-xl font-semibold text-xs transition-all hover:border-white/40"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>Office: +91 80 2340 0459</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Right Column: Interactive Domestic Booking Form (7 cols) */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-card">
+            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-card">
               <div className="mb-8">
-                <span className="text-xs font-bold text-[#F28C28] uppercase tracking-wider">
+                <span className="text-xs font-extrabold text-[#F28C28] uppercase tracking-wider">
                   Express Registration
                 </span>
-                <h2 className="text-2xl font-black text-[#102A43] mt-1">
+                <h2 className="text-2xl sm:text-3xl font-black text-[#102A43] mt-1 tracking-tight">
                   Domestic Connection Form
                 </h2>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
                   Please provide your contact details and address. We will verify and confirm delivery slot.
                 </p>
               </div>

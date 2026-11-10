@@ -71,8 +71,8 @@ export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeater
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Product Imagery & Badges (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="relative bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-3xl p-8 border border-slate-200 shadow-card">
-              <div className="absolute top-4 right-4 bg-[#F28C28] text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+            <div className="relative bg-gradient-to-br from-slate-50 to-blue-50/40 rounded-3xl p-8 border border-slate-200 shadow-card">
+              <div className="absolute top-4 right-4 bg-gradient-to-r from-[#F28C28] to-[#EA580C] text-white text-[10px] font-black uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-sm">
                 8 Safety Devices
               </div>
 
@@ -86,18 +86,18 @@ export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeater
               </div>
 
               {/* Specs highlight strip */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 pt-4 border-t border-slate-200/80 text-center">
-                <div className="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
+              <div className="grid grid-cols-3 gap-2.5 mt-4 pt-4 border-t border-slate-200/80 text-center">
+                <div className="bg-white p-3 rounded-2xl border border-slate-100 shadow-xs">
                   <div className="text-sm font-black text-[#102A43]">Instant</div>
-                  <div className="text-[10px] text-slate-500">Hot Water</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Hot Water</div>
                 </div>
-                <div className="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
+                <div className="bg-white p-3 rounded-2xl border border-slate-100 shadow-xs">
                   <div className="text-sm font-black text-[#F28C28]">40% Gas</div>
-                  <div className="text-[10px] text-slate-500">Saving Switch</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Saving Switch</div>
                 </div>
-                <div className="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
+                <div className="bg-white p-3 rounded-2xl border border-slate-100 shadow-xs">
                   <div className="text-sm font-black text-emerald-600">1 Year</div>
-                  <div className="text-[10px] text-slate-500">Warranty</div>
+                  <div className="text-[10px] text-slate-500 font-medium">Warranty</div>
                 </div>
               </div>
             </div>
@@ -106,14 +106,14 @@ export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeater
           {/* Right Column: 8 Authentic Specifications (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-2.5">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-orange-50 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3 border border-orange-100/60">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Featured Energy Appliance</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-black text-[#102A43] tracking-tight">
                 Kwality Gas Water Heater (Geyser)
               </h2>
-              <p className="mt-2 text-slate-600 text-sm leading-relaxed">
+              <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
                 Engineered for maximum thermal efficiency and complete domestic safety. Replaces high electricity bills with instant, continuous hot water powered by Kwality LPG.
               </p>
             </div>
@@ -123,16 +123,16 @@ export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeater
               {specs.map((sp, idx) => (
                 <div
                   key={idx}
-                  className="bg-slate-50 rounded-xl p-3.5 border border-slate-200/80 hover:bg-white hover:border-[#1769AA]/40 hover:shadow-xs transition-all flex items-start gap-3"
+                  className="bg-slate-50 rounded-2xl p-4 border border-slate-200/80 hover:bg-white hover:border-[#1769AA]/40 hover:shadow-cardHover transition-all duration-200 flex items-start gap-3.5 group"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-white shadow-xs flex items-center justify-center flex-shrink-0 mt-0.5 border border-slate-100">
+                  <div className="w-9 h-9 rounded-xl bg-white shadow-xs flex items-center justify-center shrink-0 mt-0.5 border border-slate-100 group-hover:scale-105 transition-transform">
                     {sp.icon}
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm">
+                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-[#1769AA] transition-colors">
                       {sp.title}
                     </h4>
-                    <p className="text-[11px] text-slate-500 leading-snug mt-0.5">
+                    <p className="text-[11px] text-slate-500 leading-snug mt-1">
                       {sp.desc}
                     </p>
                   </div>
@@ -141,16 +141,16 @@ export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeater
             </div>
 
             {/* CTAs */}
-            <div className="pt-3 flex flex-wrap items-center gap-3">
+            <div className="pt-3 flex flex-wrap items-center gap-3.5">
               <button
                 onClick={() => onOpenEnquiry("DOMESTIC")}
-                className="bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
+                className="bg-gradient-to-r from-[#F28C28] to-[#EA580C] hover:from-[#E65100] hover:to-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 active:scale-95"
               >
                 Order Gas Geyser / Enquire
               </button>
               <Link
                 href="/gas-water-heater"
-                className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all"
+                className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 px-5 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
               >
                 <span>Read Full Technical Guide</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -162,4 +162,3 @@ export default function GasWaterHeaterShowcase({ onOpenEnquiry }: GasWaterHeater
     </section>
   );
 }
-

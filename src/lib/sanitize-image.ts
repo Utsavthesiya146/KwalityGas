@@ -50,6 +50,7 @@ const LEGACY_IMAGE_MAP: Record<string, string> = {
   "/images/original/why-img-1.jpg": "/images/corporate/hero-bottling-plant.jpg",
   "/images/original/why-img-2.jpg": "/images/corporate/service-delivery-truck.jpg",
   "/images/original/why-img-3.jpg": "/images/corporate/service-safety-audit.jpg",
+  "/images/original/IMG_20190903_182027.jpg": "/images/corporate/hero-bottling-plant.jpg",
 
   // Brand & Awards
   "/images/original/logo.jpg": "/images/brand/logo.jpg",
@@ -99,6 +100,11 @@ export function sanitizeImageUrl(url: string | null | undefined, defaultFallback
     return defaultFallback;
   }
 
+  // Guarantee that any unmapped non-corporate/non-brand asset maps to a valid modern visual
+  if (!trimmed.startsWith("/images/corporate/") && !trimmed.startsWith("/images/brand/") && !trimmed.includes("hostingbaba")) {
+    return defaultFallback;
+  }
+
   return trimmed;
 }
 
@@ -133,3 +139,4 @@ export function sanitizeService(s: any): any {
     imageUrl: sanitizeImageUrl(s.imageUrl || s.image, "/images/corporate/service-delivery-truck.jpg"),
   };
 }
+

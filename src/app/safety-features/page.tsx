@@ -58,37 +58,39 @@ export default function SafetyFeaturesPage() {
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3">
+      {/* Hero Banner */}
+      <section className="relative bg-[#07131F] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-slate-800">
+        <div className="absolute inset-0 bg-grid-pattern-dark opacity-40 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#1769AA]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Comprehensive Safety Handbook</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             LPG Safety Features & Protocols
           </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
             Safety is built into every cylinder we bottle. Follow these certified statutory guidelines to ensure zero accidents in your kitchen.
           </p>
         </div>
-      </div>
+      </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
         {/* Emergency Leak Callout Banner */}
-        <div className="bg-red-600 text-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="relative bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white rounded-3xl p-8 sm:p-10 shadow-xl overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 border border-red-500/50">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center shrink-0 mt-1">
+            <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center shrink-0 mt-1 shadow-inner">
               <AlertTriangle className="w-7 h-7 text-white" />
             </div>
             <div>
-              <span className="text-xs font-black uppercase tracking-wider text-red-200">
+              <span className="text-xs font-black uppercase tracking-wider text-red-200 block mb-1">
                 Immediate Emergency Assistance
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white mt-1">
+              <h2 className="text-2xl sm:text-3xl font-black text-white mt-1 tracking-tight">
                 Smell Gas? Follow Emergency Isolation Immediately
               </h2>
-              <p className="text-xs sm:text-sm text-red-100 mt-1 max-w-2xl">
+              <p className="text-xs sm:text-sm text-red-100 mt-2 max-w-2xl leading-relaxed">
                 Ethyl mercaptan odorant is added to LPG so even microscopic leaks are instantly detectable. Turn off the regulator and dial our emergency desk:
               </p>
             </div>
@@ -97,7 +99,7 @@ export default function SafetyFeaturesPage() {
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
             <a
               href="tel:+917899787101"
-              className="bg-white text-red-700 hover:bg-slate-100 px-6 py-3.5 rounded-xl font-black text-xs uppercase tracking-wider shadow transition-all flex items-center gap-2"
+              className="bg-white text-red-700 hover:bg-slate-100 px-6 py-3.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center gap-2"
             >
               <PhoneCall className="w-4 h-4" />
               <span>Call 24/7 Desk: +91 78997 87101</span>
@@ -106,12 +108,15 @@ export default function SafetyFeaturesPage() {
         </div>
 
         {/* 5-Step Action Protocol */}
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-card space-y-8">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-card space-y-8">
           <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-black text-[#102A43]">
+            <span className="text-xs font-extrabold text-[#F28C28] uppercase tracking-wider block mb-1">
+              Statutory Action Steps
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-black text-[#102A43] tracking-tight">
               What to Do in the Event of a Gas Leak
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
               Stay calm and follow these 5 certified procedures in sequence.
             </p>
           </div>
@@ -120,13 +125,13 @@ export default function SafetyFeaturesPage() {
             {emergencySteps.map((st, idx) => (
               <div
                 key={idx}
-                className="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 hover:bg-white hover:border-[#1769AA]/40 transition-all flex flex-col justify-between"
+                className="bg-slate-50/80 rounded-2xl p-5 sm:p-6 border border-slate-200/80 hover:bg-white hover:border-[#1769AA]/40 hover:shadow-cardHover transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
-                  <div className="w-8 h-8 rounded-lg bg-[#102A43] text-white flex items-center justify-center font-black text-xs mb-3 shadow-xs">
+                  <div className="w-9 h-9 rounded-xl bg-[#102A43] text-white flex items-center justify-center font-black text-xs mb-3.5 shadow-xs group-hover:bg-[#F28C28] transition-colors">
                     {st.num}
                   </div>
-                  <h4 className="font-bold text-slate-900 text-sm mb-1.5 leading-snug">
+                  <h4 className="font-bold text-slate-900 text-sm mb-2 leading-snug group-hover:text-[#1769AA] transition-colors">
                     {st.title}
                   </h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
@@ -139,12 +144,15 @@ export default function SafetyFeaturesPage() {
         </div>
 
         {/* Cylinder Handling Rules Grid */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-black text-[#102A43]">
+            <span className="text-xs font-extrabold text-[#1769AA] uppercase tracking-wider block mb-1">
+              Precautionary Standards
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-black text-[#102A43] tracking-tight">
               Safe Cylinder Handling & Storage
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
               Mandatory storage rules for domestic homes, restaurants, and commercial bakeries.
             </p>
           </div>
@@ -153,17 +161,19 @@ export default function SafetyFeaturesPage() {
             {handlingRules.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs hover:shadow-cardHover transition-all"
+                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-card hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center mb-4">
-                  <ShieldCheck className="w-5 h-5" />
+                <div>
+                  <div className="w-11 h-11 rounded-2xl bg-blue-50 text-[#1769AA] flex items-center justify-center mb-5 border border-blue-100 group-hover:bg-blue-100 transition-colors">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 text-base mb-2 group-hover:text-[#1769AA] transition-colors">
+                    {item.rule}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
-                <h3 className="font-bold text-slate-900 text-base mb-2">
-                  {item.rule}
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  {item.desc}
-                </p>
               </div>
             ))}
           </div>
@@ -172,15 +182,17 @@ export default function SafetyFeaturesPage() {
         {/* Do's and Don'ts Comparison Table */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Do's */}
-          <div className="bg-emerald-50/50 rounded-3xl p-8 border border-emerald-200 shadow-xs space-y-4">
-            <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-lg">
-              <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
+          <div className="bg-emerald-50/60 rounded-3xl p-8 border border-emerald-200/90 shadow-card space-y-5">
+            <div className="flex items-center gap-2.5 text-emerald-800 font-extrabold text-lg">
+              <div className="w-9 h-9 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center shrink-0">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+              </div>
               <span>Safety Do's</span>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {dosAndDonts.dos.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 shrink-0" />
+                <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                  <span className="w-2 h-2 rounded-full bg-emerald-600 mt-2 shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -188,15 +200,17 @@ export default function SafetyFeaturesPage() {
           </div>
 
           {/* Don'ts */}
-          <div className="bg-red-50/50 rounded-3xl p-8 border border-red-200 shadow-xs space-y-4">
-            <div className="flex items-center gap-2 text-red-800 font-extrabold text-lg">
-              <XCircle className="w-6 h-6 text-red-600 shrink-0" />
+          <div className="bg-red-50/60 rounded-3xl p-8 border border-red-200/90 shadow-card space-y-5">
+            <div className="flex items-center gap-2.5 text-red-800 font-extrabold text-lg">
+              <div className="w-9 h-9 rounded-xl bg-red-100 border border-red-200 flex items-center justify-center shrink-0">
+                <XCircle className="w-5 h-5 text-red-600" />
+              </div>
               <span>Safety Don'ts</span>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {dosAndDonts.donts.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-600 mt-2 shrink-0" />
+                <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                  <span className="w-2 h-2 rounded-full bg-red-600 mt-2 shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -205,23 +219,23 @@ export default function SafetyFeaturesPage() {
         </div>
 
         {/* Bottom Safety Hardware Links */}
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-card flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1">
-            <h3 className="font-bold text-slate-900 text-lg">Need Approved Safety Equipment?</h3>
-            <p className="text-xs sm:text-sm text-slate-600">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-card flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-1.5 text-center md:text-left">
+            <h3 className="font-black text-[#102A43] text-xl tracking-tight">Need Approved Safety Equipment?</h3>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-xl leading-relaxed">
               Upgrade to automatic gas leak detectors, auto shutoff solenoid valves, and certified IS 9573 rubber hoses.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
             <Link
               href="/safety-devices"
-              className="bg-[#1769AA] hover:bg-[#12538A] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all"
+              className="bg-[#1769AA] hover:bg-[#12538A] text-white px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm hover:shadow-md transition-all"
             >
               View Safety Devices
             </Link>
             <Link
               href="/accessories"
-              className="bg-slate-100 hover:bg-slate-200 text-slate-800 px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all"
+              className="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all"
             >
               Order IS 9573 Hose
             </Link>

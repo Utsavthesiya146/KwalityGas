@@ -92,39 +92,42 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
 
   return (
     <div className="w-full bg-slate-50 min-h-screen">
-      {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
+      {/* Hero Banner */}
+      <section className="relative bg-[#07131F] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-slate-800">
+        <div className="absolute inset-0 bg-grid-pattern-dark opacity-40 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#1769AA]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
             <Tag className="w-3.5 h-3.5" />
             <span>Official Tariff Schedules</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             Kwality Gas Price List
           </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
             Transparent, government-compliant LPG rates for Karnataka and Tamil Nadu. Updated dynamically by the company administration.
           </p>
         </div>
-      </div>
+      </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
         {/* State Selection Tabs & Notice Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-card">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-slate-100">
             <div>
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
+              <span className="text-xs font-extrabold text-slate-400 uppercase tracking-wider block mb-2">
                 Select Your Region
               </span>
-              <div className="flex items-center gap-2">
+              <div className="inline-flex items-center gap-2 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200/60">
                 {states.map((st, idx) => (
                   <button
                     key={st.id}
                     onClick={() => setSelectedStateIndex(idx)}
-                    className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${idx === selectedStateIndex
-                        ? "bg-[#102A43] text-white shadow-sm"
-                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                      }`}
+                    className={`px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 ${
+                      idx === selectedStateIndex
+                        ? "bg-[#102A43] text-white shadow-md shadow-slate-900/10 scale-[1.02]"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
+                    }`}
                   >
                     {st.stateName}
                   </button>
@@ -132,60 +135,65 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
               </div>
             </div>
 
-            <div className="flex items-center gap-4 text-xs text-slate-600 bg-slate-50 px-4 py-3 rounded-xl border border-slate-100">
-              <Calendar className="w-4 h-4 text-[#F28C28] shrink-0" />
+            <div className="flex items-center gap-4 text-xs text-slate-700 bg-slate-50 px-5 py-3.5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div className="w-9 h-9 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center shrink-0">
+                <Calendar className="w-4 h-4 text-[#F28C28]" />
+              </div>
               <div>
-                <strong className="text-slate-900 block font-bold">{activeState.effectiveDate}</strong>
-                <span className="text-slate-500 text-[11px]">{activeState.wefNotice}</span>
+                <strong className="text-slate-900 block font-bold text-xs">{activeState.effectiveDate}</strong>
+                <span className="text-slate-500 text-[11px] font-medium">{activeState.wefNotice}</span>
               </div>
             </div>
           </div>
 
           {/* Pricing Table */}
-          <div className="mt-6 overflow-x-auto">
+          <div className="mt-8 overflow-x-auto rounded-2xl border border-slate-200/80">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-slate-200 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
-                  <th className="py-3 px-4">Cylinder Capacity</th>
-                  <th className="py-3 px-4">Segment</th>
-                  <th className="py-3 px-4">Application Details</th>
-                  <th className="py-3 px-4 text-right">Official Price (INR)</th>
-                  <th className="py-3 px-4 text-center">Action</th>
+                <tr className="bg-slate-900 text-white text-[11px] font-extrabold uppercase tracking-wider">
+                  <th className="py-4 px-5">Cylinder Capacity</th>
+                  <th className="py-4 px-5">Segment</th>
+                  <th className="py-4 px-5">Application Details</th>
+                  <th className="py-4 px-5 text-right">Official Price (INR)</th>
+                  <th className="py-4 px-5 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
-                {activeState.items && activeState.items.map((item) => (
+              <tbody className="divide-y divide-slate-100 text-xs sm:text-sm bg-white">
+                {activeState.items && activeState.items.map((item, rowIdx) => (
                   <tr
                     key={item.id}
-                    className="hover:bg-blue-50/40 transition-colors group"
+                    className={`hover:bg-blue-50/50 transition-colors group ${
+                      rowIdx % 2 === 1 ? "bg-slate-50/40" : "bg-white"
+                    }`}
                   >
-                    <td className="py-4 px-4 font-black text-[#102A43] text-base group-hover:text-[#1769AA] transition-colors">
+                    <td className="py-4 px-5 font-black text-[#102A43] text-base group-hover:text-[#1769AA] transition-colors whitespace-nowrap">
                       {item.capacity}
                     </td>
-                    <td className="py-4 px-4">
+                    <td className="py-4 px-5 whitespace-nowrap">
                       <span
-                        className={`inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${item.isDomestic
+                        className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
+                          item.isDomestic
                             ? "bg-orange-50 text-[#F28C28] border border-orange-200"
                             : "bg-blue-50 text-[#1769AA] border border-blue-200"
-                          }`}
+                        }`}
                       >
                         {item.isDomestic ? "Domestic" : "Commercial / Ind."}
                       </span>
                     </td>
-                    <td className="py-4 px-4 text-slate-600 text-xs max-w-xs">
+                    <td className="py-4 px-5 text-slate-600 text-xs max-w-xs leading-relaxed">
                       {item.notes || (item.isDomestic ? "Household cooking connection" : "Commercial catering & bakery kitchens")}
                     </td>
-                    <td className="py-4 px-4 font-black text-slate-900 text-base text-right font-mono">
+                    <td className="py-4 px-5 font-black text-slate-900 text-base text-right font-mono whitespace-nowrap">
                       {item.amount !== null && item.amount !== "" ? (
                         formatCurrency(Number(item.amount))
                       ) : (
                         <span className="text-xs font-semibold text-slate-500">Market Price</span>
                       )}
                     </td>
-                    <td className="py-4 px-4 text-center">
+                    <td className="py-4 px-5 text-center whitespace-nowrap">
                       <button
                         onClick={() => handleBook(item.isDomestic)}
-                        className="bg-slate-900 hover:bg-[#F28C28] text-white text-xs font-bold px-4 py-2 rounded-lg uppercase tracking-wider transition-colors"
+                        className="bg-[#102A43] hover:bg-[#F28C28] text-white text-xs font-bold px-4 py-2.5 rounded-xl uppercase tracking-wider transition-colors duration-200 shadow-xs hover:shadow-sm"
                       >
                         Book Refill
                       </button>
@@ -197,9 +205,11 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
           </div>
 
           {/* Statutory Tax Condition Notes */}
-          <div className="mt-8 pt-6 border-t border-slate-100 bg-slate-50 p-6 rounded-2xl border border-slate-200/80 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-bold text-[#102A43] uppercase tracking-wider">
-              <Info className="w-4 h-4 text-[#F28C28]" />
+          <div className="mt-8 pt-6 border-t border-slate-100 bg-slate-50/80 p-6 sm:p-8 rounded-2xl border border-slate-200/80 space-y-4">
+            <div className="flex items-center gap-2.5 text-xs font-extrabold text-[#102A43] uppercase tracking-wider">
+              <div className="w-6 h-6 rounded-lg bg-orange-100 text-[#F28C28] flex items-center justify-center shrink-0">
+                <Info className="w-3.5 h-3.5" />
+              </div>
               <span>Official Commercial Terms & Statutory Conditions</span>
             </div>
             <ol className="list-decimal list-inside space-y-2 text-xs text-slate-700 leading-relaxed font-medium">
@@ -228,26 +238,27 @@ export default function PriceListPageClient({ initialStates }: PriceListPageClie
         </div>
 
         {/* Commercial & Bulk Quote Callout */}
-        <div className="bg-gradient-to-r from-[#102A43] via-[#1769AA] to-[#102A43] text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-2xl font-black text-white">Require Institutional or High-Volume Pricing?</h3>
-            <p className="text-xs sm:text-sm text-slate-200 max-w-xl leading-relaxed">
+        <div className="relative bg-gradient-to-r from-[#07131F] via-[#102A43] to-[#07131F] text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-800 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="absolute inset-0 bg-grid-pattern-dark opacity-30 pointer-events-none" />
+          <div className="relative z-10 space-y-2 text-center md:text-left">
+            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Require Institutional or High-Volume Pricing?</h3>
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
               We offer contracted monthly commercial tariffs for industrial plants, multi-outlet restaurant chains, and factory canteens.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="relative z-10 flex flex-wrap items-center justify-center gap-3.5 shrink-0">
             <button
               onClick={() => {
                 setModalType("COMMERCIAL");
                 setModalOpen(true);
               }}
-              className="bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow transition-all"
+              className="bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all"
             >
               Request Commercial Tariff
             </button>
             <a
               href="tel:+917899787101"
-              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-3 rounded-xl text-xs font-bold transition-all"
+              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-3.5 rounded-xl text-xs font-bold transition-all hover:border-white/40"
             >
               <Phone className="w-4 h-4 text-[#F28C28]" />
               <span>Marketing: +91 78997 87101</span>

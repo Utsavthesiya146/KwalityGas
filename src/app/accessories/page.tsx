@@ -108,9 +108,10 @@ export default function AccessoriesPage() {
   return (
     <div className="w-full bg-slate-50 min-h-screen">
       {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
+      <div className="relative bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white py-18 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3.5 border border-white/15 shadow-xs">
             <Package className="w-3.5 h-3.5" />
             <span>Genuine Quality Accessories</span>
           </div>
@@ -123,15 +124,15 @@ export default function AccessoriesPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Safety Warning Card */}
-        <div className="bg-amber-50 rounded-2xl p-6 border border-amber-200/80 mb-14 flex items-start gap-4">
+        <div className="bg-amber-50/90 rounded-3xl p-6 sm:p-7 border border-amber-200/90 mb-14 flex items-start gap-4 shadow-xs">
           <AlertCircle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
-          <div className="space-y-1">
-            <h4 className="font-bold text-amber-950 text-sm">
+          <div className="space-y-1.5">
+            <h4 className="font-bold text-amber-950 text-sm sm:text-base">
               Beware of Counterfeit Regulators and Substandard Hoses:
             </h4>
-            <p className="text-xs text-amber-800 leading-relaxed">
+            <p className="text-xs sm:text-sm text-amber-900 leading-relaxed">
               Never use ordinary garden vinyl or plastic pipes for LPG installations. Unapproved hoses crack, harden, and invite rodent attacks within months. Always insist on genuine Kwality Gas IS 9573 reinforced steel braided hoses and calibrated brass regulators to ensure complete kitchen safety.
             </p>
           </div>
@@ -142,37 +143,38 @@ export default function AccessoriesPage() {
           {accessories.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl border border-slate-200/80 p-6 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all group"
+              className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-7 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 group hover:-translate-y-1"
             >
               <div>
-                <div className="relative w-full h-44 bg-slate-50 rounded-xl overflow-hidden mb-4 border border-slate-100 flex items-center justify-center p-3">
+                <div className="relative w-full h-52 bg-slate-900 rounded-2xl overflow-hidden mb-5 border border-slate-100 shadow-inner group">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-[11px] font-extrabold uppercase text-[#F28C28] tracking-wider">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-[11px] font-extrabold uppercase text-[#F28C28] tracking-wider truncate">
                     {item.category}
                   </span>
-                  <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200/60 shrink-0">
                     {item.rating}
                   </span>
                 </div>
 
-                <h3 className="font-bold text-slate-900 text-base mb-2 group-hover:text-[#1769AA] transition-colors">
+                <h3 className="font-bold text-slate-900 text-base mb-2 group-hover:text-[#1769AA] transition-colors leading-snug">
                   {item.title}
                 </h3>
-                <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                <p className="text-xs text-slate-600 leading-relaxed mb-4 min-h-[3rem]">
                   {item.desc}
                 </p>
 
-                <div className="space-y-1.5 border-t border-slate-100 pt-3 mb-4">
+                <div className="space-y-2 border-t border-slate-100 pt-3.5 mb-5">
                   {item.specs.map((sp, sIdx) => (
-                    <div key={sIdx} className="flex items-center gap-1.5 text-[11px] text-slate-700 font-medium">
+                    <div key={sIdx} className="flex items-center gap-2 text-[11px] text-slate-700 font-medium">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
                       <span>{sp}</span>
                     </div>
@@ -180,10 +182,10 @@ export default function AccessoriesPage() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-100">
+              <div className="pt-3.5 border-t border-slate-100">
                 <a
                   href="tel:+917899787101"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-[#F28C28] text-white py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#102A43] hover:bg-[#F28C28] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
                 >
                   <span>Order Genuine Parts</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -194,13 +196,13 @@ export default function AccessoriesPage() {
         </div>
 
         {/* Order Hardware Enquiry Form */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-card">
+        <div className="bg-white rounded-3xl p-6 sm:p-12 border border-slate-200/90 shadow-card">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-black text-[#102A43]">
+              <h3 className="text-2xl sm:text-3xl font-black text-[#102A43]">
                 Order Certified LPG Hardware & Spares
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
                 Tell us which cylinders, regulators, or hoses your facility requires. We dispatch genuine factory-sealed parts directly to your doorstep.
               </p>
             </div>
@@ -211,4 +213,3 @@ export default function AccessoriesPage() {
     </div>
   );
 }
-

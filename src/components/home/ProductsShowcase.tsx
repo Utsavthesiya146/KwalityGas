@@ -88,25 +88,25 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
         {/* Header with Filter Tabs */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-2.5">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-3 border border-blue-100/60">
               <Sparkles className="w-3.5 h-3.5 text-[#F28C28]" />
               <span>Certified Products & Appliances</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-[#102A43] tracking-tight">
               Products Showcase
             </h2>
-            <p className="mt-2 text-slate-600 text-sm max-w-xl">
+            <p className="mt-2 text-slate-600 text-sm max-w-xl leading-relaxed">
               Precision-filled LPG cylinders, instant water heaters, and certified gas regulators.
             </p>
           </div>
 
           {/* Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-white p-1.5 rounded-xl border border-slate-200 shadow-xs">
+          <div className="flex flex-wrap items-center gap-1.5 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-xs self-start md:self-auto">
             {(["ALL", "DOMESTIC", "COMMERCIAL", "INDUSTRIAL"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                   activeTab === tab
                     ? "bg-[#102A43] text-white shadow-xs"
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
@@ -130,18 +130,20 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
               featList = [];
             }
 
+            const isGeyser = (item.slug && item.slug.includes("geyser")) || (item.name && item.name.toLowerCase().includes("geyser")) || (item.name && item.name.toLowerCase().includes("heater"));
+
             return (
               <div
                 key={item.id}
-                className="bg-white rounded-3xl border border-slate-200/80 p-6 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 group"
+                className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-7 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 group hover:-translate-y-1"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xl font-black text-[#102A43] group-hover:text-[#1769AA] transition-colors">
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <span className="text-xl font-black text-[#102A43] group-hover:text-[#1769AA] transition-colors truncate">
                       {item.capacity || "Kwality Gas"}
                     </span>
                     <span
-                      className={`px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider ${
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider shrink-0 ${
                         item.isIndustrial
                           ? "bg-slate-100 text-slate-800 border border-slate-300"
                           : item.isCommercial
@@ -153,26 +155,32 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
                     </span>
                   </div>
 
-                  <div className="relative w-full h-48 bg-slate-50 rounded-2xl overflow-hidden mb-4 border border-slate-100 flex items-center justify-center p-3">
+                  {/* Product Image Stage */}
+                  <div className="relative w-full h-52 bg-slate-900 rounded-2xl overflow-hidden mb-5 border border-slate-100 shadow-inner group">
                     <Image
                       src={sanitizeImageUrl(item.imageUrl, "/images/corporate/product-cylinder-33kg.jpg")}
                       alt={item.name}
                       fill
-                      className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                      className={`transition-transform duration-500 ease-out group-hover:scale-105 ${
+                        isGeyser ? "object-contain p-3 bg-gradient-to-br from-slate-50 to-blue-50/50" : "object-cover"
+                      }`}
                     />
+                    {!isGeyser && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                    )}
                   </div>
 
-                  <h3 className="font-bold text-slate-900 text-base mb-2 leading-snug">
+                  <h3 className="font-bold text-slate-900 text-base mb-2 leading-snug group-hover:text-[#1769AA] transition-colors">
                     {item.name}
                   </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-4 min-h-[2.75rem]">
                     {item.shortDesc || item.description}
                   </p>
 
                   {featList.length > 0 && (
-                    <div className="space-y-1.5 border-t border-slate-100 pt-3 mb-4">
+                    <div className="space-y-2 border-t border-slate-100 pt-3.5 mb-5">
                       {featList.slice(0, 3).map((f: string, idx: number) => (
-                        <div key={idx} className="flex items-center gap-1.5 text-[11px] text-slate-700 font-medium">
+                        <div key={idx} className="flex items-center gap-2 text-[11px] text-slate-700 font-medium">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                           <span>{f}</span>
                         </div>
@@ -181,20 +189,21 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
                   )}
                 </div>
 
-                <div className="pt-3 border-t border-slate-100 flex items-center gap-2">
+                <div className="pt-3.5 border-t border-slate-100 flex items-center gap-2.5">
                   <button
                     onClick={() =>
                       onOpenEnquiry(
                         item.isIndustrial ? "INDUSTRIAL" : item.isCommercial ? "COMMERCIAL" : "DOMESTIC"
                       )
                     }
-                    className="flex-1 bg-slate-900 hover:bg-[#F28C28] text-white py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors text-center"
+                    className="flex-1 inline-flex items-center justify-center gap-2 bg-[#102A43] hover:bg-[#F28C28] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors text-center shadow-xs"
                   >
-                    Order Refill
+                    <span>Order Refill</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                   <Link
                     href={item.isDomestic ? "/cylinders" : item.isCommercial ? "/commercial" : "/industrial"}
-                    className="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl transition-colors"
+                    className="px-3.5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl transition-colors shrink-0"
                     title="View Details"
                   >
                     <ArrowRight className="w-4 h-4" />
@@ -206,10 +215,10 @@ export default function ProductsShowcase({ products, onOpenEnquiry }: ProductsSh
         </div>
 
         {/* View Full Catalog Link */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-14">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-[#1769AA] text-slate-800 hover:text-[#1769AA] px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow-xs hover:shadow-sm transition-all"
+            className="inline-flex items-center gap-2 bg-white border border-slate-200/90 hover:border-[#1769AA] text-slate-800 hover:text-[#1769AA] px-7 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-xs hover:shadow-card transition-all duration-200"
           >
             <span>View Complete Products Catalog</span>
             <ArrowRight className="w-4 h-4" />

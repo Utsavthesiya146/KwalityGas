@@ -98,21 +98,21 @@ export default async function CylindersPage() {
     },
     {
       id: "cyl-4",
-      name: "4 Kg Cook & Light Cylinder",
+      name: "4 Kg Cook & Light Domestic Cylinder",
       capacity: "4 Kg",
-      imageUrl: "/images/corporate/hero-domestic-lpg.jpg",
-      shortDesc: "Equipped with direct-fit stove fixtures and emergency light lantern burners. Ideal for outdoor catering, lighting, and camping.",
+      imageUrl: "/images/corporate/product-cylinder-12kg.jpg",
+      shortDesc: "Direct burner attachment compatible cylinder. Essential for outdoor cooking camps, balcony utilities, and emergency illumination.",
       isDomestic: true,
-      features: JSON.stringify(["Direct burner mounting", "Lantern light compatible", "Heavy-duty steel carry handle", "Compact portable design"]),
+      features: JSON.stringify(["Direct screw burner adapter", "High stability footring", "Integrated steel carry handle", "Compact portable footprint"]),
     },
     {
       id: "cyl-2",
-      name: "2 Kg Micro Portable Cylinder",
+      name: "2 Kg Micro Portable LPG Cylinder",
       capacity: "2 Kg",
-      imageUrl: "/images/corporate/product-cylinder-12kg.jpg",
-      shortDesc: "Ultra-compact cylinder for precision laboratory burners, jewellery melting, micro soldering, and lightweight camping stoves.",
+      imageUrl: "/images/corporate/hero-domestic-lpg.jpg",
+      shortDesc: "Ultra-compact micro cylinder engineered for scientific laboratory burners, jewellery melting, mobile technicians, and camping stoves.",
       isDomestic: true,
-      features: JSON.stringify(["Precision flame needle valve", "Factory pressure tested", "Ultra-portable weight", "Safe indoor laboratory use"]),
+      features: JSON.stringify(["Ultra-lightweight handling", "Precision fuel control valve", "Safe indoor & outdoor use", "Certified test pressure rating"]),
     },
   ];
 
@@ -121,9 +121,10 @@ export default async function CylindersPage() {
   return (
     <div className="w-full bg-slate-50 min-h-screen">
       {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
+      <div className="relative bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white py-18 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3.5 border border-white/15 shadow-xs">
             <Flame className="w-3.5 h-3.5" />
             <span>Capacity Range (2 Kgs to 33 Kgs)</span>
           </div>
@@ -138,15 +139,15 @@ export default async function CylindersPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-14">
         {/* Intro Highlight Box */}
-        <div className="bg-[#1769AA] text-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="bg-gradient-to-r from-[#102A43] via-[#1769AA] to-[#102A43] text-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-white/15">
           <div className="space-y-3">
-            <span className="text-xs font-extrabold uppercase text-[#F28C28] bg-white px-3 py-1 rounded-full shadow-xs">
+            <span className="text-xs font-extrabold uppercase text-[#F28C28] bg-white px-3.5 py-1.5 rounded-full shadow-xs inline-block">
               Audited Available Capacities
             </span>
             <h2 className="text-xl sm:text-3xl font-black text-white tracking-tight">
               Kwality Gas is Available in the Following Segments:
             </h2>
-            <ul className="text-xs sm:text-sm text-blue-100 space-y-1.5">
+            <ul className="text-xs sm:text-sm text-blue-100 space-y-2">
               <li>• <strong>15 Kgs, 17 Kgs, 21 Kgs & 33 Kgs</strong> for commercial hotels, restaurants & industrial plants.</li>
               <li>• <strong>12 Kgs & 15 Kgs</strong> for Domestic household consumers.</li>
               <li>• <strong>5.5 Kgs</strong> for Small Families & Working Professionals.</li>
@@ -157,7 +158,7 @@ export default async function CylindersPage() {
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
             <Link
               href="/price-list"
-              className="bg-[#F28C28] hover:bg-[#D9771A] text-white text-xs font-bold px-6 py-3.5 rounded-xl uppercase tracking-wider shadow-md transition-all"
+              className="bg-[#F28C28] hover:bg-[#D9771A] text-white text-xs font-bold px-6 py-3.5 rounded-xl uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
             >
               Check Live State Prices
             </Link>
@@ -185,7 +186,7 @@ export default async function CylindersPage() {
             return (
               <div
                 key={cyl.id}
-                className="bg-white rounded-2xl border border-slate-200/80 p-6 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all group"
+                className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-7 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 group hover:-translate-y-1"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -193,7 +194,7 @@ export default async function CylindersPage() {
                       {cyl.capacity || "LPG"}
                     </span>
                     <span
-                      className={`px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider ${
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
                         cyl.isIndustrial
                           ? "bg-slate-100 text-slate-800 border border-slate-300"
                           : cyl.isCommercial
@@ -205,26 +206,27 @@ export default async function CylindersPage() {
                     </span>
                   </div>
 
-                  <div className="relative w-full h-48 bg-slate-50 rounded-xl overflow-hidden mb-4 border border-slate-100 flex items-center justify-center p-3">
+                  <div className="relative w-full h-52 bg-slate-900 rounded-2xl overflow-hidden mb-5 border border-slate-100 shadow-inner group">
                     <Image
                       src={cyl.imageUrl || "/images/corporate/product-cylinder-33kg.jpg"}
                       alt={cyl.name}
                       fill
-                      className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                   </div>
 
-                  <h3 className="font-bold text-slate-900 text-base mb-2 leading-snug">
+                  <h3 className="font-bold text-slate-900 text-base mb-2 leading-snug group-hover:text-[#1769AA] transition-colors">
                     {cyl.name}
                   </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-4 min-h-[3rem]">
                     {cyl.shortDesc || cyl.description}
                   </p>
 
                   {featList.length > 0 && (
-                    <div className="space-y-1.5 border-t border-slate-100 pt-3 mb-4">
+                    <div className="space-y-2 border-t border-slate-100 pt-3.5 mb-5">
                       {featList.slice(0, 4).map((f: string, idx: number) => (
-                        <div key={idx} className="flex items-center gap-1.5 text-[11px] text-slate-700 font-medium">
+                        <div key={idx} className="flex items-center gap-2 text-[11px] text-slate-700 font-medium">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                           <span>{f}</span>
                         </div>
@@ -233,7 +235,7 @@ export default async function CylindersPage() {
                   )}
                 </div>
 
-                <div className="pt-3 border-t border-slate-100">
+                <div className="pt-3.5 border-t border-slate-100">
                   <Link
                     href={
                       cyl.isIndustrial
@@ -242,7 +244,7 @@ export default async function CylindersPage() {
                         ? "/contact/commercial"
                         : "/contact/domestic"
                     }
-                    className="w-full inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-[#F28C28] text-white py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-[#102A43] hover:bg-[#F28C28] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
                   >
                     <span>Order / Connection</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -254,33 +256,33 @@ export default async function CylindersPage() {
         </div>
 
         {/* Quality and Testing Standards */}
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-card">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/90 shadow-card">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center sm:text-left">
-            <div className="space-y-2">
-              <div className="w-12 h-12 rounded-xl bg-orange-50 text-[#F28C28] flex items-center justify-center mx-auto sm:mx-0">
+            <div className="space-y-2.5">
+              <div className="w-12 h-12 rounded-2xl bg-orange-50 text-[#F28C28] flex items-center justify-center mx-auto sm:mx-0 border border-orange-100">
                 <Scale className="w-6 h-6" />
               </div>
-              <h4 className="font-bold text-slate-900 text-base">Electronic Weight Verification</h4>
+              <h4 className="font-bold text-slate-900 text-base sm:text-lg">Electronic Weight Verification</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Zero tolerance for under-filling. Every single cylinder is cross-checked on certified digital load cells before passing out the bottling gate.
               </p>
             </div>
 
-            <div className="space-y-2">
-              <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center mx-auto sm:mx-0">
+            <div className="space-y-2.5">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#1769AA] flex items-center justify-center mx-auto sm:mx-0 border border-blue-100">
                 <Gauge className="w-6 h-6" />
               </div>
-              <h4 className="font-bold text-slate-900 text-base">Hydrostatic & Pneumatic Bath Tests</h4>
+              <h4 className="font-bold text-slate-900 text-base sm:text-lg">Hydrostatic & Pneumatic Bath Tests</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
                 100% of cylinders are submerged in illuminated water inspection baths to verify that the valve seat, spindle, and neck O-ring have zero micro-leakage.
               </p>
             </div>
 
-            <div className="space-y-2">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto sm:mx-0">
+            <div className="space-y-2.5">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto sm:mx-0 border border-emerald-100">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h4 className="font-bold text-slate-900 text-base">BIS & PESO Statutory Compliance</h4>
+              <h4 className="font-bold text-slate-900 text-base sm:text-lg">BIS & PESO Statutory Compliance</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Manufactured and tested strictly as per IS 3196 (Part 1, 2 & 3) specifications, stamped with statutory 5-year periodic testing dates.
               </p>

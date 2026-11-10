@@ -53,36 +53,36 @@ export default function CompanyIntro() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Visuals & Award (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-900 h-96 sm:h-[420px]">
+            <div className="relative rounded-3xl overflow-hidden border border-slate-200/90 shadow-xl bg-slate-900 h-96 sm:h-[440px] group">
               <Image
                 src="/images/corporate/hero-bottling-plant.jpg"
                 alt="Kwality Gas Bottling Line"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#102A43]/95 via-[#102A43]/40 to-transparent flex flex-col justify-end p-6 sm:p-8">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F28C28] text-white text-[11px] font-black uppercase tracking-wider mb-2 self-start">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081624]/95 via-[#081624]/40 to-transparent flex flex-col justify-end p-6 sm:p-8">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F28C28] text-white text-[11px] font-black uppercase tracking-wider mb-2.5 self-start shadow-sm">
                   <Award className="w-3.5 h-3.5" />
                   <span>Geneva Award Winner 2015</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-white leading-tight">
                   Over 35 Years of Engineering Heritage
                 </h3>
-                <p className="text-xs text-slate-200 mt-1">
+                <p className="text-xs text-slate-200 mt-1.5 leading-relaxed font-normal">
                   Backed by an industrial group dedicated to South India's energy and infrastructure security.
                 </p>
               </div>
             </div>
 
             {/* Quick Plant Stat Strip */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs text-center hover:shadow-cardHover transition-all">
                 <div className="text-2xl font-black text-[#102A43]">30,000 MTPA</div>
-                <div className="text-xs text-slate-500 mt-0.5">Bulk Storage Facility</div>
+                <div className="text-xs text-slate-500 mt-1 font-medium">Bulk Storage Facility</div>
               </div>
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs text-center">
+              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs text-center hover:shadow-cardHover transition-all">
                 <div className="text-2xl font-black text-[#F28C28]">8,000 / Day</div>
-                <div className="text-xs text-slate-500 mt-0.5">Bottling Capacity</div>
+                <div className="text-xs text-slate-500 mt-1 font-medium">Bottling Capacity</div>
               </div>
             </div>
           </div>
@@ -90,14 +90,14 @@ export default function CompanyIntro() {
           {/* Right Column: Narrative & 6 Advantages (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-2.5">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-3 border border-blue-100/60">
                 <Sparkles className="w-3.5 h-3.5 text-[#F28C28]" />
                 <span>Why Kwality Gas Stands Out</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-black text-[#102A43] tracking-tight">
                 A Name Synonymous with Quality & Fuel Safety
               </h2>
-              <p className="mt-2 text-slate-600 text-sm leading-relaxed">
+              <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
                 Kwality Gas Bottlers Private Limited was conceived to produce and market LPG as a premier domestic and commercial fuel. Headquartered in Bangalore, we operate 3 advanced bottling plants—2 in Tamil Nadu (Hosur, Chennai) and 1 in Karnataka (Dharwad).
               </p>
             </div>
@@ -107,16 +107,16 @@ export default function CompanyIntro() {
               {advantages.map((adv, idx) => (
                 <div
                   key={idx}
-                  className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs hover:border-[#1769AA]/40 hover:shadow-cardHover transition-all flex items-start gap-3.5"
+                  className="bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-xs hover:border-[#1769AA]/40 hover:shadow-cardHover transition-all duration-200 flex items-start gap-3.5 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 mt-0.5 border border-slate-100">
+                  <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 mt-0.5 border border-slate-100 group-hover:scale-105 transition-transform">
                     {adv.icon}
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm">
+                    <h4 className="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-[#1769AA] transition-colors">
                       {adv.title}
                     </h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                    <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">
                       {adv.desc}
                     </p>
                   </div>
@@ -128,7 +128,7 @@ export default function CompanyIntro() {
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 bg-[#102A43] hover:bg-[#1769AA] text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
+                className="inline-flex items-center gap-2 bg-[#102A43] hover:bg-[#1769AA] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
               >
                 <span>Read Full Company Profile</span>
                 <ArrowRight className="w-3.5 h-3.5" />

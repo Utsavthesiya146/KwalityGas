@@ -46,7 +46,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Commercial Compact",
       title: "15kg Commercial Cylinder",
       desc: "Optimal for mobile catering units, outdoor live counters, and medium tea/snack establishments looking for manageable ergonomics and high calorific value.",
-      image: "/images/corporate/product-cylinder-17kg.jpg",
+      image: "/images/corporate/hero-commercial-lpg.jpg",
       specs: ["Easy maneuvering", "Sturdy base footring", "Grade 1 certified gas", "Available across Karnataka & TN"],
     },
     {
@@ -82,7 +82,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Micro Portable",
       title: "2kg Mini Cylinder",
       desc: "Ultra-compact cylinder for laboratory burners, jewellery soldering, mobile welding, and light portable camping stoves.",
-      image: "/images/corporate/product-cylinder-12kg.jpg",
+      image: "/images/corporate/hero-domestic-lpg.jpg",
       specs: ["Ultra-portable ergonomics", "Precision pressure flow", "Factory sealed & stamped", "Safe for laboratory use"],
     },
   ];
@@ -95,25 +95,25 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-2.5">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-[#1769AA] text-xs font-bold uppercase tracking-wider mb-3 border border-blue-100/60">
               <Flame className="w-3.5 h-3.5 text-[#F28C28]" />
               <span>Complete Capacity Range</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-[#102A43] tracking-tight">
               LPG Cylinders for Every Requirement
             </h2>
-            <p className="mt-2 text-slate-600 text-sm max-w-2xl">
+            <p className="mt-2 text-slate-600 text-sm max-w-2xl leading-relaxed">
               From compact 2kg and 4kg domestic cylinders to 33kg heavy-duty industrial liquid and vapour off-take installations.
             </p>
           </div>
 
           {/* Segment Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-white p-1.5 rounded-xl border border-slate-200 shadow-xs self-start md:self-auto">
+          <div className="flex flex-wrap items-center gap-1.5 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-xs self-start md:self-auto">
             {(["ALL", "DOMESTIC", "COMMERCIAL", "INDUSTRIAL"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveSegment(tab)}
-                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                   activeSegment === tab
                     ? "bg-[#102A43] text-white shadow-xs"
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
@@ -130,7 +130,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
           {filtered.map((cyl, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl border border-slate-200/80 p-5 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 group"
+              className="bg-white rounded-3xl border border-slate-200/80 p-6 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 group hover:-translate-y-1"
             >
               <div>
                 {/* Top Badge & Capacity */}
@@ -139,7 +139,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
                     {cyl.capacity}
                   </span>
                   <span
-                    className={`px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider ${
+                    className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
                       cyl.segment === "DOMESTIC"
                         ? "bg-orange-50 text-[#F28C28] border border-orange-200"
                         : cyl.segment === "COMMERCIAL"
@@ -151,31 +151,32 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
                   </span>
                 </div>
 
-                {/* Cylinder Image */}
-                <div className="relative w-full h-48 bg-slate-50 rounded-xl overflow-hidden mb-4 border border-slate-100 flex items-center justify-center p-3">
+                {/* Cylinder Image Showcase */}
+                <div className="relative w-full h-52 bg-slate-900 rounded-2xl overflow-hidden mb-5 border border-slate-100 shadow-inner group">
                   <Image
                     src={cyl.image}
                     alt={cyl.title}
                     fill
-                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                 </div>
 
                 {/* Titles & Description */}
-                <div className="text-xs font-bold text-[#F28C28] uppercase tracking-wider mb-1">
+                <div className="text-[11px] font-extrabold text-[#F28C28] uppercase tracking-wider mb-1">
                   {cyl.tag}
                 </div>
-                <h3 className="font-bold text-slate-900 text-base mb-2 leading-snug">
+                <h3 className="font-bold text-slate-900 text-base mb-2 leading-snug group-hover:text-[#1769AA] transition-colors">
                   {cyl.title}
                 </h3>
-                <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                <p className="text-xs text-slate-600 leading-relaxed mb-4 min-h-[3rem]">
                   {cyl.desc}
                 </p>
 
                 {/* Specs bullets */}
-                <div className="space-y-1.5 border-t border-slate-100 pt-3 mb-4">
+                <div className="space-y-2 border-t border-slate-100 pt-3.5 mb-5">
                   {cyl.specs.map((sp, sIdx) => (
-                    <div key={sIdx} className="flex items-center gap-1.5 text-[11px] text-slate-700 font-medium">
+                    <div key={sIdx} className="flex items-center gap-2 text-[11px] text-slate-700 font-medium">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
                       <span>{sp}</span>
                     </div>
@@ -184,10 +185,10 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
               </div>
 
               {/* Action Button */}
-              <div className="pt-3 border-t border-slate-100 flex items-center gap-2">
+              <div className="pt-3 border-t border-slate-100">
                 <button
                   onClick={() => onOpenEnquiry(cyl.segment as "DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL")}
-                  className="w-full bg-slate-900 hover:bg-[#F28C28] text-white py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
+                  className="w-full bg-[#102A43] hover:bg-[#F28C28] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
                 >
                   Book / Enquire
                 </button>
@@ -197,23 +198,23 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
         </div>
 
         {/* Bottom Banner */}
-        <div className="mt-12 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-14 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-card flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center flex-shrink-0">
-              <ShieldCheck className="w-6 h-6" />
+            <div className="w-13 h-13 rounded-2xl bg-blue-50 text-[#1769AA] flex items-center justify-center flex-shrink-0 border border-blue-100">
+              <ShieldCheck className="w-7 h-7" />
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-base">
+              <h4 className="font-bold text-slate-900 text-base sm:text-lg">
                 Looking for Manifold Design or Custom Bulk Supply?
               </h4>
-              <p className="text-xs text-slate-600 mt-0.5">
+              <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
                 Our certified gas engineers design multi-cylinder manifold systems with auto changeover valves for commercial hotels and industrial plants.
               </p>
             </div>
           </div>
           <Link
             href="/cylinders"
-            className="inline-flex items-center gap-2 bg-[#1769AA] hover:bg-[#12538A] text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex-shrink-0"
+            className="inline-flex items-center gap-2 bg-[#1769AA] hover:bg-[#12538A] text-white px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex-shrink-0 shadow-xs"
           >
             <span>View Full Cylinder Specs</span>
             <ArrowRight className="w-4 h-4" />
@@ -223,4 +224,3 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
     </section>
   );
 }
-

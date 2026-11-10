@@ -80,9 +80,10 @@ export default async function ServicesPage() {
   return (
     <div className="w-full bg-slate-50 min-h-screen">
       {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
+      <div className="relative bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white py-18 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3.5 border border-white/15 shadow-xs">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Comprehensive Energy Support</span>
           </div>
@@ -97,14 +98,14 @@ export default async function ServicesPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
         {/* Core Value Statement */}
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-card text-center max-w-4xl mx-auto space-y-4">
-          <span className="text-xs font-extrabold uppercase text-[#1769AA] tracking-wider">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/90 shadow-card text-center max-w-4xl mx-auto space-y-4">
+          <span className="text-xs font-extrabold uppercase text-[#1769AA] tracking-wider block">
             Customer-Centric Energy Solutions
           </span>
           <h2 className="text-2xl sm:text-4xl font-black text-[#102A43] tracking-tight">
             Safety, Reliability & Quality in Every Drop of Fuel
           </h2>
-          <p className="text-sm text-slate-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
             The main force that drives Kwality Gas is our uncompromising emphasis on quality products and superior customer care. We treat every customer relationship as a lasting partnership backed by 35+ years of industrial legacy.
           </p>
         </div>
@@ -114,29 +115,30 @@ export default async function ServicesPage() {
           {services.map((srv, idx) => (
             <div
               key={srv.id || idx}
-              className="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-card hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex flex-col justify-between group"
+              className="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
             >
               <div>
-                <div className="relative w-full h-56 bg-slate-800">
+                <div className="relative w-full h-64 bg-slate-900 overflow-hidden">
                   <Image
                     src={srv.imageUrl || srv.image || "/images/corporate/service-delivery-truck.jpg"}
                     alt={srv.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute top-4 left-4 bg-[#102A43]/90 text-white text-xs font-black px-3 py-1.5 rounded-lg shadow-sm border border-white/10">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute top-4 left-4 backdrop-blur-md bg-[#102A43]/90 text-white text-xs font-black px-3.5 py-1.5 rounded-full shadow-md border border-white/15">
                     Pillar 0{idx + 1}
                   </div>
                 </div>
 
                 <div className="p-8 space-y-3">
-                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#1769AA] transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#1769AA] transition-colors leading-snug">
                     {srv.title}
                   </h3>
-                  <p className="text-xs font-semibold text-[#F28C28]">
+                  <p className="text-xs font-bold text-[#F28C28]">
                     {srv.shortDesc}
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pt-1">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pt-1 min-h-[4rem]">
                     {srv.fullContent || srv.shortDesc}
                   </p>
                 </div>
@@ -150,7 +152,7 @@ export default async function ServicesPage() {
                   <span>Request This Service</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
                   Certified Team
                 </span>
               </div>
@@ -159,24 +161,24 @@ export default async function ServicesPage() {
         </div>
 
         {/* Emergency Hotline Strip */}
-        <div className="bg-[#102A43] text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-gradient-to-r from-[#102A43] via-[#1769AA] to-[#102A43] text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-white/15">
           <div className="space-y-2 text-center md:text-left">
             <h3 className="text-2xl font-black text-white">Need Technical Support or Pipeline Maintenance?</h3>
             <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
               Our service engineering desk assists commercial and industrial clients with routine maintenance, pressure calibration, and emergency callouts.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-3.5 shrink-0">
             <a
               href="tel:+917899787101"
-              className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow transition-all"
+              className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
             >
               <Phone className="w-4 h-4" />
               <span>Helpline: +91 78997 87101</span>
             </a>
             <Link
               href="/contact"
-              className="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-3 rounded-xl text-xs font-bold transition-all"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-3.5 rounded-xl text-xs font-bold transition-all"
             >
               Contact Our Engineers
             </Link>

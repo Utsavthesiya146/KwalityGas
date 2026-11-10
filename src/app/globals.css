@@ -22,6 +22,7 @@ body {
   background: #FFFFFF;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main {
@@ -32,19 +33,20 @@ main {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+  letter-spacing: -0.02em;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #F8FAFC;
 }
 ::-webkit-scrollbar-thumb {
   background: #CBD5E1;
-  border-radius: 4px;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
@@ -52,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Premium corporate gradients */
 .corporate-gradient {
-  background: linear-gradient(135deg, #102A43 0%, #1769AA 100%);
+  background: linear-gradient(135deg, #0B1D2F 0%, #102A43 50%, #1769AA 100%);
 }
 
 .energy-gradient {
@@ -60,13 +62,40 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-gradient {
-  background: linear-gradient(90deg, rgba(16, 42, 67, 0.96) 0%, rgba(16, 42, 67, 0.88) 55%, rgba(23, 105, 170, 0.55) 100%);
+  background: linear-gradient(90deg, rgba(11, 29, 47, 0.96) 0%, rgba(16, 42, 67, 0.90) 55%, rgba(23, 105, 170, 0.65) 100%);
 }
 
+/* Glassmorphism panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-panel-dark {
+  background: rgba(11, 29, 47, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Subtle background grid pattern for high-tech industrial aesthetic */
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(23, 105, 170, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-grid-pattern-dark {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Premium corporate card interaction */
 .card-subtle-glow {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-subtle-glow:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px -6px rgba(16, 42, 67, 0.14);
+  box-shadow: 0 20px 40px -12px rgba(16, 42, 67, 0.12), 0 1px 3px rgba(16, 42, 67, 0.04);
 }

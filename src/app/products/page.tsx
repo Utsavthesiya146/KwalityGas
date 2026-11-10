@@ -42,9 +42,10 @@ export default async function ProductsPage() {
   return (
     <div className="w-full bg-slate-50 min-h-screen">
       {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
+      <div className="relative bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white py-18 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3.5 border border-white/15 shadow-xs">
             <Flame className="w-3.5 h-3.5 fill-[#F28C28]" />
             <span>Official Product Catalog</span>
           </div>
@@ -59,64 +60,64 @@ export default async function ProductsPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
         {/* Quick Nav Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <Link
             href="/cylinders"
-            className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex items-center gap-3.5 group"
+            className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 flex items-center gap-4 group hover:-translate-y-1"
           >
-            <div className="w-12 h-12 rounded-xl bg-orange-50 text-[#F28C28] flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-orange-50 text-[#F28C28] flex items-center justify-center shrink-0 border border-orange-100 group-hover:scale-105 transition-transform">
               <Flame className="w-6 h-6" />
             </div>
             <div>
-              <div className="font-bold text-slate-900 text-sm group-hover:text-[#1769AA] transition-colors">
+              <div className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-[#1769AA] transition-colors">
                 LPG Cylinders
               </div>
-              <div className="text-[11px] text-slate-500">2kg to 33kg range</div>
+              <div className="text-xs text-slate-500">2kg to 33kg range</div>
             </div>
           </Link>
 
           <Link
             href="/gas-water-heater"
-            className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex items-center gap-3.5 group"
+            className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 flex items-center gap-4 group hover:-translate-y-1"
           >
-            <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#1769AA] flex items-center justify-center shrink-0 border border-blue-100 group-hover:scale-105 transition-transform">
               <Sparkles className="w-6 h-6" />
             </div>
             <div>
-              <div className="font-bold text-slate-900 text-sm group-hover:text-[#1769AA] transition-colors">
+              <div className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-[#1769AA] transition-colors">
                 Gas Water Heater
               </div>
-              <div className="text-[11px] text-slate-500">8 safety devices included</div>
+              <div className="text-xs text-slate-500">8 safety devices included</div>
             </div>
           </Link>
 
           <Link
             href="/safety-devices"
-            className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex items-center gap-3.5 group"
+            className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 flex items-center gap-4 group hover:-translate-y-1"
           >
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100 group-hover:scale-105 transition-transform">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <div className="font-bold text-slate-900 text-sm group-hover:text-[#1769AA] transition-colors">
+              <div className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-[#1769AA] transition-colors">
                 Safety Devices
               </div>
-              <div className="text-[11px] text-slate-500">Gas detectors & shutoffs</div>
+              <div className="text-xs text-slate-500">Gas detectors & shutoffs</div>
             </div>
           </Link>
 
           <Link
             href="/accessories"
-            className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex items-center gap-3.5 group"
+            className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 flex items-center gap-4 group hover:-translate-y-1"
           >
-            <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 border border-purple-100 group-hover:scale-105 transition-transform">
               <Wrench className="w-6 h-6" />
             </div>
             <div>
-              <div className="font-bold text-slate-900 text-sm group-hover:text-[#1769AA] transition-colors">
+              <div className="font-bold text-slate-900 text-sm sm:text-base group-hover:text-[#1769AA] transition-colors">
                 Accessories
               </div>
-              <div className="text-[11px] text-slate-500">IS 9573 hoses & regulators</div>
+              <div className="text-xs text-slate-500">IS 9573 hoses & regulators</div>
             </div>
           </Link>
         </div>
@@ -125,7 +126,7 @@ export default async function ProductsPage() {
         <div id="water-heater" className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-card">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-sm h-80 sm:h-96 bg-slate-50 rounded-2xl p-6 border border-slate-100 flex items-center justify-center">
+              <div className="relative w-full max-w-sm h-80 sm:h-96 bg-gradient-to-br from-slate-50 to-blue-50/40 rounded-3xl p-6 border border-slate-100 shadow-inner flex items-center justify-center">
                 <Image
                   src="/images/corporate/product-gas-geyser.jpg"
                   alt="Kwality Gas Water Heater with 8 Safety Features"
@@ -136,7 +137,7 @@ export default async function ProductsPage() {
             </div>
 
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 text-[#F28C28] text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-orange-50 text-[#F28C28] text-xs font-bold uppercase tracking-wider border border-orange-100/60">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Featured Energy Saver</span>
               </div>
@@ -148,29 +149,29 @@ export default async function ProductsPage() {
               </p>
 
               {/* 8 Features compact list */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {waterHeaterSpecs.map((spec, i) => (
-                  <div key={i} className="flex items-start gap-2 text-xs">
+                  <div key={i} className="flex items-start gap-2.5 text-xs">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-slate-900 block font-bold">{spec.title}</strong>
-                      <span className="text-slate-500 text-[11px]">{spec.desc}</span>
+                      <span className="text-slate-500 text-[11px] leading-snug">{spec.desc}</span>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="pt-4 flex flex-wrap items-center gap-3">
+              <div className="pt-4 flex flex-wrap items-center gap-3.5">
                 <Link
                   href="/gas-water-heater"
-                  className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
+                  className="inline-flex items-center gap-2 bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
                 >
                   <span>Explore Water Heater Guide</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/contact/domestic"
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2.5 rounded-xl font-semibold text-xs transition-all"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-800 px-5 py-3 rounded-xl font-semibold text-xs transition-all"
                 >
                   Order Geyser Refill
                 </Link>
@@ -207,49 +208,50 @@ export default async function ProductsPage() {
               { id: "4", name: "15kg Commercial Cylinder", capacity: "15 Kg", imageUrl: "/images/corporate/hero-commercial-lpg.jpg", shortDesc: "Manageable ergonomics for fast food joints and tea stalls.", isCommercial: true },
               { id: "5", name: "12kg Domestic Cylinder", capacity: "12 Kg", imageUrl: "/images/corporate/product-cylinder-12kg.jpg", shortDesc: "Flagship domestic cooking gas cylinder for households.", isDomestic: true },
               { id: "6", name: "5.5kg Domestic Cylinder", capacity: "5.5 Kg", imageUrl: "/images/corporate/hero-domestic-lpg.jpg", shortDesc: "Compact cylinder for small families and single executives.", isDomestic: true },
-              { id: "7", name: "4kg Cook & Light Cylinder", capacity: "4 Kg", imageUrl: "/images/corporate/hero-domestic-lpg.jpg", shortDesc: "Direct burner and emergency lighting attachment support.", isDomestic: true },
-              { id: "8", name: "2kg Micro Cylinder", capacity: "2 Kg", imageUrl: "/images/corporate/product-cylinder-12kg.jpg", shortDesc: "Ultra-portable cylinder for laboratories and jewellery soldering.", isDomestic: true },
+              { id: "7", name: "4kg Cook & Light Cylinder", capacity: "4 Kg", imageUrl: "/images/corporate/product-cylinder-12kg.jpg", shortDesc: "Direct burner and emergency lighting attachment support.", isDomestic: true },
+              { id: "8", name: "2kg Micro Cylinder", capacity: "2 Kg", imageUrl: "/images/corporate/hero-domestic-lpg.jpg", shortDesc: "Ultra-portable cylinder for laboratories and jewellery soldering.", isDomestic: true },
             ]).map((prod: any) => (
               <div
                 key={prod.id}
-                className="bg-white rounded-2xl border border-slate-200/80 p-5 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all group"
+                className="bg-white rounded-3xl border border-slate-200/80 p-6 flex flex-col justify-between hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 group hover:-translate-y-1"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xl font-black text-[#102A43]">
+                  <div className="flex items-center justify-between mb-3.5">
+                    <span className="text-xl font-black text-[#102A43] group-hover:text-[#1769AA] transition-colors">
                       {prod.capacity || "LPG"}
                     </span>
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
                         prod.isIndustrial
-                          ? "bg-slate-100 text-slate-800"
+                          ? "bg-slate-100 text-slate-800 border border-slate-300"
                           : prod.isCommercial
-                          ? "bg-blue-50 text-[#1769AA]"
-                          : "bg-orange-50 text-[#F28C28]"
+                          ? "bg-blue-50 text-[#1769AA] border border-blue-200"
+                          : "bg-orange-50 text-[#F28C28] border border-orange-200"
                       }`}
                     >
                       {prod.isIndustrial ? "Industrial" : prod.isCommercial ? "Commercial" : "Domestic"}
                     </span>
                   </div>
 
-                  <div className="relative w-full h-40 bg-slate-50 rounded-xl overflow-hidden mb-3 border border-slate-100 flex items-center justify-center p-2">
+                  <div className="relative w-full h-48 bg-slate-900 rounded-2xl overflow-hidden mb-4 border border-slate-100 shadow-inner group">
                     <Image
                       src={prod.imageUrl || "/images/corporate/product-cylinder-33kg.jpg"}
                       alt={prod.name}
                       fill
-                      className="object-contain p-2 group-hover:scale-105 transition-transform"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                   </div>
 
-                  <h3 className="font-bold text-slate-900 text-sm mb-1.5 leading-snug">
+                  <h3 className="font-bold text-slate-900 text-sm mb-1.5 leading-snug group-hover:text-[#1769AA] transition-colors">
                     {prod.name}
                   </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-3">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-4 min-h-[2.5rem]">
                     {prod.shortDesc || prod.description}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-slate-100">
+                <div className="pt-3.5 border-t border-slate-100">
                   <Link
                     href={
                       prod.isIndustrial
@@ -258,7 +260,7 @@ export default async function ProductsPage() {
                         ? "/contact/commercial"
                         : "/contact/domestic"
                     }
-                    className="w-full inline-flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-[#F28C28] text-white py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
+                    className="w-full inline-flex items-center justify-center gap-1.5 bg-[#102A43] hover:bg-[#F28C28] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
                   >
                     <span>Order / Enquire</span>
                     <ArrowRight className="w-3.5 h-3.5" />

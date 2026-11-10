@@ -121,9 +121,10 @@ export default async function TestimonialsPage() {
   return (
     <div className="w-full bg-slate-50 min-h-screen">
       {/* Banner */}
-      <div className="bg-[#102A43] text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3">
+      <div className="relative bg-gradient-to-br from-[#06121E] via-[#0B1D2F] to-[#102A43] text-white py-18 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-3.5 border border-white/15 shadow-xs">
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Real Customer Experiences</span>
           </div>
@@ -142,13 +143,13 @@ export default async function TestimonialsPage() {
           {testimonials.map((t) => (
             <div
               key={t.id}
-              className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all flex flex-col justify-between group"
+              className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-xs hover:shadow-cardHover hover:border-[#1769AA]/40 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
             >
               <div>
                 {/* Header: Avatar, Name & Verified Badge */}
                 <div className="flex items-start justify-between gap-4 mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#1769AA]/20 bg-gradient-to-br from-[#102A43] to-[#1769AA] text-white flex items-center justify-center font-bold text-lg shrink-0 shadow-sm">
+                  <div className="flex items-center gap-3.5">
+                    <div className="relative w-14 h-14 rounded-2xl overflow-hidden border-2 border-[#1769AA]/20 bg-gradient-to-br from-[#102A43] to-[#1769AA] text-white flex items-center justify-center font-bold text-lg shrink-0 shadow-sm">
                       {t.avatarUrl && !t.avatarUrl.includes("original") && !t.avatarUrl.includes("testi") ? (
                         <Image
                           src={t.avatarUrl}
@@ -170,7 +171,7 @@ export default async function TestimonialsPage() {
                       <h3 className="font-bold text-slate-900 text-base leading-snug group-hover:text-[#1769AA] transition-colors">
                         {t.clientName}
                       </h3>
-                      <p className="text-xs text-[#1769AA] font-semibold">
+                      <p className="text-xs text-[#1769AA] font-bold">
                         {t.designation} {t.companyName ? `• ${t.companyName}` : ""}
                       </p>
                     </div>
@@ -194,13 +195,13 @@ export default async function TestimonialsPage() {
 
               {/* Bottom location & verified badge */}
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                <span className="flex items-center gap-1 text-[11px] font-medium text-slate-500">
+                <span className="flex items-center gap-1.5 text-[11px] font-medium text-slate-500">
                   <MapPin className="w-3.5 h-3.5 text-[#F28C28]" />
                   <span>{t.location || "South India"}</span>
                 </span>
                 {t.isVerified && (
-                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Verified Customer</span>
                   </span>
                 )}
@@ -210,23 +211,23 @@ export default async function TestimonialsPage() {
         </div>
 
         {/* Bottom CTA Banner */}
-        <div className="bg-[#102A43] text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-gradient-to-r from-[#102A43] via-[#1769AA] to-[#102A43] text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-white/15">
           <div className="space-y-2 text-center md:text-left">
             <h3 className="text-2xl font-black text-white">Join Thousands of Satisfied Consumers</h3>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-200 max-w-xl leading-relaxed">
               Experience the reliability of pure blue flame cooking, exact net weight verification, and friendly customer care.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-3.5 shrink-0">
             <Link
               href="/contact"
-              className="bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow transition-all"
+              className="bg-[#F28C28] hover:bg-[#D9771A] text-white px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
             >
               Get In Touch
             </Link>
             <Link
               href="/price-list"
-              className="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-3 rounded-xl text-xs font-bold transition-all"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-5 py-3.5 rounded-xl text-xs font-bold transition-all"
             >
               View Refill Prices
             </Link>
