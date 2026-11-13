@@ -133,6 +133,7 @@ export default async function Footer() {
                   src="/images/brand/logo.jpg"
                   alt="Kwality Gas Bottlers Logo"
                   fill
+                  unoptimized
                   className="object-contain object-left"
                 />
               </div>

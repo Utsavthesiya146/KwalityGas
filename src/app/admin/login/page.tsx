@@ -50,6 +50,7 @@ export default function AdminLoginPage() {
               src="/images/brand/logo.jpg"
               alt="Kwality Gas Bottlers"
               fill
+              unoptimized
               className="object-contain"
               priority
             />

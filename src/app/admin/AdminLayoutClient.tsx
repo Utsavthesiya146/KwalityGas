@@ -90,6 +90,7 @@ export default function AdminLayoutClient({ admin, children }: AdminLayoutClient
                 src="/images/brand/logo.jpg"
                 alt="Kwality Gas"
                 fill
+                unoptimized
                 className="object-contain"
                 priority
               />
