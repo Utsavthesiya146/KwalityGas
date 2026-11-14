@@ -205,8 +205,8 @@ export default async function ProductsPage() {
                     { id: "4", name: "15kg Commercial Cylinder", capacity: "15 Kg", imageUrl: "/images/corporate/product-cylinder-15kg.jpg", shortDesc: "Manageable ergonomics for fast food joints and tea stalls.", isCommercial: true },
                     { id: "5", name: "12kg Domestic Cylinder", capacity: "12 Kg", imageUrl: "/images/corporate/product-cylinder-12kg.jpg", shortDesc: "Flagship domestic cooking gas cylinder for households.", isDomestic: true },
                     { id: "6", name: "5.5kg Domestic Cylinder", capacity: "5.5 Kg", imageUrl: "/images/corporate/product-cylinder-5-5kg.jpg", shortDesc: "Compact cylinder for small families and single executives.", isDomestic: true },
-                    { id: "7", name: "4kg Cook & Light Cylinder", capacity: "4 Kg", imageUrl: "/images/corporate/product-cylinder-5-5kg.jpg", shortDesc: "Direct burner and emergency lighting attachment support.", isDomestic: true },
-                    { id: "8", name: "2kg Micro Cylinder", capacity: "2 Kg", imageUrl: "/images/corporate/product-cylinder-5-5kg.jpg", shortDesc: "Ultra-portable cylinder for laboratories and jewellery soldering.", isDomestic: true },
+                    { id: "7", name: "4kg Cook & Light Cylinder", capacity: "4 Kg", imageUrl: "/images/corporate/product-cylinder-4kg.jpg", shortDesc: "Direct burner and emergency lighting attachment support.", isDomestic: true },
+                    { id: "8", name: "2kg Micro Cylinder", capacity: "2 Kg", imageUrl: "/images/corporate/product-cylinder-2kg.jpg", shortDesc: "Ultra-portable cylinder for laboratories and jewellery soldering.", isDomestic: true },
                   ]
             }
           />

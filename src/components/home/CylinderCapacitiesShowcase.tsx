@@ -73,7 +73,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Cook & Light / Portable",
       title: "4kg Cook & Light Cylinder",
       desc: "Equipped with specialized direct-screw burner support and light attachments. Ideal for small outdoor cooking, weekend camping, and domestic lighting.",
-      image: "/images/corporate/product-cylinder-5-5kg.jpg",
+      image: "/images/corporate/product-cylinder-4kg.jpg",
       specs: ["Direct burner compatible", "Emergency light fixture", "Portable steel handle", "Complete safety seal"],
     },
     {
@@ -82,7 +82,7 @@ export default function CylinderCapacitiesShowcase({ onOpenEnquiry }: CylinderCa
       tag: "Micro Portable",
       title: "2kg Mini Cylinder",
       desc: "Ultra-compact cylinder for laboratory burners, jewellery soldering, mobile welding, and light portable camping stoves.",
-      image: "/images/corporate/product-cylinder-5-5kg.jpg",
+      image: "/images/corporate/product-cylinder-2kg.jpg",
       specs: ["Ultra-portable ergonomics", "Precision pressure flow", "Factory sealed & stamped", "Safe for laboratory use"],
     },
   ];

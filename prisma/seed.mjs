@@ -225,7 +225,7 @@ async function main() {
       capacity: '4.0 Kgs',
       shortDesc: 'Multi-purpose portable cylinder for cooking, domestic lighting fixtures, and outdoor emergency fuel backup.',
       description: 'Convenient size offering immediate fuel for rural kitchens, domestic light burners, and secondary household connections.',
-      imageUrl: '/images/corporate/product-cylinder-5-5kg.jpg',
+      imageUrl: '/images/corporate/product-cylinder-4kg.jpg',
       isDomestic: true,
       isCommercial: false,
       isIndustrial: false,

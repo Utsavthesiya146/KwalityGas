@@ -131,7 +131,7 @@ export default function DomesticPage() {
 
             <div className="p-7 rounded-3xl bg-slate-50 border border-slate-200/80 text-center space-y-5 hover:bg-white hover:shadow-cardHover transition-all duration-300 group">
               <div className="relative w-full h-52 rounded-2xl overflow-hidden bg-slate-900 border border-slate-100 shadow-inner">
-                <Image src="/images/corporate/hero-domestic-lpg.jpg" alt="5.5kg Compact Cylinder" fill className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+                <Image src="/images/corporate/product-cylinder-5-5kg.jpg" alt="5.5kg Compact Cylinder" fill className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
               </div>
               <div>
@@ -148,7 +148,7 @@ export default function DomesticPage() {
 
             <div className="p-7 rounded-3xl bg-slate-50 border border-slate-200/80 text-center space-y-5 hover:bg-white hover:shadow-cardHover transition-all duration-300 group">
               <div className="relative w-full h-52 rounded-2xl overflow-hidden bg-slate-900 border border-slate-100 shadow-inner">
-                <Image src="/images/corporate/product-cylinder-12kg.jpg" alt="4kg Cook & Light Cylinder" fill className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+                <Image src="/images/corporate/product-cylinder-4kg.jpg" alt="4kg Cook & Light Cylinder" fill className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
               </div>
               <div>

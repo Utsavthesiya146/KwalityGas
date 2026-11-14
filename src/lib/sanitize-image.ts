@@ -131,7 +131,11 @@ export function sanitizeProduct(p: any): any {
     resolvedImage = "/images/corporate/product-cylinder-15kg.jpg";
   } else if (cap.includes("12") || name.includes("12")) {
     resolvedImage = "/images/corporate/product-cylinder-12kg.jpg";
-  } else if (cap.includes("5.5") || cap.includes("4.0") || cap.includes("4kg") || cap.includes("2kg") || name.includes("5.5") || name.includes("4.0")) {
+  } else if (cap.includes("4.0") || cap.includes("4kg") || name.includes("4.0") || name.includes("4kg")) {
+    resolvedImage = "/images/corporate/product-cylinder-4kg.jpg";
+  } else if (cap.includes("2kg") || name.includes("2kg") || cap.includes("2.0") || name.includes("2.0") || name.includes("micro")) {
+    resolvedImage = "/images/corporate/product-cylinder-2kg.jpg";
+  } else if (cap.includes("5.5") || name.includes("5.5")) {
     resolvedImage = "/images/corporate/product-cylinder-5-5kg.jpg";
   } else if (name.includes("regulator") || name.includes("tubing") || name.includes("valve") || name.includes("safety")) {
     resolvedImage = "/images/corporate/hero-safety-standards.jpg";
@@ -165,6 +169,10 @@ export function sanitizeGalleryImage(img: any): any {
     resolved = "/images/corporate/product-cylinder-17kg.jpg";
   } else if (title.includes("15") || cat.includes("15")) {
     resolved = "/images/corporate/product-cylinder-15kg.jpg";
+  } else if (title.includes("5.5") || cat.includes("5.5")) {
+    resolved = "/images/corporate/product-cylinder-5-5kg.jpg";
+  } else if (title.includes("4kg") || title.includes("4 kg") || cat.includes("4kg")) {
+    resolved = "/images/corporate/product-cylinder-4kg.jpg";
   } else if (title.includes("12") || title.includes("domestic") || cat.includes("domestic")) {
     resolved = "/images/corporate/product-cylinder-12kg.jpg";
   } else if (title.includes("bottling") || title.includes("fleet") || cat.includes("bottling") || cat.includes("fleet") || cat.includes("plant")) {
