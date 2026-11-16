@@ -39,6 +39,11 @@ scripts/backup-staging-before-cleanup.mjs
 scripts/execute-safe-demo-cleanup.mjs
 scripts/verify-admin-modules-post-cleanup.mjs
 scripts/capture-final-acceptance.mjs
+scripts/backup-before-uat.mjs
+scripts/run-business-uat.mjs
+scripts/clean-leftover-enquiry.mjs
+scripts/debug-patch.mjs
+scripts/capture-responsive-uat-screens.mjs
 backups/
 
 # Debug logs
