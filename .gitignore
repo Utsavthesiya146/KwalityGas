@@ -11,10 +11,15 @@
 
 # Environment files
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.staging
+.env*.local
+scripts/find-staging-db.js
+scripts/inspect-remote-tidb.mjs
+scripts/check-migrations.mjs
+scripts/deploy-staging-migration.mjs
+scripts/seed-remote-dealers.mjs
+scripts/rotate-admin-password.mjs
+backups/
 
 # Debug logs
 npm-debug.log*
