@@ -19,6 +19,8 @@ scripts/check-migrations.mjs
 scripts/deploy-staging-migration.mjs
 scripts/seed-remote-dealers.mjs
 scripts/rotate-admin-password.mjs
+scripts/describe-orders.mjs
+scripts/add-order-items-updated-at.mjs
 backups/
 
 # Debug logs

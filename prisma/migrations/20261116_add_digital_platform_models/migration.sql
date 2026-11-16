@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `order_items` (
     `quantity` INTEGER NOT NULL DEFAULT 1,
     `lineTotal` DECIMAL(10, 2) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
 
     INDEX `order_items_orderId_idx`(`orderId`),
     PRIMARY KEY (`id`)
