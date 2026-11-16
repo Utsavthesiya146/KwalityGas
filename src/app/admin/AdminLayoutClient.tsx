@@ -26,6 +26,7 @@ import {
   Users,
   Truck,
   BarChart3,
+  PhoneCall,
 } from "lucide-react";
 
 interface AdminLayoutClientProps {
@@ -72,6 +73,7 @@ export default function AdminLayoutClient({ admin, children }: AdminLayoutClient
     { name: "Customers", href: "/admin/customers", icon: Users },
     { name: "Dealers & Distributors", href: "/admin/dealers", icon: Truck },
     { name: "Reports & Analytics", href: "/admin/reports", icon: BarChart3 },
+    { name: "WhatsApp Helpline Settings", href: "/admin/settings", icon: PhoneCall },
     { name: "Hero Image Slider", href: "/admin/hero-slider", icon: Sliders },
     { name: "Enquiries & Leads", href: "/admin/enquiries", icon: Inbox },
     { name: "Price List Manager", href: "/admin/price-list", icon: Tag },

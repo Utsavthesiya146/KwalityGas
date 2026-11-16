@@ -1,10 +1,34 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 export default function FloatingWhatsAppButton() {
   const pathname = usePathname();
+  const [phoneNumber, setPhoneNumber] = useState("+91 78997 87101");
+  const [cleanPhone, setCleanPhone] = useState("917899787101");
+
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchHelplineNumber() {
+      try {
+        const res = await fetch("/api/settings/whatsapp", { cache: "no-store" });
+        if (res.ok) {
+          const data = await res.json();
+          if (isMounted && data.phone && data.cleanPhone) {
+            setPhoneNumber(data.phone);
+            setCleanPhone(data.cleanPhone);
+          }
+        }
+      } catch (err) {
+        // Silently preserve default phone on error
+      }
+    }
+    fetchHelplineNumber();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Hide on admin routes
   if (pathname.startsWith("/admin")) {
@@ -14,7 +38,7 @@ export default function FloatingWhatsAppButton() {
   const defaultMsg = encodeURIComponent(
     "Hello Kwality Gas, I would like to enquire about LPG cylinder booking, refill delivery, and pricing."
   );
-  const whatsappUrl = `https://wa.me/917899787101?text=${defaultMsg}`;
+  const whatsappUrl = `https://wa.me/${cleanPhone}?text=${defaultMsg}`;
 
   return (
     <aside
@@ -25,7 +49,7 @@ export default function FloatingWhatsAppButton() {
       <div className="absolute bottom-full right-0 mb-3 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-200 transform translate-y-1 group-hover:translate-y-0">
         <div className="bg-slate-900/95 backdrop-blur-sm text-white text-xs font-semibold py-1.5 px-3 rounded-lg whitespace-nowrap shadow-xl border border-slate-700/60 flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-          <span>WhatsApp Helpline</span>
+          <span>WhatsApp Helpline ({phoneNumber})</span>
         </div>
       </div>
 
@@ -35,8 +59,8 @@ export default function FloatingWhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         className="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.45)] hover:shadow-[0_8px_30px_rgba(37,211,102,0.6)] transition-all duration-300 hover:scale-108 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#25D366]/40"
-        aria-label="Direct WhatsApp Helpline: +91 78997 87101"
-        title="WhatsApp Helpline"
+        aria-label={`Direct WhatsApp Helpline: ${phoneNumber}`}
+        title={`WhatsApp Helpline: ${phoneNumber}`}
       >
         <div className="relative flex items-center justify-center">
           {/* Authentic WhatsApp SVG Icon */}

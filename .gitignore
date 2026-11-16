@@ -26,6 +26,10 @@ scripts/capture-production-readiness-audit.mjs
 scripts/capture-admin-panels.mjs
 scripts/cleanup-test-orders.mjs
 scripts/capture-whatsapp-button-verification.mjs
+scripts/sync-local-settings.mjs
+scripts/sync-remote-settings.mjs
+scripts/test-settings-api.mjs
+scripts/verify-whatsapp-settings.mjs
 backups/
 
 # Debug logs
