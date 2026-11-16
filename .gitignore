@@ -25,6 +25,7 @@ scripts/verify-render-deploy.mjs
 scripts/capture-production-readiness-audit.mjs
 scripts/capture-admin-panels.mjs
 scripts/cleanup-test-orders.mjs
+scripts/capture-whatsapp-button-verification.mjs
 backups/
 
 # Debug logs
