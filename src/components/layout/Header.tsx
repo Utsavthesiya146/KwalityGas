@@ -24,6 +24,8 @@ import {
   ArrowRight,
   Award,
   ShoppingBag,
+  User,
+  Truck,
 } from "lucide-react";
 import EnquiryModal from "@/components/shared/EnquiryModal";
 import { useCart } from "@/context/CartContext";
@@ -123,8 +125,30 @@ export default function Header() {
               </span>
             </div>
 
-            {/* Right: Hotline */}
-            <div className="flex items-center gap-2 sm:gap-4 ml-auto shrink-0 whitespace-nowrap">
+            {/* Right: Hotline, Tracking & Customer Account */}
+            <div className="flex items-center gap-2 sm:gap-3.5 ml-auto shrink-0 whitespace-nowrap">
+              <Link
+                href="/track-order"
+                className="hidden md:inline-flex items-center gap-1.5 font-bold text-slate-300 hover:text-white transition-colors"
+                title="Track Live LPG Cylinder Order"
+              >
+                <Truck className="w-3 h-3 text-[#F28C28]" />
+                <span>Track Order</span>
+              </Link>
+
+              <span className="text-slate-700 hidden md:inline">|</span>
+
+              <Link
+                href="/account"
+                className="inline-flex items-center gap-1.5 font-bold text-slate-300 hover:text-white transition-colors"
+                title="Customer Account Portal"
+              >
+                <User className="w-3 h-3 text-[#F28C28]" />
+                <span className="hidden sm:inline">Account</span>
+              </Link>
+
+              <span className="text-slate-700">|</span>
+
               <a
                 href="tel:+917899787101"
                 className="inline-flex items-center gap-1.5 font-bold text-white hover:text-[#F28C28] transition-colors"
@@ -132,14 +156,7 @@ export default function Header() {
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <Phone className="w-3 h-3 text-[#F28C28]" />
-                <span>Hotline: +91 78997 87101</span>
-              </a>
-              <span className="text-slate-700 hidden xl:inline">|</span>
-              <a
-                href="tel:+918023400459"
-                className="hidden xl:inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
-              >
-                <span>Office: +91 80 2340 0459</span>
+                <span>+91 78997 87101</span>
               </a>
             </div>
           </div>
@@ -612,18 +629,39 @@ export default function Header() {
                 </button>
               </div>
 
-              {/* Mobile Cart Button */}
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  openCart();
-                }}
-                className="w-full bg-[#102A43] hover:bg-slate-800 text-white p-3 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-2 shadow-xs transition-colors"
+              {/* Mobile Cart & Track Actions */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    openCart();
+                  }}
+                  className="bg-[#102A43] hover:bg-slate-800 text-white p-3 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                >
+                  <ShoppingBag className="w-4 h-4 text-[#F28C28]" />
+                  <span>Cart ({totalCount})</span>
+                </button>
+
+                <Link
+                  href="/track-order"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-800 p-3 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-1.5 border border-slate-200 transition-colors"
+                >
+                  <Truck className="w-4 h-4 text-[#1769AA]" />
+                  <span>Track Order</span>
+                </Link>
+              </div>
+
+              {/* Customer Account Access */}
+              <Link
+                href="/account"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full bg-blue-50/80 hover:bg-blue-100 text-[#1769AA] p-2.5 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-2 border border-blue-200/60 transition-colors"
               >
-                <ShoppingBag className="w-4 h-4 text-[#F28C28]" />
-                <span>View Shopping Cart ({totalCount} items)</span>
-              </button>
+                <User className="w-4 h-4 text-[#F28C28]" />
+                <span>Customer Account & Bookings</span>
+              </Link>
 
               {/* Navigation Items */}
               <div className="space-y-1 text-sm font-bold text-slate-900 divide-y divide-slate-100">

@@ -884,6 +884,80 @@ async function main() {
     console.log(`Preserved ${existingSocialCount} existing Social Media Links`);
   }
 
+  // 11. Dealers & Distributors (Non-destructive)
+  const existingDealerCount = await prisma.dealer.count();
+  if (existingDealerCount === 0) {
+    const defaultDealers = [
+      {
+        businessName: 'Perfect Flame Gas',
+        contactPerson: 'Mr. S. Nagaraj (Proprietor)',
+        phone: '9845023456',
+        email: 'perfectflame@kwalitygasnetwork.com',
+        address: 'Gandhi Bazar Main Road, Basavanagudi, Bangalore - 560004',
+        territory: 'Bangalore South',
+        serviceAreas: 'Gandhi Bazar, Basavanagudi, Jayanagar, JP Nagar, Banashankari',
+        isActive: true,
+        commissionRate: 4.5,
+        notes: 'Associated with Kwality Gas for 15+ years. Supplies domestic and commercial HORECA establishments.',
+      },
+      {
+        businessName: 'Sri Balaji Enterprises',
+        contactPerson: 'Mr. Krupashankar (Proprietor)',
+        phone: '9886034567',
+        email: 'sribalaji@kwalitygasnetwork.com',
+        address: 'Chamarajpet 4th Main, Bangalore - 560018',
+        territory: 'Bangalore Central & West',
+        serviceAreas: 'Chamarajpet, Vijayanagar, Rajajinagar, Majestic, Malleshwaram',
+        isActive: true,
+        commissionRate: 5.0,
+        notes: 'Distributor catering to 45+ sub-dealers across Bangalore central and western zones.',
+      },
+      {
+        businessName: 'Peenya Industrial Energy Solutions',
+        contactPerson: 'Mr. Venkatesh Murthy',
+        phone: '9900045678',
+        email: 'peenyaenergy@kwalitygasnetwork.com',
+        address: 'Plot 48, 2nd Stage, Peenya Industrial Area, Bangalore - 560058',
+        territory: 'Bangalore North Industrial',
+        serviceAreas: 'Peenya Industrial Area, Jalahalli, Yeshwanthpur, Tumkur Road, Nelamangala',
+        isActive: true,
+        commissionRate: 3.5,
+        notes: 'Specialized 33kg LOT/VOT manifold installations and furnace supplies for manufacturing plants.',
+      },
+      {
+        businessName: 'Hosur Plant Direct Distribution Hub',
+        contactPerson: 'Mr. Ramesh Babu (Dispatch Head)',
+        phone: '9789056789',
+        email: 'hosurhub@kwalitygas.com',
+        address: 'SIPCOT Industrial Complex, Phase 1, Hosur, Tamil Nadu - 635126',
+        territory: 'Hosur & Tamil Nadu Border',
+        serviceAreas: 'Hosur, Attibele, Krishnagiri, Anekal, Electronic City South',
+        isActive: true,
+        commissionRate: 4.0,
+        notes: 'Direct bottling plant distribution terminal supporting high-volume commercial and industrial deliveries.',
+      },
+      {
+        businessName: 'Dharwad Industrial Gas Distributors',
+        contactPerson: 'Mr. Anand Kulkarni',
+        phone: '9448067890',
+        email: 'dharwaddist@kwalitygasnetwork.com',
+        address: 'Belur Industrial Area, PB Road, Dharwad - 580011',
+        territory: 'North Karnataka (Dharwad & Hubli)',
+        serviceAreas: 'Dharwad, Hubballi, Belagavi, Davanagere, Haveri',
+        isActive: true,
+        commissionRate: 4.5,
+        notes: 'Dedicated channel partner connected directly with Dharwad bottling facility.',
+      },
+    ];
+
+    for (const d of defaultDealers) {
+      await prisma.dealer.create({ data: d });
+    }
+    console.log(`Seeded ${defaultDealers.length} Authorized Dealers & Distributors`);
+  } else {
+    console.log(`Preserved ${existingDealerCount} existing Dealers`);
+  }
+
   console.log('--- Database Seeding Finished Successfully! ---');
 }
 

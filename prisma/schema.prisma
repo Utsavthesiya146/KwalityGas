@@ -317,25 +317,94 @@ enum OrderType {
   INDUSTRIAL
 }
 
+enum CustomerCategory {
+  DOMESTIC
+  COMMERCIAL
+  INDUSTRIAL
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+  REFUNDED
+}
+
+model Customer {
+  id              String           @id @default(cuid())
+  email           String           @unique
+  passwordHash    String
+  name            String
+  phone           String
+  category        CustomerCategory @default(DOMESTIC)
+  companyName     String?
+  gstNumber       String?
+  deliveryAddress String?          @db.Text
+  city            String?
+  state           String?
+  pincode         String?
+  isActive        Boolean          @default(true)
+  orders          Order[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([phone])
+  @@map("customers")
+}
+
+model Dealer {
+  id             String   @id @default(cuid())
+  businessName   String
+  contactPerson  String
+  phone          String
+  email          String?
+  address        String?  @db.Text
+  territory      String   // e.g. "Bangalore North", "Hosur", "Dharwad"
+  serviceAreas   String?  @db.Text // Comma-separated or detailed list of localities
+  isActive       Boolean  @default(true)
+  commissionRate Decimal? @db.Decimal(5, 2)
+  notes          String?  @db.Text
+  orders         Order[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([territory])
+  @@index([phone])
+  @@map("dealers")
+}
+
 model Order {
-  id              String      @id @default(cuid())
-  orderNumber     String      @unique // e.g. "KWG-ORD-202611-9876"
-  customerName    String
-  customerPhone   String
-  customerEmail   String?
-  deliveryAddress String      @db.Text
-  orderType       OrderType   @default(DOMESTIC)
-  subtotal        Decimal?    @db.Decimal(10, 2)
-  notes           String?     @db.Text
-  status          OrderStatus @default(NEW)
-  adminNotes      String?     @db.Text
-  whatsappSentAt  DateTime?
-  items           OrderItem[]
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  id                 String         @id @default(cuid())
+  orderNumber        String         @unique // e.g. "KWG-ORD-202611-9876"
+  customerId         String?
+  customer           Customer?      @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  dealerId           String?
+  dealer             Dealer?        @relation(fields: [dealerId], references: [id], onDelete: SetNull)
+  customerName       String
+  customerPhone      String
+  customerEmail      String?
+  deliveryAddress    String         @db.Text
+  orderType          OrderType      @default(DOMESTIC)
+  subtotal           Decimal?       @db.Decimal(10, 2)
+  notes              String?        @db.Text
+  status             OrderStatus    @default(NEW)
+  paymentStatus      PaymentStatus  @default(PENDING)
+  paymentNotes       String?        @db.Text
+  paymentConfirmedAt DateTime?
+  dispatchedAt       DateTime?
+  deliveredAt        DateTime?
+  cancelledAt        DateTime?
+  adminNotes         String?        @db.Text
+  whatsappSentAt     DateTime?
+  items              OrderItem[]
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
 
   @@index([status, createdAt])
+  @@index([paymentStatus])
   @@index([customerPhone])
+  @@index([customerId])
+  @@index([dealerId])
   @@map("orders")
 }
 
@@ -356,6 +425,21 @@ model OrderItem {
   @@index([orderId])
   @@map("order_items")
 }
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  adminEmail String
+  action     String   // e.g. "STATUS_UPDATE", "PAYMENT_CONFIRMED", "DEALER_ASSIGNED"
+  entity     String   // "Order", "Dealer", "Customer", "Product"
+  entityId   String?
+  details    String?  @db.LongText
+  createdAt  DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
 
 
 

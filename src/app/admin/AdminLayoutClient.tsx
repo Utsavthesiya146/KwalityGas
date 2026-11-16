@@ -23,6 +23,9 @@ import {
   Share2,
   Sliders,
   ShoppingBag,
+  Users,
+  Truck,
+  BarChart3,
 } from "lucide-react";
 
 interface AdminLayoutClientProps {
@@ -66,6 +69,9 @@ export default function AdminLayoutClient({ admin, children }: AdminLayoutClient
   const navItems = [
     { name: "Dashboard Overview", href: "/admin", icon: LayoutDashboard },
     { name: "WhatsApp Orders", href: "/admin/orders", icon: ShoppingBag },
+    { name: "Customers", href: "/admin/customers", icon: Users },
+    { name: "Dealers & Distributors", href: "/admin/dealers", icon: Truck },
+    { name: "Reports & Analytics", href: "/admin/reports", icon: BarChart3 },
     { name: "Hero Image Slider", href: "/admin/hero-slider", icon: Sliders },
     { name: "Enquiries & Leads", href: "/admin/enquiries", icon: Inbox },
     { name: "Price List Manager", href: "/admin/price-list", icon: Tag },

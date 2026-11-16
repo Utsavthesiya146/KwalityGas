@@ -21,7 +21,9 @@ import {
   ChevronDown,
   Edit,
   Trash2,
-  FileText
+  FileText,
+  Download,
+  Building,
 } from "lucide-react";
 
 interface OrderItem {
@@ -53,14 +55,32 @@ interface Order {
     | "DISPATCHED"
     | "DELIVERED"
     | "CANCELLED";
+  paymentStatus: "PENDING" | "CONFIRMED" | "FAILED" | "REFUNDED";
+  dealerId?: string | null;
+  dealer?: { id: string; businessName: string; territory: string; phone: string } | null;
+  customer?: { id: string; name: string; email: string; category: string } | null;
   adminNotes?: string | null;
+  paymentNotes?: string | null;
   createdAt: string;
   updatedAt: string;
+  whatsappSentAt?: string | null;
+  paymentConfirmedAt?: string | null;
+  dispatchedAt?: string | null;
+  deliveredAt?: string | null;
+  cancelledAt?: string | null;
   items: OrderItem[];
+}
+
+interface DealerOption {
+  id: string;
+  businessName: string;
+  territory: string;
+  phone: string;
 }
 
 interface OrdersAdminClientProps {
   initialOrders: Order[];
+  dealers: DealerOption[];
 }
 
 const STATUS_CONFIG: Record<
@@ -118,14 +138,30 @@ const STATUS_CONFIG: Record<
   },
 };
 
-export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientProps) {
+const PAYMENT_CONFIG: Record<
+  Order["paymentStatus"],
+  { label: string; bg: string; text: string; border: string }
+> = {
+  PENDING: { label: "Payment Pending", bg: "bg-amber-50", text: "text-amber-700", border: "border-amber-200" },
+  CONFIRMED: { label: "Paid Confirmed", bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
+  FAILED: { label: "Payment Failed", bg: "bg-red-50", text: "text-red-700", border: "border-red-200" },
+  REFUNDED: { label: "Refunded", bg: "bg-slate-100", text: "text-slate-600", border: "border-slate-300" },
+};
+
+export default function OrdersAdminClient({ initialOrders, dealers }: OrdersAdminClientProps) {
   const [orders, setOrders] = useState<Order[]>(initialOrders);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("ALL");
+  const [paymentFilter, setPaymentFilter] = useState<string>("ALL");
   const [typeFilter, setTypeFilter] = useState<string>("ALL");
+  const [dealerFilter, setDealerFilter] = useState<string>("ALL");
+
+  // Order Details Modal
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [editAdminNotes, setEditAdminNotes] = useState("");
+  const [editPaymentNotes, setEditPaymentNotes] = useState("");
+  const [selectedDealerId, setSelectedDealerId] = useState<string>("");
   const [savingNotes, setSavingNotes] = useState(false);
   const [statusUpdatingId, setStatusUpdatingId] = useState<string | null>(null);
 
@@ -134,7 +170,9 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
     try {
       const params = new URLSearchParams();
       if (statusFilter !== "ALL") params.set("status", statusFilter);
+      if (paymentFilter !== "ALL") params.set("paymentStatus", paymentFilter);
       if (typeFilter !== "ALL") params.set("orderType", typeFilter);
+      if (dealerFilter !== "ALL") params.set("dealerId", dealerFilter);
       if (search.trim()) params.set("search", search.trim());
 
       const res = await fetch(`/api/orders?${params.toString()}`);
@@ -160,10 +198,10 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
       const data = await res.json();
       if (data.success && data.order) {
         setOrders((prev) =>
-          prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))
+          prev.map((o) => (o.id === orderId ? { ...o, ...data.order } : o))
         );
         if (selectedOrder && selectedOrder.id === orderId) {
-          setSelectedOrder((prev) => (prev ? { ...prev, status: newStatus } : null));
+          setSelectedOrder((prev) => (prev ? { ...prev, ...data.order } : null));
         }
       }
     } catch (err) {
@@ -173,26 +211,71 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
     }
   };
 
-  const handleSaveNotes = async () => {
+  const handlePaymentStatusChange = async (orderId: string, newPaymentStatus: Order["paymentStatus"]) => {
+    try {
+      const res = await fetch("/api/orders", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: orderId, paymentStatus: newPaymentStatus }),
+      });
+      const data = await res.json();
+      if (data.success && data.order) {
+        setOrders((prev) =>
+          prev.map((o) => (o.id === orderId ? { ...o, ...data.order } : o))
+        );
+        if (selectedOrder && selectedOrder.id === orderId) {
+          setSelectedOrder((prev) => (prev ? { ...prev, ...data.order } : null));
+        }
+      }
+    } catch (err) {
+      console.error("Error updating payment status:", err);
+    }
+  };
+
+  const handleDealerChange = async (orderId: string, newDealerId: string) => {
+    try {
+      const res = await fetch("/api/orders", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: orderId, dealerId: newDealerId }),
+      });
+      const data = await res.json();
+      if (data.success && data.order) {
+        setOrders((prev) =>
+          prev.map((o) => (o.id === orderId ? { ...o, ...data.order } : o))
+        );
+        if (selectedOrder && selectedOrder.id === orderId) {
+          setSelectedOrder((prev) => (prev ? { ...prev, ...data.order } : null));
+        }
+      }
+    } catch (err) {
+      console.error("Error assigning dealer:", err);
+    }
+  };
+
+  const handleSaveModalUpdates = async () => {
     if (!selectedOrder) return;
     setSavingNotes(true);
     try {
       const res = await fetch("/api/orders", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: selectedOrder.id, adminNotes: editAdminNotes }),
+        body: JSON.stringify({
+          id: selectedOrder.id,
+          adminNotes: editAdminNotes,
+          paymentNotes: editPaymentNotes,
+          dealerId: selectedDealerId || "NONE",
+        }),
       });
       const data = await res.json();
       if (data.success && data.order) {
         setOrders((prev) =>
-          prev.map((o) =>
-            o.id === selectedOrder.id ? { ...o, adminNotes: editAdminNotes } : o
-          )
+          prev.map((o) => (o.id === selectedOrder.id ? { ...o, ...data.order } : o))
         );
-        setSelectedOrder((prev) => (prev ? { ...prev, adminNotes: editAdminNotes } : null));
+        setSelectedOrder((prev) => (prev ? { ...prev, ...data.order } : null));
       }
     } catch (err) {
-      console.error("Error saving notes:", err);
+      console.error("Error saving modal updates:", err);
     } finally {
       setSavingNotes(false);
     }
@@ -219,9 +302,10 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
   const openOrderDetails = (order: Order) => {
     setSelectedOrder(order);
     setEditAdminNotes(order.adminNotes || "");
+    setEditPaymentNotes(order.paymentNotes || "");
+    setSelectedDealerId(order.dealerId || "");
   };
 
-  // Helper to construct admin-to-customer WhatsApp URL
   const getAdminWhatsAppUrl = (order: Order) => {
     const phone = order.customerPhone.replace(/\D/g, "");
     let text = `Hello ${order.customerName},\n\n`;
@@ -231,15 +315,39 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
       text += `• ${it.productName} (${it.capacity || "Standard"}) × ${it.quantity} Qty\n`;
     });
     text += `\nDelivery Address: ${order.deliveryAddress}\n\n`;
-    text += `Please let us know your preferred delivery slot and whether you would like to pay via UPI or Bank Transfer.\n\nThank you,\nKwality Gas Customer Care\nHotline: +91 78997 87101`;
+    text += `Payment Status: ${order.paymentStatus === "CONFIRMED" ? "PAID & CONFIRMED" : "PENDING CONFIRMATION"}\n\n`;
+    text += `Please let us know your preferred delivery slot.\n\nThank you,\nKwality Gas Customer Care\nHotline: +91 78997 87101`;
 
     return `https://wa.me/91${phone}?text=${encodeURIComponent(text)}`;
   };
 
-  // Filter in-memory for instant feedback
+  // CSV Export for filtered orders
+  const exportOrdersCSV = () => {
+    let csv = "Order Number,Date,Customer Name,Phone,Order Type,Subtotal,Order Status,Payment Status,Assigned Dealer,Delivery Address\n";
+    filtered.forEach((o) => {
+      const dName = o.dealer?.businessName ? `"${o.dealer.businessName}"` : "Unassigned";
+      csv += `"${o.orderNumber}","${new Date(o.createdAt).toISOString()}","${o.customerName}","+91 ${o.customerPhone}","${o.orderType}",${o.subtotal || 0},"${o.status}","${o.paymentStatus}",${dName},"${o.deliveryAddress.replace(/"/g, '""')}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `kwality-gas-orders-${new Date().toISOString().split("T")[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // In-memory Filter
   const filtered = orders.filter((o) => {
     if (statusFilter !== "ALL" && o.status !== statusFilter) return false;
+    if (paymentFilter !== "ALL" && o.paymentStatus !== paymentFilter) return false;
     if (typeFilter !== "ALL" && o.orderType !== typeFilter) return false;
+    if (dealerFilter !== "ALL") {
+      if (dealerFilter === "UNASSIGNED" && o.dealerId) return false;
+      if (dealerFilter !== "UNASSIGNED" && o.dealerId !== dealerFilter) return false;
+    }
     if (search.trim()) {
       const q = search.toLowerCase();
       const matchNum = o.orderNumber.toLowerCase().includes(q);
@@ -252,8 +360,8 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
   });
 
   const countNew = orders.filter((o) => o.status === "NEW").length;
-  const countPending = orders.filter((o) => o.status === "PAYMENT_PENDING" || o.status === "WHATSAPP_CONTACT_PENDING").length;
-  const countConfirmed = orders.filter((o) => o.status === "PAYMENT_CONFIRMED" || o.status === "PROCESSING").length;
+  const countPendingPayment = orders.filter((o) => o.paymentStatus === "PENDING").length;
+  const countPaid = orders.filter((o) => o.paymentStatus === "CONFIRMED").length;
   const countDelivered = orders.filter((o) => o.status === "DELIVERED").length;
 
   return (
@@ -263,24 +371,35 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100 text-[#F28C28] text-xs font-bold uppercase tracking-wider mb-2">
             <ShoppingBag className="w-3.5 h-3.5" />
-            <span>WhatsApp E-Commerce System</span>
+            <span>WhatsApp E-Commerce Order Management</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Customer WhatsApp Orders
+            Customer Orders & Dispatches
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Real-time orders recorded through online portal and coordinated via official WhatsApp hotline (+91 78997 87101).
+            Real-time orders recorded in TiDB database and fulfilled through official WhatsApp hotline (+91 78997 87101).
           </p>
         </div>
 
-        <button
-          onClick={fetchOrders}
-          disabled={loading}
-          className="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-[#1769AA] text-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs shadow-xs hover:shadow-sm transition-all self-start md:self-auto disabled:opacity-50"
-        >
-          <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
-          <span>Refresh Data</span>
-        </button>
+        <div className="flex flex-wrap items-center gap-2 self-start md:self-auto">
+          <button
+            onClick={exportOrdersCSV}
+            className="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-[#1769AA] text-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs shadow-xs hover:shadow-sm transition-all"
+            title="Export Filtered Orders to CSV"
+          >
+            <Download className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Export CSV ({filtered.length})</span>
+          </button>
+
+          <button
+            onClick={fetchOrders}
+            disabled={loading}
+            className="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-[#1769AA] text-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs shadow-xs hover:shadow-sm transition-all disabled:opacity-50"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
+            <span>Refresh</span>
+          </button>
+        </div>
       </div>
 
       {/* Metrics Row */}
@@ -298,9 +417,9 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
 
         <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
           <div>
-            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Pending Action</span>
-            <div className="text-2xl font-black text-amber-600 mt-0.5">{countPending}</div>
-            <span className="text-[10px] text-slate-400">WhatsApp / Payment</span>
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Payment Pending</span>
+            <div className="text-2xl font-black text-amber-600 mt-0.5">{countPendingPayment}</div>
+            <span className="text-[10px] text-amber-700 font-bold">Unpaid orders</span>
           </div>
           <div className="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
             <Clock className="w-5 h-5" />
@@ -309,9 +428,9 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
 
         <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
           <div>
-            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Confirmed</span>
-            <div className="text-2xl font-black text-emerald-600 mt-0.5">{countConfirmed}</div>
-            <span className="text-[10px] text-slate-400">Paid & Processing</span>
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Payment Confirmed</span>
+            <div className="text-2xl font-black text-emerald-600 mt-0.5">{countPaid}</div>
+            <span className="text-[10px] text-emerald-700 font-bold">Manual admin verified</span>
           </div>
           <div className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl">
             <CheckCircle2 className="w-5 h-5" />
@@ -350,19 +469,32 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
             onChange={(e) => setStatusFilter(e.target.value)}
             className="text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#1769AA]"
           >
-            <option value="ALL">All Statuses ({orders.length})</option>
+            <option value="ALL">All Order Statuses ({orders.length})</option>
             <option value="NEW">New Order</option>
             <option value="WHATSAPP_CONTACT_PENDING">WhatsApp Pending</option>
             <option value="WHATSAPP_CONTACTED">WhatsApp Contacted</option>
             <option value="PAYMENT_PENDING">Payment Pending</option>
             <option value="PAYMENT_CONFIRMED">Payment Confirmed</option>
-            <option value="PROCESSING">Processing</option>
+            <option value="PROCESSING">Processing / Filling</option>
             <option value="DISPATCHED">Dispatched</option>
             <option value="DELIVERED">Delivered</option>
             <option value="CANCELLED">Cancelled</option>
           </select>
 
-          {/* Type Filter */}
+          {/* Payment Status Filter */}
+          <select
+            value={paymentFilter}
+            onChange={(e) => setPaymentFilter(e.target.value)}
+            className="text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#1769AA]"
+          >
+            <option value="ALL">All Payments</option>
+            <option value="PENDING">Pending Payment</option>
+            <option value="CONFIRMED">Payment Confirmed</option>
+            <option value="FAILED">Payment Failed</option>
+            <option value="REFUNDED">Refunded</option>
+          </select>
+
+          {/* Segment Filter */}
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
@@ -372,6 +504,21 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
             <option value="DOMESTIC">Domestic</option>
             <option value="COMMERCIAL">Commercial</option>
             <option value="INDUSTRIAL">Industrial</option>
+          </select>
+
+          {/* Dealer Filter */}
+          <select
+            value={dealerFilter}
+            onChange={(e) => setDealerFilter(e.target.value)}
+            className="text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#1769AA]"
+          >
+            <option value="ALL">All Dealers</option>
+            <option value="UNASSIGNED">Unassigned Only</option>
+            {dealers.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.businessName}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -385,9 +532,9 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
             </div>
             <h3 className="font-bold text-slate-800 text-sm">No orders found</h3>
             <p className="text-xs text-slate-500 max-w-sm mx-auto">
-              {search || statusFilter !== "ALL" || typeFilter !== "ALL"
+              {search || statusFilter !== "ALL" || paymentFilter !== "ALL"
                 ? "Try adjusting your search criteria or clearing filters."
-                : "No customer order requests have been received yet. Test by placing an order from the website."}
+                : "No customer order requests have been received yet."}
             </p>
           </div>
         ) : (
@@ -395,17 +542,19 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-50/80 border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                  <th className="py-3.5 px-4">Order Details</th>
+                  <th className="py-3.5 px-4">Order Reference</th>
                   <th className="py-3.5 px-4">Customer</th>
-                  <th className="py-3.5 px-4">Ordered Items</th>
-                  <th className="py-3.5 px-4">Segment & Amount</th>
-                  <th className="py-3.5 px-4">Status</th>
-                  <th className="py-3.5 px-4 text-right">Direct Actions</th>
+                  <th className="py-3.5 px-4">Ordered Cylinders</th>
+                  <th className="py-3.5 px-4">Payment Status</th>
+                  <th className="py-3.5 px-4">Order Status</th>
+                  <th className="py-3.5 px-4">Assigned Dealer</th>
+                  <th className="py-3.5 px-4 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-xs">
                 {filtered.map((order) => {
                   const statusInfo = STATUS_CONFIG[order.status] || STATUS_CONFIG.NEW;
+                  const paymentInfo = PAYMENT_CONFIG[order.paymentStatus] || PAYMENT_CONFIG.PENDING;
                   const dateStr = new Date(order.createdAt).toLocaleString("en-IN", {
                     dateStyle: "medium",
                     timeStyle: "short",
@@ -420,6 +569,17 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
                           <Calendar className="w-3 h-3" />
                           <span>{dateStr}</span>
                         </div>
+                        <span
+                          className={`inline-block mt-1 px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase ${
+                            order.orderType === "INDUSTRIAL"
+                              ? "bg-slate-100 text-slate-800"
+                              : order.orderType === "COMMERCIAL"
+                              ? "bg-blue-50 text-[#1769AA]"
+                              : "bg-orange-50 text-[#F28C28]"
+                          }`}
+                        >
+                          {order.orderType}
+                        </span>
                       </td>
 
                       {/* Customer */}
@@ -447,30 +607,31 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
                               )}
                             </div>
                           ))}
+                          {order.subtotal && (
+                            <div className="font-bold text-slate-900 pt-1">
+                              ₹{Number(order.subtotal).toFixed(2)}
+                            </div>
+                          )}
                         </div>
                       </td>
 
-                      {/* Segment & Value */}
+                      {/* Payment Status Dropdown (Manual Update) */}
                       <td className="py-3.5 px-4 align-top">
-                        <span
-                          className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider ${
-                            order.orderType === "INDUSTRIAL"
-                              ? "bg-slate-100 text-slate-800"
-                              : order.orderType === "COMMERCIAL"
-                              ? "bg-blue-50 text-[#1769AA]"
-                              : "bg-orange-50 text-[#F28C28]"
-                          }`}
+                        <select
+                          value={order.paymentStatus}
+                          onChange={(e) =>
+                            handlePaymentStatusChange(order.id, e.target.value as Order["paymentStatus"])
+                          }
+                          className={`text-xs font-bold px-2.5 py-1.5 rounded-xl border transition-all cursor-pointer ${paymentInfo.bg} ${paymentInfo.text} ${paymentInfo.border}`}
                         >
-                          {order.orderType}
-                        </span>
-                        {order.subtotal ? (
-                          <div className="font-bold text-slate-900 mt-1">₹{Number(order.subtotal).toFixed(2)}</div>
-                        ) : (
-                          <div className="text-[11px] text-slate-400 mt-1">Quoted on WhatsApp</div>
-                        )}
+                          <option value="PENDING">Pending</option>
+                          <option value="CONFIRMED">Paid Confirmed</option>
+                          <option value="FAILED">Failed</option>
+                          <option value="REFUNDED">Refunded</option>
+                        </select>
                       </td>
 
-                      {/* Status Dropdown */}
+                      {/* Order Status Dropdown */}
                       <td className="py-3.5 px-4 align-top">
                         <select
                           value={order.status}
@@ -478,9 +639,7 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
                           onChange={(e) =>
                             handleStatusChange(order.id, e.target.value as Order["status"])
                           }
-                          className={`text-xs font-bold px-2.5 py-1.5 rounded-xl border transition-all cursor-pointer ${
-                            statusInfo.bg
-                          } ${statusInfo.text} ${statusInfo.border}`}
+                          className={`text-xs font-bold px-2.5 py-1.5 rounded-xl border transition-all cursor-pointer ${statusInfo.bg} ${statusInfo.text} ${statusInfo.border}`}
                         >
                           <option value="NEW">New Order</option>
                           <option value="WHATSAPP_CONTACT_PENDING">WhatsApp Pending</option>
@@ -494,10 +653,26 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
                         </select>
                       </td>
 
+                      {/* Assigned Dealer */}
+                      <td className="py-3.5 px-4 align-top">
+                        <select
+                          value={order.dealerId || ""}
+                          onChange={(e) => handleDealerChange(order.id, e.target.value)}
+                          className="text-xs bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#1769AA]"
+                        >
+                          <option value="">Unassigned</option>
+                          {dealers.map((d) => (
+                            <option key={d.id} value={d.id}>
+                              {d.businessName} ({d.territory})
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+
                       {/* Direct Actions */}
                       <td className="py-3.5 px-4 align-top text-right">
                         <div className="inline-flex items-center gap-1.5">
-                          {/* WhatsApp Chat Button */}
+                          {/* WhatsApp Chat */}
                           <a
                             href={getAdminWhatsAppUrl(order)}
                             target="_blank"
@@ -508,20 +683,20 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
                             <MessageSquare className="w-4 h-4 fill-emerald-600" />
                           </a>
 
-                          {/* Direct Phone Call */}
+                          {/* Call */}
                           <a
                             href={`tel:+91${order.customerPhone}`}
                             className="p-2 bg-blue-50 hover:bg-blue-100 text-[#1769AA] rounded-xl transition-colors border border-blue-200"
-                            title="Call Customer"
+                            title="Call Customer Directly"
                           >
                             <Phone className="w-4 h-4" />
                           </a>
 
-                          {/* View Full Details & Notes */}
+                          {/* Full Details Modal */}
                           <button
                             onClick={() => openOrderDetails(order)}
                             className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors border border-slate-200"
-                            title="View Full Order Details"
+                            title="View Full Order Details & Notes"
                           >
                             <FileText className="w-4 h-4" />
                           </button>
@@ -530,7 +705,7 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
                           <button
                             onClick={() => handleDeleteOrder(order.id)}
                             className="p-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl transition-colors border border-red-200"
-                            title="Delete Order"
+                            title="Delete Order Record"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -545,7 +720,7 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
         )}
       </div>
 
-      {/* Order Details & Admin Notes Modal */}
+      {/* Order Details & Notes Modal */}
       {selectedOrder && (
         <div
           className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 backdrop-blur-xs animate-in fade-in duration-200"
@@ -559,7 +734,7 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
             <div className="flex items-start justify-between border-b border-slate-100 pb-4">
               <div>
                 <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-                  Order Breakdown
+                  Order Breakdown & Audit Record
                 </span>
                 <h3 className="text-xl font-black text-slate-900 mt-0.5">
                   {selectedOrder.orderNumber}
@@ -589,7 +764,7 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
               </div>
               {selectedOrder.notes && (
                 <div className="sm:col-span-2">
-                  <span className="text-slate-500 font-bold block uppercase text-[10px]">Customer Notes</span>
+                  <span className="text-slate-500 font-bold block uppercase text-[10px]">Customer Instructions</span>
                   <span className="text-slate-700 italic">"{selectedOrder.notes}"</span>
                 </div>
               )}
@@ -618,27 +793,76 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
               </div>
             </div>
 
-            {/* Internal Admin Notes */}
-            <div className="space-y-2">
+            {/* Assign Dealer */}
+            <div className="space-y-1 text-xs">
               <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider">
-                Internal Admin Notes
+                Assign Regional Dealer / Distributor
               </label>
-              <textarea
-                rows={3}
-                placeholder="Add internal notes about payment confirmation, cylinder serials, delivery boy assignment, etc."
-                value={editAdminNotes}
-                onChange={(e) => setEditAdminNotes(e.target.value)}
-                className="w-full p-3 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1769AA]"
-              />
+              <select
+                value={selectedDealerId}
+                onChange={(e) => setSelectedDealerId(e.target.value)}
+                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1769AA]"
+              >
+                <option value="">Unassigned (Kwality Direct Dispatch)</option>
+                {dealers.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.businessName} — {d.territory} (+91 {d.phone})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Admin & Payment Notes */}
+            <div className="space-y-3">
+              <div>
+                <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-1">
+                  Internal Dispatch & Admin Notes
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="Notes on cylinder tare weight, delivery vehicle assignment, delivery time slot..."
+                  value={editAdminNotes}
+                  onChange={(e) => setEditAdminNotes(e.target.value)}
+                  className="w-full p-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1769AA]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-1">
+                  Payment Verification Notes
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="UPI transaction reference, bank transfer verification, cash collection receipt..."
+                  value={editPaymentNotes}
+                  onChange={(e) => setEditPaymentNotes(e.target.value)}
+                  className="w-full p-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1769AA]"
+                />
+              </div>
+
               <div className="flex justify-end">
                 <button
-                  onClick={handleSaveNotes}
+                  onClick={handleSaveModalUpdates}
                   disabled={savingNotes}
                   className="bg-[#102A43] hover:bg-[#F28C28] text-white px-5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors disabled:opacity-50"
                 >
-                  {savingNotes ? "Saving..." : "Save Admin Notes"}
+                  {savingNotes ? "Saving Updates..." : "Save Order Notes & Dealer"}
                 </button>
               </div>
+            </div>
+
+            {/* Timestamps audit */}
+            <div className="p-3 bg-slate-100 rounded-2xl text-[10px] text-slate-500 space-y-1">
+              <div>Order Placed: {new Date(selectedOrder.createdAt).toLocaleString("en-IN")}</div>
+              {selectedOrder.paymentConfirmedAt && (
+                <div>Payment Confirmed: {new Date(selectedOrder.paymentConfirmedAt).toLocaleString("en-IN")}</div>
+              )}
+              {selectedOrder.dispatchedAt && (
+                <div>Dispatched: {new Date(selectedOrder.dispatchedAt).toLocaleString("en-IN")}</div>
+              )}
+              {selectedOrder.deliveredAt && (
+                <div>Delivered: {new Date(selectedOrder.deliveredAt).toLocaleString("en-IN")}</div>
+              )}
             </div>
 
             {/* Footer Direct WhatsApp Link */}
@@ -666,4 +890,3 @@ export default function OrdersAdminClient({ initialOrders }: OrdersAdminClientPr
     </div>
   );
 }
-

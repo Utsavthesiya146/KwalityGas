@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { CartProvider } from "@/context/CartContext";
 import CartDrawer from "@/components/cart/CartDrawer";
+import FloatingWhatsAppButton from "@/components/shared/FloatingWhatsAppButton";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -82,6 +83,7 @@ export default function RootLayout({
           <main className="flex-grow w-full max-w-full overflow-x-hidden">{children}</main>
           <Footer />
           <CartDrawer />
+          <FloatingWhatsAppButton />
         </CartProvider>
       </body>
     </html>

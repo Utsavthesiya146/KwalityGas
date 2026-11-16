@@ -38,6 +38,7 @@ export default function CartDrawer() {
   const [step, setStep] = useState<"CART" | "CHECKOUT" | "SUCCESS">("CART");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [loggedInCustomer, setLoggedInCustomer] = useState<any>(null);
   const [successData, setSuccessData] = useState<{
     orderNumber: string;
     whatsappUrl: string;
@@ -50,6 +51,24 @@ export default function CartDrawer() {
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [orderType, setOrderType] = useState<"DOMESTIC" | "COMMERCIAL" | "INDUSTRIAL">("DOMESTIC");
   const [notes, setNotes] = useState("");
+
+  // Check if customer is logged in to pre-fill information
+  React.useEffect(() => {
+    if (isCartOpen) {
+      fetch("/api/customer/me")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.authenticated && data.customer) {
+            setLoggedInCustomer(data.customer);
+            if (!customerName) setCustomerName(data.customer.name || "");
+            if (!customerPhone) setCustomerPhone(data.customer.phone || "");
+            if (!deliveryAddress) setDeliveryAddress(data.customer.deliveryAddress || "");
+            if (data.customer.category) setOrderType(data.customer.category);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [isCartOpen]);
 
   if (!isCartOpen) return null;
 
@@ -82,6 +101,7 @@ export default function CartDrawer() {
 
     try {
       const payload = {
+        customerId: loggedInCustomer?.id || undefined,
         customerName: trimmedName,
         customerPhone: cleanPhone,
         deliveryAddress: trimmedAddress,
@@ -304,6 +324,29 @@ export default function CartDrawer() {
                   </button>
                 </div>
 
+                {loggedInCustomer ? (
+                  <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between text-xs text-emerald-800">
+                    <span className="font-bold flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Logged in as {loggedInCustomer.name}</span>
+                    </span>
+                    <span className="text-[10px] bg-emerald-200/70 text-emerald-900 px-2 py-0.5 rounded-full font-bold uppercase">
+                      {loggedInCustomer.category}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="p-2.5 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-between text-xs text-[#1769AA]">
+                    <span className="text-[11px]">Returning customer?</span>
+                    <Link
+                      href="/account/login"
+                      onClick={closeCart}
+                      className="font-bold hover:underline text-xs"
+                    >
+                      Sign In to Auto-Fill
+                    </Link>
+                  </div>
+                )}
+
                 {errorMsg && (
                   <div className="p-3 bg-red-50 border border-red-200 rounded-xl flex items-start gap-2 text-xs text-red-700">
                     <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
@@ -435,35 +478,35 @@ export default function CartDrawer() {
             )}
 
             {step === "SUCCESS" && successData && (
-              <div className="py-8 text-center space-y-5">
+              <div className="py-6 text-center space-y-4">
                 <div className="w-16 h-16 mx-auto rounded-3xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
 
-                <div className="space-y-1.5">
+                <div className="space-y-1">
                   <div className="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-extrabold tracking-wide uppercase">
-                    Order Saved Successfully
+                    Order Saved in Database (TiDB)
                   </div>
-                  <h3 className="text-xl font-black text-slate-900">Thank You!</h3>
+                  <h3 className="text-xl font-black text-slate-900">Order Placed Successfully!</h3>
                   <p className="text-xs text-slate-600 max-w-xs mx-auto">
-                    Your order request has been securely recorded in our database under Order ID:
+                    Your cylinder booking is recorded. Please confirm your delivery schedule via WhatsApp:
                   </p>
-                  <div className="font-mono text-base font-extrabold text-[#1769AA] bg-slate-100 py-2 px-4 rounded-xl inline-block mt-2">
+                  <div className="font-mono text-base font-extrabold text-[#1769AA] bg-slate-100 py-2 px-4 rounded-xl inline-block mt-2 border border-slate-200">
                     {successData.orderNumber}
                   </div>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200/80 text-left text-xs text-amber-900 space-y-2">
+                <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200/80 text-left text-xs text-amber-900 space-y-1.5">
                   <div className="font-bold flex items-center gap-1.5">
                     <Clock className="w-4 h-4 text-amber-600" />
-                    <span>Next Step: WhatsApp Confirmation</span>
+                    <span>WhatsApp Coordination Active</span>
                   </div>
                   <p className="text-[11px] text-amber-800 leading-relaxed">
-                    WhatsApp has opened in a new tab with your pre-filled order details. If it did not open automatically, click the button below to connect with our dispatch team directly.
+                    Our team coordinates prices, payments, and delivery timing via WhatsApp. No online payments are collected on this site.
                   </p>
                 </div>
 
-                <div className="space-y-2.5 pt-2">
+                <div className="space-y-2 pt-1">
                   <a
                     href={successData.whatsappUrl}
                     target="_blank"
@@ -473,6 +516,34 @@ export default function CartDrawer() {
                     <MessageSquare className="w-4 h-4 fill-white" />
                     <span>Open WhatsApp Chat Now</span>
                   </a>
+
+                  {/* Fallback Options if WhatsApp doesn't open */}
+                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-left text-xs space-y-2">
+                    <span className="font-bold text-slate-800 block text-[11px] uppercase tracking-wider">
+                      If WhatsApp Did Not Open Automatically:
+                    </span>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] text-slate-600">Call Dispatch Directly:</span>
+                      <a
+                        href="tel:+917899787101"
+                        className="font-bold text-[#1769AA] hover:underline text-xs flex items-center gap-1"
+                      >
+                        <Phone className="w-3 h-3" />
+                        <span>+91 78997 87101</span>
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-200/60">
+                      <span className="text-[11px] text-slate-600">Track Order Online:</span>
+                      <Link
+                        href="/track-order"
+                        onClick={resetAndClose}
+                        className="font-bold text-[#F28C28] hover:underline text-xs flex items-center gap-1"
+                      >
+                        <span>Go to Order Tracking</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  </div>
 
                   <button
                     onClick={resetAndClose}

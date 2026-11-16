@@ -246,6 +246,18 @@ export default async function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
+                <Link href="/track-order" className="text-white hover:text-[#F28C28] font-bold transition-colors flex items-center gap-1.5 group">
+                  <ChevronRight className="w-3.5 h-3.5 text-[#F28C28] group-hover:translate-x-0.5 transition-transform" />
+                  <span>Track LPG Order</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/account" className="text-white hover:text-[#F28C28] font-bold transition-colors flex items-center gap-1.5 group">
+                  <ChevronRight className="w-3.5 h-3.5 text-[#F28C28] group-hover:translate-x-0.5 transition-transform" />
+                  <span>Customer Account</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>About Us</span>
