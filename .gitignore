@@ -30,6 +30,8 @@ scripts/sync-local-settings.mjs
 scripts/sync-remote-settings.mjs
 scripts/test-settings-api.mjs
 scripts/verify-whatsapp-settings.mjs
+scripts/verify-staging-whatsapp-settings.mjs
+scripts/capture-settings-page-visual.mjs
 backups/
 
 # Debug logs
