@@ -32,6 +32,13 @@ scripts/test-settings-api.mjs
 scripts/verify-whatsapp-settings.mjs
 scripts/verify-staging-whatsapp-settings.mjs
 scripts/capture-settings-page-visual.mjs
+scripts/audit-tidb-records.mjs
+scripts/inspect-details.mjs
+scripts/inspect-remaining-tables.mjs
+scripts/backup-staging-before-cleanup.mjs
+scripts/execute-safe-demo-cleanup.mjs
+scripts/verify-admin-modules-post-cleanup.mjs
+scripts/capture-final-acceptance.mjs
 backups/
 
 # Debug logs
