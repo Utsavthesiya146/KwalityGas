@@ -130,3 +130,41 @@ export async function PATCH(req: NextRequest) {
   }
 }
 
+export async function DELETE(req: NextRequest) {
+  const admin = await getCurrentAdmin();
+  if (!admin) {
+    return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
+  }
+
+  const url = new URL(req.url);
+  const id = url.searchParams.get("id");
+  if (!id) {
+    return NextResponse.json({ error: "Customer ID is required" }, { status: 400 });
+  }
+
+  try {
+    const existing = await prisma.customer.findUnique({ where: { id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Customer not found" }, { status: 404 });
+    }
+
+    await prisma.customer.delete({ where: { id } });
+
+    await prisma.auditLog.create({
+      data: {
+        adminEmail: admin.email,
+        action: "DELETE_CUSTOMER",
+        entity: "Customer",
+        entityId: id,
+        details: JSON.stringify({ email: existing.email, name: existing.name }),
+      },
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (err: any) {
+    console.error("Customers DELETE error:", err);
+    return NextResponse.json({ error: "Failed to delete customer: " + err.message }, { status: 500 });
+  }
+}
+
+
