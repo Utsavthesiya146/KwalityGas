@@ -44,6 +44,8 @@ scripts/run-business-uat.mjs
 scripts/clean-leftover-enquiry.mjs
 scripts/debug-patch.mjs
 scripts/capture-responsive-uat-screens.mjs
+scripts/check-live-button-dom.mjs
+scripts/capture-polished-whatsapp-screenshots.mjs
 backups/
 
 # Debug logs
